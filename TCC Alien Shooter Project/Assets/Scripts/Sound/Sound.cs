@@ -22,10 +22,11 @@ public class Sound
     public void Setup(AudioSource audioSource)
     {
         audioSource.clip = clip;
-        if(GameState.GameStateInstance != null)
-        {
-            audioSource.volume = GameState.SaveData.mute ? 0f : volume * GameState.SaveData.sfxVolume;
-        }
+        // if(GameState.GameStateInstance != null)
+        // {
+        //     audioSource.volume = GameState.SaveData.mute ? 0f : volume * GameState.SaveData.sfxVolume;
+        // }
+        audioSource.volume =volume;
         audioSource.pitch = pitch;
         audioSource.loop = loop;
         audioSource.playOnAwake = playOnAwake;
@@ -33,14 +34,14 @@ public class Sound
 
     public void PlayOn(AudioSource audioSource)
     {
-        if(GameState.GameStateInstance != null && GameState.SaveData.mute) return;
+        //if(GameState.GameStateInstance != null && GameState.SaveData.mute) return;
         
         Setup(audioSource);
         if(pitchRNG.Length >= 2 && pitchRNG[0] != pitchRNG[1])
         {
             audioSource.pitch = pitch + Random.Range(pitchRNG[0], pitchRNG[1]);
         }
-        audioSource.PlayOneShot(clip);
+        if(clip) audioSource.PlayOneShot(clip);
     }
 
 }

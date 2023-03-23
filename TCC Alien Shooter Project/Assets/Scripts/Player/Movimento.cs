@@ -12,8 +12,6 @@ public class Movimento : MonoBehaviour
     [SerializeField] [Range(0.5f,1f)] private float backWardsMultiplier = 0.5f;
     [SerializeField] [Range(0.5f,1f)] private float strafeMultiplier = 0.9f;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] [Range(0,1)] private float weightIKhand;
-    private Transform lookAtObj;
     public Vector3 LookAtRayHit{get; private set;}
     private CharacterController controller;
     private Camera cam;
@@ -25,7 +23,6 @@ public class Movimento : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip passosClip;
     [HideInInspector] public ReticulaFeedback reticula;
-    private PlayerIK ik;
 
 
     private void Start()
@@ -33,17 +30,12 @@ public class Movimento : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
         anim = GetComponentInChildren<Animator>();
-        lookAtObj = cam.transform.GetChild(0);
-        ik = GetComponentInChildren<PlayerIK>();
         UpdateIK();
     }
 
     private void UpdateIK()
     {
-        if(ik == null) return;
-        ik.lookAtObj = lookAtObj;
-        ik.weightIKhand = weightIKhand;
-        ik.LookAtRayHit = LookAtRayHit;
+
     }
 
     private void Update()
@@ -101,33 +93,7 @@ public class Movimento : MonoBehaviour
 
     void OnAnimatorIK()
     {
-        //limitando a rotacao da cabeca
-        Vector3 frente = transform.forward;
-        Vector3 direcaoAlvo = lookAtObj.transform.position - transform.position;
-        float angulo = Vector3.Angle(frente, direcaoAlvo);
 
-        if(LookAtRayHit != Vector3.zero)
-        {
-            anim.SetLookAtPosition(LookAtRayHit);
-            anim.SetIKPosition(AvatarIKGoal.RightHand, LookAtRayHit);
-        }
-        else
-        {
-            anim.SetLookAtPosition(lookAtObj.position);
-            anim.SetIKPosition(AvatarIKGoal.RightHand, lookAtObj.position);
-        }
-        
-
-        if (angulo < 70 )
-        {
-            anim.SetLookAtWeight(1);
-            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, weightIKhand);
-        }
-        else
-        {
-            anim.SetLookAtWeight(1);
-            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, weightIKhand);
-        }
     }
 
     private void MoveRotation()
@@ -187,7 +153,7 @@ public class Movimento : MonoBehaviour
 
         if((velocitylAbs > 0.1) && controller.isGrounded)
         {
-            if(audioSource.isPlaying == false)
+            if(audioSource.isPlaying == false && passosClip)
             {
                 audioSource.PlayOneShot(passosClip);
             }
