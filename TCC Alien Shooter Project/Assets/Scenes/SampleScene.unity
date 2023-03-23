@@ -10395,8 +10395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d607ff1f7be1f604bba1ae1425f3f5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensibilidadeMouse: 100
-  maxVerticalRotation: {x: -30, y: 30}
+  sensibilidadeMouse: 500
+  maxXRotation: {x: -90, y: 90}
   playerBody: {fileID: 1038927378}
   playerHead: {fileID: 330585546}
 --- !u!114 &1038927377
@@ -10416,8 +10416,8 @@ MonoBehaviour:
   runAccelaration: 3
   backWardsMultiplier: 1
   strafeMultiplier: 1
-  jumpForce: 10
-  gravity: 5
+  jumpForce: 5
+  gravity: 10
   audioSource: {fileID: 1038927379}
   passosClip: {fileID: 0}
   reticula: {fileID: 0}
