@@ -5,10 +5,15 @@ using UnityEngine;
 public class Movimento : MonoBehaviour
 {
     [Header("Character Values")]
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float runAccelaration = 3f;
+    [SerializeField] private float inerciaDeccalaration = 5f;
+    private float ungroudedTime;
     private float currentSpeed;
+    private Vector3 movementInput;
+    private Vector3 lastMovementInput;
+    private float lastInputSpeed;
     [SerializeField] [Range(0.5f,1f)] private float backWardsMultiplier = 0.5f;
     [SerializeField] [Range(0.5f,1f)] private float strafeMultiplier = 0.9f;
     [SerializeField] private float jumpForce = 10f;
@@ -31,6 +36,7 @@ public class Movimento : MonoBehaviour
         cam = Camera.main;
         anim = GetComponentInChildren<Animator>();
         UpdateIK();
+        //Application.targetFrameRate = 124;
     }
 
     private void UpdateIK()
@@ -106,14 +112,19 @@ public class Movimento : MonoBehaviour
 
     private void MoveInput()
     {
-        Vector3 vertical = Input.GetAxis("Vertical") * transform.forward;
-        if(Input.GetAxis("Vertical") < 0) vertical = Input.GetAxis("Vertical") * transform.forward * backWardsMultiplier;
-        Vector3 rawHorizontal = Input.GetAxis("Horizontal") * cam.transform.right;
-        Vector3 horizontal = rawHorizontal * strafeMultiplier;
-
         if(controller.isGrounded)
         {
-            gravityAcceleration = 0f;
+            ungroudedTime = 0;
+            gravityAcceleration = -gravity;
+        } 
+        else
+        {
+            ungroudedTime += Time.deltaTime;
+            gravityAcceleration -= gravity * Time.deltaTime;
+        } 
+
+        if(ungroudedTime < 0.1f)
+        {
             anim.SetBool("isJumping", false);
 
             if (Input.GetButtonDown("Jump"))
@@ -121,24 +132,39 @@ public class Movimento : MonoBehaviour
                 gravityAcceleration = jumpForce;
                 anim.SetBool("isJumping", true);
             }
-            else gravityAcceleration = -gravity * 10f * Time.deltaTime;
-
         }
-        else
+
+        Vector3 vertical = Input.GetAxis("Vertical") * transform.forward;
+        if(Input.GetAxis("Vertical") < 0) vertical = Input.GetAxis("Vertical") * transform.forward * backWardsMultiplier;
+
+        Vector3 rawHorizontal = Input.GetAxis("Horizontal") * cam.transform.right;
+        Vector3 horizontal = rawHorizontal * strafeMultiplier;
+
+        movementInput = (vertical + horizontal).normalized;
+
+        var hasMovingInput = (Vector3.Distance(movementInput, Vector3.zero) > 0.01);
+        var isRuning = Input.GetButton("Sprint");
+
+        if(hasMovingInput && (isRuning || (!isRuning && currentSpeed < walkSpeed))) currentSpeed += (isRuning ? runAccelaration : runAccelaration * 2) * Time.deltaTime;
+        
+        if((currentSpeed > walkSpeed & !isRuning)
+        || !hasMovingInput)
         {
-            gravityAcceleration -= gravity * Time.deltaTime;
+            currentSpeed -= (lastInputSpeed > walkSpeed ? inerciaDeccalaration : inerciaDeccalaration * 3) * Time.deltaTime;
+            if(!isRuning && hasMovingInput && currentSpeed > walkSpeed - 0.1f && currentSpeed < walkSpeed + 0.1f) currentSpeed = walkSpeed;
         }
 
-        Vector3 movement = (vertical + horizontal) * Time.deltaTime;
-        if(Input.GetButton("Sprint")) currentSpeed += runAccelaration * Time.deltaTime;
-        else currentSpeed -= runAccelaration * Time.deltaTime;
+        currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);
 
-        if(currentSpeed < speed) currentSpeed = speed;
-        else if(currentSpeed > runSpeed) currentSpeed = runSpeed;
+        if(hasMovingInput)
+        {
+            lastInputSpeed = currentSpeed;
+            lastMovementInput = movementInput;
+        }
 
-        movement = movement * currentSpeed;
-
-        movement.y = gravityAcceleration * Time.deltaTime * speed;
+        var movement = (hasMovingInput ? movementInput : lastMovementInput) * currentSpeed;
+        movement.y += gravityAcceleration;
+        movement = movement * Time.deltaTime;
         
         controller.Move(movement);
         
