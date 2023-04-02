@@ -50,7 +50,6 @@ public class Movimento : MonoBehaviour
         {
             Movement();
             Animations();
-            LookAtRayHit = GetRayCastMiddle();
             UpdateIK();
         }
     }
@@ -66,36 +65,7 @@ public class Movimento : MonoBehaviour
     {
         
     }
-    private Vector3 GetRayCastMiddle()
-    {
-        var layer = 1 << 3;
-        layer = ~layer;
-        
-        RaycastHit rayHit;
-
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, 500f, layer))
-        {
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * 500f, Color.red);
-            if(rayHit.rigidbody != null && rayHit.rigidbody.gameObject.CompareTag("Enemy") && reticula != null)
-            {
-                reticula.EnemyState();
-            }
-            else if(reticula != null)
-            {
-                reticula.NeutralState();
-            }
-            return rayHit.point;
-        }
-        else
-        {
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * 500f, Color.gray);
-            if(reticula != null)
-            {
-                reticula.NeutralState();
-            }
-            return Vector3.zero;
-        }
-    }
+    
 
     void OnAnimatorIK()
     {
