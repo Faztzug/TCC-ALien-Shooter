@@ -18,6 +18,7 @@ public class MovimentoMouse : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Application.targetFrameRate = 60;
     }
 
 
@@ -35,7 +36,7 @@ public class MovimentoMouse : MonoBehaviour
         raycastResult = GetRayCastMiddle();
     }
 
-    private int GetLayers()
+    public int GetLayers()
     {
         var layer = 1 << 3;
         return ~layer;

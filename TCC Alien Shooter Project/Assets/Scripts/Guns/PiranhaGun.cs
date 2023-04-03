@@ -30,6 +30,7 @@ public class PiranhaGun : Gun
 
     IEnumerator BiteCourotine()
     {
+        fire2timer = waitBeforeDamage + biteDamageDuration + 0.1f;
         yield return new WaitForSeconds(waitBeforeDamage);
         biteColliderGO.SetActive(true);
         yield return new WaitForSeconds(biteDamageDuration);
