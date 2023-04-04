@@ -17,7 +17,6 @@ public class EnemyIA : MonoBehaviour
     [SerializeField] protected float minPlayerDistance = 10f;
     [Range(0,1)] protected float updateRate;
     protected float distance;
-    [SerializeField] float FocusGainOnDeath = 3f;
     protected Animator anim;
     [HideInInspector] public bool alive = true;
     [SerializeField] protected int damageTauntAsync = 3;

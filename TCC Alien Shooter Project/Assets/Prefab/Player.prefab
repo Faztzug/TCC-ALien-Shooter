@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 8319963421708248064}
   - component: {fileID: 8319963421708248067}
   - component: {fileID: 8319963421708248068}
+  - component: {fileID: 2534254147762935394}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -458,6 +459,43 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &2534254147762935394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8319963421708248095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d38913061519aa4eb9cea706b7287e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 8319963421708248066}
+  isPlayerDead: 0
+  godMode: 0
+  playerLookAt: {fileID: 0}
+  GenericAudioSourcePrefab: {fileID: 0}
+  saveData:
+    mute: 0
+    sfxVolume: 1
+    musicVolume: 1
+    quality: 2
+    showFPS: 1
+    unlockLevelsTo: 1
+    heliconiaColetada: 0
+    oncaColetada: 0
+    planta2: 0
+    animal2: 0
+    planta3: 0
+    animal3: 0
+    checkpointPosition:
+    - 0
+    - 0
+    - 0
+    animalColetadoNaFase: 0
+    plantaColetadaNaFase: 0
+    jumpCutscene: 0
 --- !u!1 &8319963421880858457
 GameObject:
   m_ObjectHideFlags: 0

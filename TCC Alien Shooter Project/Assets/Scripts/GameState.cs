@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Cinemachine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
 using System;
@@ -22,9 +21,7 @@ public class GameState : MonoBehaviour
     public bool godMode = false;
     static public bool GodMode => GameStateInstance.godMode;
     static public void ToogleGodMode() => GameStateInstance.godMode = !GodMode;
-    public Transform playerLookAt;
     static public bool isOnCutscene;
-    static public bool hasOpenCutsceneBook;
     static public bool skipCutscene;
     private Camera mainCamera;
     static public Camera MainCamera { get => gameState.mainCamera; }
@@ -43,41 +40,35 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        var cutSceneGOCam = GameObject.FindGameObjectWithTag("CutsceneCamera");
+        //var cutSceneGOCam = GameObject.FindGameObjectWithTag("CutsceneCamera");
         //mainCanvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<MainCanvas>();
-        //cinemachineFreeLook = GameObject.FindObjectOfType<CinemachineFreeLook>();
-        //cinemachineFreeLook.Follow = playerTransform;
-        //cinemachineFreeLook.LookAt = playerLookAt;
         gameState = this;
         SaveData = saveManager.LoadGame();
-
-        Application.targetFrameRate = 60;
-        Debug.Log("HAS CUTSCENE CAM? " + cutSceneGOCam != null);
         
-        if(cutSceneGOCam != null)
-        {
-            cutsceneCamera = cutSceneGOCam.GetComponent<Camera>();
-            var timelineAnim = cutSceneGOCam.GetComponent<PlayableDirector>();
-            if(timelineAnim != null && timelineAnim.duration > 1f && !SaveData.jumpCutscene)
-            {
-                SetMainCamera();
-                SetCutsceneCamera();
-                Debug.Log("duration " + timelineAnim.duration);
-                StartCoroutine(EndCutsceneOnTime((float)timelineAnim.duration));
-            }
-            else
-            {
-                Debug.Log("empty clip");
-                SetCutsceneCamera();
-                SetMainCamera();
-                StartCoroutine(EndCutsceneOnTime(1f));
-            }
-        }
-        else 
-        {
-            Debug.Log("CAM IS NULL");
-            StartCoroutine(EndCutsceneOnTime(1f));
-        }
+        // if(cutSceneGOCam != null)
+        // {
+        //     cutsceneCamera = cutSceneGOCam.GetComponent<Camera>();
+        //     var timelineAnim = cutSceneGOCam.GetComponent<PlayableDirector>();
+        //     if(timelineAnim != null && timelineAnim.duration > 1f && !SaveData.jumpCutscene)
+        //     {
+        //         SetMainCamera();
+        //         SetCutsceneCamera();
+        //         Debug.Log("duration " + timelineAnim.duration);
+        //         StartCoroutine(EndCutsceneOnTime((float)timelineAnim.duration));
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("empty clip");
+        //         SetCutsceneCamera();
+        //         SetMainCamera();
+        //         StartCoroutine(EndCutsceneOnTime(1f));
+        //     }
+        // }
+        // else 
+        // {
+        //     Debug.Log("CAM IS NULL");
+        //     StartCoroutine(EndCutsceneOnTime(1f));
+        // }
 
         saveData.jumpCutscene = false;
         UpdateQuality();

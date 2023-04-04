@@ -39,6 +39,7 @@ public class EnemyDummy : EnemyIA
             {
                 playerPos = player.position;
                 agent.SetDestination(playerPos);
+                Debug.Log("going to player");
             }
             else 
             {
