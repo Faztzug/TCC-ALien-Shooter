@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemyIA : MonoBehaviour
 {
     [SerializeField] [Range(0,1)] protected float[] updateRateRNG = new float[2];
-    [HideInInspector] public Transform player;
+    [HideInInspector] public Transform player => GameState.PlayerTransform;
     protected Vector3 pos;
     protected Vector3 playerPos;
     protected NavMeshAgent agent;
@@ -26,15 +26,6 @@ public class EnemyIA : MonoBehaviour
     protected virtual void Start() 
     {
         updateRate = Random.Range(updateRateRNG[0], updateRateRNG[1]);
-        var players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var p in players)
-        {
-            if(p.GetComponent<PlayerHealth>() == true)
-            {
-                player = p.transform;
-                break;
-            }
-        }
         agent = GetComponent<NavMeshAgent>();
         rgbd = GetComponent<Rigidbody>();
         rgbd.maxAngularVelocity = 0;
@@ -103,5 +94,40 @@ public class EnemyIA : MonoBehaviour
     public virtual void UpdateHealth(float health, float maxHealth)
     {
 
+    }
+
+    protected void GoToPlayer()
+    {
+        if(IsPlayerAlive())
+        {
+            playerPos = player.position;
+        }
+
+        pos = transform.position;
+        
+        distance = Vector3.Distance(pos, playerPos);
+
+
+        if(agent.isOnNavMesh)
+        {
+            if(distance > minPlayerDistance && distance < findPlayerDistance && IsPlayerAlive())
+            {
+                playerPos = player.position;
+                agent.SetDestination(playerPos);
+                //Debug.Log("going to player");
+            }
+            else 
+            {
+                pos = transform.position;
+                agent.SetDestination(pos);
+                rgbd.velocity = Vector3.zero;
+                rgbd.angularVelocity = Vector3.zero;
+                //Debug.Log("not going to player");
+            }
+        }
+        else
+        {
+            Debug.LogError(gameObject.name + " OUT OF NAV MESH!");
+        }
     }
 }
