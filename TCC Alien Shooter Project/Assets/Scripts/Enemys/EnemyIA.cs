@@ -8,20 +8,17 @@ public class EnemyIA : MonoBehaviour
 {
     [SerializeField] [Range(0,1)] protected float[] updateRateRNG = new float[2];
     [HideInInspector] public Transform player => GameState.PlayerTransform;
-    protected Vector3 pos;
-    protected Vector3 playerPos;
     protected NavMeshAgent agent;
     protected Rigidbody rgbd;
     [SerializeField] protected float shootingDistance = 100f;
     [SerializeField] protected float findPlayerDistance = 100f;
     [SerializeField] protected float minPlayerDistance = 10f;
     [Range(0,1)] protected float updateRate;
-    protected float distance;
+    protected float distance => Vector3.Distance(player.position, this.transform.position);
     protected Animator anim;
     [HideInInspector] public bool alive = true;
     [SerializeField] protected int damageTauntAsync = 3;
     protected int tauntTimerAsync;
-    protected float outlineMaxThickness;
 
     protected virtual void Start() 
     {
@@ -29,7 +26,6 @@ public class EnemyIA : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rgbd = GetComponent<Rigidbody>();
         rgbd.maxAngularVelocity = 0;
-        distance = Mathf.Infinity;
         tauntTimerAsync = damageTauntAsync * 3;
         anim = GetComponent<Animator>();
         
@@ -70,7 +66,8 @@ public class EnemyIA : MonoBehaviour
     }
     public virtual void EnemyDeath()
     {
-        anim.SetTrigger("Die");
+        if(anim == null) GameObject.Destroy(this.gameObject);
+        if(anim != null) anim.SetTrigger("Die");
 
         if(agent.isOnNavMesh) agent.SetDestination(transform.position);
 
@@ -98,27 +95,16 @@ public class EnemyIA : MonoBehaviour
 
     protected void GoToPlayer()
     {
-        if(IsPlayerAlive())
-        {
-            playerPos = player.position;
-        }
-
-        pos = transform.position;
-        
-        distance = Vector3.Distance(pos, playerPos);
-
-
         if(agent.isOnNavMesh)
         {
             if(distance > minPlayerDistance && distance < findPlayerDistance && IsPlayerAlive())
             {
-                playerPos = player.position;
-                agent.SetDestination(playerPos);
+                agent.SetDestination(player.position);
                 //Debug.Log("going to player");
             }
             else 
             {
-                pos = transform.position;
+                var pos = transform.position;
                 agent.SetDestination(pos);
                 rgbd.velocity = Vector3.zero;
                 rgbd.angularVelocity = Vector3.zero;

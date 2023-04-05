@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 8319963421708248067}
   - component: {fileID: 8319963421708248068}
   - component: {fileID: 2534254147762935394}
+  - component: {fileID: 5770464165946987000}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -588,6 +589,38 @@ MonoBehaviour:
     animalColetadoNaFase: 0
     plantaColetadaNaFase: 0
     jumpCutscene: 0
+--- !u!114 &5770464165946987000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8319963421708248095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0775ba4c4f9b9cf418574ef160798a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
+  effectTimeMultplier: 10
+  effectGainMultplier: 2
+  effectDownMultplier: 0.5
+  fallingDeathHeight: -100
+  audioSource: {fileID: 0}
+  deathSound:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0
+    - 0
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  damageSounds: []
+  dead: 0
 --- !u!1 &8319963421880858457
 GameObject:
   m_ObjectHideFlags: 0

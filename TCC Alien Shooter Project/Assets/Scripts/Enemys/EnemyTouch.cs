@@ -23,73 +23,30 @@ public class EnemyTouch : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         TouchDamage(hit.gameObject);
-        //Debug.Log(hit.gameObject.name);
-        // if((hit.gameObject.CompareTag("Melle") 
-        // || hit.gameObject.CompareTag("Cactu")) 
-        // && time < 0)
-        // {
-        //     var damage = contactDamage;
-        //     if(hit.gameObject.TryGetComponent<ContactDamage>(out ContactDamage contact))
-        //     {
-        //         damage = contact.Damage;
-        //     }
-        //     Debug.Log("T Ouch!");
-        //     hp.UpdateHealth(damage);
-        //     time = invicibilityTime;
-        // }
     }
     void OnCollisionEnter(Collision hit)
     {
         TouchDamage(hit.gameObject);
-        // if((hit.gameObject.CompareTag("Melle") 
-        // || hit.gameObject.CompareTag("Cactu")) 
-        // && time < 0)
-        // {
-        //     var damage = contactDamage;
-        //     if(hit.gameObject.TryGetComponent<ContactDamage>(out ContactDamage contact))
-        //     {
-        //         damage = contact.Damage;
-        //     }
-        //     Debug.Log("T Ouch!");
-        //     hp.UpdateHealth(damage);
-        //     time = invicibilityTime;
-        // }
     }
     void OnTriggerEnter(Collider hit)
     {
         TouchDamage(hit.gameObject);
-        // if((hit.gameObject.CompareTag("Melle") 
-        // || hit.gameObject.CompareTag("Cactu")) 
-        // && time < 0)
-        // {
-        //     var damage = contactDamage;
-        //     if(hit.gameObject.TryGetComponent<ContactDamage>(out ContactDamage contact))
-        //     {
-        //         damage = contact.Damage;
-        //     }
-        //     Debug.Log("T Ouch!");
-        //     hp.UpdateHealth(damage);
-        //     time = invicibilityTime;
-        // }
     }
 
     private void TouchDamage(GameObject hit)
     {
-        if((hit.CompareTag("Melle") 
-        || hit.CompareTag("Cactu")) 
-        && time < 0)
+        if((hit.CompareTag("Player")) && time < 0)
         {
             var damage = contactDamage;
-            if(hit.gameObject.TryGetComponent<ContactDamage>(out ContactDamage contact))
+            var healthObj = hit.GetComponentInChildren<Health>();
+            var curTransform = hit.transform;
+            while (healthObj != null && curTransform.parent != null)
             {
-                damage = contact.Damage;
+                curTransform = curTransform.parent;
+                healthObj = curTransform.GetComponent<Health>();
             }
-            // else if(hit.gameObject.TryGetComponent<Bullet>(out Bullet bullet))
-            // {
-            //     damage = bullet.damage;
-            // }
-            Debug.Log("T Ouch!");
-            hp.UpdateHealth(damage);
+            healthObj?.UpdateHealth(contactDamage);
+            if(healthObj) Debug.Log("T Ouch!");
             time = invicibilityTime;
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 //using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerHealth : Health
@@ -22,7 +23,7 @@ public class PlayerHealth : Health
     public Sound[] damageSounds;
     //private GameState state;
     public bool dead;
-    private Volume damageEffect;
+    //private Volume damageEffect;
     
 
     public override void Start()
@@ -31,8 +32,7 @@ public class PlayerHealth : Health
         //bar.fillAmount = health / maxHealth;
         UpdateHealth();
         //damageEffect = GameState.mainCanvas.GetComponentInChildren<Volume>();
-        damageEffect.weight = 0f;
-        //state = GetComponent<GameState>();
+        //damageEffect.weight = 0f;
     }
 
     void Update()
@@ -45,18 +45,18 @@ public class PlayerHealth : Health
             Debug.Log("GOD MODE: " + GameState.GodMode);
         }
 
-        if(damageEffect.weight > 0)
-        {
-            if(damageTime < 0)
-            {
-                damageEffect.weight -= 1f * Time.deltaTime * effectDownMultplier;
-                damageTime = 0;
-            }
-            else
-            {
-                damageTime -= 1f * Time.deltaTime;
-            }
-        }
+        // if(damageEffect.weight > 0)
+        // {
+        //     if(damageTime < 0)
+        //     {
+        //         damageEffect.weight -= 1f * Time.deltaTime * effectDownMultplier;
+        //         damageTime = 0;
+        //     }
+        //     else
+        //     {
+        //         damageTime -= 1f * Time.deltaTime;
+        //     }
+        // }
 
         if(transform.position.y < fallingDeathHeight) DestroyCharacter();
         
@@ -80,18 +80,18 @@ public class PlayerHealth : Health
         var hpPorcentage = Mathf.Abs(health / maxHealth);
         var chgPorcentage = Mathf.Abs(value / maxHealth);
 
-        if(value < 0)
-        {
-            damageEffect.weight += chgPorcentage * effectGainMultplier;
-            damageTime += chgPorcentage * effectTimeMultplier;
-        }
-        else if(value > 0)
-        {
-            damageEffect.weight -= chgPorcentage * effectGainMultplier;
-            damageTime -= chgPorcentage * effectTimeMultplier;
-            if(damageEffect.weight < 0) damageEffect.weight = 0;
-            if(damageTime < 0) damageTime = 0;
-        }
+        // if(value < 0)
+        // {
+        //     damageEffect.weight += chgPorcentage * effectGainMultplier;
+        //     damageTime += chgPorcentage * effectTimeMultplier;
+        // }
+        // else if(value > 0)
+        // {
+        //     damageEffect.weight -= chgPorcentage * effectGainMultplier;
+        //     damageTime -= chgPorcentage * effectTimeMultplier;
+        //     if(damageEffect.weight < 0) damageEffect.weight = 0;
+        //     if(damageTime < 0) damageTime = 0;
+        // }
     }
 
     IEnumerator EndUpdateHealth()
@@ -123,5 +123,7 @@ public class PlayerHealth : Health
         Cursor.lockState = CursorLockMode.None;
         //GameState.mainCanvas.gameOver.SetActive(true);
         //EventSystem.current.SetSelectedGameObject(GameState.mainCanvas.gameOver.GetComponentInChildren<Button>().gameObject);
+
+        SceneManager.LoadScene(gameObject.scene.name);
     }
 }

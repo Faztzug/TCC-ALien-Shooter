@@ -8,17 +8,19 @@ public class BiteTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        Debug.Log("BITE: " + other.tag);
         if(!other.CompareTag("Player"))
         {
             var curTransform = other.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
-            while (healthObj != null && curTransform.parent != null)
+            while (healthObj == null && curTransform.parent != null)
             {
+                Debug.Log("while pass");
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();
             }
             healthObj?.UpdateHealth(damage);
+            if(healthObj) Debug.Log("BITE SUCESS: " + other.name);
+            else Debug.Log("BITE FAILLLL: " + other.name);
         } 
     }
 
