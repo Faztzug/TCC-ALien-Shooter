@@ -49,10 +49,13 @@ public class Gun : MonoBehaviour
     {
         fire1timer -= Time.deltaTime;
         fire2timer -= Time.deltaTime;
-        foreach (var curPoint in gunPointPositions) 
+        if(!(Input.GetButton("Fire2") && fire2timer <= 0))
         {
-            var line = curPoint.GetComponent<LineRenderer>();
-            if(line) line.enabled = false;
+            foreach (var curPoint in gunPointPositions) 
+            {
+                var line = curPoint.GetComponentInChildren<LaserVFXManager>();
+                if(line) line.TurnOffLAser();
+            }
         }
         if (!GameState.isGamePaused)
         {
@@ -103,9 +106,8 @@ public class Gun : MonoBehaviour
             {
                 Debug.DrawLine(curPoint.position, cam.transform.forward * 500, Color.blue, 10f);
             }
-            var line = curPoint.GetComponent<LineRenderer>();
-            if(line) line.enabled = true;
-            line?.SetPositions(new Vector3[] {curPoint.position, GetRayCastMiddle(curPoint.position)});
+            var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
+            if(laser) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
             if(bullet) 
             {
@@ -156,7 +158,7 @@ public class Gun : MonoBehaviour
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
-            while (healthObj != null && curTransform.parent != null)
+            while (healthObj == null && curTransform.parent != null)
             {
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();

@@ -82,11 +82,12 @@ public class MovimentoMouse : MonoBehaviour
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
-            while (healthObj != null && curTransform.parent != null)
+            while (healthObj == null && curTransform.parent != null)
             {
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();
             }
+            //Debug.Log("Found Health? " + (healthObj != null));
             return healthObj;
         }
         else
