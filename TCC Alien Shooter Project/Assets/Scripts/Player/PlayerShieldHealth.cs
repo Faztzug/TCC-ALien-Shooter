@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 //using UnityEngine.Rendering.PostProcessing;
 
-public class PlayerHealth : Health
+public class PlayerShieldHealth : ShieldHealth
 {
     //[SerializeField] private Image bar;
     //private Image bar => GameState.mainCanvas.healthBar;
@@ -35,8 +35,9 @@ public class PlayerHealth : Health
         //damageEffect.weight = 0f;
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if(GameState.GodMode) UpdateHealth(maxHealth);
 
         if(Input.GetButtonDown("GodMode"))
@@ -59,7 +60,6 @@ public class PlayerHealth : Health
         // }
 
         if(transform.position.y < fallingDeathHeight) DestroyCharacter();
-        
     }
 
     private bool updatingHealthThisFrame;
@@ -67,10 +67,13 @@ public class PlayerHealth : Health
     {
         if (updatingHealthThisFrame) return;
         updatingHealthThisFrame = true;
-        if(value < -5 && !GameState.IsPlayerDead)
+        if(value < 0 && !GameState.IsPlayerDead)
         {
-            var index = Random.Range(0, damageSounds.Length);
-            damageSounds[index].PlayOn(audioSource);
+            if(damageSounds.Length > 0)
+            {
+                var index = Random.Range(0, damageSounds.Length);
+                damageSounds[index]?.PlayOn(audioSource);
+            }
         }
         base.UpdateHealth(value);
         //bar.fillAmount = health / maxHealth;

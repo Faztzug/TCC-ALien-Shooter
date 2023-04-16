@@ -7,7 +7,7 @@ public class HealthItem : Item
     public override void CollectItem(Collider info)
     {
         base.CollectItem(info);
-        if(info.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth hp))
+        if(info.gameObject.TryGetComponent<PlayerShieldHealth>(out PlayerShieldHealth hp))
         {
             if(hp.IsMaxHealth) return;
             var porcent = ammount / 100f;
