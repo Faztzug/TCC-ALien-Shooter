@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public bool isTraveling {private set; get;}
+    private MeshRenderer meshRenderer;
+    public string bulletType;
     [SerializeField] private Vector3 moveVector;
     private float speed;
     private float gravity;
@@ -13,12 +16,13 @@ public class Bullet : MonoBehaviour
     private bool setedVelocity = false;
     public float headShootMultiplier = 5f;
     [HideInInspector] public bool hit = false;
-    [SerializeField] private AudioClip headShootSound;
+    [SerializeField] private Sound headShootSound;
 
     void Start()
     {
         speed = moveVector.z;
         gravity = moveVector.y;
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
         
         setedVelocity = false;
     }
@@ -40,12 +44,12 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collisionInfo)
     {
         
-        if(collisionInfo.collider.gameObject.CompareTag("EnemyHead"))
-        {
-            Debug.Log("HEADSHOT!" + collisionInfo.collider.gameObject);
-            damage = damage * headShootMultiplier;
-            //play sound
-        }
+        // if(collisionInfo.collider.gameObject.CompareTag("EnemyHead"))
+        // {
+        //     Debug.Log("HEADSHOT!" + collisionInfo.collider.gameObject);
+        //     damage = damage * headShootMultiplier;
+        //     //play sound
+        // }
         if(collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);
         else BulletHit(collisionInfo.gameObject);
     }
@@ -56,7 +60,13 @@ public class Bullet : MonoBehaviour
     }
     public void BulletHit(GameObject collision, bool isTrigger = false)
     {
-        if(!isTrigger) gameObject.SetActive(false);
+        if(!isTrigger)
+        {
+            rgbd.velocity = Vector3.zero;
+            rgbd.constraints = RigidbodyConstraints.FreezeAll;
+            isTraveling = false;
+            meshRenderer.enabled = false;
+        } 
         if(hit) return;
         hit = true;
 
@@ -71,7 +81,12 @@ public class Bullet : MonoBehaviour
 
     public void Respawn()
     {
+        isTraveling = true;
+        if(!meshRenderer) meshRenderer = GetComponentInChildren<MeshRenderer>();
+        meshRenderer.enabled = true;
+        rgbd.constraints = RigidbodyConstraints.None;
         rgbd.velocity = Vector3.zero;
+        rgbd.angularVelocity = Vector3.zero;
         gravity = moveVector.y;
         speed = moveVector.z;
         transform.position = Vector3.zero;

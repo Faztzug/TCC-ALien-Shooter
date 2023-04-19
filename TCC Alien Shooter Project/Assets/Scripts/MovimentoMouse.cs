@@ -69,7 +69,7 @@ public class MovimentoMouse : MonoBehaviour
             {
                 reticula.NeutralState();
             }
-            return Vector3.zero;
+            return Camera.main.transform.forward * 500;
         }
     }
 

@@ -15,8 +15,8 @@ public class Gun : MonoBehaviour
     [SerializeField] protected float fire2cooldown = 0f;
     protected float fire1timer = 0f;
     protected float fire2timer = 0f;
-    [SerializeField] private List<Bullet> bullets;
-    [SerializeField] private GameObject bulletPrefab;
+    protected List<Bullet> bullets = new List<Bullet>();
+    [SerializeField] protected Bullet bulletPrefab;
     [SerializeField] private GameObject Flash;
     [SerializeField] private float shootCooldown = 3f;
     [SerializeField] private Transform[] gunPointPositions;
@@ -33,11 +33,6 @@ public class Gun : MonoBehaviour
     virtual protected void Start()
     {
         cam = Camera.main;
-        foreach (Bullet bullet in bullets)
-        {
-            bullet.transform.SetParent(null);
-            bullet.gameObject.SetActive(false);
-        }
 
         UpdateAmmoText();
         Cursor.lockState = CursorLockMode.Locked;
@@ -92,7 +87,7 @@ public class Gun : MonoBehaviour
         fire2timer = fire2cooldown;
     }
     
-    protected void Shooting(Bullet bullet = null)
+    protected void Shooting(Bullet bulletPrefab = null)
     {
         var target = movimentoMouse.raycastResult;
 
@@ -109,9 +104,11 @@ public class Gun : MonoBehaviour
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
             if(laser) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
-            if(bullet) 
+            if(bulletPrefab) 
             {
-                SpawnBullet(bullet, curPoint.position);
+                var bullet = SpawnBullet(bulletPrefab);
+                bullet.transform.LookAt(target);
+                ReadyBulletForFire(bullet, curPoint.position);
                 bullet.transform.LookAt(target);
             }
             else if(continuosDamage)
@@ -127,7 +124,7 @@ public class Gun : MonoBehaviour
         }
         if(Flash != null)
         {
-            var flash = Instantiate(Flash, bullet.transform.position, bullet.transform.rotation);
+            var flash = Instantiate(Flash, bulletPrefab.transform.position, bulletPrefab.transform.rotation);
             Destroy(flash.gameObject, 1f);
         }
     }
@@ -171,8 +168,21 @@ public class Gun : MonoBehaviour
         }
     }
 
-
-    protected void SpawnBullet(Bullet bullet, Vector3 position)
+    protected Bullet SpawnBullet(Bullet bulletPrefab)
+    {
+        var respawnBullet = bullets.Find(b => b.bulletType == bulletPrefab.bulletType && !b.isTraveling);
+        if (respawnBullet != null)
+        {
+            return respawnBullet;
+        }
+        else
+        {
+            var newBullet = Instantiate(bulletPrefab, null);
+            bullets.Add(newBullet);
+            return newBullet;
+        }
+    }
+    protected void ReadyBulletForFire(Bullet bullet, Vector3 position)
     {
         bullet.hit = false;
         bullet.StopAllCoroutines();

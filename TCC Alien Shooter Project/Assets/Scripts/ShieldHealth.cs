@@ -25,7 +25,6 @@ public class ShieldHealth : Health
         
         if(value < 0)
         {
-            Debug.Log("Set Timer");
             regenTimer = regenCooldown;
             UpdateShieldValue(value);
         }
@@ -40,7 +39,6 @@ public class ShieldHealth : Health
     {
         if(regenTimer < 0) UpdateShieldValue(shieldRegen * Time.deltaTime);
         
-        Debug.Log("Update");
         regenTimer = regenTimer - Time.deltaTime;
     }
 

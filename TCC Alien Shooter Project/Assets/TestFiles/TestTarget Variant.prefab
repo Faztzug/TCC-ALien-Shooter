@@ -384,7 +384,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ac8788350c451bc4cbfaaf2b1e37b71a,
         type: 3}
       propertyPath: m_Name
-      value: TestTarget Variant (6)
+      value: TestTarget Variant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8788350c451bc4cbfaaf2b1e37b71a,
         type: 3}
@@ -1360,7 +1360,7 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.18, z: 0}
---- !u!114 &6152765080242588358
+--- !u!114 &540897188215287866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1369,11 +1369,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8332833992592404001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0077c20d89edfcf43a94a8d041d3a5a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 33a7fe6d8d66c374f845090a36ef4b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  health: 1
+  health: 0
+  maxShield: 1
+  curShield: 0
+  shieldRegen: 0.5
+  regenCooldown: 1
 --- !u!4 &8362609175763248625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8401270280512440703, guid: ac8788350c451bc4cbfaaf2b1e37b71a,

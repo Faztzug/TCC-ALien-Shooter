@@ -14,8 +14,9 @@ public class LaserVFXManager : MonoBehaviour
         foreach (var line in lines)
         {
             line.SetPositions(new Vector3[] {startPoint, endPoint});
+            Vector3 dir = (endPoint - startPoint).normalized;
             startVFX.position = startPoint;
-            endVFX.position = endPoint;
+            endVFX.position = endPoint - (dir / 10);
         }
     }
 

@@ -29,6 +29,15 @@ public class Movimento : MonoBehaviour
     [SerializeField] private AudioClip passosClip;
     [HideInInspector] public ReticulaFeedback reticula;
 
+    private bool isCrouching;
+    [SerializeField] private float crouchingSpeed = 3f;
+    private float upwardsHeight;
+    private Vector3 upwardsCenter;
+    private Vector3 upwardsCamLocalPos;
+    [SerializeField] private float crouchingHeight;
+    [SerializeField] private Vector3 crouchingCenter;
+    [SerializeField] private Vector3 crouchingCamLocalPos;
+
 
     private void Start()
     {
@@ -36,7 +45,9 @@ public class Movimento : MonoBehaviour
         cam = Camera.main;
         anim = GetComponentInChildren<Animator>();
         UpdateIK();
-        //Application.targetFrameRate = 124;
+        upwardsHeight = controller.height;
+        upwardsCenter = controller.center;
+        upwardsCamLocalPos = cam.transform.localPosition;
     }
 
     private void UpdateIK()
@@ -63,7 +74,20 @@ public class Movimento : MonoBehaviour
 
     private void Animations()
     {
-        
+        isCrouching = Input.GetButton("Crouch");
+        anim.SetBool("crouching", isCrouching);
+        if(isCrouching)
+        {
+            controller.height = Mathf.Lerp(controller.height, crouchingHeight, 0.25f);
+            controller.center = Vector3.Lerp(controller.center, crouchingCenter, 0.25f);
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchingCamLocalPos, 0.1f);
+        }
+        else
+        {
+            controller.height = Mathf.Lerp(controller.height, upwardsHeight, 0.25f);
+            controller.center = Vector3.Lerp(controller.center, upwardsCenter, 0.25f);
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, upwardsCamLocalPos, 0.1f);
+        }
     }
     
 
@@ -117,11 +141,18 @@ public class Movimento : MonoBehaviour
 
         if(hasMovingInput && (isRuning || (!isRuning && currentSpeed < walkSpeed))) currentSpeed += (isRuning ? runAccelaration : runAccelaration * 2) * Time.deltaTime;
         
-        if((currentSpeed > walkSpeed & !isRuning)
+        if((currentSpeed > crouchingSpeed && isCrouching)
         || !hasMovingInput)
         {
+            currentSpeed -= (lastInputSpeed > crouchingSpeed ? inerciaDeccalaration : inerciaDeccalaration * 3) * Time.deltaTime;
+            var flag = isCrouching && hasMovingInput && currentSpeed > crouchingSpeed - 0.1f && currentSpeed < crouchingSpeed + 0.1f;
+            if(flag) currentSpeed = crouchingSpeed;
+        }
+        else if((currentSpeed > walkSpeed && !isRuning))
+        {
             currentSpeed -= (lastInputSpeed > walkSpeed ? inerciaDeccalaration : inerciaDeccalaration * 3) * Time.deltaTime;
-            if(!isRuning && hasMovingInput && currentSpeed > walkSpeed - 0.1f && currentSpeed < walkSpeed + 0.1f) currentSpeed = walkSpeed;
+            var flag = hasMovingInput && currentSpeed > walkSpeed - 0.1f && currentSpeed < walkSpeed + 0.1f;
+            if(flag) currentSpeed = walkSpeed;
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BiteTrigger : MonoBehaviour
 {
     [SerializeField] float damage;
+    private List<Health> lastDamages = new List<Health>();
 
     private void OnTriggerEnter(Collider other) 
     {
@@ -18,10 +19,22 @@ public class BiteTrigger : MonoBehaviour
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();
             }
-            healthObj?.UpdateHealth(damage);
-            if(healthObj) Debug.Log("BITE SUCESS: " + other.name);
+            if(healthObj != null && !lastDamages.Contains(healthObj))
+            {
+                healthObj?.UpdateHealth(damage);
+                lastDamages.Add(healthObj);
+                StartCoroutine(EndEnemyInvicibility(healthObj));
+                Debug.Log("BITE SUCESS: " + other.name);
+            }
             else Debug.Log("BITE FAILLLL: " + other.name);
+            
         } 
+    }
+
+    IEnumerator EndEnemyInvicibility(Health healthObj)
+    {
+        yield return new WaitForEndOfFrame();
+        lastDamages.Remove(healthObj);
     }
 
     // void OnTriggerStay(Collider other)

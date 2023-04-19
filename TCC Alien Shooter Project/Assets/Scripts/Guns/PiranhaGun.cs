@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PiranhaGun : Gun
 {
@@ -19,7 +20,7 @@ public class PiranhaGun : Gun
     protected override void PrimaryFire()
     {
         base.PrimaryFire();
-        StartCoroutine(BiteCourotine());
+        BiteTask();
     }
 
     protected override void HoldSencondaryFire()
@@ -28,12 +29,12 @@ public class PiranhaGun : Gun
         Shooting();
     }
 
-    IEnumerator BiteCourotine()
+    private async void BiteTask()
     {
         fire2timer = waitBeforeDamage + biteDamageDuration + 0.1f;
-        yield return new WaitForSeconds(waitBeforeDamage);
+        await Task.Delay((int)(waitBeforeDamage * 1000));
         biteColliderGO.SetActive(true);
-        yield return new WaitForSeconds(biteDamageDuration);
+        await Task.Delay((int)(biteDamageDuration * 1000));
         biteColliderGO.SetActive(false);
     }
 }
