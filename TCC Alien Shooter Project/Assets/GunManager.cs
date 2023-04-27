@@ -36,7 +36,6 @@ public class GunManager : MonoBehaviour
         if (index > guns.Length - 1) index = 0;
 
         foreach (var gun in guns) gun.SetActive(false);
-        Debug.Log(index + " " + selectedGun);
         guns[index].SetActive(true);
 
         if(index != Mathf.FloorToInt(selectedGun)) selectedGun = index;

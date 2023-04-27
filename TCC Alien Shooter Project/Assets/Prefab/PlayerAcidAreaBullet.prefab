@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7384125577035025041}
   - component: {fileID: -5793986801796681945}
   m_Layer: 7
-  m_Name: PlayerAcidBullet
+  m_Name: PlayerAcidAreaBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4931738055459567188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,10 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17db65f98b0dde843946c6f0fd2c6adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletType: PlayerAcidBullet
+  bulletType: acid1
   moveVector: {x: 0, y: -15, z: 35}
   rgbd: {fileID: 7384125577035025041}
-  damage: 5
+  damage: 2
   headShootMultiplier: 3
   hit: 0
   headShootSound:
@@ -127,8 +127,10 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
-  acidPoolGO: {fileID: 0}
-  explosionGO: {fileID: 0}
+  acidPoolGO: {fileID: 1370613234679078720, guid: 7efbfb18b2792cd44b74d078e4cefa9e,
+    type: 3}
+  explosionGO: {fileID: 1370613234679078720, guid: 0e82439ea60aaa9419684e239991660e,
+    type: 3}
 --- !u!54 &7384125577035025041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,7 +191,7 @@ TrailRenderer:
   m_Time: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.25
     widthCurve:
       serializedVersion: 2
       m_Curve:

@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour
         if(other.attachedRigidbody?.gameObject != null) BulletHit(other.attachedRigidbody.gameObject, true);
         else BulletHit(other.gameObject, true);
     }
-    public void BulletHit(GameObject collision, bool isTrigger = false)
+    public virtual void BulletHit(GameObject collision, bool isTrigger = false)
     {
         if(!isTrigger)
         {
@@ -106,5 +106,10 @@ public class Bullet : MonoBehaviour
         setedVelocity = false;
 
         gameObject.SetActive(false);
+    }
+
+    private void OnValidate() 
+    {
+        if(bulletType != name) bulletType = name;
     }
 }

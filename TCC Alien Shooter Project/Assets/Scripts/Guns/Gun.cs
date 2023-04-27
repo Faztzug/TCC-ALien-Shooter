@@ -178,6 +178,7 @@ public class Gun : MonoBehaviour
         else
         {
             var newBullet = Instantiate(bulletPrefab, null);
+            newBullet.bulletType = bulletPrefab.name;
             bullets.Add(newBullet);
             return newBullet;
         }

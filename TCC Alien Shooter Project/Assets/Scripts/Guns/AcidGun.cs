@@ -14,6 +14,6 @@ public class AcidGun : Gun
     protected override void SecondaryFire()
     {
         base.SecondaryFire();
-        //Shooting(explosiveBullet);
+        Shooting(explosiveBullet);
     }
 }
