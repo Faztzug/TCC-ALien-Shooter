@@ -17,12 +17,14 @@ public class Bullet : MonoBehaviour
     public float headShootMultiplier = 5f;
     [HideInInspector] public bool hit = false;
     [SerializeField] private Sound headShootSound;
+    TrailRenderer[] trailRenderers = new TrailRenderer[]{};
 
     void Start()
     {
         speed = moveVector.z;
         gravity = moveVector.y;
         meshRenderer = GetComponentInChildren<MeshRenderer>();
+        trailRenderers = GetComponentsInChildren<TrailRenderer>();
         
         setedVelocity = false;
     }
@@ -53,11 +55,11 @@ public class Bullet : MonoBehaviour
         if(collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);
         else BulletHit(collisionInfo.gameObject);
     }
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.attachedRigidbody?.gameObject != null) BulletHit(other.attachedRigidbody.gameObject, true);
-        else BulletHit(other.gameObject, true);
-    }
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     if(other.attachedRigidbody?.gameObject != null) BulletHit(other.attachedRigidbody.gameObject, true);
+    //     else BulletHit(other.gameObject, true);
+    // }
     public virtual void BulletHit(GameObject collision, bool isTrigger = false)
     {
         if(!isTrigger)
@@ -66,6 +68,10 @@ public class Bullet : MonoBehaviour
             rgbd.constraints = RigidbodyConstraints.FreezeAll;
             isTraveling = false;
             meshRenderer.enabled = false;
+            foreach (var trail in trailRenderers)
+            {
+                trail.emitting = false;
+            }
         } 
         if(hit) return;
         hit = true;
@@ -79,7 +85,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void Respawn()
+    public void Respawn(Vector3 position)
     {
         isTraveling = true;
         if(!meshRenderer) meshRenderer = GetComponentInChildren<MeshRenderer>();
@@ -89,10 +95,14 @@ public class Bullet : MonoBehaviour
         rgbd.angularVelocity = Vector3.zero;
         gravity = moveVector.y;
         speed = moveVector.z;
-        transform.position = Vector3.zero;
-        transform.SetPositionAndRotation(Vector3.zero, new Quaternion(0,0,0,0));
+        transform.position = position;
+        transform.SetPositionAndRotation(position, new Quaternion(0,0,0,0));
         rgbd.angularVelocity = Vector3.zero;
         setedVelocity = false;
+        foreach (var trail in trailRenderers)
+        {
+            trail.emitting = true;
+        }
     }
     
     public void DisableBullet(float time)

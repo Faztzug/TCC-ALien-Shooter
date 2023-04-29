@@ -5,20 +5,23 @@ using TMPro;
 
 public class Gun : MonoBehaviour
 {
+    [SerializeField] bool isPlayerGun = true;
     [SerializeField] bool continuosDamage = false;
     [SerializeField] bool allPointsGoTarget = true;
-    [SerializeField] private int loadedAmmo = 6;
+    [SerializeField] private float loadedAmmo = 6;
+    public float LoadedAmmo => loadedAmmo;
     [SerializeField] private int maxLoadedAmmo = 6;
-    [SerializeField] [Range(0, 72)] private int extraAmmo = 12;
-    [SerializeField] private int maxExtraAmmo = 72;
     [SerializeField] protected float fire1cooldown = 0.5f;
     [SerializeField] protected float fire2cooldown = 0f;
     protected float fire1timer = 0f;
+    public float Fire1Timer => fire1timer;
     protected float fire2timer = 0f;
+    public float Fire2Timer => fire2timer;
     protected List<Bullet> bullets = new List<Bullet>();
     [SerializeField] protected Bullet bulletPrefab;
+    public Bullet GetBulletPrefab => bulletPrefab;
     [SerializeField] private GameObject Flash;
-    [SerializeField] private float shootCooldown = 3f;
+    [SerializeField] private float shootCooldown = 30f;
     [SerializeField] private Transform[] gunPointPositions;
     private Camera cam;
     //[SerializeField] private TextMeshProUGUI ammoText;
@@ -44,6 +47,9 @@ public class Gun : MonoBehaviour
     {
         fire1timer -= Time.deltaTime;
         fire2timer -= Time.deltaTime;
+
+        if(!isPlayerGun) return;
+
         if(!(Input.GetButton("Fire2") && fire2timer <= 0))
         {
             foreach (var curPoint in gunPointPositions) 
@@ -71,25 +77,25 @@ public class Gun : MonoBehaviour
     {
         
     }
-    virtual protected void PrimaryFire()
+    virtual public void PrimaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
     }
-    virtual protected void SecondaryFire()
+    virtual public void SecondaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
     }
-    virtual protected void HoldSencondaryFire()
+    virtual public void HoldSencondaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
     }
     
-    protected void Shooting(Bullet bulletPrefab = null)
+    public void Shooting(Bullet bulletPrefab = null)
     {
-        var target = movimentoMouse.raycastResult;
+        var target = isPlayerGun ? movimentoMouse.raycastResult : GameState.PlayerTransform.position;
 
         foreach (var curPoint in gunPointPositions)
         {
@@ -110,16 +116,19 @@ public class Gun : MonoBehaviour
                 bullet.transform.LookAt(target);
                 ReadyBulletForFire(bullet, curPoint.position);
                 bullet.transform.LookAt(target);
+                loadedAmmo -= 1;
             }
             else if(continuosDamage)
             {
                 if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth((float)damage * Time.deltaTime);
                 else  GetTargetHealth(curPoint.position)?.UpdateHealth((float)damage * Time.deltaTime);
+                loadedAmmo -= Time.deltaTime;
             }
             else
             {
                 if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage);
                 else  GetTargetHealth(curPoint.position)?.UpdateHealth(damage);
+                loadedAmmo -= 1;
             }
         }
         if(Flash != null)
@@ -187,7 +196,7 @@ public class Gun : MonoBehaviour
     {
         bullet.hit = false;
         bullet.StopAllCoroutines();
-        bullet.Respawn();
+        bullet.Respawn(position);
         bullet.transform.position = position;
         //bullet.transform.localRotation = cam.transform.rotation;
         bullet.gameObject.SetActive(true);
@@ -203,13 +212,13 @@ public class Gun : MonoBehaviour
 
     public void GainAmmo(int ammount, Item item)
     {
-        if(extraAmmo < maxExtraAmmo)
+        if(loadedAmmo < maxLoadedAmmo)
         {
-            extraAmmo += ammount;
+            loadedAmmo += ammount;
             UpdateAmmoText();
             item.DestroyItem();
 
-            if(extraAmmo > maxExtraAmmo) extraAmmo = maxExtraAmmo;
+            if(loadedAmmo > maxLoadedAmmo) loadedAmmo = maxLoadedAmmo;
         }
     }
 }

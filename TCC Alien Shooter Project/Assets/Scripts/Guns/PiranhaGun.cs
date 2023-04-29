@@ -17,13 +17,13 @@ public class PiranhaGun : Gun
     }
 
 
-    protected override void PrimaryFire()
+    public override void PrimaryFire()
     {
         base.PrimaryFire();
         BiteTask();
     }
 
-    protected override void HoldSencondaryFire()
+    public override void HoldSencondaryFire()
     {
         base.HoldSencondaryFire();
         Shooting();

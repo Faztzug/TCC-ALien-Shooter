@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody), typeof(NavMeshAgent))] 
 public class EnemyIA : MonoBehaviour
@@ -16,6 +17,7 @@ public class EnemyIA : MonoBehaviour
     [Range(0,1)] protected float updateRate;
     protected float distance => Vector3.Distance(player.position, this.transform.position);
     protected Animator anim;
+    [Range(0f,0.1f)] [SerializeField] protected float shootChance = 0.8f;
     [HideInInspector] public bool alive = true;
     [SerializeField] protected int damageTauntAsync = 3;
     protected int tauntTimerAsync;
@@ -100,6 +102,7 @@ public class EnemyIA : MonoBehaviour
             if(distance > minPlayerDistance && distance < findPlayerDistance && IsPlayerAlive())
             {
                 agent.SetDestination(player.position);
+                agent.isStopped = false;
                 //Debug.Log("going to player");
             }
             else 
@@ -115,5 +118,21 @@ public class EnemyIA : MonoBehaviour
         {
             Debug.LogError(gameObject.name + " OUT OF NAV MESH!");
         }
+    }
+
+    protected void StopMoving()
+    {
+        if(agent.isOnNavMesh) agent.SetDestination(this.transform.position);
+        agent.isStopped = true;
+    }
+
+    protected void TurnToPlayer()
+    {
+        var playerFlatPos = player.position;
+        playerFlatPos.y = transform.position.y;
+        var directionPlayer = playerFlatPos - transform.position;
+        //var newDirection = Vector3.RotateTowards(transform.forward, directionPlayer, 30, 0);
+
+        transform.DORotate(directionPlayer, 1f, RotateMode.FastBeyond360);
     }
 }
