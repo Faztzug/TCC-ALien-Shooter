@@ -39,5 +39,6 @@ public class GunManager : MonoBehaviour
         guns[index].SetActive(true);
 
         if(index != Mathf.FloorToInt(selectedGun)) selectedGun = index;
+        GameState.mainCanvas.GunSelected(index);
     }
 }

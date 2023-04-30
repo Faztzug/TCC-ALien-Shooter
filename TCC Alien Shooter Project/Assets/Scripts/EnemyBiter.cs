@@ -28,7 +28,6 @@ public class EnemyBiter : EnemyIA
     {
         base.AsyncUpdateIA();
         shootRNG = Random.Range(0f,1f);
-        Debug.Log("RNG " + shootRNG);
 
         if(!isBiting)
         {

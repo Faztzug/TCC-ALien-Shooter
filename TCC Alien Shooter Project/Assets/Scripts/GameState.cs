@@ -7,7 +7,7 @@ using System;
 
 public class GameState : MonoBehaviour
 {
-    //static public MainCanvas mainCanvas;
+    static public CanvasManager mainCanvas;
     //static public CinemachineFreeLook cinemachineFreeLook;
     public Transform playerTransform;
     static public Transform PlayerTransform => GameStateInstance.playerTransform;
@@ -41,7 +41,7 @@ public class GameState : MonoBehaviour
     {
         mainCamera = Camera.main;
         //var cutSceneGOCam = GameObject.FindGameObjectWithTag("CutsceneCamera");
-        //mainCanvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<MainCanvas>();
+        mainCanvas = gameObject.GetComponentInChildren<CanvasManager>();
         gameState = this;
         SaveData = saveManager.LoadGame();
         

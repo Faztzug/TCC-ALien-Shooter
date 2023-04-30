@@ -67,11 +67,11 @@ public class Bullet : MonoBehaviour
             rgbd.velocity = Vector3.zero;
             rgbd.constraints = RigidbodyConstraints.FreezeAll;
             isTraveling = false;
-            meshRenderer.enabled = false;
             foreach (var trail in trailRenderers)
             {
                 trail.emitting = false;
             }
+            meshRenderer.enabled = false;
         } 
         if(hit) return;
         hit = true;
@@ -99,10 +99,7 @@ public class Bullet : MonoBehaviour
         transform.SetPositionAndRotation(position, new Quaternion(0,0,0,0));
         rgbd.angularVelocity = Vector3.zero;
         setedVelocity = false;
-        foreach (var trail in trailRenderers)
-        {
-            trail.emitting = true;
-        }
+        StartCoroutine(ResetTrail());
     }
     
     public void DisableBullet(float time)
@@ -116,6 +113,15 @@ public class Bullet : MonoBehaviour
         setedVelocity = false;
 
         gameObject.SetActive(false);
+    }
+
+    IEnumerator ResetTrail()
+    {
+        yield return new WaitForEndOfFrame();
+        foreach (var trail in trailRenderers)
+        {
+            trail.emitting = true;
+        }
     }
 
     private void OnValidate() 
