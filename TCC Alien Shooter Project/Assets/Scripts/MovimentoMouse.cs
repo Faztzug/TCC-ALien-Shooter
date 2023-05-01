@@ -14,6 +14,7 @@ public class MovimentoMouse : MonoBehaviour
     private Camera cam => Camera.main;
     [HideInInspector] public ReticulaFeedback reticula;
     public Vector3 raycastResult {get; private set;}
+    public const int kHorizonPoint = 250;
 
     void Start()
     {
@@ -49,9 +50,9 @@ public class MovimentoMouse : MonoBehaviour
         
         RaycastHit rayHit;
 
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, 500f, layer))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
         {
-            //Debug.DrawRay(cam.transform.position, cam.transform.forward * 500f, Color.blue);
+            //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.blue);
             if(rayHit.rigidbody != null && rayHit.rigidbody.gameObject.CompareTag("Enemy") && reticula != null)
             {
                 reticula.EnemyState();
@@ -64,12 +65,12 @@ public class MovimentoMouse : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(cam.transform.position, cam.transform.forward * 500f, Color.red);
+            //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.red);
             if(reticula != null)
             {
                 reticula.NeutralState();
             }
-            return Camera.main.transform.forward * 500;
+            return Camera.main.transform.forward * kHorizonPoint;
         }
     }
 
@@ -78,7 +79,7 @@ public class MovimentoMouse : MonoBehaviour
         var layer = GetLayers();
         RaycastHit rayHit;
 
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, 500f, layer))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();

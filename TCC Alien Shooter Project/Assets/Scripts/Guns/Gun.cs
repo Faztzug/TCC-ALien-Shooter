@@ -69,7 +69,7 @@ public class Gun : MonoBehaviour
 
         foreach (var point in gunPointPositions)
         {
-            Debug.DrawRay(point.position, cam.transform.forward * 500f, Color.red);
+            Debug.DrawRay(point.position, cam.transform.forward * MovimentoMouse.kHorizonPoint, Color.red);
         }
     }
 
@@ -105,7 +105,7 @@ public class Gun : MonoBehaviour
             }
             else 
             {
-                Debug.DrawLine(curPoint.position, cam.transform.forward * 500, Color.blue, 10f);
+                Debug.DrawLine(curPoint.position, cam.transform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
             }
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
             if(laser) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
@@ -142,16 +142,16 @@ public class Gun : MonoBehaviour
         var layer = movimentoMouse.GetLayers();
         RaycastHit rayHit;
 
-        if(Physics.Raycast(gunPoint, cam.transform.forward, out rayHit, 500, layer))
+        if(Physics.Raycast(gunPoint, cam.transform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
         {
             if(!rayHit.collider)Debug.Log("no collision");
             if(rayHit.collider) return rayHit.point;
-            else return cam.transform.forward * 500;
+            else return cam.transform.forward * MovimentoMouse.kHorizonPoint;
         }
         else
         {
             Debug.Log("no hit");
-            return cam.transform.forward * 500;
+            return cam.transform.forward * MovimentoMouse.kHorizonPoint;
         }
     }
 
@@ -160,7 +160,7 @@ public class Gun : MonoBehaviour
         var layer = movimentoMouse.GetLayers();
         RaycastHit rayHit;
 
-        if(Physics.Raycast(gunPoint, cam.transform.forward, out rayHit, 500, layer))
+        if(Physics.Raycast(gunPoint, cam.transform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
