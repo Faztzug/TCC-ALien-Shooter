@@ -23,16 +23,12 @@ public class PlayerShieldHealth : ShieldHealth
     public Sound[] damageSounds;
     //private GameState state;
     public bool dead;
-    //private Volume damageEffect;
     
 
     public override void Start()
     {
         base.Start();
-        //bar.fillAmount = health / maxHealth;
         UpdateHealth();
-        //damageEffect = GameState.mainCanvas.GetComponentInChildren<Volume>();
-        //damageEffect.weight = 0f;
     }
 
     protected override void Update()

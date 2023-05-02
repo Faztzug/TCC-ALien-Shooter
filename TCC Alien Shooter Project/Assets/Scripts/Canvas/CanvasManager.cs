@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CanvasManager : MonoBehaviour
     private List<Tween> gunTweens = new List<Tween>();
     [SerializeField] private Image shieldImage;
     [SerializeField] private Image healthImage;
+    [SerializeField] private Volume damageEffect;
 
     void Start()
     {
@@ -35,5 +37,6 @@ public class CanvasManager : MonoBehaviour
     {
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
+        damageEffect.weight = 1 - (shieldImage.fillAmount * shieldImage.fillAmount);
     }
 }
