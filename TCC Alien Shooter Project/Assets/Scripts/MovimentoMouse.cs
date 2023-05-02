@@ -37,9 +37,9 @@ public class MovimentoMouse : MonoBehaviour
         raycastResult = GetRayCastMiddle();
     }
 
-    public int GetLayers()
+    static public int GetLayers(bool isPlayerCast = true)
     {
-        var layer = 1 << 3;
+        var layer = isPlayerCast ? LayerMask.GetMask("Player") : LayerMask.GetMask("Enemy");
         return ~layer;
     }
 

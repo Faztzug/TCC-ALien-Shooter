@@ -5,9 +5,9 @@ using UnityEngine;
 public class ShieldHealth : Health
 {
     [SerializeField] protected float maxShield = 1;
-    [SerializeField] protected float curShield;
+    protected float curShield;
     [SerializeField] protected float shieldRegen = 1f;
-    [SerializeField] protected float regenCooldown = 0.5f;
+    [SerializeField] protected float regenCooldown = 2f;
     private float regenTimer = 0f;
 
     public override void Start()

@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using MyBox;
 
 public class Gun : MonoBehaviour
 {
     [SerializeField] bool isPlayerGun = true;
+    [HideInInspector] public Transform aimTransform;
     [SerializeField] bool continuosDamage = false;
     [SerializeField] bool allPointsGoTarget = true;
     [SerializeField] private float loadedAmmo = 6;
@@ -32,10 +33,13 @@ public class Gun : MonoBehaviour
     protected Sound reloadFailSound;
     protected Animator anim;
     [SerializeField] protected MovimentoMouse movimentoMouse;
+    [HideInInspector] public Vector3 enemyTarget;
+    [HideInInspector] public bool enemyHoldingFire;
    
     virtual protected void Start()
     {
         cam = Camera.main;
+        if(isPlayerGun) aimTransform = cam.transform;
 
         UpdateAmmoText();
         Cursor.lockState = CursorLockMode.Locked;
@@ -48,7 +52,19 @@ public class Gun : MonoBehaviour
         fire1timer -= Time.deltaTime;
         fire2timer -= Time.deltaTime;
 
-        if(!isPlayerGun) return;
+        if(!isPlayerGun)
+        {
+            if(fire2timer <= 0 && !enemyHoldingFire)
+            {
+                foreach (var curPoint in gunPointPositions) 
+                {
+                    var line = curPoint.GetComponentInChildren<LaserVFXManager>();
+                    if(line) line.TurnOffLAser();
+                }
+            }
+            return;
+        }
+        
 
         if(!(Input.GetButton("Fire2") && fire2timer <= 0))
         {
@@ -69,7 +85,7 @@ public class Gun : MonoBehaviour
 
         foreach (var point in gunPointPositions)
         {
-            Debug.DrawRay(point.position, cam.transform.forward * MovimentoMouse.kHorizonPoint, Color.red);
+            Debug.DrawRay(point.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.red);
         }
     }
 
@@ -95,18 +111,18 @@ public class Gun : MonoBehaviour
     
     public void Shooting(Bullet bulletPrefab = null)
     {
-        var target = isPlayerGun ? movimentoMouse.raycastResult : GameState.PlayerTransform.position;
+        var target = isPlayerGun ? movimentoMouse.raycastResult : enemyTarget;
 
         foreach (var curPoint in gunPointPositions)
         {
-            if(allPointsGoTarget) 
-            {
-                Debug.DrawLine(curPoint.position, target, Color.blue, 10f);
-            }
-            else 
-            {
-                Debug.DrawLine(curPoint.position, cam.transform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
-            }
+            // if(allPointsGoTarget) 
+            // {
+            //     Debug.DrawLine(curPoint.position, target, Color.blue, 10f);
+            // }
+            // else 
+            // {
+            //     Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
+            // }
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
             if(laser) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
@@ -120,14 +136,14 @@ public class Gun : MonoBehaviour
             }
             else if(continuosDamage)
             {
-                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth((float)damage * Time.deltaTime);
-                else  GetTargetHealth(curPoint.position)?.UpdateHealth((float)damage * Time.deltaTime);
+                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage * Time.deltaTime);
+                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage * Time.deltaTime);
                 loadedAmmo -= Time.deltaTime;
             }
             else
             {
                 if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage);
-                else  GetTargetHealth(curPoint.position)?.UpdateHealth(damage);
+                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage);
                 loadedAmmo -= 1;
             }
         }
@@ -139,28 +155,28 @@ public class Gun : MonoBehaviour
     }
     public Vector3 GetRayCastMiddle(Vector3 gunPoint)
     {
-        var layer = movimentoMouse.GetLayers();
+        var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
 
-        if(Physics.Raycast(gunPoint, cam.transform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
+        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
         {
             if(!rayHit.collider)Debug.Log("no collision");
             if(rayHit.collider) return rayHit.point;
-            else return cam.transform.forward * MovimentoMouse.kHorizonPoint;
+            else return aimTransform.forward * MovimentoMouse.kHorizonPoint;
         }
         else
         {
             Debug.Log("no hit");
-            return cam.transform.forward * MovimentoMouse.kHorizonPoint;
+            return aimTransform.forward * MovimentoMouse.kHorizonPoint;
         }
     }
 
     public Health GetTargetHealth(Vector3 gunPoint)
     {
-        var layer = movimentoMouse.GetLayers();
+        var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
 
-        if(Physics.Raycast(gunPoint, cam.transform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
+        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
@@ -198,7 +214,7 @@ public class Gun : MonoBehaviour
         bullet.StopAllCoroutines();
         bullet.Respawn(position);
         bullet.transform.position = position;
-        //bullet.transform.localRotation = cam.transform.rotation;
+        //bullet.transform.localRotation = aimTransform.forward;
         bullet.gameObject.SetActive(true);
         bullet.DisableBullet(shootCooldown);
         bullet.damage = damage;

@@ -39,6 +39,7 @@ public class PlayerShieldHealth : ShieldHealth
     {
         base.Update();
         if(GameState.GodMode) UpdateHealth(maxHealth);
+        UpdateHealthBar();
 
         if(Input.GetButtonDown("GodMode"))
         {
@@ -83,6 +84,7 @@ public class PlayerShieldHealth : ShieldHealth
         var hpPorcentage = Mathf.Abs(health / maxHealth);
         var chgPorcentage = Mathf.Abs(value / maxHealth);
 
+
         // if(value < 0)
         // {
         //     damageEffect.weight += chgPorcentage * effectGainMultplier;
@@ -96,6 +98,8 @@ public class PlayerShieldHealth : ShieldHealth
         //     if(damageTime < 0) damageTime = 0;
         // }
     }
+
+    public void UpdateHealthBar() => GameState.mainCanvas.UpdateShieldHealthPercentage(curShield / maxShield, health / maxHealth);
 
     IEnumerator EndUpdateHealth()
     {

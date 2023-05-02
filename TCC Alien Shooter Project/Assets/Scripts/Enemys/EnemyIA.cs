@@ -17,10 +17,18 @@ public class EnemyIA : MonoBehaviour
     [Range(0,1)] protected float updateRate;
     protected float distance => Vector3.Distance(player.position, this.transform.position);
     protected Animator anim;
+    [Range(0,100)] [SerializeField] protected float shootAim = 90;
     [Range(0f,0.1f)] [SerializeField] protected float shootChance = 0.8f;
     [HideInInspector] public bool alive = true;
     [SerializeField] protected int damageTauntAsync = 3;
     protected int tauntTimerAsync;
+    protected Gun gun;
+    protected Vector3 missTargetPos = new Vector3();
+    protected bool doesContinuousFire => gun is PiranhaGun;
+    [SerializeField] protected Transform aimTransform;
+    [SerializeField] private float aimRotationSpeed = 5f;
+    protected Vector3 targetPos;
+    protected Transform newTargetTrans;
 
     protected virtual void Start() 
     {
@@ -30,13 +38,22 @@ public class EnemyIA : MonoBehaviour
         rgbd.maxAngularVelocity = 0;
         tauntTimerAsync = damageTauntAsync * 3;
         anim = GetComponent<Animator>();
+        gun = GetComponentInChildren<Gun>();
+        gun.aimTransform = aimTransform;
+        targetPos = player.position;
+        newTargetTrans = player;
         
         StartCoroutine(CourotineAsyncUpdateIA());
     }
 
     protected virtual void Update() 
     {
+        targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
+        // var directionPlayer = targetPos - aimTransform.position;
         
+        // var newDirection = Vector3.RotateTowards(aimTransform.forward, directionPlayer, aimRotationSpeed, 0);
+        // aimTransform.rotation = Quaternion.LookRotation(newDirection);
+        aimTransform.LookAt(targetPos);
     }
 
     protected IEnumerator CourotineAsyncUpdateIA()
@@ -134,5 +151,47 @@ public class EnemyIA : MonoBehaviour
         //var newDirection = Vector3.RotateTowards(transform.forward, directionPlayer, 30, 0);
 
         transform.DORotate(directionPlayer, 1f, RotateMode.FastBeyond360);
+    }
+    protected float shootRNG;
+    private void ShootAtPlayer()
+    {
+        //Debug.Log("shoot player " + shootChance +" >= " + shootRNG);
+        StopMoving();
+        var playerNoYPos = player.position;
+        playerNoYPos.y = this.transform.position.y;
+        var distanceFlat = Vector3.Distance(this.transform.position, playerNoYPos);
+
+        var rngValue = (1f / shootAim) * distance;
+        var rngMissTarget = new Vector3(Random.Range(-rngValue, rngValue),Random.Range(-rngValue, rngValue), Random.Range(-rngValue, rngValue));
+        newTargetTrans = GameState.playerRandomBodyPart;
+        if(!doesContinuousFire && Vector3.Distance(missTargetPos, Vector3.zero) < 0.01f) missTargetPos = rngMissTarget;
+        else missTargetPos = Vector3.Lerp(missTargetPos, rngMissTarget, Time.deltaTime);
+        newTargetTrans.position += missTargetPos;
+        var isPlayerAbove = player.position.y >= transform.position.y;
+        if(gun is AcidGun) 
+        { 
+            var plusY = new Vector3(0, isPlayerAbove ? distance / 4f : distanceFlat / 8f, 0);
+            newTargetTrans.position += plusY;
+        }
+
+        if(!doesContinuousFire) targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
+
+        gun.enemyTarget = doesContinuousFire ? targetPos : newTargetTrans.position;
+    }
+
+    protected virtual void PrimaryFire()
+    {
+        ShootAtPlayer();
+        gun.PrimaryFire();
+    }
+    protected virtual void SecondaryFire()
+    {
+        ShootAtPlayer();
+        gun.SecondaryFire();
+    }
+    protected virtual void HoldSecondaryFire()
+    {
+        ShootAtPlayer();
+        gun.HoldSencondaryFire();
     }
 }

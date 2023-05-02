@@ -5,6 +5,7 @@ using UnityEngine;
 public class RotateToPlayer : MonoBehaviour
 {
     private Transform player => GameState.PlayerTransform;
+    [SerializeField] private bool flatYRotantion = true;
     [SerializeField] private float lerpSpeed;
     [SerializeField] private int distanceToRotate = 30;
     private Vector3 curWorldPos;
@@ -13,7 +14,7 @@ public class RotateToPlayer : MonoBehaviour
         if(Vector3.Distance(this.transform.position, player.position) < distanceToRotate)
         {
             var playerFlatPos = player.position;
-            playerFlatPos.y = transform.position.y;
+            if(flatYRotantion) playerFlatPos.y = transform.position.y;
             var directionPlayer = playerFlatPos - transform.position;
             var speed = lerpSpeed * Time.deltaTime;
             var newDirection = Vector3.RotateTowards(transform.forward, directionPlayer, speed, 0);

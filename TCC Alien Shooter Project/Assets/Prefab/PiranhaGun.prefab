@@ -600,8 +600,8 @@ MonoBehaviour:
   isPlayerGun: 1
   continuosDamage: 1
   allPointsGoTarget: 0
-  loadedAmmo: 6
-  maxLoadedAmmo: 6
+  loadedAmmo: 10
+  maxLoadedAmmo: 40
   fire1cooldown: 0.35
   fire2cooldown: 0
   bulletPrefab: {fileID: 0}
@@ -612,6 +612,7 @@ MonoBehaviour:
   - {fileID: 8660088876963430480}
   damage: -1
   movimentoMouse: {fileID: 0}
+  enemyTarget: {x: 0, y: 0, z: 0}
   biteColliderGO: {fileID: 5693225437726120581}
   waitBeforeDamage: 0.1
   biteDamageDuration: 0.3

@@ -10,6 +10,8 @@ public class GameState : MonoBehaviour
     static public CanvasManager mainCanvas;
     //static public CinemachineFreeLook cinemachineFreeLook;
     public Transform playerTransform;
+    public Transform[] playerBodyParts = new Transform[]{};
+    static public Transform playerRandomBodyPart => GameStateInstance.playerBodyParts[UnityEngine.Random.Range(0, GameStateInstance.playerBodyParts.Length)];
     static public Transform PlayerTransform => GameStateInstance.playerTransform;
     public bool isPlayerDead = false;
     static public bool IsPlayerDead {

@@ -5,8 +5,8 @@ using UnityEngine.Audio;
 
 public class Health : MonoBehaviour
 {
-    public float maxHealth;
-    [SerializeField] protected float health;
+    public float maxHealth = 1f;
+    protected float health;
     //[SerializeField] protected AudioSource source;
     //[SerializeField] protected AudioClip damageSound;
     protected Animator anim;
