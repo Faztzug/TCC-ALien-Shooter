@@ -30,6 +30,9 @@ public class EnemyIA : MonoBehaviour
     protected Vector3 targetPos;
     protected Transform newTargetTrans;
 
+    protected bool inFireRange => distance <= shootingDistance;
+    protected bool inWalkRange => distance <= findPlayerDistance && distance >= minPlayerDistance;
+
     protected virtual void Start() 
     {
         updateRate = Random.Range(updateRateRNG[0], updateRateRNG[1]);
@@ -163,7 +166,7 @@ public class EnemyIA : MonoBehaviour
     private void ShootAtPlayer()
     {
         //Debug.Log("shoot player " + shootChance +" >= " + shootRNG);
-        StopMoving();
+        //StopMoving();
         var playerNoYPos = player.position;
         playerNoYPos.y = this.transform.position.y;
         var distanceFlat = Vector3.Distance(this.transform.position, playerNoYPos);
@@ -177,7 +180,7 @@ public class EnemyIA : MonoBehaviour
         var isPlayerAbove = player.position.y >= transform.position.y;
         if(gun is AcidGun) 
         { 
-            var plusY = new Vector3(0, isPlayerAbove ? distance / 4f : distanceFlat / 8f, 0);
+            var plusY = new Vector3(0, distance / 16f, 0);
             newTargetTrans.position += plusY;
         }
 

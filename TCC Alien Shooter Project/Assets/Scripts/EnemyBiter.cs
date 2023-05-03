@@ -29,8 +29,12 @@ public class EnemyBiter : EnemyIA
         if(!isBiting)
         {
             if(distance <= minPlayerDistance) BitePlayer();
-            else if(doesShoot && shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.Fire1Timer < 0) PrimaryFire();
-            else GoToPlayer();
+            else if(doesShoot && shootChance >= shootRNG && gun.LoadedAmmo > 0 
+            && gun.Fire1Timer < 0 && inFireRange) 
+            {
+                PrimaryFire();
+            }
+            else if(inWalkRange) GoToPlayer();
         }
     }
 

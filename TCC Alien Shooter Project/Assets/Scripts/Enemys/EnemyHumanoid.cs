@@ -29,22 +29,22 @@ public class EnemyHumanoid : EnemyIA
         if(!isContinousFiring && doesContinuousFire)
         {
             agent.speed = runSpeed * walkingFiringSpeed;
-            if(shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.Fire2Timer < 0)
+            if(shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.Fire2Timer < 0 && inFireRange)
             {
                 keepFiringTimer = Random.Range(keepFiringTimeRNG[0],keepFiringTimeRNG[1]);
                 HoldSecondaryFire();
             } 
 
-            if(distance > minPlayerDistance && distance < findPlayerDistance) GoToPlayer();
+            if(inWalkRange) GoToPlayer();
             else if(agent.isOnNavMesh) agent.isStopped = true;
         }
-        else if(isContinousFiring && doesContinuousFire)
+        else if(isContinousFiring && doesContinuousFire && distance <= shootingDistance)
         {
             HoldSecondaryFire();
         }
-        else if(doesContinuousFire)
+        else if(distance >= minPlayerDistance && distance <= findPlayerDistance && distance >= shootingDistance)
         {
-
+            GoToPlayer();
         }
     }
 }
