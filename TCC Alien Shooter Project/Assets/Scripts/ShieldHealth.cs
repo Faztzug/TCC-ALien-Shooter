@@ -41,8 +41,9 @@ public class ShieldHealth : Health
         UpdateShieldValue(value);
     }
 
-    protected virtual void Update() 
+    protected override void Update() 
     {
+        base.Update();
         if(regenTimer < 0) UpdateShieldValue(shieldRegen * Time.deltaTime);
         
         regenTimer = regenTimer - Time.deltaTime;

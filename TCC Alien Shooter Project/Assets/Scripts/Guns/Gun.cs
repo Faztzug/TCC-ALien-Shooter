@@ -139,6 +139,7 @@ public class Gun : MonoBehaviour
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
             if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
+            Health targetHealth = null;
             if(bulletPrefab) 
             {
                 var bullet = SpawnBullet(bulletPrefab);
@@ -147,16 +148,16 @@ public class Gun : MonoBehaviour
                 ReadyBulletForFire(bullet, curPoint.position);
                 bullet.transform.LookAt(target);
             }
-            else if(continuosDamage)
+            else 
             {
-                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage * Time.deltaTime, damageType);
-                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage * Time.deltaTime, damageType);
+                if(allPointsGoTarget) targetHealth = movimentoMouse.GetTargetHealth();
+                else targetHealth = GetTargetHealth(curPoint.position);
+
+                if(continuosDamage) targetHealth?.UpdateHealth(damage * Time.deltaTime, damageType);
+                else targetHealth?.UpdateHealth(damage, damageType);
+                targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position), continuosDamage);
             }
-            else
-            {
-                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage, damageType);
-                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage, damageType);
-            }
+            
         }
         if(Flash != null)
         {

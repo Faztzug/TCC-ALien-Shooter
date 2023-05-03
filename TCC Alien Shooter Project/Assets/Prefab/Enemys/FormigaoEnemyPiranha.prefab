@@ -394,6 +394,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
+    type: 3}
   maxShield: 1
   shieldRegen: 1
   regenCooldown: 2
@@ -661,6 +663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 0
+  firstDamageType: 0
+  secondDamageType: 0
   isPlayerGun: 0
   aimTransform: {fileID: 0}
   continuosDamage: 1

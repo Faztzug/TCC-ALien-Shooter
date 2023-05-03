@@ -6,6 +6,7 @@ public class AcidDamage : DamageHealthCollider
 {
     private void OnTriggerStay(Collider other) 
     {
-        GetHealth(other)?.UpdateHealth(damage * Time.deltaTime, DamageType.acidDamage);
+        var hp = GetHealth(other);
+        hp?.UpdateHealth(damage * Time.deltaTime, DamageType.acidDamage);
     }
 }

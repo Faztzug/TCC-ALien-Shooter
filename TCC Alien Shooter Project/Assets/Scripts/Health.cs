@@ -14,11 +14,18 @@ public class Health : MonoBehaviour
     protected Animator anim;
     private EnemyIA thisEnemy;
     public Action onDeath;
+    [SerializeField] private GameObject bloodVFX;
+
     public virtual void Start()
     {
         health = maxHealth;
         thisEnemy = GetComponent<EnemyIA>();
         if(thisEnemy != null) anim = GetComponentInChildren<Animator>();
+    }
+
+    protected virtual void Update() 
+    {
+        bloodVfxTimer -= Time.deltaTime;
     }
 
     public virtual void UpdateHealth(float value, DamageType damageType)
@@ -34,6 +41,15 @@ public class Health : MonoBehaviour
             //if(source != null) source.PlayOneShot(damageSound);
             //else Debug.LogError("NO AUDIO SOURCE FOR DAMAGE");
         }
+    }
+
+    float bloodVfxTimer = 0f;
+    public virtual void BleedVFX(Vector3 position, bool isContinuos = false)
+    {
+        if(isContinuos & bloodVfxTimer > 0) return;
+        if(bloodVFX == null) Debug.Log(name + " Não possui vfx de sangue!");
+        else GameObject.Instantiate(bloodVFX, position, Quaternion.identity, this.transform);
+        if(isContinuos) bloodVfxTimer = 0.5f;
     }
 
     public virtual void DestroyCharacter()
