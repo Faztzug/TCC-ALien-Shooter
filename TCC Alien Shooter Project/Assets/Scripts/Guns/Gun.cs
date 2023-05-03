@@ -13,6 +13,8 @@ public enum GunType
 public class Gun : MonoBehaviour
 {
     public GunType gunType;
+    [SerializeField] private DamageType firstDamageType;
+    [SerializeField] private DamageType secondDamageType;
     [SerializeField] bool isPlayerGun = true;
     [HideInInspector] public Transform aimTransform;
     [SerializeField] bool continuosDamage = false;
@@ -125,7 +127,7 @@ public class Gun : MonoBehaviour
         if(continuosDamage) LoadedAmmo -= SecondaryAmmoCost * Time.deltaTime;
     }
     
-    public void Shooting(Bullet bulletPrefab = null)
+    public void Shooting(DamageType damageType, Bullet bulletPrefab = null)
     {
         var target = isPlayerGun ? movimentoMouse.raycastResult : enemyTarget;
 
@@ -140,19 +142,20 @@ public class Gun : MonoBehaviour
             if(bulletPrefab) 
             {
                 var bullet = SpawnBullet(bulletPrefab);
+                bullet.damageType = damageType;
                 bullet.transform.LookAt(target);
                 ReadyBulletForFire(bullet, curPoint.position);
                 bullet.transform.LookAt(target);
             }
             else if(continuosDamage)
             {
-                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage * Time.deltaTime);
-                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage * Time.deltaTime);
+                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage * Time.deltaTime, damageType);
+                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage * Time.deltaTime, damageType);
             }
             else
             {
-                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage);
-                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage);
+                if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage, damageType);
+                else GetTargetHealth(curPoint.position)?.UpdateHealth(damage, damageType);
             }
         }
         if(Flash != null)

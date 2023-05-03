@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [HideInInspector] public DamageType damageType;
     public bool isTraveling {private set; get;}
     private MeshRenderer meshRenderer;
     public string bulletType;
@@ -80,7 +81,7 @@ public class Bullet : MonoBehaviour
         
         if(collision.GetComponent<Health>())
         {
-            collision.GetComponent<Health>().UpdateHealth(damage);
+            collision.GetComponent<Health>().UpdateHealth(damage, damageType);
             //Debug.Log(collisionInfo.gameObject.name + " took " + damage + " of damage!");
         }
     }

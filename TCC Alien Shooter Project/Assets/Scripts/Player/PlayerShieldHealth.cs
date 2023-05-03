@@ -28,13 +28,13 @@ public class PlayerShieldHealth : ShieldHealth
     public override void Start()
     {
         base.Start();
-        UpdateHealth();
+        UpdateHealth(maxHealth, DamageType.NULL);
     }
 
     protected override void Update()
     {
         base.Update();
-        if(GameState.GodMode) UpdateHealth(maxHealth);
+        if(GameState.GodMode) UpdateHealth(maxHealth, DamageType.NULL);
         UpdateHealthBar();
 
         if(Input.GetButtonDown("GodMode"))
@@ -60,7 +60,7 @@ public class PlayerShieldHealth : ShieldHealth
     }
 
     private bool updatingHealthThisFrame;
-    public override void UpdateHealth(float value = 0)
+    public override void UpdateHealth(float value, DamageType damageType)
     {
         if(value < 0)
         {
@@ -75,7 +75,7 @@ public class PlayerShieldHealth : ShieldHealth
                 damageSounds[index]?.PlayOn(audioSource);
             }
         }
-        base.UpdateHealth(value);
+        base.UpdateHealth(value, damageType);
         //bar.fillAmount = health / maxHealth;
 
         StartCoroutine(EndUpdateHealth());

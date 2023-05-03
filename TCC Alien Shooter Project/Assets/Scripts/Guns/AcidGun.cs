@@ -8,12 +8,12 @@ public class AcidGun : Gun
     public override void PrimaryFire()
     {
         base.PrimaryFire();
-        Shooting(bulletPrefab);
+        Shooting(DamageType.acidDamage, bulletPrefab);
     }
 
     public override void SecondaryFire()
     {
         base.SecondaryFire();
-        Shooting(explosiveBullet);
+        Shooting(DamageType.acidDamage, explosiveBullet);
     }
 }

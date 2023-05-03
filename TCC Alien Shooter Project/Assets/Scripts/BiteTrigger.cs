@@ -11,7 +11,7 @@ public class BiteTrigger : DamageHealthCollider
         if(!other.CompareTag("Player"))
         {
             var health = GetHealth(other.gameObject);
-            health?.UpdateHealth(damage);
+            health?.UpdateHealth(damage, DamageType.piranhaBiteDamage);
             if(health != null) piranha.BiteGainAmmo();
         } 
     }

@@ -16,11 +16,17 @@ public class ShieldHealth : Health
         curShield = maxShield;
     }
 
-    public override void UpdateHealth(float value = 0)
+    public void PierciShieldDamage(float value)
+    {
+        if(curShield > 0) health += value / 2;
+        UpdateHealth(value, DamageType.NULL);
+    }
+
+    public override void UpdateHealth(float value, DamageType damageType)
     {
         if(curShield <= 0 || value > 0)
         {
-            base.UpdateHealth(value);
+            base.UpdateHealth(value, damageType);
         } 
         
         if(value < 0)

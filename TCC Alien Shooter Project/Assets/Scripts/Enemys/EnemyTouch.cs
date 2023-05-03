@@ -45,7 +45,7 @@ public class EnemyTouch : MonoBehaviour
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();
             }
-            healthObj?.UpdateHealth(contactDamage);
+            healthObj?.UpdateHealth(contactDamage, DamageType.NULL);
             if(healthObj) Debug.Log("T Ouch!");
             time = invicibilityTime;
         }

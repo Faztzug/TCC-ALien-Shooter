@@ -12,7 +12,7 @@ public class EnemyDrop : MonoBehaviour
     public void Drop()
     {
         Vector3 dropPos = transform.position;
-        dropPos.y =+ 5;
+        dropPos.y =+ 2;
         Quaternion dropRot = transform.rotation;
         for (int i = 0; i < itens.Length; i++)
         {

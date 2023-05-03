@@ -28,7 +28,7 @@ public class PiranhaGun : Gun
     public override void HoldSencondaryFire()
     {
         base.HoldSencondaryFire();
-        Shooting();
+        Shooting(DamageType.heatLaserDamage);
     }
 
     public void BiteGainAmmo()

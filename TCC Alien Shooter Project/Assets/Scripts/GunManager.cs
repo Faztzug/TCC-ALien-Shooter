@@ -21,6 +21,7 @@ public class GunManager : MonoBehaviour
 
     void Update()
     {
+        if(GameState.isGamePaused) return;
         var input = Input.GetAxis("Mouse ScrollWheel");
         if(input > 0) selectedGun += 1;
         if(input < 0) selectedGun -= 1;
