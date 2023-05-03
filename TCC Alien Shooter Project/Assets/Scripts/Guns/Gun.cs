@@ -80,7 +80,7 @@ public class Gun : MonoBehaviour
         }
         
         if(GameState.GodMode) LoadedAmmo = maxLoadedAmmo;
-        if(!(Input.GetButton("Fire2") && fire2timer <= 0))
+        if(!(Input.GetButton("Fire2") && fire2timer <= 0) || loadedAmmo <= 0)
         {
             foreach (var curPoint in gunPointPositions) 
             {
