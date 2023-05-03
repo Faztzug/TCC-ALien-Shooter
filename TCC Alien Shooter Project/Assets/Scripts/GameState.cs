@@ -76,6 +76,7 @@ public class GameState : MonoBehaviour
         UpdateQuality();
         OnSettingsUpdated?.Invoke();
         saveManager.SaveGame(saveData);
+        PauseGame(false);
     }
     private void Start() 
     {
@@ -93,6 +94,7 @@ public class GameState : MonoBehaviour
         {
             StartCoroutine(EndCutsceneOnTime(0f));
         }
+        else if(Input.GetButtonDown("Pause")) PauseGame(!isGamePaused);
     }
 
     public static void RestartStage()
@@ -177,6 +179,14 @@ public class GameState : MonoBehaviour
         var audioSource = AudioObject.GetComponent<AudioSource>();
         sound.PlayOn(audioSource);
         Destroy(AudioObject, destroyTime);
+    }
+
+    public static void PauseGame(bool pause)
+    {
+        isGamePaused = pause;
+        Cursor.lockState = pause ? CursorLockMode.None : CursorLockMode.Locked;
+        Time.timeScale = pause ? 0f : 1f;
+        mainCanvas.SetPauseMenu(pause);
     }
 
     IEnumerator EndGame()
