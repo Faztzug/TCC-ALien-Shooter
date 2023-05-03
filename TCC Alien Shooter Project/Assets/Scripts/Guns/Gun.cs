@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private DamageType firstDamageType;
     [SerializeField] private DamageType secondDamageType;
     [SerializeField] bool isPlayerGun = true;
-    [HideInInspector] public Transform aimTransform;
+    public Transform aimTransform;
     [SerializeField] bool continuosDamage = false;
     [SerializeField] bool allPointsGoTarget = true;
     [SerializeField] private float loadedAmmo = 6;
@@ -104,7 +104,7 @@ public class Gun : MonoBehaviour
             //point.rotation = Quaternion.LookRotation(newDirection);
             //point.LookAt(horizonPos);
             Debug.DrawRay(point.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.red);
-            Debug.DrawRay(aimTransform.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.green);
+            //Debug.DrawRay(aimTransform.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.green);
         }
     }
 
@@ -137,7 +137,7 @@ public class Gun : MonoBehaviour
             // else   Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
             
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
-            if(laser) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
+            if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
             if(bulletPrefab) 
             {
@@ -168,7 +168,7 @@ public class Gun : MonoBehaviour
     {
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
-
+        
         if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
         {
             if(rayHit.collider) return rayHit.point;
@@ -176,7 +176,8 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            return aimTransform.forward * MovimentoMouse.kHorizonPoint;
+            Debug.DrawLine(aimTransform.position, aimTransform.position + aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.green);
+            return aimTransform.position + aimTransform.forward * MovimentoMouse.kHorizonPoint;
         }
     }
 

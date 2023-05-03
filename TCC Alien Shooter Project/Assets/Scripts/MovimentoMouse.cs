@@ -52,7 +52,7 @@ public class MovimentoMouse : MonoBehaviour
 
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
         {
-            //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.blue);
+            Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.blue);
             if(rayHit.rigidbody != null && rayHit.rigidbody.gameObject.CompareTag("Enemy") && reticula != null)
             {
                 reticula.EnemyState();
@@ -65,12 +65,12 @@ public class MovimentoMouse : MonoBehaviour
         }
         else
         {
-            //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.red);
+            //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.green);
             if(reticula != null)
             {
                 reticula.NeutralState();
             }
-            return Camera.main.transform.forward * kHorizonPoint;
+            return cam.transform.position + cam.transform.forward * kHorizonPoint;
         }
     }
 

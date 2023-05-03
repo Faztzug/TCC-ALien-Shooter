@@ -36,7 +36,7 @@ public class EnemyHumanoid : EnemyIA
             } 
 
             if(distance > minPlayerDistance && distance < findPlayerDistance) GoToPlayer();
-            else agent.isStopped = true;
+            else if(agent.isOnNavMesh) agent.isStopped = true;
         }
         else if(isContinousFiring && doesContinuousFire)
         {

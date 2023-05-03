@@ -143,8 +143,11 @@ public class EnemyIA : MonoBehaviour
 
     protected void StopMoving()
     {
-        if(agent.isOnNavMesh) agent.SetDestination(this.transform.position);
-        agent.isStopped = true;
+        if(agent.isOnNavMesh) 
+        {   
+            agent.SetDestination(this.transform.position);
+            agent.isStopped = true;
+        }
     }
 
     protected void TurnToPlayer()
