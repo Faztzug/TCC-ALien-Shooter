@@ -5,15 +5,17 @@ using System.Threading.Tasks;
 
 public class PiranhaGun : Gun
 {
-    [SerializeField] GameObject biteColliderGO;
+    [SerializeField] BiteTrigger biteCollider;
     [SerializeField] float waitBeforeDamage;
     [SerializeField] float biteDamageDuration;
+    [SerializeField] float biteAmmoGain = 1f;
     bool firing;
 
     protected override void Start()
     {
         base.Start();
-        biteColliderGO.SetActive(false);
+        biteCollider.gameObject.SetActive(false);
+        biteCollider.piranha = this;
     }
 
 
@@ -29,12 +31,17 @@ public class PiranhaGun : Gun
         Shooting();
     }
 
+    public void BiteGainAmmo()
+    {
+        GainAmmo(biteAmmoGain, null);
+    }
+
     private async void BiteTask()
     {
         fire2timer = waitBeforeDamage + biteDamageDuration + 0.1f;
         await Task.Delay((int)(waitBeforeDamage * 1000));
-        biteColliderGO.SetActive(true);
+        biteCollider.gameObject.SetActive(true);
         await Task.Delay((int)(biteDamageDuration * 1000));
-        biteColliderGO.SetActive(false);
+        biteCollider.gameObject.SetActive(false);
     }
 }

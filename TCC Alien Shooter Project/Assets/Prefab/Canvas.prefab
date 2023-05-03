@@ -752,9 +752,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiColor: {r: 0.21960783, g: 1, b: 0.830547, a: 1}
   gunsSelectables:
-  - {fileID: 7561782197722315542}
-  - {fileID: 8923449175376578593}
-  - {fileID: 4660236247320304926}
+  - {fileID: 4466169282777914304}
+  - {fileID: 3377040200905763063}
+  - {fileID: 1560393614134902216}
   seletedScale: 1.3
   shieldImage: {fileID: 7935774600881621444}
   healthImage: {fileID: 2437230818661023258}
@@ -1348,6 +1348,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4249975969956835281}
     m_Modifications:
+    - target: {fileID: 277765916043451342, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.830547
+      objectReference: {fileID: 0}
+    - target: {fileID: 277765916043451342, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960783
+      objectReference: {fileID: 0}
     - target: {fileID: 645988365400659740, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
         type: 3}
       propertyPath: m_Color.b
@@ -1501,6 +1511,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5105476234700923952}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4466169282777914304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8872459435418664944, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5105476234700923952}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142c8390c5c4184f8c75978996fed33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6196081117548943111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1508,6 +1530,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4249975969956835281}
     m_Modifications:
+    - target: {fileID: 277765916043451342, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.830547
+      objectReference: {fileID: 0}
+    - target: {fileID: 277765916043451342, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960783
+      objectReference: {fileID: 0}
     - target: {fileID: 645988365400659740, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
         type: 3}
       propertyPath: m_Sprite
@@ -1664,8 +1696,25 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4292149048
       objectReference: {fileID: 0}
+    - target: {fileID: 8872459435418664944, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: _gunType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4359a7fc8ab01434eaab9aac8e363ff6, type: 3}
+--- !u!114 &3377040200905763063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8872459435418664944, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6196081117548943111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142c8390c5c4184f8c75978996fed33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8923449175376578593 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3326633236482776870, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
@@ -1679,6 +1728,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4249975969956835281}
     m_Modifications:
+    - target: {fileID: 277765916043451342, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.830547
+      objectReference: {fileID: 0}
+    - target: {fileID: 277765916043451342, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960783
+      objectReference: {fileID: 0}
     - target: {fileID: 645988365400659740, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
         type: 3}
       propertyPath: m_Sprite
@@ -1835,8 +1894,25 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4292149048
       objectReference: {fileID: 0}
+    - target: {fileID: 8872459435418664944, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+        type: 3}
+      propertyPath: _gunType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4359a7fc8ab01434eaab9aac8e363ff6, type: 3}
+--- !u!114 &1560393614134902216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8872459435418664944, guid: 4359a7fc8ab01434eaab9aac8e363ff6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7964316189541089848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142c8390c5c4184f8c75978996fed33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4660236247320304926 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3326633236482776870, guid: 4359a7fc8ab01434eaab9aac8e363ff6,

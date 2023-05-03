@@ -671,13 +671,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc109018dfeaf448a721cc0821c2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 1
   isPlayerGun: 1
+  aimTransform: {fileID: 0}
   continuosDamage: 0
   allPointsGoTarget: 0
-  loadedAmmo: 64
-  maxLoadedAmmo: 6
+  loadedAmmo: 20
+  maxLoadedAmmo: 60
+  PrimaryAmmoCost: 1
+  SecondaryAmmoCost: 3
   fire1cooldown: 0.5
-  fire2cooldown: 0.85
+  fire2cooldown: 1.25
   bulletPrefab: {fileID: 8196861408395965754, guid: c1010900c080cd54cbc3bd6a7501cb7d,
     type: 3}
   Flash: {fileID: 0}
@@ -686,6 +690,8 @@ MonoBehaviour:
   - {fileID: 1343884193598592456}
   damage: -1
   movimentoMouse: {fileID: 0}
+  enemyTarget: {x: 0, y: 0, z: 0}
+  enemyHoldingFire: 0
   explosiveBullet: {fileID: 8196861408395965754, guid: 0c16fa5d0c802df458e53b807bc87938,
     type: 3}
 --- !u!1 &1343884194440453300

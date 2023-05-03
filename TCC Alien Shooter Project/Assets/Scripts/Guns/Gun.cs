@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 
+public enum GunType
+{
+    PiranhaGun,
+    AcidGun,
+    EletricGun,
+}
+
 public class Gun : MonoBehaviour
 {
+    public GunType gunType;
     [SerializeField] bool isPlayerGun = true;
     [HideInInspector] public Transform aimTransform;
     [SerializeField] bool continuosDamage = false;
     [SerializeField] bool allPointsGoTarget = true;
     [SerializeField] private float loadedAmmo = 6;
-    public float LoadedAmmo => loadedAmmo;
+    public float LoadedAmmo 
+    {get => loadedAmmo; 
+    private set{loadedAmmo = Mathf.Clamp(value, 0, maxLoadedAmmo); 
+    UpdateAmmoText();}}
     [SerializeField] private int maxLoadedAmmo = 6;
+    [SerializeField] private int PrimaryAmmoCost = 1;
+    [SerializeField] private int SecondaryAmmoCost = 1;
     [SerializeField] protected float fire1cooldown = 0.5f;
     [SerializeField] protected float fire2cooldown = 0f;
     protected float fire1timer = 0f;
@@ -25,7 +38,6 @@ public class Gun : MonoBehaviour
     [SerializeField] private float shootCooldown = 30f;
     [SerializeField] private Transform[] gunPointPositions;
     private Camera cam;
-    //[SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] protected float damage = -1f;
     protected AudioSource audioSource;
     protected Sound fireSound;
@@ -65,7 +77,7 @@ public class Gun : MonoBehaviour
             return;
         }
         
-
+        if(GameState.GodMode) LoadedAmmo = maxLoadedAmmo;
         if(!(Input.GetButton("Fire2") && fire2timer <= 0))
         {
             foreach (var curPoint in gunPointPositions) 
@@ -76,37 +88,41 @@ public class Gun : MonoBehaviour
         }
         if (!GameState.isGamePaused)
         {
-            if (Input.GetButtonDown("Fire1") && fire1timer <= 0) PrimaryFire();
-            else if (Input.GetButtonDown("Fire2") && fire2timer <= 0) SecondaryFire();
-            else if (Input.GetButtonDown("Reload")) Reload();
+            if (Input.GetButtonDown("Fire1") && fire1timer <= 0  && (LoadedAmmo > 0 || PrimaryAmmoCost == 0)) PrimaryFire();
+            else if (Input.GetButtonDown("Fire2") && fire2timer <= 0  && (LoadedAmmo > 0 || SecondaryAmmoCost == 0)) SecondaryFire();
 
-            if(Input.GetButton("Fire2") && fire2timer <= 0) HoldSencondaryFire();
+            if(Input.GetButton("Fire2") && fire2timer <= 0  && (LoadedAmmo > 0 || SecondaryAmmoCost == 0)) HoldSencondaryFire();
         }
 
         foreach (var point in gunPointPositions)
         {
+            // var horizonPos = aimTransform.forward * MovimentoMouse.kHorizonPoint;
+            // var dir = horizonPos - point.position;
+            // var newDirection = Vector3.RotateTowards(point.forward, aimTransform.forward, 360, 0);
+            //point.rotation = Quaternion.LookRotation(newDirection);
+            //point.LookAt(horizonPos);
             Debug.DrawRay(point.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.red);
+            Debug.DrawRay(aimTransform.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.green);
         }
     }
 
-    virtual protected void Reload()
-    {
-        
-    }
     virtual public void PrimaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
+        if(!continuosDamage) LoadedAmmo -= PrimaryAmmoCost;
     }
     virtual public void SecondaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
+        if(!continuosDamage) LoadedAmmo -= SecondaryAmmoCost;
     }
     virtual public void HoldSencondaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
+        if(continuosDamage) LoadedAmmo -= SecondaryAmmoCost * Time.deltaTime;
     }
     
     public void Shooting(Bullet bulletPrefab = null)
@@ -115,14 +131,9 @@ public class Gun : MonoBehaviour
 
         foreach (var curPoint in gunPointPositions)
         {
-            // if(allPointsGoTarget) 
-            // {
-            //     Debug.DrawLine(curPoint.position, target, Color.blue, 10f);
-            // }
-            // else 
-            // {
-            //     Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
-            // }
+            // if(allPointsGoTarget)  Debug.DrawLine(curPoint.position, target, Color.blue, 10f);
+            // else   Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
+            
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
             if(laser) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
@@ -132,19 +143,16 @@ public class Gun : MonoBehaviour
                 bullet.transform.LookAt(target);
                 ReadyBulletForFire(bullet, curPoint.position);
                 bullet.transform.LookAt(target);
-                loadedAmmo -= 1;
             }
             else if(continuosDamage)
             {
                 if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage * Time.deltaTime);
                 else GetTargetHealth(curPoint.position)?.UpdateHealth(damage * Time.deltaTime);
-                loadedAmmo -= Time.deltaTime;
             }
             else
             {
                 if(allPointsGoTarget) movimentoMouse.GetTargetHealth()?.UpdateHealth(damage);
                 else GetTargetHealth(curPoint.position)?.UpdateHealth(damage);
-                loadedAmmo -= 1;
             }
         }
         if(Flash != null)
@@ -160,13 +168,11 @@ public class Gun : MonoBehaviour
 
         if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, MovimentoMouse.kHorizonPoint, layer))
         {
-            if(!rayHit.collider)Debug.Log("no collision");
             if(rayHit.collider) return rayHit.point;
             else return aimTransform.forward * MovimentoMouse.kHorizonPoint;
         }
         else
         {
-            Debug.Log("no hit");
             return aimTransform.forward * MovimentoMouse.kHorizonPoint;
         }
     }
@@ -214,7 +220,6 @@ public class Gun : MonoBehaviour
         bullet.StopAllCoroutines();
         bullet.Respawn(position);
         bullet.transform.position = position;
-        //bullet.transform.localRotation = aimTransform.forward;
         bullet.gameObject.SetActive(true);
         bullet.DisableBullet(shootCooldown);
         bullet.damage = damage;
@@ -222,19 +227,18 @@ public class Gun : MonoBehaviour
 
     public void UpdateAmmoText()
     {
-        //ammoText.text = loadedAmmo + " / " + extraAmmo;
-        //ammoText.text = extraAmmo.ToString();
+        if(!isPlayerGun) return;
+        GameState.mainCanvas.UpdateAmmoText(gunType, loadedAmmo / maxLoadedAmmo);
     }
 
-    public void GainAmmo(int ammount, Item item)
+    public void GainAmmo(float ammount, Item item)
     {
-        if(loadedAmmo < maxLoadedAmmo)
+        if(LoadedAmmo < maxLoadedAmmo)
         {
-            loadedAmmo += ammount;
-            UpdateAmmoText();
-            item.DestroyItem();
+            LoadedAmmo += ammount;
+            item?.DestroyItem();
 
-            if(loadedAmmo > maxLoadedAmmo) loadedAmmo = maxLoadedAmmo;
+            if(LoadedAmmo > maxLoadedAmmo) LoadedAmmo = maxLoadedAmmo;
         }
     }
 }

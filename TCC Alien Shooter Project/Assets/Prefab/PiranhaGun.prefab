@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: -5
+  piranha: {fileID: 0}
 --- !u!1 &8660088875594995284
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,11 +598,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38e425197c90fc498f43448a65f3bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 0
   isPlayerGun: 1
+  aimTransform: {fileID: 0}
   continuosDamage: 1
   allPointsGoTarget: 0
-  loadedAmmo: 10
-  maxLoadedAmmo: 40
+  loadedAmmo: 25
+  maxLoadedAmmo: 100
+  PrimaryAmmoCost: 0
+  SecondaryAmmoCost: 1
   fire1cooldown: 0.35
   fire2cooldown: 0
   bulletPrefab: {fileID: 0}
@@ -613,9 +618,11 @@ MonoBehaviour:
   damage: -1
   movimentoMouse: {fileID: 0}
   enemyTarget: {x: 0, y: 0, z: 0}
-  biteColliderGO: {fileID: 5693225437726120581}
+  enemyHoldingFire: 0
+  biteCollider: {fileID: 7370464230192837999}
   waitBeforeDamage: 0.1
   biteDamageDuration: 0.3
+  biteAmmoGain: 1
 --- !u!82 &8660088876829131602
 AudioSource:
   m_ObjectHideFlags: 0

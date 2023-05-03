@@ -62,8 +62,11 @@ public class PlayerShieldHealth : ShieldHealth
     private bool updatingHealthThisFrame;
     public override void UpdateHealth(float value = 0)
     {
-        if (updatingHealthThisFrame) return;
-        updatingHealthThisFrame = true;
+        if(value < 0)
+        {
+            if (updatingHealthThisFrame) return;
+            updatingHealthThisFrame = true;
+        }
         if(value < 0 && !GameState.IsPlayerDead)
         {
             if(damageSounds.Length > 0)
@@ -93,6 +96,11 @@ public class PlayerShieldHealth : ShieldHealth
         //     if(damageEffect.weight < 0) damageEffect.weight = 0;
         //     if(damageTime < 0) damageTime = 0;
         // }
+    }
+
+    public void GainHealth(float value)
+    {
+        health += Mathf.Clamp(health+value, 0, maxHealth);
     }
 
     public void UpdateHealthBar() => GameState.mainCanvas.UpdateShieldHealthPercentage(curShield / maxShield, health / maxHealth);

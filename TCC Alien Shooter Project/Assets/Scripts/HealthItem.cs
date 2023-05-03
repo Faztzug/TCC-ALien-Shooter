@@ -12,7 +12,7 @@ public class HealthItem : Item
             if(hp.IsMaxHealth) return;
             var porcent = ammount / 100f;
             var value = hp.maxHealth * porcent;
-            hp.UpdateHealth(value);
+            hp.GainHealth(value);
             DestroyItem();
         }
     }

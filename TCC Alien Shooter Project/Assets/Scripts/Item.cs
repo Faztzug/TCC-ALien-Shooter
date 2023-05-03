@@ -6,7 +6,6 @@ public class Item : MonoBehaviour
 { 
     [SerializeField] protected int ammount;
     [SerializeField] protected Sound collectSound;
-    public GameObject alma;
 
     protected virtual void Start() { }
     void OnTriggerEnter(Collider other)
@@ -14,8 +13,6 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CollectItem(other);
-            if(alma) alma.SetActive(true);
-            else Debug.LogWarning("Iem Sem Alma Referenciada no Inspetor");
         }
 
     }
@@ -27,7 +24,7 @@ public class Item : MonoBehaviour
 
     public virtual void DestroyItem()
     {
-        GameState.InstantiateSound(collectSound, transform.position);
+        if(collectSound.clip != null) GameState.InstantiateSound(collectSound, transform.position);
         this.gameObject.SetActive(false);
     }
 }

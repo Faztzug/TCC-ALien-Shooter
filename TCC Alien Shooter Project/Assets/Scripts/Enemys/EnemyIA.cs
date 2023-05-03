@@ -85,6 +85,10 @@ public class EnemyIA : MonoBehaviour
     }
     public virtual void EnemyDeath()
     {
+        if(gameObject.TryGetComponent<EnemyDrop>(out EnemyDrop drop))
+        {
+            drop.Drop();
+        }
         if(anim == null) GameObject.Destroy(this.gameObject);
         if(anim != null) anim.SetTrigger("Die");
 

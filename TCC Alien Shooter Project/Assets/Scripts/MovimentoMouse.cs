@@ -14,7 +14,7 @@ public class MovimentoMouse : MonoBehaviour
     private Camera cam => Camera.main;
     [HideInInspector] public ReticulaFeedback reticula;
     public Vector3 raycastResult {get; private set;}
-    public const int kHorizonPoint = 250;
+    public const int kHorizonPoint = 150;
 
     void Start()
     {

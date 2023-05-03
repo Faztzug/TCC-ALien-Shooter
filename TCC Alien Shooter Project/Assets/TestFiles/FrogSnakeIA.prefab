@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: -2646598843623873948}
   - component: {fileID: 820349350335583623}
   - component: {fileID: 7263116752646557219}
+  - component: {fileID: 18465562273839761}
   m_Layer: 6
   m_Name: FrogSnakeIA
   m_TagString: Enemy
@@ -448,12 +449,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc109018dfeaf448a721cc0821c2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 0
   isPlayerGun: 0
   aimTransform: {fileID: 0}
   continuosDamage: 0
   allPointsGoTarget: 0
   loadedAmmo: 12
   maxLoadedAmmo: 12
+  PrimaryAmmoCost: 1
+  SecondaryAmmoCost: 1
   fire1cooldown: 8
   fire2cooldown: 8
   bulletPrefab: {fileID: 8196861408395965754, guid: 40b1132f9875d0f41b21dc6340f88486,
@@ -467,6 +471,25 @@ MonoBehaviour:
   enemyTarget: {x: 0, y: 0, z: 0}
   enemyHoldingFire: 0
   explosiveBullet: {fileID: 0}
+--- !u!114 &18465562273839761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663323385330519290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ce1abfc1ad68a4d9beecea17bccc23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDrops: 2
+  itens:
+  - {fileID: 3397737234963070811, guid: 830ee5911ad387342abccb2eaf64707c, type: 3}
+  - {fileID: 4275636808051785984, guid: c0556c998d85af14e9edc1c421c366bb, type: 3}
+  dropChance:
+  - 100
+  - 10
 --- !u!1 &7663323385535217423
 GameObject:
   m_ObjectHideFlags: 0
