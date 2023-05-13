@@ -5,12 +5,14 @@ using UnityEngine;
 public class MovimentoMouse : MonoBehaviour
 {
     public float sensibilidadeMouse = 100f;
+    private float senX => GameState.SettingsData.sensibilidadeX;
+    private float senY => GameState.SettingsData.sensibilidadeY;
     [SerializeField] private Vector2 maxXRotation = new Vector2(-80f, 80f);
 
     public Transform playerBody;
     public Transform playerHead;
 
-    private float camRotation;
+    private float camRotationY;
     private Camera cam => Camera.main;
     [HideInInspector] public ReticulaFeedback reticula;
     public Vector3 raycastResult {get; private set;}
@@ -25,13 +27,13 @@ public class MovimentoMouse : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensibilidadeMouse * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensibilidadeMouse * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * sensibilidadeMouse * senX * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * sensibilidadeMouse * senY * Time.deltaTime;
 
-        camRotation += mouseY;
-        camRotation = Mathf.Clamp(camRotation, maxXRotation.x, maxXRotation.y);
+        camRotationY += mouseY;
+        camRotationY = Mathf.Clamp(camRotationY, maxXRotation.x, maxXRotation.y);
 
-        playerHead.localRotation = Quaternion.Euler(camRotation,0f,0f);
+        playerHead.localRotation = Quaternion.Euler(camRotationY,0f,0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
         raycastResult = GetRayCastMiddle();

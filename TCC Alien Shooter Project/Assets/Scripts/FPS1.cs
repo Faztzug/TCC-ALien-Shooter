@@ -6,7 +6,7 @@ using TMPro;
 public class FPS1 : MonoBehaviour
 {
     private TextMeshProUGUI textMesh;
-    private int framesCount = 60;
+    [SerializeField] private int framesCount = 60;
     void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
@@ -21,6 +21,8 @@ public class FPS1 : MonoBehaviour
 
     private void CalcularFPS()
     {
+        textMesh.enabled = GameState.SettingsData.showFPS;
+        Debug.Log("show FPS? " + GameState.SettingsData.showFPS);
         textMesh.text = framesCount.ToString("FPS 00");
         framesCount = 0;
     }

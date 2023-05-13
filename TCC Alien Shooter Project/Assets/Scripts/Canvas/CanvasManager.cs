@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private Color uiColor;
     [SerializeField] private List<UIGun> gunsSelectables = new List<UIGun>();
     [SerializeField] private float seletedScale = 1.3f;
@@ -17,9 +18,16 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Image healthImage;
     [SerializeField] private Volume damageEffect;
 
+    public bool DoesExitPause()
+    {
+        if(!pauseMenu.activeSelf) return false;
+        else return !settingsMenu.activeSelf;
+    }
+
     void Start()
     {
-        pauseMenu.SetActive(false);
+        SetPauseMenu(false);
+        SetSettingsMenu(false);
     }
 
     private void OnValidate() 
@@ -52,6 +60,10 @@ public class CanvasManager : MonoBehaviour
     public void SetPauseMenu(bool value) 
     {
         pauseMenu.SetActive(value);
+    }
+    public void SetSettingsMenu(bool value) 
+    {
+        settingsMenu.SetActive(value);
     }
     public void ResumeGame() => GameState.PauseGame(false);
     public void QuitGame() => GameState.LoadScene("Menu");

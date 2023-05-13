@@ -49,54 +49,25 @@ public class SaveManager
     public SaveData ResetCheckPointValue(SaveData saveData)
     {
         saveData.checkpointPosition = new float[3]{0,0,0};
-        saveData.animalColetadoNaFase = false;
-        saveData.plantaColetadaNaFase = false;
         SaveGame(saveData);
         return LoadGame();
     }
 }
 
 [Serializable]
-public enum Quality
-{
-    Low,
-    Medium,
-    High,
-}
-
-[Serializable]
 public class SaveData
 {
-    [Header("Settings")]
-    public bool mute;
-    public float sfxVolume;
-    public float musicVolume;
-    public Quality quality;
-    public bool showFPS;
+    
 
     [Header("GameData")]
     public int unlockLevelsTo = 1;
-    public bool heliconiaColetada;
-    public bool oncaColetada;
-    public bool planta2;
-    public bool animal2;
-    public bool planta3;
-    public bool animal3;
     public float[] checkpointPosition = new float[3]{0,0,0};
-    public bool animalColetadoNaFase;
-    public bool plantaColetadaNaFase;
 
     [Header("Cutscene")]
     public bool jumpCutscene;
 
     public SaveData()
     {
-        mute = false;
-        musicVolume = 1f;
-        sfxVolume = 1f;
-        quality = Quality.High;
-        showFPS = true;
-
         unlockLevelsTo = 1;
         checkpointPosition = new float[3]{0,0,0};
     }

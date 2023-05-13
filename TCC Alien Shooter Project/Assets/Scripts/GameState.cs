@@ -33,9 +33,14 @@ public class GameState : MonoBehaviour
     private GameState() { }
 
     public static GameState GameStateInstance => gameState;
+
     public SaveData saveData;
     public static SaveData SaveData { get => gameState.saveData; set => gameState.saveData = value; }
     public static SaveManager saveManager = new SaveManager();
+    public SettingsData settingsData;
+    public static SettingsData SettingsData { get => gameState.settingsData; set => gameState.settingsData = value; }
+    public static SettingsDataManager settingsManager = new SettingsDataManager();
+
     public static Action OnSettingsUpdated;
     public static Action OnCutsceneEnd;
 
@@ -74,14 +79,26 @@ public class GameState : MonoBehaviour
 
         saveData.jumpCutscene = false;
         UpdateQuality();
+        OnSettingsUpdated += ReloadSettings;
         OnSettingsUpdated?.Invoke();
         saveManager.SaveGame(saveData);
         PauseGame(false);
     }
+
+    static public void ReloadSettings()
+    {
+        Debug.Log("RELOADING SETTINGS");
+        SettingsData = settingsManager.LoadSettings();
+    }
+    private void OnDestroy() 
+    {
+        OnSettingsUpdated -= ReloadSettings;
+    }
+
     private void Start() 
     {
-        var checkpoint = 
-        new Vector3(saveData.checkpointPosition[0], saveData.checkpointPosition[1], saveData.checkpointPosition[2]);
+        var checkpoint = new Vector3(saveData.checkpointPosition[0], 
+        saveData.checkpointPosition[1], saveData.checkpointPosition[2]);
         if(checkpoint != Vector3.zero)
         {
             playerTransform.GetComponent<Movimento>().GoToCheckPoint(checkpoint);
@@ -135,10 +152,6 @@ public class GameState : MonoBehaviour
         gameState.cutsceneCamera?.gameObject.SetActive(false);
         gameState.mainCamera.gameObject.SetActive(true);
         isOnCutscene = false;
-        // cinemachineFreeLook.m_YAxisRecentering.RecenterNow();
-        // cinemachineFreeLook.m_RecenterToTargetHeading.RecenterNow();
-        // cinemachineFreeLook.m_XAxis.m_Recentering.RecenterNow();
-        // cinemachineFreeLook.m_YAxis.m_Recentering.RecenterNow();
     }
 
     public static void SetCheckPoint(Vector3 position)
@@ -150,9 +163,9 @@ public class GameState : MonoBehaviour
 
     public static void UpdateQuality()
     {
-        if(QualitySettings.GetQualityLevel() != (int)SaveData.quality)
+        if(QualitySettings.GetQualityLevel() != (int)SettingsData.quality)
         {
-            QualitySettings.SetQualityLevel((int)SaveData.quality);
+            QualitySettings.SetQualityLevel((int)SettingsData.quality);
         }
     }
 
@@ -183,6 +196,12 @@ public class GameState : MonoBehaviour
 
     public static void PauseGame(bool pause)
     {
+        if(isGamePaused && !mainCanvas.DoesExitPause())
+        {
+            Debug.Log("should exit pause? " + mainCanvas.DoesExitPause());
+            mainCanvas.SetSettingsMenu(false);
+            return;
+        }
         isGamePaused = pause;
         Cursor.lockState = pause ? CursorLockMode.None : CursorLockMode.Locked;
         Time.timeScale = pause ? 0f : 1f;

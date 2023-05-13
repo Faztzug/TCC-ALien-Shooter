@@ -558,25 +558,20 @@ MonoBehaviour:
   godMode: 0
   GenericAudioSourcePrefab: {fileID: 0}
   saveData:
-    mute: 0
-    sfxVolume: 1
-    musicVolume: 1
-    quality: 2
-    showFPS: 1
     unlockLevelsTo: 1
-    heliconiaColetada: 0
-    oncaColetada: 0
-    planta2: 0
-    animal2: 0
-    planta3: 0
-    animal3: 0
     checkpointPosition:
     - 0
     - 0
     - 0
-    animalColetadoNaFase: 0
-    plantaColetadaNaFase: 0
     jumpCutscene: 0
+  settingsData:
+    mute: 0
+    sfxVolume: 0.8
+    musicVolume: 0.8
+    quality: 2
+    showFPS: 1
+    sensibilidadeX: 0.5
+    sensibilidadeY: 0.5
 --- !u!114 &5770464165946987000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  bloodVFX: {fileID: 0}
   maxShield: 5
   shieldRegen: 1
   regenCooldown: 1
