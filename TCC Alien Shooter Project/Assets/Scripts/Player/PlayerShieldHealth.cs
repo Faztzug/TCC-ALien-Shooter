@@ -113,28 +113,21 @@ public class PlayerShieldHealth : ShieldHealth
 
     public override void DestroyCharacter()
     {
+        base.DestroyCharacter();
         if(GameState.IsPlayerDead) return;
-        //anim.SetTrigger("Die");
+        anim.SetBool("Death", true);
+        anim.SetTrigger("death");
         
         if(audioSource != null) deathSound.PlayOn(audioSource);
         GameState.IsPlayerDead = true;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
-        foreach (var item in GetComponentsInChildren<Collider>())
-        {
-            if(item is CharacterController) continue;
-            item.enabled = false;
-        }
-        foreach (var item in GetComponentsInChildren<MonoBehaviour>())
-        {
-            if(item == this || item is Movimento || item is GameState) continue;
-            item.enabled = false;
-        }
+        
         //GameState.mainCanvas.ResumeGame();
         Cursor.lockState = CursorLockMode.None;
         //GameState.mainCanvas.gameOver.SetActive(true);
         //EventSystem.current.SetSelectedGameObject(GameState.mainCanvas.gameOver.GetComponentInChildren<Button>().gameObject);
 
-        SceneManager.LoadScene(gameObject.scene.name);
+        GameState.LoadScene(gameObject.scene.name, 5f);
     }
 }

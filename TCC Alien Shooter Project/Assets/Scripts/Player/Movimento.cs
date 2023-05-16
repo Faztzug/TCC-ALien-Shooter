@@ -37,6 +37,7 @@ public class Movimento : MonoBehaviour
     [SerializeField] private float crouchingHeight;
     [SerializeField] private Vector3 crouchingCenter;
     [SerializeField] private Vector3 crouchingCamLocalPos;
+    [SerializeField] private Vector3 deathCamLocalPos;
 
 
     private void Start()
@@ -76,6 +77,14 @@ public class Movimento : MonoBehaviour
     {
         isCrouching = Input.GetButton("Crouch");
         anim.SetBool("crouching", isCrouching);
+
+        
+        if(GameState.IsPlayerDead)
+        {
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, deathCamLocalPos, 0.1f);
+            return;
+        }
+
         if(isCrouching)
         {
             controller.height = Mathf.Lerp(controller.height, crouchingHeight, 0.25f);
@@ -117,7 +126,7 @@ public class Movimento : MonoBehaviour
             gravityAcceleration -= gravity * Time.deltaTime;
         } 
 
-        if(ungroudedTime < 0.1f)
+        if(ungroudedTime < 0.1f && !GameState.IsPlayerDead)
         {
             anim.SetBool("isJumping", false);
 
@@ -135,9 +144,11 @@ public class Movimento : MonoBehaviour
         Vector3 horizontal = rawHorizontal * strafeMultiplier;
 
         movementInput = (vertical + horizontal).normalized;
+        if(GameState.IsPlayerDead) movementInput = Vector3.zero;
 
         var hasMovingInput = (Vector3.Distance(movementInput, Vector3.zero) > 0.01);
         var isRuning = Input.GetButton("Sprint");
+        anim.SetBool("isRuning", isRuning && hasMovingInput && !isCrouching);
 
         if(hasMovingInput && (isRuning || (!isRuning && currentSpeed < walkSpeed))) currentSpeed += (isRuning ? runAccelaration : runAccelaration * 2) * Time.deltaTime;
         

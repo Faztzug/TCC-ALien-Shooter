@@ -368,6 +368,9 @@ MonoBehaviour:
   updateRateRNG:
   - 0.235
   - 0.624
+  lowSpeed: 3
+  walkingSpeed: 5
+  runSpeed: 8
   shootingDistance: 30
   findPlayerDistance: 50
   minPlayerDistance: 5
@@ -377,7 +380,6 @@ MonoBehaviour:
   damageTauntAsync: 1
   aimTransform: {fileID: 1517865326771250779}
   aimRotationSpeed: 5
-  walkingFiringSpeed: 0.6
   keepFiringTimeRNG:
   - 1.06
   - 10
@@ -396,6 +398,7 @@ MonoBehaviour:
   maxHealth: 1
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
+  handTransform: {fileID: 911177049971152034}
   maxShield: 1
   shieldRegen: 1
   regenCooldown: 2
@@ -1548,7 +1551,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 507834378b6d3cd429871d744f1ed1c9, type: 2}
+      objectReference: {fileID: 9100000, guid: ae4dd97c9687aa94eb736488165ef86c, type: 2}
     - target: {fileID: 5866666021909216657, guid: 22ea55ad3a81fb64f8a9573746e869f3,
         type: 3}
       propertyPath: m_ApplyRootMotion

@@ -171,7 +171,7 @@ public class GameState : MonoBehaviour
 
     IEnumerator LoadSceneCourotine(float waitTime, string sceneName)
     {
-        yield return new WaitForSecondsRealtime(waitTime);
+        yield return new WaitForSeconds(waitTime);
 
         SceneManager.LoadScene(sceneName);
     }

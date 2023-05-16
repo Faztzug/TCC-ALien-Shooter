@@ -11,6 +11,9 @@ public class EnemyIA : MonoBehaviour
     [HideInInspector] public Transform player => GameState.PlayerTransform;
     protected NavMeshAgent agent;
     protected Rigidbody rgbd;
+    [SerializeField] protected float lowSpeed = 3f;
+    [SerializeField] protected float walkingSpeed = 5f;
+    [SerializeField] protected float runSpeed = 8f;
     [SerializeField] protected float shootingDistance = 100f;
     [SerializeField] protected float findPlayerDistance = 100f;
     [SerializeField] protected float minPlayerDistance = 10f;
@@ -40,11 +43,12 @@ public class EnemyIA : MonoBehaviour
         rgbd = GetComponent<Rigidbody>();
         rgbd.maxAngularVelocity = 0;
         tauntTimerAsync = damageTauntAsync * 3;
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         gun = GetComponentInChildren<Gun>();
         gun.aimTransform = aimTransform;
         targetPos = player.position;
         newTargetTrans = player;
+        agent.speed = walkingSpeed;
         
         StartCoroutine(CourotineAsyncUpdateIA());
     }
@@ -93,21 +97,25 @@ public class EnemyIA : MonoBehaviour
             drop.Drop();
         }
         if(anim == null) GameObject.Destroy(this.gameObject);
-        if(anim != null) anim.SetTrigger("Die");
+        if(anim != null) anim.SetBool("Death", true);
+        if(anim != null) anim.SetTrigger("death");
 
         if(agent.isOnNavMesh) agent.SetDestination(transform.position);
+        if(agent.isOnNavMesh) agent.isStopped = true;
 
         alive = false;
 
-        foreach (var collider in GetComponentsInChildren<Collider>())
-        {
-            collider.enabled = false;
-        }
-        foreach (var script in GetComponentsInChildren<MonoBehaviour>())
-        {
-            if(script == this) continue;
-            script.enabled = false;
-        }
+        // foreach (var collider in GetComponentsInChildren<Collider>())
+        // {
+        //     collider.enabled = false;
+        // }
+        // foreach (var script in GetComponentsInChildren<MonoBehaviour>(true))
+        // {
+        //     if(script == this) continue;
+        //     if(script is Gun) (script as LaserVFXManager).TurnOffLAser();
+        //     if(script is LaserVFXManager) (script as LaserVFXManager).TurnOffLAser();
+        //     script.enabled = false;
+        // }
         this.StopAllCoroutines();
     }
     public virtual void Taunt()

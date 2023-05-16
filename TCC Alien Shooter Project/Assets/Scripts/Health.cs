@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.Rendering;
 
 public class Health : MonoBehaviour
 {
@@ -15,12 +16,13 @@ public class Health : MonoBehaviour
     private EnemyIA thisEnemy;
     public Action onDeath;
     [SerializeField] private GameObject bloodVFX;
+    [SerializeField] protected Transform handTransform;
 
     public virtual void Start()
     {
         health = maxHealth;
         thisEnemy = GetComponent<EnemyIA>();
-        if(thisEnemy != null) anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Update() 
@@ -55,8 +57,40 @@ public class Health : MonoBehaviour
     public virtual void DestroyCharacter()
     {
         onDeath?.Invoke();
-        if(thisEnemy != null) thisEnemy.EnemyDeath();
-        else if(TryGetComponent<EnemyDrop>(out EnemyDrop drop)) {drop.Drop(); this.gameObject.SetActive(false);}
-        else Destroy(this.gameObject);
+        if(anim != null)
+        {
+            foreach (var collider in GetComponentsInChildren<Collider>())
+            {
+                if(collider is CharacterController) continue;
+                collider.enabled = false;
+            }
+            foreach (var script in GetComponentsInChildren<MonoBehaviour>())
+            {
+                if(script == this || script is Movimento || script is GameState 
+                || script is CanvasManager || script is Volume) 
+                {
+                    continue;
+                }
+
+                if(script is MovimentoMouse) script.enabled = false;
+                if(script is Gun && handTransform != null) script.transform.SetParent(handTransform);
+                if(script is LaserVFXManager) (script as LaserVFXManager).TurnOffLAser();
+                script.enabled = false;
+            }
+        }
+        
+        if(thisEnemy != null) 
+        {
+            thisEnemy.EnemyDeath();
+        }
+        else if(TryGetComponent<EnemyDrop>(out EnemyDrop drop)) 
+        {
+            drop.Drop(); 
+            this.gameObject.SetActive(false);
+        }
+        else if(anim == null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
