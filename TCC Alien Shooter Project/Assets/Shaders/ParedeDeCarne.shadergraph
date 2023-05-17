@@ -44,6 +44,9 @@
         },
         {
             "m_Id": "f31b1535adb64baa9eb396333c5c05eb"
+        },
+        {
+            "m_Id": "c28e385daab5494c8916a6761371ca55"
         }
     ],
     "m_Keywords": [],
@@ -191,6 +194,9 @@
         },
         {
             "m_Id": "8a75594840ef4bfd851862f36ee46f81"
+        },
+        {
+            "m_Id": "e0695874b10f4bc19ed4fde024ecd186"
         }
     ],
     "m_GroupDatas": [],
@@ -712,6 +718,20 @@
                     "m_Id": "abed14c2c3cf40289943b24a6f08979f"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "e0695874b10f4bc19ed4fde024ecd186"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "91734bb2b7694f94bfb4ddf2d3d527ef"
+                },
+                "m_SlotId": 4
             }
         },
         {
@@ -3666,6 +3686,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "9a849ef1ca8b4c77851126c72e267f39",
+    "m_Id": 0,
+    "m_DisplayName": "Amplitude",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
     "m_ObjectId": "9ae6b8bcd59a4d1aa9f855eee4490fec",
     "m_Guid": {
@@ -4086,7 +4121,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Amplitude",
     "m_StageCapability": 2,
-    "m_Value": 10.0,
+    "m_Value": -20.0,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }
@@ -4549,6 +4584,29 @@
     },
     "m_Property": {
         "m_Id": "9ae6b8bcd59a4d1aa9f855eee4490fec"
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "c28e385daab5494c8916a6761371ca55",
+    "m_Guid": {
+        "m_GuidSerialized": "cfd5dfe8-0989-47e2-b3a7-180d456f54e1"
+    },
+    "m_Name": "Amplitude",
+    "m_DefaultReferenceName": "Vector1_c28e385daab5494c8916a6761371ca55",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 5.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
     }
 }
 
@@ -5055,6 +5113,41 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "e0695874b10f4bc19ed4fde024ecd186",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1017.0,
+            "y": 1014.0000610351563,
+            "width": 129.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "9a849ef1ca8b4c77851126c72e267f39"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "c28e385daab5494c8916a6761371ca55"
     }
 }
 
