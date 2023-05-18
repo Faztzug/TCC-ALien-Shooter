@@ -10,6 +10,10 @@ public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private DocumentLoreUIManager PDAmanager;
+    private ScrollRect PDAscroll;
+    [SerializeField] private RectTransform scrollContent;
+    [SerializeField] private RectTransform pdaTextHolder;
     [SerializeField] private Color uiColor;
     [SerializeField] private List<UIGun> gunsSelectables = new List<UIGun>();
     [SerializeField] private float seletedScale = 1.3f;
@@ -20,14 +24,16 @@ public class CanvasManager : MonoBehaviour
 
     public bool DoesExitPause()
     {
-        if(!pauseMenu.activeSelf) return false;
+        if(!pauseMenu.activeSelf && !PDAmanager.gameObject.activeSelf) return false;
         else return !settingsMenu.activeSelf;
     }
 
     void Start()
     {
+        PDAscroll = GetComponentInChildren<ScrollRect>(true);
         SetPauseMenu(false);
         SetSettingsMenu(false);
+        SetPDAdocument(false);
     }
 
     private void OnValidate() 
@@ -65,6 +71,44 @@ public class CanvasManager : MonoBehaviour
     {
         settingsMenu.SetActive(value);
     }
+    public void SetPDAdocument(bool value, LoreDocument ?loreDocument = null) 
+    {
+        PDAmanager.gameObject.SetActive(value);
+        if(loreDocument.HasValue) 
+        {
+            PDAmanager.SetLoreDucmentUI(loreDocument.Value);
+            StartCoroutine(UpdatePDALayoutCourotine());
+        }
+    }
+    IEnumerator UpdatePDALayoutCourotine()
+    {
+        yield return new WaitForEndOfFrame();
+        UpdatePDALayout();
+        yield return new WaitForSecondsRealtime(0);
+        UpdatePDALayout();
+        yield return new WaitForSecondsRealtime(0.1f);
+        UpdatePDALayout();
+        yield return new WaitForSecondsRealtime(0.5f);
+        UpdatePDALayout();
+    }
+    private void UpdatePDALayout()
+    {
+        var SCRect = pdaTextHolder;
+        Debug.Log(SCRect.name);
+
+        // Debug.Log(SCRect.sizeDelta.ToString());
+        // PDAscroll.content.sizeDelta = SCRect.sizeDelta;
+
+        //PDAscroll.content.rect.Set(SCRect.rect.x, SCRect.rect.y, SCRect.rect.width, SCRect.rect.height);
+        //Debug.Log(SCRect.rect.ToString());
+
+        scrollContent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SCRect.rect.height);
+        Debug.Log(SCRect.rect.height.ToString());
+
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(PDAscroll.transform as RectTransform);
+    }
+
     public void ResumeGame() => GameState.PauseGame(false);
     public void QuitGame() => GameState.LoadScene("Menu");
 }

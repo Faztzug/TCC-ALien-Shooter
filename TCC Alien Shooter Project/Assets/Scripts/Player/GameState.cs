@@ -200,12 +200,23 @@ public class GameState : MonoBehaviour
         {
             Debug.Log("should exit pause? " + mainCanvas.DoesExitPause());
             mainCanvas.SetSettingsMenu(false);
+            mainCanvas.SetPauseMenu(true);
+            mainCanvas.SetPDAdocument(false);
             return;
         }
         isGamePaused = pause;
         Cursor.lockState = pause ? CursorLockMode.None : CursorLockMode.Locked;
         Time.timeScale = pause ? 0f : 1f;
         mainCanvas.SetPauseMenu(pause);
+        mainCanvas.SetPDAdocument(false);
+    }
+    
+    public static void OpenPDA(LoreDocument loreText)
+    {
+        PauseGame(true);
+        mainCanvas.SetPauseMenu(false);
+        mainCanvas.SetSettingsMenu(false);
+        mainCanvas.SetPDAdocument(true, loreText);
     }
 
     IEnumerator EndGame()
