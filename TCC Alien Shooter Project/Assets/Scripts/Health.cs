@@ -50,7 +50,7 @@ public class Health : MonoBehaviour
     {
         if(isContinuos & bloodVfxTimer > 0) return;
         if(bloodVFX == null) Debug.Log(name + " Não possui vfx de sangue!");
-        else GameObject.Instantiate(bloodVFX, position, Quaternion.identity, this.transform);
+        else GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null);
         if(isContinuos) bloodVfxTimer = 0.5f;
     }
 
