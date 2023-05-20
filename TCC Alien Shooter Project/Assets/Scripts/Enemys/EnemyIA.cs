@@ -21,7 +21,7 @@ public class EnemyIA : MonoBehaviour
     protected float distance => Vector3.Distance(player.position, this.transform.position);
     protected Animator anim;
     [Range(0,100)] [SerializeField] protected float shootAim = 90;
-    [Range(0f,0.1f)] [SerializeField] protected float shootChance = 0.8f;
+    [Range(0f,0.1f)] [SerializeField] protected float shootChance = 0.08f;
     [HideInInspector] public bool alive = true;
     [SerializeField] protected int damageTauntAsync = 3;
     protected int tauntTimerAsync;
@@ -160,6 +160,8 @@ public class EnemyIA : MonoBehaviour
             agent.isStopped = true;
         }
     }
+
+    protected bool IsMoving() => !agent.isStopped && Vector3.Distance(agent.destination, transform.position) > minPlayerDistance;
 
     protected void TurnToPlayer()
     {

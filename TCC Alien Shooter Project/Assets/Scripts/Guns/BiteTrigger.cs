@@ -12,6 +12,8 @@ public class BiteTrigger : DamageHealthCollider
         {
             var health = GetHealth(other.gameObject);
             health?.UpdateHealth(damage, DamageType.piranhaBiteDamage);
+            health?.BleedVFX(other.ClosestPointOnBounds(this.transform.position));
+            health?.BleedVFX(other.ClosestPointOnBounds(GameState.MainCamera.transform.position));
             if(health != null) piranha.BiteGainAmmo();
         } 
     }

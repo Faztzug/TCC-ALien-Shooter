@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyBiter : EnemyIA
 {
-    [SerializeField] private GameObject biteCollider;
-    [SerializeField] private float biteWaitStart = 0.1f;
-    [SerializeField] private float biteTime = 0.1f;
-    [SerializeField] private float biteCooldownEnd = 0.2f;
-    [SerializeField] bool doesShoot = true;
+    [SerializeField] protected GameObject biteCollider;
+    [SerializeField] protected float biteWaitStart = 0.1f;
+    [SerializeField] protected float biteTime = 0.1f;
+    [SerializeField] protected float biteCooldownEnd = 0.2f;
+    [SerializeField] protected bool doesShoot = true;
     protected bool isBiting;
     private Coroutine biteCourotine;
     protected override void Start()
