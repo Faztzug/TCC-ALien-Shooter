@@ -26,7 +26,7 @@ public class Movimento : MonoBehaviour
     [SerializeField] private float gravity = 1f;
     private float gravityAcceleration;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip passosClip;
+    [SerializeField] private Sound passosSound;
     [HideInInspector] public ReticulaFeedback reticula;
 
     private bool isCrouching;
@@ -63,6 +63,13 @@ public class Movimento : MonoBehaviour
             Movement();
             Animations();
             UpdateIK();
+        }
+        else
+        {
+            if(passosSound.audioSource != null)
+            {
+                passosSound.audioSource.Pause();
+            }
         }
     }
 
@@ -189,16 +196,17 @@ public class Movimento : MonoBehaviour
         else if(Input.GetAxis("Horizontal") < 0) anim.SetFloat("Strafe", (-horizontal.magnitude * currentSpeed) / runSpeed);
 
 
-        if((velocitylAbs > 0.1) && controller.isGrounded)
+        if((velocitylAbs > 0.1) && controller.isGrounded && !GameState.isGamePaused)
         {
-            if(audioSource.isPlaying == false && passosClip)
+            if(passosSound.isPlaying == false && passosSound.clip)
             {
-                audioSource.PlayOneShot(passosClip);
+                passosSound.PlayOn(audioSource);
             }
+            passosSound.audioSource.pitch = passosSound.pitch * currentSpeed / runSpeed;
         }
-        else
+        else if(passosSound.audioSource != null)
         {
-            audioSource.Stop();
+            passosSound.audioSource.Pause();
         }
     }
 

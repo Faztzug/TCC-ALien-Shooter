@@ -14,9 +14,12 @@ public class GunManager : MonoBehaviour
         if(pastValue != _selectedGunIndex) GunSelected();
     }}
     private int _selectedGunIndex;
+    [SerializeField] private Sound gubSelectSound;
+    private AudioSource audioSource;
 
     private void Start() 
     {
+        audioSource = GetComponentInChildren<AudioSource>();
         GunSelected();
     }
 
@@ -53,5 +56,6 @@ public class GunManager : MonoBehaviour
 
         if(index != Mathf.FloorToInt(selectedGunIndex)) selectedGunIndex = index;
         GameState.mainCanvas.GunSelected(selectedGun.gunType);
+        gubSelectSound.PlayOn(audioSource);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class Bullet : MonoBehaviour
 {
@@ -101,25 +102,27 @@ public class Bullet : MonoBehaviour
         transform.SetPositionAndRotation(position, new Quaternion(0,0,0,0));
         rgbd.angularVelocity = Vector3.zero;
         setedVelocity = false;
-        StartCoroutine(ResetTrail());
+        ResetTrail();
     }
     
     public void DisableBullet(float time)
     {
-        StartCoroutine(DisableTimer(time));
+        DisableTimer(time);
     }
 
-    IEnumerator DisableTimer(float time)
+    async void DisableTimer(float time)
     {
-        yield return new WaitForSeconds(time);
+        await Task.Delay((int)(time * 1000));
+        if(!this) return;
         setedVelocity = false;
 
         gameObject.SetActive(false);
     }
 
-    IEnumerator ResetTrail()
+    async void ResetTrail()
     {
-        yield return new WaitForEndOfFrame();
+        await Task.Delay((int)(20));
+        if(!this) return;
         foreach (var trail in trailRenderers)
         {
             trail.emitting = true;

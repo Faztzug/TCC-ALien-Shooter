@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
+using DG.Tweening;
 
 public enum GunType
 {
@@ -42,9 +43,8 @@ public class Gun : MonoBehaviour
     private Camera cam;
     [SerializeField] protected float damage = -1f;
     protected AudioSource audioSource;
-    protected Sound fireSound;
-    protected Sound reloadSound;
-    protected Sound reloadFailSound;
+    [SerializeField] protected Sound fire1Sound;
+    [SerializeField] protected Sound fire2Sound;
     protected Animator anim;
     [SerializeField] protected MovimentoMouse movimentoMouse;
     [HideInInspector] public Vector3 enemyTarget;
@@ -80,13 +80,16 @@ public class Gun : MonoBehaviour
         }
         
         if(GameState.GodMode) LoadedAmmo = maxLoadedAmmo;
-        if(!(Input.GetButton("Fire2") && fire2timer <= 0) || loadedAmmo <= 0)
+        if(continuosDamage && !(Input.GetButton("Fire2") && fire2timer <= 0) || loadedAmmo <= 0)
         {
             foreach (var curPoint in gunPointPositions) 
             {
                 var line = curPoint.GetComponentInChildren<LaserVFXManager>();
                 if(line) line.TurnOffLAser();
             }
+            if(fire2Sound.isPlaying) fire2Sound.audioSource.DOFade(0, 0.2f).SetEase(Ease.InSine)
+            .OnComplete(() => {if(!(Input.GetButton("Fire2") && fire2timer <= 0) || loadedAmmo <= 0) fire2Sound.audioSource.Stop();});
+            //if(fire2Sound.isPlaying) fire2Sound.audioSource?.Stop();
         }
         if (!GameState.isGamePaused)
         {
@@ -113,18 +116,27 @@ public class Gun : MonoBehaviour
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
         if(!continuosDamage) LoadedAmmo -= PrimaryAmmoCost;
+        fire1Sound.PlayOn(audioSource);
     }
     virtual public void SecondaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
         if(!continuosDamage) LoadedAmmo -= SecondaryAmmoCost;
+        fire2Sound.PlayOn(audioSource);
+        if(continuosDamage)
+        {
+            fire2Sound.audioSource.volume = 0;
+            fire2Sound.audioSource.DOFade(fire2Sound.SFXVolume, 0.2f);
+        }
     }
     virtual public void HoldSencondaryFire()
     {
         fire1timer = fire1cooldown;
         fire2timer = fire2cooldown;
         if(continuosDamage) LoadedAmmo -= SecondaryAmmoCost * Time.deltaTime;
+        if(!fire2Sound.isPlaying) fire2Sound.PlayOn(audioSource);
+        if(!fire2Sound.isPlaying) Debug.Log("Play Fire2 Sound HOLD");
     }
     
     public void Shooting(DamageType damageType, Bullet bulletPrefab = null)

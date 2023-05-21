@@ -22,7 +22,6 @@ public class FPS1 : MonoBehaviour
     private void CalcularFPS()
     {
         textMesh.enabled = GameState.SettingsData.showFPS;
-        Debug.Log("show FPS? " + GameState.SettingsData.showFPS);
         textMesh.text = framesCount.ToString("FPS 00");
         framesCount = 0;
     }

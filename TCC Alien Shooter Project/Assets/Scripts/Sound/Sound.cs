@@ -7,8 +7,10 @@ public class Sound
 {
     public AudioClip clip;
     public string name;
-    [Range(0, 1)]
-    public float volume = 1f;
+    [Range(0, 1)] [SerializeField]
+    private float volume = 1f;
+    public float SFXVolume => volume * GameState.SettingsData.sfxVolume;
+    public float MusicVolume => volume * GameState.SettingsData.musicVolume;
     [Range(-3, 3)]
     public float pitch = 1f;
     [Range(-3, 3)]
@@ -18,6 +20,7 @@ public class Sound
 
     [HideInInspector]
     public AudioSource audioSource;
+    public bool isPlaying => audioSource != null && audioSource.isPlaying && audioSource.clip == clip;
     
     public void Setup(AudioSource audioSource)
     {
@@ -26,10 +29,11 @@ public class Sound
         // {
         //     audioSource.volume = GameState.SaveData.mute ? 0f : volume * GameState.SaveData.sfxVolume;
         // }
-        audioSource.volume =volume;
+        audioSource.volume = SFXVolume;
         audioSource.pitch = pitch;
         audioSource.loop = loop;
         audioSource.playOnAwake = playOnAwake;
+        this.audioSource = audioSource;
     }
 
     public void PlayOn(AudioSource audioSource)
@@ -39,9 +43,9 @@ public class Sound
         Setup(audioSource);
         if(pitchRNG.Length >= 2 && pitchRNG[0] != pitchRNG[1])
         {
-            audioSource.pitch = pitch + Random.Range(pitchRNG[0], pitchRNG[1]);
+            this.audioSource.pitch = pitch + Random.Range(pitchRNG[0], pitchRNG[1]);
         }
-        if(clip) audioSource.PlayOneShot(clip);
+        if(clip) this.audioSource.PlayOneShot(clip);
     }
 
 }

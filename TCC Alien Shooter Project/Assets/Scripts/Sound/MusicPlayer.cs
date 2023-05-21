@@ -27,7 +27,7 @@ public class MusicPlayer : MonoBehaviour
         if(this == null) return;
         if(GameState.GameStateInstance != null)
         {
-            audioSource.volume = GameState.SettingsData.mute ? 0f : musicSound.volume * GameState.SettingsData.musicVolume;
+            audioSource.volume = GameState.SettingsData.mute ? 0f : musicSound.MusicVolume;
         }
     }
 
