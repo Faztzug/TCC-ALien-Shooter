@@ -1,0 +1,199 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5473626503293613094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7752916104222441061}
+  - component: {fileID: 4105209537623455090}
+  - component: {fileID: 5856778142654873910}
+  - component: {fileID: 3680341301169943170}
+  - component: {fileID: 2407160758388491548}
+  - component: {fileID: 4469770627789467147}
+  - component: {fileID: 5473626503293613093}
+  m_Layer: 0
+  m_Name: PDAItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7752916104222441061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.834, y: 1.48, z: 7.58}
+  m_LocalScale: {x: 1, y: 0.32, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4105209537623455090
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5856778142654873910
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 7c69e8201acded247a7aab7602f22e39, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3680341301169943170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &2407160758388491548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: -0.25, z: 0}
+--- !u!54 &4469770627789467147
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.5
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5473626503293613093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473626503293613094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632879d1f4083c6418678bbdf31b3282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammount: 1
+  collectSound:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0
+    - 0
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  loreText:
+    indexOrder: 0
+    tittleText: DEBUG TEXT
+    bodyText: "Lorem ipsum\r\n\nLorem ipsum utilizado para demonstrar o layout gr\xE1fico
+      de uma p\xE1gina web\r\nA express\xE3o Lorem ipsum em design gr\xE1fico e editora\xE7\xE3o
+      \xE9 um texto padr\xE3o em latim utilizado na produ\xE7\xE3o gr\xE1fica para
+      preencher os espa\xE7os de texto em publica\xE7\xF5es (jornais, revistas, e
+      sites) para testar e ajustar aspectos visuais (layout, tipografia, formata\xE7\xE3o,
+      etc.) antes de utilizar conte\xFAdo real. Tamb\xE9m \xE9 utilizado em cat\xE1logos
+      tipogr\xE1ficos, para demonstrar textos e t\xEDtulos escritos com as fontes.[1]\r\n\r\nComposi\xE7\xE3o\r\nEm
+      sua forma mais comum, o texto \xE9 como se segue:\r\n\r\n\"Lorem ipsum dolor
+      sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis
+      condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique
+      senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque
+      purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis
+      ut adipiscing.\"\r\nNos pa\xEDses de l\xEDngua inglesa o texto apresenta-se
+      em forma um pouco diferente, apresentada a seguir:\r\n\r\n\"Lorem ipsum dolor
+      sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+      mollit anim id est laborum.\"\r\nTradu\xE7\xE3o\r\nSua tradu\xE7\xE3o para
+      o portugu\xEAs seria:\r\n\r\n\"A dor em si \xE9 importante para a principal
+      elite adiposa. Ser repudiado pelo inventor e a exist\xEAncia dessas dores deve
+      ser evitado. Ele o condena como se eles n\xE3o o conhecessem, e como aquele
+      a quem eles seguem; bem-vindo a grande coisa que \xE9 aben\xE7oada\"\r\nHist\xF3ria\r\nA
+      express\xE3o Lorem ipsum n\xE3o \xE9 um texto qualquer. Richard McClintock,
+      professor de latim na Hampden-Sydney College, na Virg\xEDnia, pesquisou uma
+      das palavras da passagem do texto lorem ipsum na literatura cl\xE1ssica, \"consectetur\",
+      descobriu que o trecho vem das se\xE7\xF5es 1.10.32 e 1.10.33 do \"De Finibus
+      Bonorum et Malorum\" (Os extremos do bem e do mal) escrito por C\xEDcero em
+      45 a.C. Esse livro versa sobre a teoria da \xE9tica, tendo sido muito consultado
+      durante o per\xEDodo da Renascen\xE7a. A primeira linha, \"Lorem ipsum dolor
+      sit amet...\", encontra-se na se\xE7\xE3o 1.10.32.[1]\r\n\r\nOnde encontrar
+      e uso\r\nEm documentos utilizados para testes, este tipo de texto \xE9 utilizado
+      para evitar que as pessoas foquem a aten\xE7\xE3o no texto e se concentrem
+      nos aspectos visuais. O lorem ipsum simula com razo\xE1vel fidelidade um texto
+      real, por possuir palavras de diversos tamanhos e sinais de pontua\xE7\xE3o,
+      permitindo testar tamb\xE9m a forma como o texto flui nas caixas e campos de
+      formata\xE7\xE3o.[1]\r\n\r\nVoc\xEA pode encontr\xE1-lo em editores de texto,
+      tais como o HQ Sublime; basta digitar <Lorem e pressione TAB e. no Microsoft
+      Word, basta digitar \"=Lorem(x,y)\" onde x \xE9 o n\xFAmero de par\xE1grafos
+      desejado e y \xE9 o n\xFAmero de frases para cada par\xE1grafo. No LibreOffice
+      Writer ele pode ser inserido pelo menu \"Ferramentas\", em \"Autotexto\", selecionando
+      \"Padr\xE3o\", e ent\xE3o \"Lorem Ipsum\"."

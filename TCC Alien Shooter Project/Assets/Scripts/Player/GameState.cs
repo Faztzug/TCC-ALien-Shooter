@@ -51,6 +51,7 @@ public class GameState : MonoBehaviour
         mainCanvas = gameObject.GetComponentInChildren<CanvasManager>();
         gameState = this;
         SaveData = saveManager.LoadGame();
+        if(SaveData.gunsColected == null) SaveData = saveManager.ResetData();
         
         // if(cutSceneGOCam != null)
         // {
@@ -84,6 +85,8 @@ public class GameState : MonoBehaviour
         saveManager.SaveGame(saveData);
         PauseGame(false);
     }
+
+    static public void SaveGameData() => saveManager.SaveGame(SaveData);
 
     static public void ReloadSettings()
     {

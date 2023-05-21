@@ -57,10 +57,9 @@ public class SaveManager
 [Serializable]
 public class SaveData
 {
-    
-
     [Header("GameData")]
     public int unlockLevelsTo = 1;
+    public List<GunType> gunsColected = new List<GunType>();
     public float[] checkpointPosition = new float[3]{0,0,0};
 
     [Header("Cutscene")]
@@ -70,5 +69,6 @@ public class SaveData
     {
         unlockLevelsTo = 1;
         checkpointPosition = new float[3]{0,0,0};
+        gunsColected = new List<GunType>();
     }
 }

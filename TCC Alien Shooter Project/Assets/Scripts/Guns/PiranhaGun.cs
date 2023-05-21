@@ -12,6 +12,7 @@ public class PiranhaGun : Gun
     [SerializeField] float biteAmmoGain = 1f;
     bool firing;
     [SerializeField] Transform modelTrans;
+    public Transform ModelTrans => modelTrans;
     [SerializeField] Transform biteEndTrans;
     private Vector3 modelStartLocalPos;
     private Vector3 biteEndLocalPos;

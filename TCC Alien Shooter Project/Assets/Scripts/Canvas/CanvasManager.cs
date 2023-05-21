@@ -41,6 +41,7 @@ public class CanvasManager : MonoBehaviour
         foreach (var uiColorComp in GetComponentsInChildren<UIColor>()) uiColorComp.Color = uiColor;
     }
 
+    public void GunSelected(GunType gunType) => GunSelected(gunsSelectables.FindIndex(g => g.GunType == gunType));
     public void GunSelected(int index)
     {
         foreach (var tween in gunTweens) tween.Kill();

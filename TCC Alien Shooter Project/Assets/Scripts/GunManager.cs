@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GunManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] guns;
-    public int selectedGun 
-    {get => _selectedGun;
+    [SerializeField] List<Gun> guns;
+    public int selectedGunIndex 
+    {get => _selectedGunIndex;
     set {
-        var pastValue = _selectedGun; 
-        _selectedGun = value; 
-        if(pastValue != _selectedGun) GunSelected();
+        var pastValue = _selectedGunIndex; 
+        _selectedGunIndex = value; 
+        if(pastValue != _selectedGunIndex) GunSelected();
     }}
-    private int _selectedGun;
+    private int _selectedGunIndex;
 
     private void Start() 
     {
@@ -23,23 +24,34 @@ public class GunManager : MonoBehaviour
     {
         if(GameState.isGamePaused) return;
         var input = Input.GetAxis("Mouse ScrollWheel");
-        if(input > 0) selectedGun += 1;
-        if(input < 0) selectedGun -= 1;
-        if(Input.GetButtonDown("One")) selectedGun = 0;
-        else if(Input.GetButtonDown("Two")) selectedGun = 1;
-        else if(Input.GetButtonDown("Three")) selectedGun = 2;
+        if(input > 0) selectedGunIndex += 1;
+        if(input < 0) selectedGunIndex -= 1;
+        if(Input.GetButtonDown("One")) selectedGunIndex = 0;
+        else if(Input.GetButtonDown("Two")) selectedGunIndex = 1;
+        else if(Input.GetButtonDown("Three")) selectedGunIndex = 2;
+    }
+
+    public void SetSelectedGun(GunType gunType)
+    {
+        selectedGunIndex = guns.FindIndex(g => g.gunType == gunType);
+        GunSelected();
     }
 
     private void GunSelected()
     {
-        var index = selectedGun % guns.Length;
-        if (index < 0) index = guns.Length - 1;
-        if (index > guns.Length - 1) index = 0;
+        foreach (var gun in guns) gun.gameObject.SetActive(false);
+        if(GameState.SaveData.gunsColected == null || GameState.SaveData.gunsColected.Count <= 0) return;
 
-        foreach (var gun in guns) gun.SetActive(false);
-        guns[index].SetActive(true);
+        var colectedGuns = guns.Where(g => GameState.SaveData.gunsColected.Contains(g.gunType)).ToArray();
 
-        if(index != Mathf.FloorToInt(selectedGun)) selectedGun = index;
-        GameState.mainCanvas.GunSelected(index);
+        var index = selectedGunIndex % colectedGuns.Length;
+        if (index < 0) index = colectedGuns.Length - 1;
+        if (index > colectedGuns.Length - 1) index = 0;
+
+        var selectedGun = guns[guns.IndexOf(colectedGuns[index])];
+        selectedGun.gameObject.SetActive(true);
+
+        if(index != Mathf.FloorToInt(selectedGunIndex)) selectedGunIndex = index;
+        GameState.mainCanvas.GunSelected(selectedGun.gunType);
     }
 }

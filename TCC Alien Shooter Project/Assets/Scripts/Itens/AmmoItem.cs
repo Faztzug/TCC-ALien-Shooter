@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoItem : Item
 {
-    [SerializeField] private GunType ammoType;
+    [SerializeField] protected GunType ammoType;
     [SerializeField] private int[] ammoRange = new int[2];
     protected override void Start() 
     {
