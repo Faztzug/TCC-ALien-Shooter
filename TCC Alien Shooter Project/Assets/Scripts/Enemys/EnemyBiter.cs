@@ -36,6 +36,7 @@ public class EnemyBiter : EnemyIA
             else if(doesShoot && shootChance >= shootRNG && gun.LoadedAmmo > 0 
             && gun.Fire1Timer < 0 && inFireRange) 
             {
+                StopMoving();
                 PrimaryFire();
             }
             else if(inWalkRange) 
@@ -52,6 +53,7 @@ public class EnemyBiter : EnemyIA
 
     protected virtual IEnumerator BiteCourotine()
     {
+        anim.SetTrigger("Melle");
         isBiting = true;
         yield return new WaitForSeconds(biteWaitStart);
         GoToPlayerDirect();

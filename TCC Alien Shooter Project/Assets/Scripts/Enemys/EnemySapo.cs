@@ -20,7 +20,6 @@ public class EnemySapo : EnemyBiter
         //jumpTween.OnComplete(() => jumpTween.Kill(true));
     }
 
-
     protected override void AsyncUpdateIA()
     {
         base.AsyncUpdateIA();
@@ -30,6 +29,7 @@ public class EnemySapo : EnemyBiter
             var height = jumpHeight * rng;
             var time = jumpTime * rng;
             isJumping = true;
+            anim.SetTrigger("Jump");
             jumpTween = DOTween.Sequence();
             jumpTween.Append(modelTrans.DOLocalMoveY(height, time / 2).SetEase(Ease.OutSine));
             jumpTween.Append(modelTrans.DOLocalMoveY(0, time / 2).SetEase(Ease.InSine));

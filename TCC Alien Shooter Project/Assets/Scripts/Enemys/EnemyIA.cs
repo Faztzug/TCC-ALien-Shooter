@@ -242,6 +242,7 @@ public class EnemyIA : MonoBehaviour
     {
         ShootAtPlayer();
         gun.PrimaryFire();
+        anim.SetTrigger("Fire");
     }
     protected virtual void SecondaryFire()
     {

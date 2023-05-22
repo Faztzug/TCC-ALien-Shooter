@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42a99e7543db9b4cb4d574d7ba24284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: -2
   invicibilityTime: 0.1
 --- !u!1 &7663323384576428417
 GameObject:
@@ -443,6 +443,7 @@ MonoBehaviour:
   updateRateRNG:
   - 0.162
   - 0.324
+  playerOffsetXRNG: {x: 0, y: 0}
   playerOffsetGoTo: {x: 0, y: 0, z: 0}
   lowSpeed: 3
   walkingSpeed: 7
@@ -568,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ce1abfc1ad68a4d9beecea17bccc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropYOffset: 2
   maxDrops: 2
   itens:
   - {fileID: 3397737234963070811, guid: 830ee5911ad387342abccb2eaf64707c, type: 3}
@@ -832,6 +834,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Model_Sapito
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 7aed444126c1d9e4d935e5b9d924605c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a4e3dc66a14653d4484199788e6b1cb9, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 7aed444126c1d9e4d935e5b9d924605c,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7aed444126c1d9e4d935e5b9d924605c, type: 3}
