@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTouch : MonoBehaviour
+public class EnemyTouch : DamageHealthCollider
 {
-    [SerializeField] private float contactDamage;
-    private Health hp;
     [SerializeField] float invicibilityTime = 0.1f;
     private float time;
 
     void Start()
     {
-        hp = GetComponent<Health>();
         time = invicibilityTime;
     }
 
@@ -37,16 +34,7 @@ public class EnemyTouch : MonoBehaviour
     {
         if((hit.CompareTag("Player")) && time < 0)
         {
-            var damage = contactDamage;
-            var healthObj = hit.GetComponentInChildren<Health>();
-            var curTransform = hit.transform;
-            while (healthObj != null && curTransform.parent != null)
-            {
-                curTransform = curTransform.parent;
-                healthObj = curTransform.GetComponent<Health>();
-            }
-            healthObj?.UpdateHealth(contactDamage, DamageType.NULL);
-            if(healthObj) Debug.Log("T Ouch!");
+            GetHealth(hit)?.UpdateHealth(damage, DamageType.NULL);
             time = invicibilityTime;
         }
     }

@@ -14,6 +14,6 @@ public class EnemyDummy : EnemyIA
     {
         base.AsyncUpdateIA();
 
-        base.GoToPlayer();
+        base.GoToPlayerOffset();
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyDrop : MonoBehaviour
 {
+    [SerializeField] private float dropYOffset = 2f;
     [SerializeField] private int maxDrops = 2;
     [SerializeField] private GameObject[] itens = new GameObject[2];
 
@@ -12,7 +13,7 @@ public class EnemyDrop : MonoBehaviour
     public void Drop()
     {
         Vector3 dropPos = transform.position;
-        dropPos.y =+ 1;
+        dropPos.y =+ dropYOffset;
         Quaternion dropRot = transform.rotation;
         for (int i = 0; i < itens.Length; i++)
         {
@@ -21,7 +22,7 @@ public class EnemyDrop : MonoBehaviour
             {
                 Debug.Log("DROPPING");
                 var item = Instantiate(itens[i], dropPos, dropRot);
-                item.GetComponent<Rigidbody>().AddForce(item.transform.up * 5f, ForceMode.Impulse);
+                item.GetComponent<Rigidbody>().AddForce(item.transform.up * dropYOffset, ForceMode.Impulse);
                 if(i >= maxDrops) return;
             } 
         }

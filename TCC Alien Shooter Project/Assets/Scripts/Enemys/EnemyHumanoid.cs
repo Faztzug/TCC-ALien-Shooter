@@ -35,7 +35,7 @@ public class EnemyHumanoid : EnemyIA
                 HoldSecondaryFire();
             } 
 
-            if(inWalkRange) GoToPlayer();
+            if(inWalkRange) GoToPlayerOffset();
             else if(agent.isOnNavMesh) agent.isStopped = true;
         }
         else if(isContinousFiring && doesContinuousFire && distance <= shootingDistance)
@@ -45,7 +45,7 @@ public class EnemyHumanoid : EnemyIA
         }
         else if(distance >= minPlayerDistance && distance <= findPlayerDistance && distance >= shootingDistance)
         {
-            GoToPlayer();
+            GoToPlayerOffset();
             agent.speed = runSpeed;
             anim.SetBool("isRuning", true);
         }

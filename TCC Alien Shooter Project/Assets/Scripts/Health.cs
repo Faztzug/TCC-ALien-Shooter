@@ -40,6 +40,7 @@ public class Health : MonoBehaviour
         if(value < 0)
         {
             if(anim != null) anim.SetTrigger("Damage");
+            if(thisEnemy != null) thisEnemy.OnDamage();
             //if(source != null) source.PlayOneShot(damageSound);
             //else Debug.LogError("NO AUDIO SOURCE FOR DAMAGE");
         }

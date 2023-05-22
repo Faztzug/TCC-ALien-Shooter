@@ -10,7 +10,7 @@ public class EnemyBiter : EnemyIA
     [SerializeField] protected float biteCooldownEnd = 0.2f;
     [SerializeField] protected bool doesShoot = true;
     protected bool isBiting;
-    private Coroutine biteCourotine;
+    protected Coroutine biteCourotine;
     protected override void Start()
     {
         base.Start();
@@ -28,13 +28,20 @@ public class EnemyBiter : EnemyIA
 
         if(!isBiting)
         {
-            if(distance <= minPlayerDistance) BitePlayer();
+            if(distance <= minPlayerDistance) 
+            {
+                GoToPlayerDirect();
+                BitePlayer();
+            }
             else if(doesShoot && shootChance >= shootRNG && gun.LoadedAmmo > 0 
             && gun.Fire1Timer < 0 && inFireRange) 
             {
                 PrimaryFire();
             }
-            else if(inWalkRange) GoToPlayer();
+            else if(inWalkRange) 
+            {
+                GoToPlayerOffset();
+            }
         }
     }
 
@@ -43,11 +50,11 @@ public class EnemyBiter : EnemyIA
         if(biteCourotine == null) biteCourotine = StartCoroutine(BiteCourotine());
     }
 
-
-    protected IEnumerator BiteCourotine()
+    protected virtual IEnumerator BiteCourotine()
     {
         isBiting = true;
         yield return new WaitForSeconds(biteWaitStart);
+        GoToPlayerDirect();
         biteCollider.SetActive(true);
         yield return new WaitForSeconds(biteTime);
         biteCollider.SetActive(false);

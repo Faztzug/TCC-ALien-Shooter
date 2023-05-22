@@ -9,6 +9,8 @@ public class EnemyIA : MonoBehaviour
 {
     [SerializeField] [Range(0,1)] protected float[] updateRateRNG = new float[2];
     [HideInInspector] public Transform player => GameState.PlayerTransform;
+    [SerializeField] protected Vector2 playerOffsetXRNG;
+    [SerializeField] protected Vector3 playerOffsetGoTo;
     protected NavMeshAgent agent;
     protected Rigidbody rgbd;
     [SerializeField] protected float lowSpeed = 3f;
@@ -45,10 +47,11 @@ public class EnemyIA : MonoBehaviour
         tauntTimerAsync = damageTauntAsync * 3;
         anim = GetComponentInChildren<Animator>();
         gun = GetComponentInChildren<Gun>();
-        gun.aimTransform = aimTransform;
+        if(gun != null) gun.aimTransform = aimTransform;
         targetPos = player.position;
         newTargetTrans = player;
         agent.speed = walkingSpeed;
+        playerOffsetGoTo.x = Random.Range(playerOffsetXRNG.x, playerOffsetXRNG.y);
         
         StartCoroutine(CourotineAsyncUpdateIA());
     }
@@ -60,7 +63,7 @@ public class EnemyIA : MonoBehaviour
         
         // var newDirection = Vector3.RotateTowards(aimTransform.forward, directionPlayer, aimRotationSpeed, 0);
         // aimTransform.rotation = Quaternion.LookRotation(newDirection);
-        aimTransform.LookAt(targetPos);
+        if(gun != null) aimTransform.LookAt(targetPos);
     }
 
     protected IEnumerator CourotineAsyncUpdateIA()
@@ -122,20 +125,56 @@ public class EnemyIA : MonoBehaviour
     {
         tauntTimerAsync = damageTauntAsync;
     }
+    public virtual void OnDamage()
+    {
+        
+    }
     public virtual void UpdateHealth(float health, float maxHealth)
     {
 
     }
 
-    protected void GoToPlayer()
+    protected void GoToPlayerDirect()
+    {
+        if(agent.isOnNavMesh)
+        {
+            if(distance < findPlayerDistance && IsPlayerAlive()) //ignores min distance
+            {
+                var playerFlatPos = player.position;
+                playerFlatPos.y = transform.position.y;
+                var directionPlayer = playerFlatPos - transform.position;
+
+                var thisPos = transform.position;
+                agent.SetDestination(player.position + directionPlayer * 0.5f);
+                agent.isStopped = false;
+            }
+            else 
+            {
+                var pos = transform.position;
+                agent.SetDestination(pos);
+                rgbd.velocity = Vector3.zero;
+                rgbd.angularVelocity = Vector3.zero;
+                //Debug.Log("not going to player");
+            }
+        }
+        else
+        {
+            Debug.LogError(gameObject.name + " OUT OF NAV MESH!");
+        }
+    }
+    protected void GoToPlayerOffset(bool goToOffset = true)
     {
         if(agent.isOnNavMesh)
         {
             if(distance > minPlayerDistance && distance < findPlayerDistance && IsPlayerAlive())
             {
-                agent.SetDestination(player.position);
+                var offset = goToOffset ? (player.rotation * playerOffsetGoTo) : Vector3.zero;
+                agent.SetDestination(player.position + offset);
                 agent.isStopped = false;
-                //Debug.Log("going to player");
+                if(Vector3.Distance(playerOffsetGoTo, Vector3.zero) > 0) 
+                {
+                    Debug.Log("going to player " + (player.rotation * playerOffsetGoTo));
+                }
             }
             else 
             {
