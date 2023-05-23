@@ -171,10 +171,10 @@ public class EnemyIA : MonoBehaviour
                 var offset = goToOffset ? (player.rotation * playerOffsetGoTo) : Vector3.zero;
                 agent.SetDestination(player.position + offset);
                 agent.isStopped = false;
-                if(Vector3.Distance(playerOffsetGoTo, Vector3.zero) > 0) 
-                {
-                    Debug.Log("going to player " + (player.rotation * playerOffsetGoTo));
-                }
+                // if(Vector3.Distance(playerOffsetGoTo, Vector3.zero) > 0) 
+                // {
+                //     Debug.Log("going to player " + (player.rotation * playerOffsetGoTo));
+                // }
             }
             else 
             {

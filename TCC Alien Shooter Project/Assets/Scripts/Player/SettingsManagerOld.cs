@@ -32,12 +32,12 @@ public class SettingsManagerOld : MonoBehaviour
         sensibilidadeX.value = settingsData.sensibilidadeX;
         sensibilidadeY.value = settingsData.sensibilidadeY;
 
-        GameState.OnSettingsUpdated += SettingsHasUpdated;
+        if(GameState.GameStateInstance) GameState.OnSettingsUpdated += SettingsHasUpdated;
     }
     private void UpdateFileData()
     {
         settingsManager.SaveSettings(SettingsData);
-        GameState.OnSettingsUpdated?.Invoke();
+        if(GameState.GameStateInstance) GameState.OnSettingsUpdated?.Invoke();
     }
     public void MuteChanged(bool value)
     {
@@ -77,11 +77,11 @@ public class SettingsManagerOld : MonoBehaviour
 
     private void SettingsHasUpdated()
     {
-        GameState.UpdateQuality();
+        if(GameState.GameStateInstance) GameState.UpdateQuality();
     }
 
     private void OnDestroy() 
     {
-        GameState.OnSettingsUpdated -= SettingsHasUpdated;
+        if(GameState.GameStateInstance) GameState.OnSettingsUpdated -= SettingsHasUpdated;
     }
 }
