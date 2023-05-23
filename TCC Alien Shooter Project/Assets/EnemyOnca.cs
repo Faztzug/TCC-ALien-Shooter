@@ -28,6 +28,7 @@ public class EnemyOnca : EnemyBiter
         base.Update();
         transCooldownTimer -= Time.deltaTime;
         transDurationTimer -= Time.deltaTime;
+        anim.SetBool("Walking", !agent.isStopped && Vector3.Distance(agent.destination, this.transform.position) > minPlayerDistance);
     }
 
     protected override void AsyncUpdateIA()
@@ -69,6 +70,7 @@ public class EnemyOnca : EnemyBiter
 
     override protected IEnumerator BiteCourotine()
     {
+        anim.SetTrigger("Melle");
         isBiting = true;
         agent.speed = runSpeed;
         agent.angularSpeed = agentAngleSpeed * 3;

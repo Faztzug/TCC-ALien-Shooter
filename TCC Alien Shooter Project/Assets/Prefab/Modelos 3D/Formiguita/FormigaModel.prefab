@@ -709,6 +709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4128863318421808278}
   - component: {fileID: 8046955736037719788}
+  - component: {fileID: 366394820362719518}
   m_Layer: 0
   m_Name: FormigaModel
   m_TagString: Untagged
@@ -746,7 +747,7 @@ Animator:
   m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -754,6 +755,53 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &366394820362719518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604986243334307372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 2108382656903609726}
+  - {fileID: 6771356342097667488}
+  - {fileID: 5735730349393179453}
+  - {fileID: 8269956887084486055}
+  - {fileID: 8438894144019121154}
+  - {fileID: 8175159585953822609}
+  - {fileID: 7253723972500037487}
+  - {fileID: 8007463603922351637}
+  - {fileID: 4310780826833720082}
+  - {fileID: 2256403904682574729}
+  - {fileID: 6699877318011288288}
+  - {fileID: 2188331121300675916}
+  - {fileID: 7442918608105927635}
+  - {fileID: 3344411077956182905}
+  - {fileID: 7970169347827306565}
+  - {fileID: 6345943888698768772}
+  - {fileID: 7276258874799412926}
+  - {fileID: 3220593843792316561}
+  - {fileID: 6098884175191158581}
+  - {fileID: 6402164243914759494}
+  - {fileID: 3942658867299869953}
+  - {fileID: 1639221813317883349}
+  - {fileID: 7891336777206635640}
+  - {fileID: 2113680107681953493}
+  - {fileID: 2842825765575900341}
+  - {fileID: 5756527885871515099}
+  - {fileID: 948488834646670198}
+  - {fileID: 8681652677609474111}
 --- !u!1 &4384588802891972923
 GameObject:
   m_ObjectHideFlags: 0
