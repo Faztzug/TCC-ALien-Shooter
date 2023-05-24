@@ -37,6 +37,7 @@ public class EnemyIA : MonoBehaviour
 
     protected bool inFireRange => distance <= shootingDistance;
     protected bool inWalkRange => distance <= findPlayerDistance && distance >= minPlayerDistance;
+    protected AudioSource audioSource;
 
     protected virtual void Start() 
     {
@@ -52,6 +53,7 @@ public class EnemyIA : MonoBehaviour
         newTargetTrans = player;
         agent.speed = walkingSpeed;
         playerOffsetGoTo.x = Random.Range(playerOffsetXRNG.x, playerOffsetXRNG.y);
+        audioSource = GetComponentInChildren<AudioSource>();
         
         StartCoroutine(CourotineAsyncUpdateIA());
     }

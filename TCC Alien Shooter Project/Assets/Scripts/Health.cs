@@ -17,17 +17,23 @@ public class Health : MonoBehaviour
     public Action onDeath;
     [SerializeField] private GameObject bloodVFX;
     [SerializeField] protected Transform handTransform;
+    public Sound[] damageSounds;
+    public Sound deathSound;
+    public AudioSource audioSource;
+    protected float damageSoundTimer;
 
     public virtual void Start()
     {
         health = maxHealth;
         thisEnemy = GetComponent<EnemyIA>();
         anim = GetComponentInChildren<Animator>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     protected virtual void Update() 
     {
         bloodVfxTimer -= Time.deltaTime;
+        damageSoundTimer -= Time.deltaTime;
     }
 
     public virtual void UpdateHealth(float value, DamageType damageType)
@@ -44,9 +50,20 @@ public class Health : MonoBehaviour
             //if(source != null) source.PlayOneShot(damageSound);
             //else Debug.LogError("NO AUDIO SOURCE FOR DAMAGE");
         }
+
+        if(value < 0 && health >= 0)
+        {
+            if(damageSoundTimer < 0 && damageSounds.Length > 0)
+            {
+                var index = UnityEngine.Random.Range(0, damageSounds.Length);
+                damageSounds[index]?.PlayOn(audioSource);
+                damageSoundTimer = 1f;
+                Debug.Log("Health dmaage Sound " + name);
+            }
+        }
     }
 
-    float bloodVfxTimer = 0f;
+    protected float bloodVfxTimer = 0f;
     public virtual void BleedVFX(Vector3 position, bool isContinuos = false)
     {
         if(isContinuos & bloodVfxTimer > 0) return;
@@ -79,6 +96,8 @@ public class Health : MonoBehaviour
                 script.enabled = false;
             }
         }
+        
+        if(audioSource != null) deathSound?.PlayOn(audioSource);
         
         if(thisEnemy != null) 
         {

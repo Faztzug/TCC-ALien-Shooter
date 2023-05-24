@@ -11,6 +11,7 @@ public class EnemyBiter : EnemyIA
     [SerializeField] protected bool doesShoot = true;
     protected bool isBiting;
     protected Coroutine biteCourotine;
+    [SerializeField] protected Sound melleSound;
     protected override void Start()
     {
         base.Start();
@@ -53,6 +54,7 @@ public class EnemyBiter : EnemyIA
 
     protected virtual IEnumerator BiteCourotine()
     {
+        melleSound?.PlayOn(audioSource);
         anim.SetTrigger("Melle");
         isBiting = true;
         yield return new WaitForSeconds(biteWaitStart);

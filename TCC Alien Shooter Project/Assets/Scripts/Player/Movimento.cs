@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class Movimento : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Movimento : MonoBehaviour
     [SerializeField] private Vector3 crouchingCenter;
     [SerializeField] private Vector3 crouchingCamLocalPos;
     [SerializeField] private Vector3 deathCamLocalPos;
+    private RigBuilder rigBuilder;
 
 
     private void Start()
@@ -45,15 +47,24 @@ public class Movimento : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
         anim = GetComponentInChildren<Animator>();
+        rigBuilder = GetComponentInChildren<RigBuilder>();
         UpdateIK();
         upwardsHeight = controller.height;
         upwardsCenter = controller.center;
         upwardsCamLocalPos = cam.transform.localPosition;
+        //StartCoroutine(UpdateRigBuilder());
     }
 
     private void UpdateIK()
     {
 
+    }
+
+    IEnumerator UpdateRigBuilder()
+    {
+        yield return new WaitForSeconds(1f);
+        rigBuilder.Build();
+        StartCoroutine(UpdateRigBuilder());
     }
 
     private void Update()

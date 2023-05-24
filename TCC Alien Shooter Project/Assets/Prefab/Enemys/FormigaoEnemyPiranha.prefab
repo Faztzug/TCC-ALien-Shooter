@@ -369,6 +369,8 @@ MonoBehaviour:
   updateRateRNG:
   - 0.235
   - 0.624
+  playerOffsetXRNG: {x: 0, y: 0}
+  playerOffsetGoTo: {x: 0, y: 0, z: 0}
   lowSpeed: 3
   walkingSpeed: 5
   runSpeed: 8
@@ -400,9 +402,53 @@ MonoBehaviour:
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   handTransform: {fileID: 911177049971152034}
+  damageSounds:
+  - clip: {fileID: 8300000, guid: 63bfd2dd890e8b64dab3dac27eddd995, type: 3}
+    name: playerDamage1
+    volume: 1
+    pitch: 0
+    pitchRNG:
+    - 0.32
+    - -0.29
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: e84d18b2ca253e749bc6078706ffccf0, type: 3}
+    name: playerDamage2
+    volume: 1
+    pitch: 0
+    pitchRNG:
+    - 0.41
+    - -0.33
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  deathSound:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0
+    - 0
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  audioSource: {fileID: 0}
   maxShield: 1
   shieldRegen: 1
   regenCooldown: 2
+  shieldDamageSounds:
+  - clip: {fileID: 8300000, guid: 6cde5a92ec6f01d4186141ccb6835ed9, type: 3}
+    name: playerShieldDamage1
+    volume: 1
+    pitch: 0
+    pitchRNG:
+    - 0.32
+    - -0.29
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
 --- !u!136 &1517865328363480275
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -444,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ce1abfc1ad68a4d9beecea17bccc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropYOffset: 2
   maxDrops: 2
   itens:
   - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}

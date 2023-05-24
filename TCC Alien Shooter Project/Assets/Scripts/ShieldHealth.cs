@@ -9,6 +9,7 @@ public class ShieldHealth : Health
     [SerializeField] protected float shieldRegen = 1f;
     [SerializeField] protected float regenCooldown = 2f;
     private float regenTimer = 0f;
+    public Sound[] shieldDamageSounds;
 
     public override void Start()
     {
@@ -31,6 +32,13 @@ public class ShieldHealth : Health
         
         if(value < 0)
         {
+            if(damageSoundTimer < 0 && shieldDamageSounds.Length > 0)
+            {
+                var index = UnityEngine.Random.Range(0, shieldDamageSounds.Length);
+                shieldDamageSounds[index]?.PlayOn(audioSource);
+                damageSoundTimer = 1f;
+                Debug.Log("Shield dmaage Sound " + name);
+            }
             regenTimer = regenCooldown;
             UpdateShieldValue(value);
         }

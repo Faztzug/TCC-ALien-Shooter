@@ -18,9 +18,6 @@ public class PlayerShieldHealth : ShieldHealth
     [SerializeField] float effectDownMultplier = 0.5f;
     [SerializeField] float fallingDeathHeight = -1000;
     public bool IsMaxHealth => health >= maxHealth;
-    public AudioSource audioSource;
-    public Sound deathSound;
-    public Sound[] damageSounds;
     //private GameState state;
     public bool dead;
     
@@ -67,14 +64,7 @@ public class PlayerShieldHealth : ShieldHealth
             if (updatingHealthThisFrame) return;
             updatingHealthThisFrame = true;
         }
-        if(value < 0 && !GameState.IsPlayerDead)
-        {
-            if(damageSounds.Length > 0)
-            {
-                var index = Random.Range(0, damageSounds.Length);
-                damageSounds[index]?.PlayOn(audioSource);
-            }
-        }
+        
         base.UpdateHealth(value, damageType);
         //bar.fillAmount = health / maxHealth;
 
@@ -118,7 +108,6 @@ public class PlayerShieldHealth : ShieldHealth
         anim.SetBool("Death", true);
         anim.SetTrigger("death");
         
-        if(audioSource != null) deathSound.PlayOn(audioSource);
         GameState.IsPlayerDead = true;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
