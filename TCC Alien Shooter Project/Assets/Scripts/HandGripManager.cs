@@ -16,7 +16,7 @@ public class HandGripManager : MonoBehaviour
         SetGrips();
     }
 
-    private void SetGrips()
+    public void SetGrips()
     {
         rightIK.data.target = rightGrip;
         leftIK.data.target = leftGrip;

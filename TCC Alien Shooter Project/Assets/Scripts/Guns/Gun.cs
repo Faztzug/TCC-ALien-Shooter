@@ -49,6 +49,7 @@ public class Gun : MonoBehaviour
     [SerializeField] protected MovimentoMouse movimentoMouse;
     [HideInInspector] public Vector3 enemyTarget;
     [HideInInspector] public bool enemyHoldingFire;
+    private HandGripManager handGripManager;
    
     virtual protected void Start()
     {
@@ -59,6 +60,7 @@ public class Gun : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         anim = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
+        handGripManager = GetComponentInChildren<HandGripManager>();
     }
 
     protected void LateUpdate()
@@ -117,6 +119,7 @@ public class Gun : MonoBehaviour
         fire2timer = fire2cooldown;
         if(!continuosDamage) LoadedAmmo -= PrimaryAmmoCost;
         fire1Sound.PlayOn(audioSource);
+        anim?.SetTrigger("Fire1");
     }
     virtual public void SecondaryFire()
     {
@@ -129,6 +132,7 @@ public class Gun : MonoBehaviour
             fire2Sound.audioSource.volume = 0;
             fire2Sound.audioSource.DOFade(fire2Sound.SFXVolume, 0.2f);
         }
+        anim?.SetTrigger("Fire2");
     }
     virtual public void HoldSencondaryFire()
     {
@@ -137,6 +141,7 @@ public class Gun : MonoBehaviour
         if(continuosDamage) LoadedAmmo -= SecondaryAmmoCost * Time.deltaTime;
         if(!fire2Sound.isPlaying) fire2Sound.PlayOn(audioSource);
         if(!fire2Sound.isPlaying) Debug.Log("Play Fire2 Sound HOLD");
+        anim?.SetTrigger("Fire2");
     }
     
     public void Shooting(DamageType damageType, Bullet bulletPrefab = null)
@@ -257,5 +262,10 @@ public class Gun : MonoBehaviour
 
             if(LoadedAmmo > maxLoadedAmmo) LoadedAmmo = maxLoadedAmmo;
         }
+    }
+
+    private void OnEnable() 
+    {
+        handGripManager?.SetGrips();
     }
 }
