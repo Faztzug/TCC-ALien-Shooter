@@ -20,6 +20,8 @@ public class PlayerShieldHealth : ShieldHealth
     public bool IsMaxHealth => health >= maxHealth;
     //private GameState state;
     public bool dead;
+    [SerializeField] private Material playerHealthMat;
+    [SerializeField] private Color[] matHealthColors;
     
 
     public override void Start()
@@ -93,7 +95,21 @@ public class PlayerShieldHealth : ShieldHealth
         health += Mathf.Clamp(health+value, 0, maxHealth);
     }
 
-    public void UpdateHealthBar() => GameState.mainCanvas.UpdateShieldHealthPercentage(curShield / maxShield, health / maxHealth);
+    public void UpdateHealthBar() 
+    {
+        GameState.mainCanvas.UpdateShieldHealthPercentage(curShield / maxShield, health / maxHealth);
+        
+        var hpByColor = maxHealth / matHealthColors.Length;
+        Debug.Log("hpByColor " + hpByColor + "colorIndex " + (Mathf.CeilToInt(CurHealth / hpByColor)-1));
+        var colorIndex = Mathf.Clamp(Mathf.CeilToInt(CurHealth / hpByColor) -1, 0, matHealthColors.Length);
+        if(GameState.IsPlayerDead) colorIndex = 0;
+        
+        var nextColorI = colorIndex == matHealthColors.Length-1 ? colorIndex : colorIndex+1;
+        playerHealthMat.color = Color.Lerp(matHealthColors[colorIndex], matHealthColors[nextColorI], CurHealth % hpByColor);
+        playerHealthMat.SetColor("_EmissionColor", 
+        Color.Lerp(matHealthColors[colorIndex], matHealthColors[nextColorI], CurHealth % hpByColor));
+        //DynamicGI.UpdateEnvironment();
+    }
 
     IEnumerator EndUpdateHealth()
     {

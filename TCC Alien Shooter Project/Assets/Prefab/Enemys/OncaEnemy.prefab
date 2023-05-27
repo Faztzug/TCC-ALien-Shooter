@@ -72,6 +72,17 @@ MonoBehaviour:
   biteTime: 0.8
   biteCooldownEnd: 1
   doesShoot: 0
+  melleSound:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0
+    - 0
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
   transMat: {fileID: 2100000, guid: c088abb984f6320478f81793e99b766b, type: 2}
   invisibleChance: 68
   transCooldown: {x: 2, y: 6}
@@ -226,6 +237,19 @@ MonoBehaviour:
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   handTransform: {fileID: 0}
+  damageSounds: []
+  deathSound:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0
+    - 0
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &-4800811894422088956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +449,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06bf6f1a6d5e4cb4aa77483cf52c65a1, type: 3}
+--- !u!1 &621766517946767448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 06bf6f1a6d5e4cb4aa77483cf52c65a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 315705571711902985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &282361140296712930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 06bf6f1a6d5e4cb4aa77483cf52c65a1,
@@ -437,6 +467,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 315705571711902985}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &328717251
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621766517946767448}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: d20c6a5621ba2fb46bd20a0a39f5b5d3, type: 3}
+  m_Controller: {fileID: 9100000, guid: de3ada6be809cd74eb06f229796e32f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!136 &315705571711902988
 CapsuleCollider:
   m_ObjectHideFlags: 0

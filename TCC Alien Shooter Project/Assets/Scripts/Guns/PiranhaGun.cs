@@ -46,17 +46,6 @@ public class PiranhaGun : Gun
 
     private async void BiteTask()
     {
-        // Tween[] tweens = new Tween[]
-        // {modelTrans.DOLocalMove(biteEndLocalPos, waitBeforeDamage + (biteDamageDuration / 2)).SetEase(Ease.InCubic)
-        // ,modelTrans.DOLocalMove(modelStartLocalPos, biteDamageDuration).SetEase(Ease.OutCubic)};
-
-        // DOTween.Sequence(tweens);
-
-        // DOTween.Sequence(
-        //     modelTrans.DOLocalMove(biteEndLocalPos, waitBeforeDamage + (biteDamageDuration / 2)).SetEase(Ease.InCubic))
-        //     .Append(modelTrans.DOLocalMove(modelStartLocalPos, biteDamageDuration).SetEase(Ease.OutCubic));
-            //.OnComplete(() => Debug.Log("Bite Tween Ended " + biteEndLocalPos.ToString() + " " + modelStartLocalPos.ToString()));
-
         modelTrans.DOLocalMove(biteEndLocalPos, waitBeforeDamage + (biteDamageDuration / 2)).SetEase(Ease.InCubic)
         .OnComplete(() => modelTrans.DOLocalMove(modelStartLocalPos, biteDamageDuration).SetEase(Ease.OutCubic));
         fire2timer = waitBeforeDamage + biteDamageDuration + 0.1f;
