@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2718350239965155575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.372, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3406036749820392394}
   m_Father: {fileID: 6186766376421385889}
@@ -57,9 +57,9 @@ GameObject:
   - component: {fileID: 483162181847707062}
   - component: {fileID: 8001594250104887794}
   - component: {fileID: 5220311143066199980}
-  - component: {fileID: 963517197283945030}
   - component: {fileID: 2246127261171949016}
   - component: {fileID: 21387251152172751}
+  - component: {fileID: 6811425423828565654}
   m_Layer: 0
   m_Name: AcidGunItem
   m_TagString: Untagged
@@ -155,19 +155,6 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   ammoType: 1
   ammoRange: 0f0000000f000000
---- !u!65 &963517197283945030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8483112015781604578}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &2246127261171949016
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -197,6 +184,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &6811425423828565654
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483112015781604578}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2940310824142836769
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4342118866325966072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.372, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6596011882488754860}
   m_Father: {fileID: 5485388761182534318}
@@ -57,9 +57,9 @@ GameObject:
   - component: {fileID: 2256094848395669945}
   - component: {fileID: 8570513565823682045}
   - component: {fileID: 5875383791855369123}
-  - component: {fileID: 1487545736526558793}
   - component: {fileID: 490914253140689367}
   - component: {fileID: 1851032949399268032}
+  - component: {fileID: 2424732302412467591}
   m_Layer: 0
   m_Name: PiranhaGunItem
   m_TagString: Untagged
@@ -155,19 +155,6 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   ammoType: 0
   ammoRange: 1900000019000000
---- !u!65 &1487545736526558793
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7800756069556007149}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &490914253140689367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -197,6 +184,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &2424732302412467591
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7800756069556007149}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6630148167486805319
 PrefabInstance:
   m_ObjectHideFlags: 0
