@@ -10,8 +10,13 @@ public class GunManager : MonoBehaviour
     public int selectedGunIndex 
     {get => _selectedGunIndex;
     set {
-        var pastValue = _selectedGunIndex; 
-        _selectedGunIndex = value % guns.Count; 
+        scroolInput = 0.5f;
+        var pastValue = _selectedGunIndex;
+
+        if(value >= guns.Count) _selectedGunIndex = 0;
+        else if(value < 0) _selectedGunIndex = guns.Count - 1;
+        else _selectedGunIndex = value;
+        
         if(pastValue != _selectedGunIndex) GunSelected();
     }}
     private int _selectedGunIndex;
@@ -19,11 +24,13 @@ public class GunManager : MonoBehaviour
     private AudioSource audioSource;
     private Animator anim;
     [SerializeField] private float gunChangeWait;
+    private bool changingGun;
     private Coroutine gunChange;
     private float scroolInput;
 
     private void Start() 
     {
+        scroolInput = 0.5f;
         audioSource = GetComponentInChildren<AudioSource>();
         anim = GetComponentInChildren<Animator>();
         foreach (var gun in guns) gun.gameObject.SetActive(false);
@@ -32,10 +39,12 @@ public class GunManager : MonoBehaviour
 
     void Update()
     {
-        if(GameState.isGamePaused) return;
+        if(GameState.isGamePaused || changingGun) return;
         scroolInput += Input.GetAxis("Mouse ScrollWheel");
+
         if(scroolInput > 1) selectedGunIndex += 1;
-        if(scroolInput < 0) selectedGunIndex -= 1;
+        else if(scroolInput < 0) selectedGunIndex -= 1;
+
         if(Input.GetButtonDown("One")) selectedGunIndex = 0;
         else if(Input.GetButtonDown("Two")) selectedGunIndex = 1;
         else if(Input.GetButtonDown("Three")) selectedGunIndex = 2;
@@ -56,11 +65,15 @@ public class GunManager : MonoBehaviour
     private IEnumerator GunSelectedCourotine()
     {
         anim.SetTrigger("Change");
+        Debug.Log("New gun index: " + selectedGunIndex);
         scroolInput = 0.5f;
+        changingGun = true;
         yield return new WaitForSeconds(gunChangeWait);
 
         foreach (var gun in guns) gun.gameObject.SetActive(false);
         if(GameState.SaveData.gunsColected == null || GameState.SaveData.gunsColected.Count <= 0) yield return null;
+        
+        changingGun = false;
 
         var colectedGuns = guns.Where(g => GameState.SaveData.gunsColected.Contains(g.gunType)).ToArray();
 
