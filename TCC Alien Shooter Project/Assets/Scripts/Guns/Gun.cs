@@ -171,7 +171,7 @@ public class Gun : MonoBehaviour
 
                 if(continuosDamage) targetHealth?.UpdateHealth(damage * Time.deltaTime, damageType);
                 else targetHealth?.UpdateHealth(damage, damageType);
-                targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position), continuosDamage);
+                targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position), damageType, continuosDamage);
             }
             
         }

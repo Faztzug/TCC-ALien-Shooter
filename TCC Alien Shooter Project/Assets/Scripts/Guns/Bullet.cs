@@ -83,7 +83,7 @@ public class Bullet : MonoBehaviour
         if(collision.TryGetComponent<Health>(out Health health))
         {
             health.UpdateHealth(damage, damageType);
-            health?.BleedVFX(transform.position);
+            health?.BleedVFX(transform.position, damageType);
             //Debug.Log(collisionInfo.gameObject.name + " took " + damage + " of damage!");
         }
     }

@@ -22,4 +22,13 @@ public class HealthImmunities : Health
         }
         base.UpdateHealth(value, damageType);
     }
+
+    public override void BleedVFX(Vector3 position, DamageType damageType, bool isContinuos = false)
+    {
+        if(damageOnlyFrom != null && damageOnlyFrom.Count > 0)
+        {
+            if(!damageOnlyFrom.Contains(damageType)) return;
+        }
+        base.BleedVFX(position, damageType, isContinuos);
+    }
 }

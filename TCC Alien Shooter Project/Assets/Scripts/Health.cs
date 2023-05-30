@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     private EnemyIA thisEnemy;
     public Action onDeath;
     [SerializeField] private GameObject bloodVFX;
+    [SerializeField] private GameObject DeathVFX;
     [SerializeField] protected Transform handTransform;
     public Sound[] damageSounds;
     public Sound deathSound;
@@ -64,17 +65,21 @@ public class Health : MonoBehaviour
     }
 
     protected float bloodVfxTimer = 0f;
-    public virtual void BleedVFX(Vector3 position, bool isContinuos = false)
+    public virtual void BleedVFX(Vector3 position, DamageType damageType, bool isContinuos = false)
     {
         if(isContinuos & bloodVfxTimer > 0) return;
         if(bloodVFX == null) Debug.Log(name + " Não possui vfx de sangue!");
-        else GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null);
+        else GameObject.Destroy(GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null), 3f);
         if(isContinuos) bloodVfxTimer = 0.5f;
     }
 
     public virtual void DestroyCharacter()
     {
         onDeath?.Invoke();
+
+        if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, Quaternion.identity, null), 3f);
+        if(audioSource != null) GameState.InstantiateSound(deathSound, transform.position);
+
         if(anim != null)
         {
             foreach (var collider in GetComponentsInChildren<Collider>())
@@ -96,8 +101,6 @@ public class Health : MonoBehaviour
                 script.enabled = false;
             }
         }
-        
-        if(audioSource != null) deathSound?.PlayOn(audioSource);
         
         if(thisEnemy != null) 
         {
