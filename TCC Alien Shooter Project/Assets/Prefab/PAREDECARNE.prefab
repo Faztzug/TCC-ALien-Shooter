@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8865840754950469247}
   - component: {fileID: 8865840754950469244}
   - component: {fileID: 8865840754950469218}
+  - component: {fileID: 7638671357861229825}
   m_Layer: 0
   m_Name: PAREDECARNE
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8865840754950469245}
   m_LocalRotation: {x: 1.110223e-17, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.366886, y: 0.75000185, z: 45.345673}
+  m_LocalPosition: {x: 5.366886, y: 0.7500018, z: 45.34567}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19318,6 +19319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 63652ccf8e4fe8a4b8f7b20f96e40644, type: 2}
   - {fileID: 2100000, guid: 9f26fab68ec292f4f912dcb19b2456d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -19331,7 +19333,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -19374,7 +19376,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bab4575d936959429db5e07603f5acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  bloodVFX: {fileID: 0}
+  maxHealth: 2
+  bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
+    type: 3}
+  DeathVFX: {fileID: 3311497572441437955, guid: 9524b6247f474df41986bbfa4ff56cbd,
+    type: 3}
   handTransform: {fileID: 0}
+  damageSounds: []
+  deathSound:
+    clip: {fileID: 0}
+    name: 
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0
+    - 0
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  audioSource: {fileID: 0}
   damageOnlyFrom: 03000000
+--- !u!95 &7638671357861229825
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865840754950469245}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39f7bcac9bbd84f4d85cf2b72168a76d, type: 2}
+  m_CullingMode: 2
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

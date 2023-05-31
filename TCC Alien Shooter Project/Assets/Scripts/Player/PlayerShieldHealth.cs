@@ -100,7 +100,7 @@ public class PlayerShieldHealth : ShieldHealth
         GameState.mainCanvas.UpdateShieldHealthPercentage(curShield / maxShield, health / maxHealth);
         
         var hpByColor = maxHealth / matHealthColors.Length;
-        Debug.Log("hpByColor " + hpByColor + "colorIndex " + (Mathf.CeilToInt(CurHealth / hpByColor)-1));
+        //Debug.Log("hpByColor " + hpByColor + "colorIndex " + (Mathf.CeilToInt(CurHealth / hpByColor)-1));
         var colorIndex = Mathf.Clamp(Mathf.CeilToInt(CurHealth / hpByColor) -1, 0, matHealthColors.Length-1);
         if(GameState.IsPlayerDead) colorIndex = 0;
         

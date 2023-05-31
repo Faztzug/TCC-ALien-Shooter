@@ -77,11 +77,12 @@ public class Health : MonoBehaviour
     {
         onDeath?.Invoke();
 
-        if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, Quaternion.identity, null), 3f);
+        if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 3f);
         if(audioSource != null) GameState.InstantiateSound(deathSound, transform.position);
 
         if(anim != null)
         {
+            Debug.Log(anim.parameterCount);
             foreach (var collider in GetComponentsInChildren<Collider>())
             {
                 if(collider is CharacterController) continue;
@@ -111,7 +112,7 @@ public class Health : MonoBehaviour
             drop.Drop(); 
             this.gameObject.SetActive(false);
         }
-        else if(anim == null)
+        else if(anim == null || anim.parameterCount == 0)
         {
             Destroy(this.gameObject);
         }
