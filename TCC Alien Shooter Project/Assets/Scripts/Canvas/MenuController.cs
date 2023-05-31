@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    [SerializeField] private string level1 = "Level 1";
+    [SerializeField] private string test = "SampleScene";
+
     private void Start() 
     {
         Cursor.lockState = CursorLockMode.None;
@@ -12,7 +15,7 @@ public class MenuController : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene(level1);
     }
     
     public void TestLevel()

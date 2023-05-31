@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -784,6 +784,22 @@ PlayableDirector:
     value: {fileID: 2141178966}
   - key: {fileID: -5452479856580974163, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -6509125394618213465, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4530910351818156380, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 717364023345653128, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2686747449424953023, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3749971818005318257, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4489989774439236544, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5580985532438420502, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -688239465861540223, guid: 9497ff5b516bcd941bd773307be28c45, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &674903657
@@ -1202,6 +1218,7 @@ GameObject:
   - component: {fileID: 1004910745}
   - component: {fileID: 1004910744}
   - component: {fileID: 1004910743}
+  - component: {fileID: 1004910747}
   m_Layer: 5
   m_Name: Fundo
   m_TagString: Untagged
@@ -1296,6 +1313,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1004910747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004910742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16adcb51b5812341bb97495a8eb20e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Level 1
+  timeToAutoSkip: 53.5
 --- !u!1 &1014414835
 GameObject:
   m_ObjectHideFlags: 0

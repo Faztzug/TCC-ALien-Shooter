@@ -7,7 +7,6 @@ public class CutsceneSkip : MonoBehaviour
 {    
     [SerializeField] private string sceneName;
     [SerializeField] private float timeToAutoSkip = 60f;
-    public float cronomether = 0;
     void Start()
     {
         Time.timeScale = 1;
@@ -16,7 +15,7 @@ public class CutsceneSkip : MonoBehaviour
     }
     void Update()
     {
-        cronomether += 1 * Time.unscaledDeltaTime;
+        if(Input.GetButtonUp("Pause")) LoadNextScene();
     }
     IEnumerator AutoLoad()
     {
