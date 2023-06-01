@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HealthItem : Item
 {
-    public override void CollectItem(Collider info)
+    public override void CollectItem(GameObject obj)
     {
-        base.CollectItem(info);
-        if(info.gameObject.TryGetComponent<PlayerShieldHealth>(out PlayerShieldHealth hp))
+        base.CollectItem(obj);
+        if(obj.TryGetComponent<PlayerShieldHealth>(out PlayerShieldHealth hp))
         {
             if(hp.IsMaxHealth) return;
             var porcent = ammount / 100f;

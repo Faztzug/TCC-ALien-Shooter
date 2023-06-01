@@ -17,6 +17,9 @@ public class MovimentoMouse : MonoBehaviour
     [SerializeField] private ReticulaFeedback reticula;
     public Vector3 raycastResult {get; private set;}
     public const int kHorizonPoint = 150;
+    public float distanceFromTarget => Vector3.Distance(raycastResult, cam.transform.position);
+    [SerializeField] private float distanceToInteract = 3f;
+    public bool isOnInteractableDistance => distanceFromTarget <= distanceToInteract;
 
     void Start()
     {
@@ -37,6 +40,24 @@ public class MovimentoMouse : MonoBehaviour
         playerBody.Rotate(Vector3.up * mouseX);
 
         GetTargetHealth();
+
+        if(Input.GetButtonDown("Use") && isOnInteractableDistance)
+        {
+            var layer = GetLayers();
+            RaycastHit rayHit;
+            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
+            {
+                raycastResult = rayHit.point;
+                var curTransform = rayHit.transform;
+                var itemObj = curTransform.GetComponentInChildren<Item>();
+                while (itemObj == null && curTransform.parent != null)
+                {
+                    curTransform = curTransform.parent;
+                    itemObj = curTransform.GetComponent<Item>();
+                }
+                itemObj.InteractingWithItem();
+            }
+        }
     }
 
     static public int GetLayers(bool isPlayerCast = true)
@@ -44,37 +65,6 @@ public class MovimentoMouse : MonoBehaviour
         var layer = isPlayerCast ? LayerMask.GetMask("Player") : LayerMask.GetMask("Enemy");
         return ~layer;
     }
-
-    
-    // public Vector3 GetRayCastMiddle()
-    // {
-    //     var layer = GetLayers();
-        
-    //     RaycastHit rayHit;
-
-    //     if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
-    //     {
-    //         Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.blue);
-    //         // if(rayHit.rigidbody != null && rayHit.rigidbody.gameObject.CompareTag("Enemy") && reticula != null)
-    //         // {
-    //         //     reticula.EnemyState();
-    //         // }
-    //         // else if(reticula != null)
-    //         // {
-    //         //     reticula.NeutralState();
-    //         // }
-    //         return rayHit.point;
-    //     }
-    //     else
-    //     {
-    //         //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.green);
-    //         // if(reticula != null)
-    //         // {
-    //         //     reticula.NeutralState();
-    //         // }
-    //         return cam.transform.position + cam.transform.forward * kHorizonPoint;
-    //     }
-    // }
 
     public Health GetTargetHealth()
     {

@@ -11,11 +11,14 @@ public class AmmoItem : Item
         base.Start();
         ammount = Random.Range(ammoRange[0], ammoRange[1]+1);
     }
-    public override void CollectItem(Collider info)
+    public override void CollectItem(GameObject obj)
     {
-        base.CollectItem(info);
-        var guns = info.GetComponentsInChildren<Gun>(true);
-        foreach (var gun in guns) if(gun.gunType == ammoType) gun.GainAmmo(ammount, this);
-        Debug.Log("collecting ammo: " + ammoType + " found gun? " + guns.Length);
+        base.CollectItem(obj);
+        var guns = obj.GetComponentsInChildren<Gun>(true);
+        foreach (var gun in guns) if(gun.gunType == ammoType)
+        {
+            gun.GainAmmo(ammount, this);
+            Debug.Log("collecting ammo: " + ammoType + " found gun? " + guns.Length);
+        }
     }
 }

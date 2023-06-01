@@ -20,10 +20,21 @@ public class PDAItem : Item
         timer -= Time.deltaTime;
     }
 
-    public override void CollectItem(Collider info)
+    public override void CollectItem(GameObject obj)
     {
         if(timer > 0) return;
-        base.CollectItem(info);
+        base.CollectItem(obj);
+        OpenPDA();
+    }
+
+    public override void InteractingWithItem()
+    {
+        if(timer > 0) OpenPDA();
+        else base.InteractingWithItem();
+    }
+
+    private void OpenPDA()
+    {
         GameState.OpenPDA(loreText);
         collectSound.PlayOn(audioSource);
         timer = readCooldown;

@@ -25,6 +25,8 @@ public class GameState : MonoBehaviour
     static public void ToogleGodMode() => GameStateInstance.godMode = !GodMode;
     static public bool isOnCutscene;
     static public bool skipCutscene;
+    private MovimentoMouse movimentoMouse;
+    static public MovimentoMouse MovimentoMouse { get => gameState.movimentoMouse; }
     private Camera mainCamera;
     static public Camera MainCamera { get => gameState.mainCamera; }
     private Camera cutsceneCamera;
@@ -47,6 +49,7 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
+        movimentoMouse = GetComponentInChildren<MovimentoMouse>();
         //var cutSceneGOCam = GameObject.FindGameObjectWithTag("CutsceneCamera");
         mainCanvas = gameObject.GetComponentInChildren<CanvasManager>();
         gameState = this;

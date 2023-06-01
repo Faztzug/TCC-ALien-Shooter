@@ -256,6 +256,7 @@ public class Gun : MonoBehaviour
     {
         if(LoadedAmmo < maxLoadedAmmo)
         {
+            Debug.Log("gaining ammo");
             LoadedAmmo += ammount;
             item?.DestroyItem();
 
