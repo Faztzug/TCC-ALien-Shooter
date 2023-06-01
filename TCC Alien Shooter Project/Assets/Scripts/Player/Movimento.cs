@@ -28,7 +28,6 @@ public class Movimento : MonoBehaviour
     private float gravityAcceleration;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Sound passosSound;
-    [HideInInspector] public ReticulaFeedback reticula;
 
     private bool isCrouching;
     [SerializeField] private float crouchingSpeed = 3f;

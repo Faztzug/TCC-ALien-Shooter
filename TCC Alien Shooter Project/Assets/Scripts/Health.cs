@@ -82,7 +82,6 @@ public class Health : MonoBehaviour
 
         if(anim != null)
         {
-            Debug.Log(anim.parameterCount);
             foreach (var collider in GetComponentsInChildren<Collider>())
             {
                 if(collider is CharacterController) continue;
@@ -91,7 +90,7 @@ public class Health : MonoBehaviour
             foreach (var script in GetComponentsInChildren<MonoBehaviour>())
             {
                 if(script == this || script is Movimento || script is GameState 
-                || script is CanvasManager || script is Volume) 
+                || script is CanvasManager || script is Volume || LayerMask.LayerToName(script.gameObject.layer) == "UI") 
                 {
                     continue;
                 }

@@ -28,7 +28,7 @@ public class ShieldHealth : Health
         if(curShield <= 0 || value > 0)
         {
             base.UpdateHealth(value, damageType);
-        } 
+        }
         
         if(value < 0)
         {
@@ -41,6 +41,7 @@ public class ShieldHealth : Health
             }
             regenTimer = regenCooldown;
             UpdateShieldValue(value);
+            if(health <= 0) DestroyCharacter();
         }
     }
 
@@ -52,6 +53,7 @@ public class ShieldHealth : Health
     protected override void Update() 
     {
         base.Update();
+        if(CurHealth <= 0) return;
         if(regenTimer < 0) UpdateShieldValue(shieldRegen * Time.deltaTime);
         
         regenTimer = regenTimer - Time.deltaTime;

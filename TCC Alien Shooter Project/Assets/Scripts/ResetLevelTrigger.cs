@@ -9,7 +9,8 @@ public class ResetLevelTrigger : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(gameObject.scene.name);
+            //SceneManager.LoadScene(gameObject.scene.name);
+            other.GetComponent<PlayerShieldHealth>().PierciShieldDamage(-1000);
         }
     }
 }

@@ -202,7 +202,7 @@ public class EnemyIA : MonoBehaviour
         }
     }
 
-    protected bool IsMoving() => !agent.isStopped && Vector3.Distance(agent.destination, transform.position) > minPlayerDistance;
+    protected bool IsMoving() => agent.isOnNavMesh && !agent.isStopped && Vector3.Distance(agent.destination, transform.position) > minPlayerDistance;
 
     protected void TurnToPlayer()
     {

@@ -27,6 +27,7 @@ public class GunManager : MonoBehaviour
     private bool changingGun;
     private Coroutine gunChange;
     private float scroolInput;
+    [SerializeField] private ReticulaFeedback reticulaFeedback;
 
     private void Start() 
     {
@@ -87,5 +88,6 @@ public class GunManager : MonoBehaviour
         if(index != Mathf.FloorToInt(selectedGunIndex)) _selectedGunIndex = index;
         GameState.mainCanvas.GunSelected(selectedGun.gunType);
         gubSelectSound.PlayOn(audioSource);
+        reticulaFeedback.SetReticulaIndex(index);
     }
 }

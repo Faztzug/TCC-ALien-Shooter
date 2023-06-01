@@ -42,20 +42,7 @@ public class PlayerShieldHealth : ShieldHealth
             Debug.Log("GOD MODE: " + GameState.GodMode);
         }
 
-        // if(damageEffect.weight > 0)
-        // {
-        //     if(damageTime < 0)
-        //     {
-        //         damageEffect.weight -= 1f * Time.deltaTime * effectDownMultplier;
-        //         damageTime = 0;
-        //     }
-        //     else
-        //     {
-        //         damageTime -= 1f * Time.deltaTime;
-        //     }
-        // }
-
-        if(transform.position.y < fallingDeathHeight) DestroyCharacter();
+        if(transform.position.y < fallingDeathHeight && !GameState.IsPlayerDead) DestroyCharacter();
     }
 
     private bool updatingHealthThisFrame;
@@ -74,20 +61,6 @@ public class PlayerShieldHealth : ShieldHealth
 
         var hpPorcentage = Mathf.Abs(health / maxHealth);
         var chgPorcentage = Mathf.Abs(value / maxHealth);
-
-
-        // if(value < 0)
-        // {
-        //     damageEffect.weight += chgPorcentage * effectGainMultplier;
-        //     damageTime += chgPorcentage * effectTimeMultplier;
-        // }
-        // else if(value > 0)
-        // {
-        //     damageEffect.weight -= chgPorcentage * effectGainMultplier;
-        //     damageTime -= chgPorcentage * effectTimeMultplier;
-        //     if(damageEffect.weight < 0) damageEffect.weight = 0;
-        //     if(damageTime < 0) damageTime = 0;
-        // }
     }
 
     public void GainHealth(float value)

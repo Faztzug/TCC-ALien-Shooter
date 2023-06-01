@@ -14,7 +14,7 @@ public class MovimentoMouse : MonoBehaviour
 
     private float camRotationY;
     private Camera cam => Camera.main;
-    [HideInInspector] public ReticulaFeedback reticula;
+    [SerializeField] private ReticulaFeedback reticula;
     public Vector3 raycastResult {get; private set;}
     public const int kHorizonPoint = 150;
 
@@ -36,7 +36,7 @@ public class MovimentoMouse : MonoBehaviour
         playerHead.localRotation = Quaternion.Euler(camRotationY,0f,0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
-        raycastResult = GetRayCastMiddle();
+        GetTargetHealth();
     }
 
     static public int GetLayers(bool isPlayerCast = true)
@@ -46,35 +46,35 @@ public class MovimentoMouse : MonoBehaviour
     }
 
     
-    public Vector3 GetRayCastMiddle()
-    {
-        var layer = GetLayers();
+    // public Vector3 GetRayCastMiddle()
+    // {
+    //     var layer = GetLayers();
         
-        RaycastHit rayHit;
+    //     RaycastHit rayHit;
 
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
-        {
-            Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.blue);
-            if(rayHit.rigidbody != null && rayHit.rigidbody.gameObject.CompareTag("Enemy") && reticula != null)
-            {
-                reticula.EnemyState();
-            }
-            else if(reticula != null)
-            {
-                reticula.NeutralState();
-            }
-            return rayHit.point;
-        }
-        else
-        {
-            //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.green);
-            if(reticula != null)
-            {
-                reticula.NeutralState();
-            }
-            return cam.transform.position + cam.transform.forward * kHorizonPoint;
-        }
-    }
+    //     if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
+    //     {
+    //         Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.blue);
+    //         // if(rayHit.rigidbody != null && rayHit.rigidbody.gameObject.CompareTag("Enemy") && reticula != null)
+    //         // {
+    //         //     reticula.EnemyState();
+    //         // }
+    //         // else if(reticula != null)
+    //         // {
+    //         //     reticula.NeutralState();
+    //         // }
+    //         return rayHit.point;
+    //     }
+    //     else
+    //     {
+    //         //Debug.DrawRay(cam.transform.position, cam.transform.forward * kHorizonPoint, Color.green);
+    //         // if(reticula != null)
+    //         // {
+    //         //     reticula.NeutralState();
+    //         // }
+    //         return cam.transform.position + cam.transform.forward * kHorizonPoint;
+    //     }
+    // }
 
     public Health GetTargetHealth()
     {
@@ -83,18 +83,27 @@ public class MovimentoMouse : MonoBehaviour
 
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
         {
+            raycastResult = rayHit.point;
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
+            var itemObj = curTransform.GetComponentInChildren<Item>();
             while (healthObj == null && curTransform.parent != null)
             {
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();
+                itemObj = curTransform.GetComponent<Item>();
             }
             //Debug.Log("Found Health? " + (healthObj != null));
+
+            if(healthObj != null) reticula.SetReticulaState(ReticulaState.Enemy);
+            else if(itemObj != null) reticula.SetReticulaState(ReticulaState.Interactable);
+            else reticula.SetReticulaState(ReticulaState.Neutral);
             return healthObj;
         }
         else
         {
+            reticula.SetReticulaState(ReticulaState.Neutral);
+            raycastResult = cam.transform.position + cam.transform.forward * kHorizonPoint;
             return null;
         }
     }

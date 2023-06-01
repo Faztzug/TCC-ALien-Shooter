@@ -3,30 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ReticulaState
+{
+    Neutral,
+    Enemy,
+    Interactable,
+}
 public class ReticulaFeedback : MonoBehaviour
 {
-    //[SerializeField] private MenuPause canvasScript;
-    [SerializeField] private Image reticula;
-    [SerializeField] private Sprite neutralState;
-    [SerializeField] private Sprite enemyState;
-    private bool onEnemy;
-    void Start()
+    [SerializeField] private Image image;
+    [SerializeField] private Sprite[] gunReticulas;
+    [SerializeField] private UIColor uIColor;
+    [SerializeField] private Color enemyColor;
+    [SerializeField] private Color interactableColor;
+
+    public void SetReticulaIndex(int index)
     {
-        reticula.sprite = neutralState;
-        onEnemy = false;
-        //canvasScript.player.GetComponent<Movimento>().reticula = this;
+        image.sprite = gunReticulas[index];
     }
 
-    public void NeutralState()
+    public void SetReticulaState(ReticulaState reticulaState)
     {
-        if(onEnemy == false) return;
-        reticula.sprite = neutralState;
-        onEnemy = false;
-    }
-    public void EnemyState()
-    {
-        if(onEnemy == true) return;
-        reticula.sprite = enemyState;
-        onEnemy = true;
+        switch (reticulaState)
+        {
+            case ReticulaState.Enemy :
+                image.color = enemyColor;
+                break;
+            case ReticulaState.Interactable :
+                image.color = interactableColor;
+                break;
+            default: 
+                image.color = uIColor.Color;
+                break;
+        }
     }
 }
