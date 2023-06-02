@@ -375,8 +375,8 @@ MonoBehaviour:
   lowSpeed: 3
   walkingSpeed: 5
   runSpeed: 8
-  shootingDistance: 30
-  findPlayerDistance: 50
+  shootingDistance: 15
+  findPlayerDistance: 20
   minPlayerDistance: 5
   shootAim: 90
   shootChance: 0.1
@@ -384,6 +384,7 @@ MonoBehaviour:
   damageTauntAsync: 1
   aimTransform: {fileID: 1517865326771250779}
   aimRotationSpeed: 5
+  gizmoColor: {r: 0.015686274, g: 0.079685025, b: 1, a: 1}
   keepFiringTimeRNG:
   - 1.06
   - 10
@@ -496,12 +497,12 @@ MonoBehaviour:
   maxDrops: 2
   itens:
   - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}
-  - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}
   - {fileID: 4275636808051785984, guid: c0556c998d85af14e9edc1c421c366bb, type: 3}
+  - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}
   dropChance:
   - 100
-  - 25
   - 10
+  - 25
 --- !u!82 &2310278856307361847
 AudioSource:
   m_ObjectHideFlags: 0

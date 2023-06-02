@@ -39,6 +39,8 @@ public class EnemyIA : MonoBehaviour
     protected bool inWalkRange => distance <= findPlayerDistance && distance >= minPlayerDistance;
     protected AudioSource audioSource;
 
+    [SerializeField] private Color gizmoColor = Color.yellow;
+
     protected virtual void Start() 
     {
         updateRate = Random.Range(updateRateRNG[0], updateRateRNG[1]);
@@ -255,5 +257,11 @@ public class EnemyIA : MonoBehaviour
     {
         ShootAtPlayer();
         gun.HoldSencondaryFire();
+    }
+
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = gizmoColor;
+        Gizmos.DrawWireSphere(transform.position, findPlayerDistance);
     }
 }

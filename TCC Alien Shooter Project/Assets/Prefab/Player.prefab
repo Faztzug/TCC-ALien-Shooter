@@ -524,7 +524,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 479
+    m_Bits: 2007
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -668,6 +668,7 @@ MonoBehaviour:
   playerBody: {fileID: 8319963421708248066}
   playerHead: {fileID: 8319963421209622490}
   reticula: {fileID: 177779067850414071}
+  distanceToInteract: 3
 --- !u!82 &8319963421708248067
 AudioSource:
   m_ObjectHideFlags: 0
@@ -822,6 +823,7 @@ MonoBehaviour:
     showFPS: 1
     sensibilidadeX: 0.5
     sensibilidadeY: 0.5
+  nextScene: Menu
 --- !u!114 &5770464165946987000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6066,6 +6068,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4660236247320304926, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4660236247320304926, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -6091,6 +6098,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561782197722315542, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561782197722315542, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -6107,6 +6119,11 @@ PrefabInstance:
     - target: {fileID: 8923449175376578593, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923449175376578593, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8923449175376578593, guid: d950f54d0b4b1604384a3e4ae5592fb5,

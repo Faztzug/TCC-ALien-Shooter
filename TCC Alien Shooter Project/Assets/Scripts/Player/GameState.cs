@@ -45,6 +45,8 @@ public class GameState : MonoBehaviour
 
     public static Action OnSettingsUpdated;
     public static Action OnCutsceneEnd;
+    
+    [SerializeField] private string nextScene = "MenuInicial";
 
     private void Awake()
     {
@@ -225,9 +227,13 @@ public class GameState : MonoBehaviour
         mainCanvas.SetPDAdocument(true, loreText);
     }
 
-    IEnumerator EndGame()
+    public static void EndLevel()
+    {
+        gameState.StartCoroutine(gameState.EndLevelCourotine());
+    }
+    IEnumerator EndLevelCourotine()
     {
         yield return new WaitForSecondsRealtime(1f);
-        LoadScene("Cutscene_Final");
+        LoadScene(nextScene);
     }
 }

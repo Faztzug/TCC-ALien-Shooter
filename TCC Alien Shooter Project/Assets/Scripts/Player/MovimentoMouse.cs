@@ -41,7 +41,7 @@ public class MovimentoMouse : MonoBehaviour
 
         GetTargetHealth();
 
-        if(Input.GetButtonDown("Use") && isOnInteractableDistance)
+        if(Input.GetButtonDown("Use") && isOnInteractableDistance && !GameState.isGamePaused)
         {
             var layer = GetLayers();
             RaycastHit rayHit;
@@ -55,7 +55,7 @@ public class MovimentoMouse : MonoBehaviour
                     curTransform = curTransform.parent;
                     itemObj = curTransform.GetComponent<Item>();
                 }
-                itemObj.InteractingWithItem();
+                itemObj?.InteractingWithItem();
             }
         }
     }
@@ -81,7 +81,7 @@ public class MovimentoMouse : MonoBehaviour
             {
                 curTransform = curTransform.parent;
                 healthObj = curTransform.GetComponent<Health>();
-                itemObj = curTransform.GetComponent<Item>();
+                if(itemObj == null) itemObj = curTransform.GetComponent<Item>();
             }
             //Debug.Log("Found Health? " + (healthObj != null));
 

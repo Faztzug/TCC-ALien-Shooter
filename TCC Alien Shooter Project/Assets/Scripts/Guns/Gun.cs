@@ -69,6 +69,7 @@ public class Gun : MonoBehaviour
 
         if(!isPlayerGun)
         {
+            loadedAmmo = 100; //inimigos nunca ficam sem munição
             if(fire2timer <= 0 && !enemyHoldingFire)
             {
                 foreach (var curPoint in gunPointPositions) 

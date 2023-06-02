@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4590790420961399760}
   - component: {fileID: 1181995846482703978}
   - component: {fileID: 1935275814970918813}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PiranhaAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,10 +207,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.109
       objectReference: {fileID: 0}
+    - target: {fileID: -2169803525351568067, guid: f81e12caed2909f41821f69bd8b86552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f81e12caed2909f41821f69bd8b86552,
         type: 3}
       propertyPath: m_Name
       value: MunicaoPiranhac
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f81e12caed2909f41821f69bd8b86552,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f81e12caed2909f41821f69bd8b86552, type: 3}

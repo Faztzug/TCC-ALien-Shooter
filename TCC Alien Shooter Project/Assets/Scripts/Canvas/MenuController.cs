@@ -15,6 +15,8 @@ public class MenuController : MonoBehaviour
     }
     public void StartGame()
     {
+        var save = new SaveManager();
+        save.SaveGame(save.ResetData());
         SceneManager.LoadScene(level1);
     }
     

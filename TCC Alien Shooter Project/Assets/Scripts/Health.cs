@@ -28,7 +28,8 @@ public class Health : MonoBehaviour
         health = maxHealth;
         thisEnemy = GetComponent<EnemyIA>();
         anim = GetComponentInChildren<Animator>();
-        audioSource = GetComponentInChildren<AudioSource>();
+        var getAudio = GetComponentInChildren<AudioSource>();
+        if(getAudio != null) audioSource = getAudio;
     }
 
     protected virtual void Update() 
@@ -79,6 +80,7 @@ public class Health : MonoBehaviour
 
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
         if(audioSource != null) GameState.InstantiateSound(deathSound, transform.position);
+        else deathSound.PlayOn(audioSource);
 
         if(anim != null)
         {

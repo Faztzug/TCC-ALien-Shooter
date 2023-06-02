@@ -9,11 +9,14 @@ public class EnemyDrop : MonoBehaviour
     [SerializeField] private GameObject[] itens = new GameObject[2];
 
     [SerializeField] private float[] dropChance = new float[2]; //0 a 100
+
+    private bool droped = false;
     
     public void Drop()
     {
+        if(droped) return;
         Vector3 dropPos = transform.position;
-        dropPos.y =+ dropYOffset;
+        dropPos.y =+ 0.5f;
         Quaternion dropRot = transform.rotation;
         for (int i = 0; i < itens.Length; i++)
         {
@@ -26,6 +29,7 @@ public class EnemyDrop : MonoBehaviour
                 if(i >= maxDrops) return;
             } 
         }
+        droped = true;
     }
 
     private void OnValidate() 
