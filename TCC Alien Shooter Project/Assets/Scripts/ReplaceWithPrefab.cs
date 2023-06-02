@@ -1,3 +1,4 @@
+#if (UNITY_EDITOR) 
 using UnityEngine;
 using UnityEditor;
 
@@ -55,3 +56,4 @@ public class ReplaceWithPrefab : EditorWindow
         EditorGUILayout.LabelField("Selection count: " + Selection.objects.Length);
     }
 }
+#endif

@@ -26,12 +26,13 @@ public class CanvasManager : MonoBehaviour
     public bool DoesExitPause()
     {
         if(!pauseMenu.activeSelf && !PDAmanager.gameObject.activeSelf) return false;
-        else return !(settingsMenu.activeSelf && tutorial.activeSelf);
+        else return !(settingsMenu.activeSelf || tutorial.activeSelf);
     }
 
     void Start()
     {
         PDAscroll = GetComponentInChildren<ScrollRect>(true);
+        foreach (var uiColorComp in GetComponentsInChildren<UIColor>(true)) uiColorComp.Color = uiColor;
         SetPauseMenu(false);
         SetSettingsMenu(false);
         SetTutorial(false);

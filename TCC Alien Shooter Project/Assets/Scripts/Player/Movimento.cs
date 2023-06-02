@@ -20,7 +20,7 @@ public class Movimento : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     public Vector3 LookAtRayHit{get; private set;}
     private CharacterController controller;
-    private Camera cam;
+    [SerializeField] private Camera mainCam;
     private Animator anim;
 
     [Header("Gravity Values")]
@@ -44,13 +44,12 @@ public class Movimento : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        cam = Camera.main;
         anim = GetComponentInChildren<Animator>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
         UpdateIK();
         upwardsHeight = controller.height;
         upwardsCenter = controller.center;
-        upwardsCamLocalPos = cam.transform.localPosition;
+        upwardsCamLocalPos = mainCam.transform.localPosition;
         //StartCoroutine(UpdateRigBuilder());
     }
 
@@ -98,7 +97,7 @@ public class Movimento : MonoBehaviour
         
         if(GameState.IsPlayerDead)
         {
-            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, deathCamLocalPos, 0.1f);
+            mainCam.transform.localPosition = Vector3.Lerp(mainCam.transform.localPosition, deathCamLocalPos, 0.1f);
             return;
         }
 
@@ -106,13 +105,13 @@ public class Movimento : MonoBehaviour
         {
             controller.height = Mathf.Lerp(controller.height, crouchingHeight, 0.25f);
             controller.center = Vector3.Lerp(controller.center, crouchingCenter, 0.25f);
-            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchingCamLocalPos, 0.1f);
+            mainCam.transform.localPosition = Vector3.Lerp(mainCam.transform.localPosition, crouchingCamLocalPos, 0.1f);
         }
         else
         {
             controller.height = Mathf.Lerp(controller.height, upwardsHeight, 0.25f);
             controller.center = Vector3.Lerp(controller.center, upwardsCenter, 0.25f);
-            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, upwardsCamLocalPos, 0.1f);
+            mainCam.transform.localPosition = Vector3.Lerp(mainCam.transform.localPosition, upwardsCamLocalPos, 0.1f);
         }
     }
     
@@ -124,7 +123,7 @@ public class Movimento : MonoBehaviour
 
     private void MoveRotation()
     {
-        var camRotation = cam.transform.rotation;
+        var camRotation = mainCam.transform.rotation;
         var objRotation = transform.rotation;
         Vector3 setRotation = new Vector3(objRotation.eulerAngles.x, camRotation.eulerAngles.y, objRotation.eulerAngles.z);
         transform.eulerAngles = setRotation;
@@ -157,7 +156,7 @@ public class Movimento : MonoBehaviour
         Vector3 vertical = Input.GetAxis("Vertical") * transform.forward;
         if(Input.GetAxis("Vertical") < 0) vertical = Input.GetAxis("Vertical") * transform.forward * backWardsMultiplier;
 
-        Vector3 rawHorizontal = Input.GetAxis("Horizontal") * cam.transform.right;
+        Vector3 rawHorizontal = Input.GetAxis("Horizontal") * mainCam.transform.right;
         Vector3 horizontal = rawHorizontal * strafeMultiplier;
 
         movementInput = (vertical + horizontal).normalized;
