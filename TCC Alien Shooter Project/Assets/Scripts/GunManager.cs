@@ -78,6 +78,7 @@ public class GunManager : MonoBehaviour
 
         var colectedGuns = guns.Where(g => GameState.SaveData.gunsColected.Contains(g.gunType)).ToArray();
 
+        if(colectedGuns.Length <= 0) yield break;
         var index = selectedGunIndex % colectedGuns.Length;
         if (index < 0) index = colectedGuns.Length - 1;
         if (index > colectedGuns.Length - 1) index = 0;

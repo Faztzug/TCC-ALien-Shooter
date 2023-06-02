@@ -209,12 +209,14 @@ public class GameState : MonoBehaviour
         {
             Debug.Log("should exit pause? " + mainCanvas.DoesExitPause());
             mainCanvas.SetSettingsMenu(false);
-            mainCanvas.SetPauseMenu(true);
+            mainCanvas.SetTutorial(false);
             mainCanvas.SetPDAdocument(false);
+            mainCanvas.SetPauseMenu(true);
+            Cursor.lockState = isGamePaused ? CursorLockMode.None : CursorLockMode.Locked;
             return;
         }
         isGamePaused = pause;
-        Cursor.lockState = pause ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = isGamePaused ? CursorLockMode.None : CursorLockMode.Locked;
         Time.timeScale = pause ? 0f : 1f;
         mainCanvas?.SetPauseMenu(pause);
         mainCanvas?.SetPDAdocument(false);
@@ -225,6 +227,7 @@ public class GameState : MonoBehaviour
         PauseGame(true);
         mainCanvas.SetPauseMenu(false);
         mainCanvas.SetSettingsMenu(false);
+        mainCanvas.SetTutorial(false);
         mainCanvas.SetPDAdocument(true, loreText);
     }
 

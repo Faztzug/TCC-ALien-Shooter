@@ -10,6 +10,7 @@ public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject tutorial;
     [SerializeField] private DocumentLoreUIManager PDAmanager;
     private ScrollRect PDAscroll;
     [SerializeField] private RectTransform scrollContent;
@@ -25,7 +26,7 @@ public class CanvasManager : MonoBehaviour
     public bool DoesExitPause()
     {
         if(!pauseMenu.activeSelf && !PDAmanager.gameObject.activeSelf) return false;
-        else return !settingsMenu.activeSelf;
+        else return !(settingsMenu.activeSelf && tutorial.activeSelf);
     }
 
     void Start()
@@ -33,6 +34,7 @@ public class CanvasManager : MonoBehaviour
         PDAscroll = GetComponentInChildren<ScrollRect>(true);
         SetPauseMenu(false);
         SetSettingsMenu(false);
+        SetTutorial(false);
         SetPDAdocument(false);
     }
 
@@ -71,6 +73,10 @@ public class CanvasManager : MonoBehaviour
     public void SetSettingsMenu(bool value) 
     {
         settingsMenu.SetActive(value);
+    }
+    public void SetTutorial(bool value) 
+    {
+        tutorial.SetActive(value);
     }
     public void SetPDAdocument(bool value, LoreDocument ?loreDocument = null) 
     {
