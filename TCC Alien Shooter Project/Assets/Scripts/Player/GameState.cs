@@ -47,6 +47,7 @@ public class GameState : MonoBehaviour
     public static Action OnCutsceneEnd;
     
     [SerializeField] private string nextScene = "MenuInicial";
+    [SerializeField] private GameObject endCanvas;
 
     private void Awake()
     {
@@ -229,11 +230,13 @@ public class GameState : MonoBehaviour
 
     public static void EndLevel()
     {
+        if(!GodMode) ToogleGodMode();
         gameState.StartCoroutine(gameState.EndLevelCourotine());
     }
     IEnumerator EndLevelCourotine()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        GameObject.Instantiate(endCanvas,null);
+        yield return new WaitForSecondsRealtime(5f);
         LoadScene(nextScene);
     }
 }
