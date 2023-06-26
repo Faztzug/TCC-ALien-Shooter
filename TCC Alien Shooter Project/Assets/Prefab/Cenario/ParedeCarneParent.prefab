@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 8292693962663227836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 5088051872176965690}
   m_Father: {fileID: 0}
@@ -98,6 +98,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParedeCarneDeath
       objectReference: {fileID: 0}
+    - target: {fileID: 3311497572441437955, guid: 9524b6247f474df41986bbfa4ff56cbd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9524b6247f474df41986bbfa4ff56cbd, type: 3}
 --- !u!1001 &4437645464621186649
@@ -107,6 +112,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6958182718181129411}
     m_Modifications:
+    - target: {fileID: 2114081142, guid: 82bde0277a1484143a6ba755253c3d35, type: 3}
+      propertyPath: distancePadding
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114081142, guid: 82bde0277a1484143a6ba755253c3d35, type: 3}
+      propertyPath: activationDistance
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2590599482528091125, guid: 82bde0277a1484143a6ba755253c3d35,
         type: 3}
       propertyPath: m_RootOrder
@@ -120,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 8865840754950469216, guid: 82bde0277a1484143a6ba755253c3d35,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 2276
+      value: 2252
       objectReference: {fileID: 0}
     - target: {fileID: 8865840754950469219, guid: 82bde0277a1484143a6ba755253c3d35,
         type: 3}
@@ -140,7 +153,7 @@ PrefabInstance:
     - target: {fileID: 8865840754950469219, guid: 82bde0277a1484143a6ba755253c3d35,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.08
+      value: -1.19
       objectReference: {fileID: 0}
     - target: {fileID: 8865840754950469219, guid: 82bde0277a1484143a6ba755253c3d35,
         type: 3}
