@@ -686,7 +686,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 566796ffa39bb2448ba9cbd08a2b986a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2218,6 +2218,11 @@ PrefabInstance:
     - target: {fileID: 6365519763254964031, guid: 08d3fe7c5cb4b9b41a91607f11444382,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953254686513483777, guid: 08d3fe7c5cb4b9b41a91607f11444382,
+        type: 3}
+      propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7814970150844676846, guid: 08d3fe7c5cb4b9b41a91607f11444382,
