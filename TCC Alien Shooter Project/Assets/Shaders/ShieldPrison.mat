@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ShieldPrison
-  m_Shader: {fileID: -6465566751694194690, guid: c73e4a3ca121ed94aa5db46d739a1117,
+  m_Shader: {fileID: -6465566751694194690, guid: f355b8f756a14bf49840b06c986e6270,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 2
@@ -41,26 +41,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Fill: -0.19
-    - _NormalStrength: 1
+    - _Fill: -0.014
+    - _NormalStrength: 0.01
     - _Offset: 0.6
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _ScrollSpeed: 0.01
-    - _fresnel_Power: 1.1
+    - _ScrollSpeed: 0.05
+    - _fresnel_Power: 2.5
     m_Colors:
-    - _Emission: {r: 2.3529413, g: 3.9215686, b: 5.992157, a: 0}
+    - _Emission: {r: 2.796428, g: 4.623427, b: 7.12157, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1870952228237709326
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
