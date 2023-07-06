@@ -15,6 +15,12 @@ public class PDAItem : Item
         audioSource = GetComponentInChildren<AudioSource>();
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        //base.OnTriggerEnter(other);
+        //do nothing
+    }
+
     private void Update() 
     {
         timer -= Time.deltaTime;

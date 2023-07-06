@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 4128863318421808278}
   - component: {fileID: 8046955736037719788}
   - component: {fileID: 366394820362719518}
+  - component: {fileID: 2267541195877445987}
   m_Layer: 0
   m_Name: FormigaModel
   m_TagString: Untagged
@@ -802,6 +803,20 @@ MonoBehaviour:
   - {fileID: 5756527885871515099}
   - {fileID: 948488834646670198}
   - {fileID: 8681652677609474111}
+--- !u!114 &2267541195877445987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604986243334307372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f295d3b751673c4d87cfdbfa224dcc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRngVar: {x: 0.01, y: 0.05, z: 0.01}
+  minRngVar: {x: -0.05, y: -0.1, z: -0.05}
 --- !u!1 &4384588802891972923
 GameObject:
   m_ObjectHideFlags: 0
