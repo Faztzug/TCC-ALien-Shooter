@@ -26,7 +26,7 @@ public class EnemyHumanoid : EnemyIA
         anim.SetFloat("Movement", agent.velocity.magnitude);
         anim.SetBool("isRuning", false);
 
-        if(!isContinousFiring && doesContinuousFire)
+        if(!isContinousFiring && doesContinuousFire && !gun.IsACloseObstacleOnFire())
         {
             agent.speed = walkingSpeed;
             if(shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.Fire2Timer < 0 && inFireRange)

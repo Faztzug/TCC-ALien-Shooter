@@ -32,6 +32,7 @@ public class ShieldHealth : Health
         
         if(value < 0)
         {
+            if(thisEnemy != null) thisEnemy.OnDamage();
             if(damageSoundTimer < 0 && shieldDamageSounds.Length > 0)
             {
                 var index = UnityEngine.Random.Range(0, shieldDamageSounds.Length);

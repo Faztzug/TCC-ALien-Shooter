@@ -125,24 +125,16 @@ public class EnemyIA : MonoBehaviour
         // }
         this.StopAllCoroutines();
     }
-    public virtual void Taunt()
-    {
-        tauntTimerAsync = damageTauntAsync;
-    }
     public virtual void OnDamage()
     {
-        
-    }
-    public virtual void UpdateHealth(float health, float maxHealth)
-    {
-
+        GoToPlayerDirect(ignoreFindDistance: true);
     }
 
-    protected void GoToPlayerDirect()
+    protected void GoToPlayerDirect(bool ignoreFindDistance = false)
     {
         if(agent.isOnNavMesh)
         {
-            if(distance < findPlayerDistance && IsPlayerAlive()) //ignores min distance
+            if((ignoreFindDistance || distance < findPlayerDistance) && IsPlayerAlive()) //ignores min distance
             {
                 var playerFlatPos = player.position;
                 playerFlatPos.y = transform.position.y;
@@ -244,12 +236,14 @@ public class EnemyIA : MonoBehaviour
 
     protected virtual void PrimaryFire()
     {
+        if(gun.IsACloseObstacleOnFire()) return;
         ShootAtPlayer();
         gun.PrimaryFire();
         anim.SetTrigger("Fire");
     }
     protected virtual void SecondaryFire()
     {
+        if(gun.IsACloseObstacleOnFire()) return;
         ShootAtPlayer();
         gun.SecondaryFire();
     }

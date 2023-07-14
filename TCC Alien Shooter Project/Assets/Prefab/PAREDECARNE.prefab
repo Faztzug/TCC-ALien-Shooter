@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8324370154961960064}
   - component: {fileID: 2449988340479806027}
   - component: {fileID: 2114081142}
+  - component: {fileID: 5719291770713497581}
   m_Layer: 0
   m_Name: PAREDECARNE
   m_TagString: Untagged
@@ -19555,6 +19556,22 @@ MonoBehaviour:
   activationDistance: 10
   distancePadding: 2
   normalizedDist: 0
+--- !u!208 &5719291770713497581
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865840754950469245}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.8640001, y: 3.4850001, z: 5.873}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.864, y: -0.30200002, z: -4.873}
+  m_TimeToStationary: 0.5
 --- !u!1001 &115481869963139420
 PrefabInstance:
   m_ObjectHideFlags: 0

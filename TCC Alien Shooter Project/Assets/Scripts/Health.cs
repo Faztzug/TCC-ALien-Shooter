@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     //[SerializeField] protected AudioSource source;
     //[SerializeField] protected AudioClip damageSound;
     protected Animator anim;
-    private EnemyIA thisEnemy;
+    protected EnemyIA thisEnemy;
     public Action onDeath;
     [SerializeField] private GameObject bloodVFX;
     [SerializeField] private GameObject DeathVFX;

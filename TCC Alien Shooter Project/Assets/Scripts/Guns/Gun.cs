@@ -221,6 +221,26 @@ public class Gun : MonoBehaviour
         }
     }
 
+    public bool IsACloseObstacleOnFire()
+    {
+        if(isPlayerGun) return false;
+        var layer = MovimentoMouse.GetLayers(isPlayerGun);
+        RaycastHit rayHit;
+        foreach (var gunPointT in gunPointPositions)
+        {
+            var gunPoint = gunPointT.position;
+            var dir = GameState.PlayerMiddleT.position - gunPoint;
+            if(Physics.Raycast(gunPoint, dir.normalized, out rayHit, 10, layer))
+            {
+                Debug.DrawLine(gunPoint, gunPoint + dir.normalized * 10, Color.yellow, 1f);
+                if(rayHit.collider && Vector3.Distance(transform.position, GameState.PlayerTransform.position) < 15) 
+                Debug.Log("Layer on 10 distance = " + LayerMask.LayerToName(rayHit.collider.gameObject.layer));
+                if(rayHit.collider && rayHit.collider.gameObject.layer != LayerMask.NameToLayer("Player")) return true;
+            }
+        }
+        return false;
+    }
+
     protected Bullet SpawnBullet(Bullet bulletPrefab)
     {
         var respawnBullet = bullets.Find(b => b.bulletType == bulletPrefab.bulletType && !b.isTraveling);
