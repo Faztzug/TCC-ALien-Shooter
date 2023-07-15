@@ -47,6 +47,7 @@ public class Movimento : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
         UpdateIK();
+        StartCoroutine(UpdateRigBuilder());
         upwardsHeight = controller.height;
         upwardsCenter = controller.center;
         upwardsCamLocalPos = mainCam.transform.localPosition;
@@ -55,14 +56,13 @@ public class Movimento : MonoBehaviour
 
     private void UpdateIK()
     {
-
     }
 
     IEnumerator UpdateRigBuilder()
     {
-        yield return new WaitForSeconds(1f);
+        yield return null;
         rigBuilder.Build();
-        StartCoroutine(UpdateRigBuilder());
+        //StartCoroutine(UpdateRigBuilder());
     }
 
     private void Update()

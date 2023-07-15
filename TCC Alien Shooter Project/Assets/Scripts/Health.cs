@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 using UnityEngine.Rendering;
+using UnityEngine.Animations.Rigging;
 
 public class Health : MonoBehaviour
 {
@@ -92,7 +93,8 @@ public class Health : MonoBehaviour
             foreach (var script in GetComponentsInChildren<MonoBehaviour>())
             {
                 if(script == this || script is Movimento || script is GameState 
-                || script is CanvasManager || script is Volume || LayerMask.LayerToName(script.gameObject.layer) == "UI") 
+                || script is CanvasManager || script is Volume || LayerMask.LayerToName(script.gameObject.layer) == "UI"
+                || script is RigBuilder && this is PlayerShieldHealth) 
                 {
                     continue;
                 }

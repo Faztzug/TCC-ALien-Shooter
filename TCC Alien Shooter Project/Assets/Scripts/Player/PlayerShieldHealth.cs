@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Animations.Rigging;
 //using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerShieldHealth : ShieldHealth
@@ -94,6 +95,11 @@ public class PlayerShieldHealth : ShieldHealth
     {
         base.DestroyCharacter();
         if(GameState.IsPlayerDead) return;
+        foreach (var rigBuilder in GetComponentsInChildren<RigBuilder>())
+        {
+            Debug.Log("GOT RIG");
+            rigBuilder.enabled = true;
+        }
         anim.SetBool("Death", true);
         anim.SetTrigger("death");
         
