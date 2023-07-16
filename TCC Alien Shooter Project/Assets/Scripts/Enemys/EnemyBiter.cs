@@ -9,6 +9,7 @@ public class EnemyBiter : EnemyIA
     [SerializeField] protected float biteTime = 0.1f;
     [SerializeField] protected float biteCooldownEnd = 0.2f;
     [SerializeField] protected bool doesShoot = true;
+    [SerializeField] protected float waitBeforeFire = 0.25f;
     protected bool isBiting;
     protected Coroutine biteCourotine;
     [SerializeField] protected Sound melleSound;
@@ -38,13 +39,20 @@ public class EnemyBiter : EnemyIA
             && gun.Fire1Timer < 0 && inFireRange) 
             {
                 StopMoving();
-                PrimaryFire();
+                updateRate += waitBeforeFire;
+                StartCoroutine(FireCourotine());
             }
             else if(inWalkRange) 
             {
                 GoToPlayerOffset();
             }
         }
+    }
+
+    IEnumerator FireCourotine()
+    {
+        yield return new WaitForSeconds(waitBeforeFire);
+        PrimaryFire();
     }
 
     protected virtual void BitePlayer()

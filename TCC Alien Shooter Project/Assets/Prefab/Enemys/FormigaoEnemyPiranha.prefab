@@ -342,7 +342,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1517865328363480280}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.55
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -381,7 +381,6 @@ MonoBehaviour:
   shootAim: 90
   shootChance: 0.1
   alive: 1
-  damageTauntAsync: 1
   aimTransform: {fileID: 1517865326771250779}
   aimRotationSpeed: 5
   gizmoColor: {r: 0.015686274, g: 0.079685025, b: 1, a: 0.25490198}
@@ -404,7 +403,6 @@ MonoBehaviour:
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   DeathVFX: {fileID: 0}
-  handTransform: {fileID: 911177049971152034}
   damageSounds:
   - clip: {fileID: 8300000, guid: 63bfd2dd890e8b64dab3dac27eddd995, type: 3}
     name: playerDamage1
@@ -438,6 +436,8 @@ MonoBehaviour:
     playOnAwake: 0
     audioSource: {fileID: 0}
   audioSource: {fileID: 2310278856307361847}
+  gunHolder: {fileID: 1517865326771250779}
+  rightHand: {fileID: 4041683421462357025}
   maxShield: 1
   shieldRegen: 1
   regenCooldown: 2
@@ -814,8 +814,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4420770397108962463}
-  m_LocalRotation: {x: -0.051730726, y: -0.10417812, z: -0.0061237076, w: 0.9931935}
-  m_LocalPosition: {x: 0.19500017, y: -0.143, z: 0.33999997}
+  m_LocalRotation: {x: -0.05191529, y: -0.13932079, z: -0.0042860336, w: 0.9888762}
+  m_LocalPosition: {x: 0.203, y: -0.132, z: 0.326}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4420770397433989392}
@@ -828,7 +828,7 @@ Transform:
   - {fileID: 9161788130700198818}
   m_Father: {fileID: 1517865326771250779}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -5.971, y: -11.972, z: -0.08}
+  m_LocalEulerAnglesHint: {x: -5.962, y: -16.057, z: 0.345}
 --- !u!114 &4420770397108962456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,12 +1818,6 @@ Transform:
 --- !u!1 &1860518434633291323 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 22ea55ad3a81fb64f8a9573746e869f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1517865328035441514}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &911177049971152034 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 22ea55ad3a81fb64f8a9573746e869f3,
     type: 3}
   m_PrefabInstance: {fileID: 1517865328035441514}
   m_PrefabAsset: {fileID: 0}

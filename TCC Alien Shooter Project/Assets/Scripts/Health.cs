@@ -18,7 +18,6 @@ public class Health : MonoBehaviour
     public Action onDeath;
     [SerializeField] private GameObject bloodVFX;
     [SerializeField] private GameObject DeathVFX;
-    [SerializeField] protected Transform handTransform;
     public Sound[] damageSounds;
     public Sound deathSound;
     public AudioSource audioSource;
@@ -80,7 +79,7 @@ public class Health : MonoBehaviour
         onDeath?.Invoke();
 
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
-        if(audioSource != null) GameState.InstantiateSound(deathSound, transform.position);
+        if(audioSource == null) GameState.InstantiateSound(deathSound, transform.position);
         else deathSound.PlayOn(audioSource);
 
         if(anim != null)
@@ -100,7 +99,6 @@ public class Health : MonoBehaviour
                 }
 
                 if(script is MovimentoMouse) script.enabled = false;
-                if(script is Gun && handTransform != null) script.transform.SetParent(handTransform);
                 if(script is LaserVFXManager) (script as LaserVFXManager).TurnOffLAser();
                 script.enabled = false;
             }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShieldHealth : Health
 {
+    [SerializeField] protected Transform gunHolder;
+    [SerializeField] private Transform rightHand;
     [SerializeField] protected float maxShield = 1;
     protected float curShield;
     [SerializeField] protected float shieldRegen = 1f;
@@ -49,6 +51,15 @@ public class ShieldHealth : Health
     public virtual void RecoverShield(float value)
     {
         UpdateShieldValue(value);
+    }
+
+    public override void DestroyCharacter()
+    {
+        base.DestroyCharacter();
+        if(anim != null)
+        {
+            if(gunHolder != null && rightHand != null) gunHolder.SetParent(rightHand);
+        }
     }
 
     protected override void Update() 

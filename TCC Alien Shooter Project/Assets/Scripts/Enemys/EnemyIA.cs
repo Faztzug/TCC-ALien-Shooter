@@ -25,8 +25,6 @@ public class EnemyIA : MonoBehaviour
     [Range(0,100)] [SerializeField] protected float shootAim = 90;
     [Range(0f,0.1f)] [SerializeField] protected float shootChance = 0.08f;
     [HideInInspector] public bool alive = true;
-    [SerializeField] protected int damageTauntAsync = 3;
-    protected int tauntTimerAsync;
     protected Gun gun;
     protected Vector3 missTargetPos = new Vector3();
     protected bool doesContinuousFire => gun is PiranhaGun;
@@ -47,7 +45,6 @@ public class EnemyIA : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rgbd = GetComponent<Rigidbody>();
         rgbd.maxAngularVelocity = 0;
-        tauntTimerAsync = damageTauntAsync * 3;
         anim = GetComponentInChildren<Animator>();
         gun = GetComponentInChildren<Gun>();
         if(gun != null) gun.aimTransform = aimTransform;
@@ -78,12 +75,7 @@ public class EnemyIA : MonoBehaviour
 
         rgbd.velocity = Vector3.zero;
 
-        if(tauntTimerAsync >= 0)
-        {
-            tauntTimerAsync--;
-            //Debug.Log("Current Taunt = " + tauntTimerAsync + name);
-        }
-        else  AsyncUpdateIA();
+        AsyncUpdateIA();
 
         StartCoroutine(CourotineAsyncUpdateIA());
     }

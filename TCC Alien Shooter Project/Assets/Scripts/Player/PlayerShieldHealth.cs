@@ -23,6 +23,8 @@ public class PlayerShieldHealth : ShieldHealth
     public bool dead;
     [SerializeField] private Material playerHealthMat;
     [SerializeField] private Color[] matHealthColors;
+
+    [SerializeField] private Animator gunHolderAnim;
     
 
     public override void Start()
@@ -95,13 +97,10 @@ public class PlayerShieldHealth : ShieldHealth
     {
         base.DestroyCharacter();
         if(GameState.IsPlayerDead) return;
-        foreach (var rigBuilder in GetComponentsInChildren<RigBuilder>())
-        {
-            Debug.Log("GOT RIG");
-            rigBuilder.enabled = true;
-        }
+
         anim.SetBool("Death", true);
         anim.SetTrigger("death");
+        gunHolderAnim.SetTrigger("Death");
         
         GameState.IsPlayerDead = true;
         Time.timeScale = 1f;

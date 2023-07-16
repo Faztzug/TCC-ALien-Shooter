@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 public class Bullet : MonoBehaviour
 {
+    [HideInInspector] public Gun parentGun;
     [HideInInspector] public DamageType damageType;
     public bool isTraveling {private set; get;}
     private MeshRenderer meshRenderer;
@@ -64,6 +65,8 @@ public class Bullet : MonoBehaviour
     // }
     public virtual void BulletHit(GameObject collision, bool isTrigger = false)
     {
+        if(collision.GetComponentInChildren<Gun>() == parentGun) return;
+        
         if(!isTrigger)
         {
             rgbd.velocity = Vector3.zero;

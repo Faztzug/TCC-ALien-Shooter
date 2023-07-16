@@ -147,6 +147,7 @@ public class Gun : MonoBehaviour
     public void Shooting(DamageType damageType, Bullet bulletPrefab = null)
     {
         var target = isPlayerGun ? movimentoMouse.raycastResult : enemyTarget;
+        if(!isPlayerGun) transform.LookAt(enemyTarget);
 
         foreach (var curPoint in gunPointPositions)
         {
@@ -256,6 +257,7 @@ public class Gun : MonoBehaviour
     }
     protected void ReadyBulletForFire(Bullet bullet, Vector3 position)
     {
+        bullet.parentGun = this;
         bullet.hit = false;
         bullet.StopAllCoroutines();
         bullet.Respawn(position);
