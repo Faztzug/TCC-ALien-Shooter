@@ -242,7 +242,7 @@ public class EnemyIA : MonoBehaviour
     protected virtual void HoldSecondaryFire()
     {
         ShootAtPlayer();
-        gun.HoldSencondaryFire();
+        gun.SecondaryFire();
     }
 
     private void OnDrawGizmos() 

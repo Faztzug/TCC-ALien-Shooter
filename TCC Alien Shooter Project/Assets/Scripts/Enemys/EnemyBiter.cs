@@ -36,7 +36,7 @@ public class EnemyBiter : EnemyIA
                 BitePlayer();
             }
             else if(doesShoot && shootChance >= shootRNG && gun.LoadedAmmo > 0 
-            && gun.Fire1Timer < 0 && inFireRange) 
+            && gun.primaryFireData.fireTimer < 0 && inFireRange) 
             {
                 StopMoving();
                 updateRate += waitBeforeFire;

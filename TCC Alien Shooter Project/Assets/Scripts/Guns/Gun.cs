@@ -13,11 +13,10 @@ public enum GunType
 public class Gun : MonoBehaviour
 {
     public GunType gunType;
-    [SerializeField] private DamageType firstDamageType;
-    [SerializeField] private DamageType secondDamageType;
+    public GunFireStruct primaryFireData;
+    public GunFireStruct secondaryFireData;
     [SerializeField] bool isPlayerGun = true;
     public Transform aimTransform;
-    [SerializeField] bool continuosDamage = false;
     [SerializeField] bool allPointsGoTarget = true;
     [SerializeField] private float loadedAmmo = 6;
     public float LoadedAmmo 
@@ -25,25 +24,12 @@ public class Gun : MonoBehaviour
     private set{loadedAmmo = Mathf.Clamp(value, 0, maxLoadedAmmo); 
     UpdateAmmoText();}}
     [SerializeField] private int maxLoadedAmmo = 6;
-    [SerializeField] private int PrimaryAmmoCost = 1;
-    [SerializeField] private int SecondaryAmmoCost = 1;
-    [SerializeField] protected float fire1cooldown = 0.5f;
-    [SerializeField] protected float fire2cooldown = 0f;
-    protected float fire1timer = 0f;
-    public float Fire1Timer => fire1timer;
-    protected float fire2timer = 0f;
-    public float Fire2Timer => fire2timer;
     protected List<Bullet> bullets = new List<Bullet>();
-    [SerializeField] protected Bullet bulletPrefab;
-    public Bullet GetBulletPrefab => bulletPrefab;
     [SerializeField] private GameObject Flash;
     [SerializeField] private float shootCooldown = 30f;
     [SerializeField] private Transform[] gunPointPositions;
     private Camera cam;
-    [SerializeField] protected float damage = -1f;
     protected AudioSource audioSource;
-    [SerializeField] protected Sound fire1Sound;
-    [SerializeField] protected Sound fire2Sound;
     protected Animator anim;
     [SerializeField] protected MovimentoMouse movimentoMouse;
     [HideInInspector] public Vector3 enemyTarget;
@@ -64,14 +50,15 @@ public class Gun : MonoBehaviour
 
     protected void LateUpdate()
     {
-        fire1timer -= Time.deltaTime;
-        fire2timer -= Time.deltaTime;
+        primaryFireData.fireTimer -= Time.deltaTime;
+        secondaryFireData.fireTimer -= Time.deltaTime;
 
         if(!isPlayerGun)
         {
             loadedAmmo = 100; //inimigos nunca ficam sem munição
-            if(fire2timer <= 0 && !enemyHoldingFire)
+            if(secondaryFireData.fireTimer <= 0 && !enemyHoldingFire)
             {
+                //TODO: update to primary fire as well
                 foreach (var curPoint in gunPointPositions) 
                 {
                     var line = curPoint.GetComponentInChildren<LaserVFXManager>();
@@ -82,69 +69,96 @@ public class Gun : MonoBehaviour
         }
         
         if(GameState.GodMode) LoadedAmmo = maxLoadedAmmo;
-        if(continuosDamage && !(Input.GetButton("Fire2") && fire2timer <= 0) || loadedAmmo <= 0)
+        if(secondaryFireData.continuosFire && !(Input.GetButton("Fire2") && secondaryFireData.fireTimer <= 0) || loadedAmmo <= 0)
         {
+            //TODO: need fix to carry separate laser for modes of fire
             foreach (var curPoint in gunPointPositions) 
             {
                 var line = curPoint.GetComponentInChildren<LaserVFXManager>();
                 if(line) line.TurnOffLAser();
             }
-            if(fire2Sound.isPlaying) fire2Sound.audioSource.DOFade(0, 0.2f).SetEase(Ease.InSine)
-            .OnComplete(() => {if(!(Input.GetButton("Fire2") && fire2timer <= 0) || loadedAmmo <= 0) fire2Sound.audioSource.Stop();});
-            //if(fire2Sound.isPlaying) fire2Sound.audioSource?.Stop();
+            //TODO: Do fade on begin and on end needs better management to not override each other
+            if(secondaryFireData.fireSound.isPlaying) secondaryFireData.fireSound.audioSource.DOFade(0, 0.2f).SetEase(Ease.InSine)
+            .OnComplete(() => {
+                if(!(Input.GetButton("Fire2") && secondaryFireData.fireTimer <= 0) || loadedAmmo <= 0) 
+                secondaryFireData.fireSound.audioSource.Stop();});
         }
         if (!GameState.isGamePaused)
         {
-            if (Input.GetButtonDown("Fire1") && fire1timer <= 0  && (LoadedAmmo > 0 || PrimaryAmmoCost == 0)) PrimaryFire();
-            else if (Input.GetButtonDown("Fire2") && fire2timer <= 0  && (LoadedAmmo > 0 || SecondaryAmmoCost == 0)) SecondaryFire();
-
-            if(Input.GetButton("Fire2") && fire2timer <= 0  && (LoadedAmmo > 0 || SecondaryAmmoCost == 0)) HoldSencondaryFire();
+            if(LoadedAmmo > 0 || primaryFireData.ammoCost == 0)
+            {
+                if (Input.GetButtonDown("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
+            }
+            
+            if(LoadedAmmo > 0 || secondaryFireData.ammoCost == 0)
+            {
+                if(secondaryFireData.continuosFire && Input.GetButton("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
+                else if(Input.GetButtonDown("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
+            }
+            
+            
         }
 
         foreach (var point in gunPointPositions)
         {
-            // var horizonPos = aimTransform.forward * MovimentoMouse.kHorizonPoint;
-            // var dir = horizonPos - point.position;
-            // var newDirection = Vector3.RotateTowards(point.forward, aimTransform.forward, 360, 0);
-            //point.rotation = Quaternion.LookRotation(newDirection);
-            //point.LookAt(horizonPos);
             Debug.DrawRay(point.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.red);
-            //Debug.DrawRay(aimTransform.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.green);
         }
     }
 
     virtual public void PrimaryFire()
     {
-        fire1timer = fire1cooldown;
-        fire2timer = fire2cooldown;
-        if(!continuosDamage) LoadedAmmo -= PrimaryAmmoCost;
-        fire1Sound.PlayOn(audioSource);
+        //TODO: update to have hold mode like secondary fire
+        primaryFireData.fireTimer = primaryFireData.fireCooldown;
+        secondaryFireData.fireTimer = secondaryFireData.fireCooldown;
+        if(!primaryFireData.continuosFire) LoadedAmmo -= primaryFireData.ammoCost;
+        primaryFireData.fireSound.PlayOn(audioSource);
         anim?.SetTrigger("Fire1");
     }
+
     virtual public void SecondaryFire()
     {
-        fire1timer = fire1cooldown;
-        fire2timer = fire2cooldown;
-        if(!continuosDamage) LoadedAmmo -= SecondaryAmmoCost;
-        fire2Sound.PlayOn(audioSource);
-        if(continuosDamage)
+        primaryFireData.fireTimer = primaryFireData.fireCooldown;
+        secondaryFireData.fireTimer = secondaryFireData.fireCooldown;
+        if(!secondaryFireData.continuosFire) 
         {
-            fire2Sound.audioSource.volume = 0;
-            fire2Sound.audioSource.DOFade(fire2Sound.SFXVolume, 0.2f);
+            LoadedAmmo -= secondaryFireData.ammoCost;
+            LoadedAmmo -= secondaryFireData.ammoCost * Time.deltaTime;
+        }
+
+        if(secondaryFireData.continuosFire)
+        {
+            if(!audioSource.isPlaying && !audioSource.clip == secondaryFireData.fireSound.clip)
+            {
+                audioSource.Play();
+            }
+            else if(!audioSource.isPlaying)
+            {
+                secondaryFireData.fireSound.PlayOn(audioSource, oneShot: false);
+            } 
+
+            if(secondaryFireData.fireSound.audioSource != null && !secondaryFireData.fireSound.audioSource.isPlaying)
+            {
+                secondaryFireData.fireSound.audioSource.volume = 0;
+                secondaryFireData.fireSound.audioSource.DOFade(secondaryFireData.fireSound.SFXVolume, 0.2f);
+            }
+        }
+        else
+        {
+            secondaryFireData.fireSound.PlayOn(audioSource);
         }
         anim?.SetTrigger("Fire2");
     }
-    virtual public void HoldSencondaryFire()
-    {
-        fire1timer = fire1cooldown;
-        fire2timer = fire2cooldown;
-        if(continuosDamage) LoadedAmmo -= SecondaryAmmoCost * Time.deltaTime;
-        if(!fire2Sound.isPlaying) fire2Sound.PlayOn(audioSource);
-        if(!fire2Sound.isPlaying) Debug.Log("Play Fire2 Sound HOLD");
-        anim?.SetTrigger("Fire2");
-    }
+    // virtual public void HoldSencondaryFire()
+    // {
+    //     fire1timer = fire1cooldown;
+    //     fire2timer = fire2cooldown;
+    //     if(secondaryFireData.continuosFire) LoadedAmmo -= SecondaryAmmoCost * Time.deltaTime;
+    //     if(!secondaryFireData.fireSound.isPlaying) secondaryFireData.fireSound.PlayOn(audioSource);
+    //     if(!secondaryFireData.fireSound.isPlaying) Debug.Log("Play Fire2 Sound HOLD");
+    //     anim?.SetTrigger("Fire2");
+    // }
     
-    public void Shooting(DamageType damageType, Bullet bulletPrefab = null)
+    public void Shooting(GunFireStruct fireMode, Bullet bulletPrefab = null)
     {
         var target = isPlayerGun ? movimentoMouse.raycastResult : enemyTarget;
         if(!isPlayerGun) transform.LookAt(enemyTarget);
@@ -154,14 +168,16 @@ public class Gun : MonoBehaviour
             // if(allPointsGoTarget)  Debug.DrawLine(curPoint.position, target, Color.blue, 10f);
             // else   Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
             
+            var damageType = fireMode.damageType;
             var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
             if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position));
 
             Health targetHealth = null;
-            if(bulletPrefab) 
+            if(fireMode.bulletPrefab) 
             {
-                var bullet = SpawnBullet(bulletPrefab);
+                var bullet = SpawnBullet(fireMode.bulletPrefab);
                 bullet.damageType = damageType;
+                bullet.damage = fireMode.damage;
                 bullet.transform.LookAt(target);
                 ReadyBulletForFire(bullet, curPoint.position);
                 bullet.transform.LookAt(target);
@@ -171,9 +187,9 @@ public class Gun : MonoBehaviour
                 if(allPointsGoTarget) targetHealth = movimentoMouse.GetTargetHealth();
                 else targetHealth = GetTargetHealth(curPoint.position);
 
-                if(continuosDamage) targetHealth?.UpdateHealth(damage * Time.deltaTime, damageType);
-                else targetHealth?.UpdateHealth(damage, damageType);
-                targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position), damageType, continuosDamage);
+                if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
+                else targetHealth?.UpdateHealth(fireMode.damage, damageType);
+                targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position), damageType, fireMode.continuosFire);
             }
             
         }
@@ -264,7 +280,6 @@ public class Gun : MonoBehaviour
         bullet.transform.position = position;
         bullet.gameObject.SetActive(true);
         bullet.DisableBullet(shootCooldown);
-        bullet.damage = damage;
     }
 
     public void UpdateAmmoText()
@@ -288,5 +303,11 @@ public class Gun : MonoBehaviour
     private void OnEnable() 
     {
         handGripManager?.SetGrips();
+    }
+
+    private void OnValidate() 
+    {
+        if(primaryFireData.damage > 0) primaryFireData.damage = -primaryFireData.damage;
+        if(secondaryFireData.damage > 0) secondaryFireData.damage = -secondaryFireData.damage;
     }
 }

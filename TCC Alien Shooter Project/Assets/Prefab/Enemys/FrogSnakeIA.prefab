@@ -174,7 +174,7 @@ Transform:
   - {fileID: 6885041802372437492}
   - {fileID: 5229428172734305677}
   m_Father: {fileID: 7663323385330519294}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7663323384221329621
 MeshFilter:
@@ -284,7 +284,7 @@ Transform:
   m_Children:
   - {fileID: 7663323385535217420}
   m_Father: {fileID: 7663323385330519294}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7663323384576428421
 MeshFilter:
@@ -362,7 +362,6 @@ GameObject:
   - component: {fileID: 4939166433329461512}
   - component: {fileID: -2646598843623873948}
   - component: {fileID: 820349350335583623}
-  - component: {fileID: 7263116752646557219}
   - component: {fileID: 18465562273839761}
   - component: {fileID: 5363006840946648732}
   m_Layer: 6
@@ -383,6 +382,7 @@ Transform:
   m_LocalPosition: {x: -1.47, y: 2.068, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5127676667316545675}
   - {fileID: 7502107824600138664}
   - {fileID: 8194639129548323497}
   - {fileID: 7663323384576428422}
@@ -496,7 +496,6 @@ MonoBehaviour:
   bloodVFX: {fileID: 1211128768393774554, guid: 08b720b0373a1ff4abd26950e3e25aba,
     type: 3}
   DeathVFX: {fileID: 0}
-  handTransform: {fileID: 0}
   damageSounds: []
   deathSound:
     clip: {fileID: 8300000, guid: b370a8af05f198f419b6afd571d02425, type: 3}
@@ -525,64 +524,6 @@ MonoBehaviour:
   flatYRotantion: 1
   lerpSpeed: 4
   distanceToRotate: 30
---- !u!114 &7263116752646557219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7663323385330519290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acc109018dfeaf448a721cc0821c2df6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunType: 1
-  firstDamageType: 3
-  secondDamageType: 3
-  isPlayerGun: 0
-  aimTransform: {fileID: 0}
-  continuosDamage: 0
-  allPointsGoTarget: 0
-  loadedAmmo: 12
-  maxLoadedAmmo: 12
-  PrimaryAmmoCost: 1
-  SecondaryAmmoCost: 1
-  fire1cooldown: 8
-  fire2cooldown: 8
-  bulletPrefab: {fileID: 8196861408395965754, guid: 40b1132f9875d0f41b21dc6340f88486,
-    type: 3}
-  Flash: {fileID: 0}
-  shootCooldown: 30
-  gunPointPositions:
-  - {fileID: 5229428172734305677}
-  damage: -1
-  fire1Sound:
-    clip: {fileID: 8300000, guid: dcfacbdb3625aa54194cdef450293df3, type: 3}
-    name: Acid1Fire
-    volume: 1
-    pitch: 1
-    pitchRNG:
-    - -0.37
-    - 0.36
-    loop: 0
-    playOnAwake: 0
-    audioSource: {fileID: 0}
-  fire2Sound:
-    clip: {fileID: 8300000, guid: dcfacbdb3625aa54194cdef450293df3, type: 3}
-    name: Acid1Fire
-    volume: 1
-    pitch: 1
-    pitchRNG:
-    - -0.37
-    - 0.36
-    loop: 0
-    playOnAwake: 0
-    audioSource: {fileID: 0}
-  movimentoMouse: {fileID: 0}
-  enemyTarget: {x: 0, y: 0, z: 0}
-  enemyHoldingFire: 0
-  explosiveBullet: {fileID: 0}
 --- !u!114 &18465562273839761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,6 +735,153 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &6165222621468740962
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7663323385330519294}
+    m_Modifications:
+    - target: {fileID: 904803937564853600, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193598592456, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524904, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_Name
+      value: AcidGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524906, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: isPlayerGun
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524906, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: primaryFireData.ammoCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524906, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: secondaryFireData.ammoCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524906, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: primaryFireData.bulletPrefab
+      value: 
+      objectReference: {fileID: 8196861408395965754, guid: 40b1132f9875d0f41b21dc6340f88486,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 1343884193950524907, guid: 47c1033a9a3fa3c4488809f423788201, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 47c1033a9a3fa3c4488809f423788201, type: 3}
+--- !u!4 &5127676667316545675 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1343884193950524905, guid: 47c1033a9a3fa3c4488809f423788201,
+    type: 3}
+  m_PrefabInstance: {fileID: 6165222621468740962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8040735324022056003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -804,7 +892,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7aed444126c1d9e4d935e5b9d924605c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7aed444126c1d9e4d935e5b9d924605c,
         type: 3}
@@ -1308,7 +1396,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ffc56e5dd3dca76488ec0353bbd21e6d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ffc56e5dd3dca76488ec0353bbd21e6d,
         type: 3}

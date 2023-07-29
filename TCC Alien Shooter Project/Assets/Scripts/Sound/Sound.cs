@@ -36,7 +36,7 @@ public class Sound
         this.audioSource = audioSource;
     }
 
-    public void PlayOn(AudioSource audioSource)
+    public void PlayOn(AudioSource audioSource, bool oneShot = true)
     {
         //if(GameState.GameStateInstance != null && GameState.SaveData.mute) return;
         
@@ -45,7 +45,11 @@ public class Sound
         {
             this.audioSource.pitch = pitch + Random.Range(pitchRNG[0], pitchRNG[1]);
         }
-        if(clip) this.audioSource.PlayOneShot(clip);
+        if(clip) 
+        {
+            if(oneShot) this.audioSource.PlayOneShot(clip);
+            else this.audioSource.Play();
+        }
     }
 
 }

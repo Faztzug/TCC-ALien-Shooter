@@ -10,7 +10,6 @@ public class PiranhaGun : Gun
     [SerializeField] float waitBeforeDamage;
     [SerializeField] float biteDamageDuration;
     [SerializeField] float biteAmmoGain = 1f;
-    bool firing;
     [SerializeField] Transform modelTrans;
     public Transform ModelTrans => modelTrans;
     [SerializeField] Transform biteEndTrans;
@@ -33,11 +32,18 @@ public class PiranhaGun : Gun
         BiteTask();
     }
 
-    public override void HoldSencondaryFire()
+    public override void SecondaryFire()
     {
-        base.HoldSencondaryFire();
-        Shooting(DamageType.heatLaserDamage);
+        base.SecondaryFire();
+        //base.HoldSencondaryFire();
+        Shooting(secondaryFireData);
     }
+
+    // public override void HoldSencondaryFire()
+    // {
+    //     base.HoldSencondaryFire();
+    //     Shooting(DamageType.heatLaserDamage);
+    // }
 
     public void BiteGainAmmo()
     {
@@ -48,7 +54,7 @@ public class PiranhaGun : Gun
     {
         modelTrans.DOLocalMove(biteEndLocalPos, waitBeforeDamage + (biteDamageDuration / 2)).SetEase(Ease.InCubic)
         .OnComplete(() => modelTrans.DOLocalMove(modelStartLocalPos, biteDamageDuration).SetEase(Ease.OutCubic));
-        fire2timer = waitBeforeDamage + biteDamageDuration + 0.1f;
+        secondaryFireData.fireTimer += waitBeforeDamage + biteDamageDuration + 0.1f;
         await Task.Delay((int)(waitBeforeDamage * 1000));
         biteCollider.gameObject.SetActive(true);
         await Task.Delay((int)(biteDamageDuration * 1000));

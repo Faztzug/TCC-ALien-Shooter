@@ -29,7 +29,7 @@ public class EnemyHumanoid : EnemyIA
         if(!isContinousFiring && doesContinuousFire && !gun.IsACloseObstacleOnFire())
         {
             agent.speed = walkingSpeed;
-            if(shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.Fire2Timer < 0 && inFireRange)
+            if(shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.secondaryFireData.fireTimer < 0 && inFireRange)
             {
                 keepFiringTimer = Random.Range(keepFiringTimeRNG[0],keepFiringTimeRNG[1]);
                 HoldSecondaryFire();

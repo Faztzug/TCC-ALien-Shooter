@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AcidGun : Gun
+public class EletricGun : Gun
 {
+    private float chargingPower;
     public override void PrimaryFire()
     {
         base.PrimaryFire();
@@ -14,5 +15,6 @@ public class AcidGun : Gun
     {
         base.SecondaryFire();
         Shooting(secondaryFireData);
+        if(secondaryFireData.continuosFire) chargingPower += Time.deltaTime;
     }
 }

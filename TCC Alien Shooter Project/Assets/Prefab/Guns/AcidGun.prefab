@@ -673,6 +673,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 1
+  primaryFireData:
+    damageType: 3
+    bulletPrefab: {fileID: 8196861408395965754, guid: c1010900c080cd54cbc3bd6a7501cb7d,
+      type: 3}
+    Flash: {fileID: 0}
+    damage: -1.5
+    continuosFire: 0
+    ammoCost: 1
+    fireCooldown: 0.5
+    fireTimer: 0
+    fireSound:
+      clip: {fileID: 8300000, guid: dcfacbdb3625aa54194cdef450293df3, type: 3}
+      name: Acid1Fire
+      volume: 1
+      pitch: 1
+      pitchRNG:
+      - -0.37
+      - 0.36
+      loop: 0
+      playOnAwake: 0
+      audioSource: {fileID: 0}
+  secondaryFireData:
+    damageType: 3
+    bulletPrefab: {fileID: 8196861408395965754, guid: 0c16fa5d0c802df458e53b807bc87938,
+      type: 3}
+    Flash: {fileID: 0}
+    damage: -2
+    continuosFire: 0
+    ammoCost: 1
+    fireCooldown: 1.2
+    fireTimer: 0
+    fireSound:
+      clip: {fileID: 8300000, guid: dcfacbdb3625aa54194cdef450293df3, type: 3}
+      name: Acid2Fire
+      volume: 1
+      pitch: 1
+      pitchRNG:
+      - -0.6
+      - -0.13
+      loop: 0
+      playOnAwake: 0
+      audioSource: {fileID: 0}
   firstDamageType: 3
   secondDamageType: 3
   isPlayerGun: 1
