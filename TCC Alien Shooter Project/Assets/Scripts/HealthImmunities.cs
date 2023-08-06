@@ -16,12 +16,10 @@ public class HealthImmunities : Health
 
     public override void UpdateHealth(float value, DamageType damageType)
     {
-        Debug.Log("Imunitie Damge CHECKING");
         if(damageOnlyFrom != null && damageOnlyFrom.Count > 0)
         {
             if(!damageOnlyFrom.Contains(damageType)) return;
         }
-        Debug.Log("Imunitie Damge REEIVED");
         base.UpdateHealth(value, damageType);
     }
 

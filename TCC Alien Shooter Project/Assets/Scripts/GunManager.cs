@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 public class GunManager : MonoBehaviour
 {
     [SerializeField] List<Gun> guns;
+    List<Gun> avaibleGuns;
     public int selectedGunIndex 
     {get => _selectedGunIndex;
     set {
@@ -40,6 +41,12 @@ public class GunManager : MonoBehaviour
 
     void Update()
     {
+        avaibleGuns = guns.Where(g => GameState.SaveData.gunsColected.Contains(g.gunType)).ToList();
+        foreach (var gun in avaibleGuns)
+        {
+            gun.AmmoRegen();
+        }
+
         if(GameState.isGamePaused || changingGun) return;
         scroolInput += Input.GetAxis("Mouse ScrollWheel");
 
