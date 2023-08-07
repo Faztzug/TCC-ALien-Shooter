@@ -78,7 +78,7 @@ public class Gun : MonoBehaviour
                 //TODO: update to primary fire as well, but will need to keep Lasers serialized
                 foreach (var curPoint in gunPointPositions) 
                 {
-                    var line = curPoint.GetComponentInChildren<LaserVFXManager>();
+                    var line = curPoint.GetComponentInChildren<GunVFXManager>();
                     if(line) line.TurnOffLAser();
                 }
             }
@@ -92,7 +92,7 @@ public class Gun : MonoBehaviour
         {
             foreach (var curPoint in gunPointPositions) 
             {
-                var line = curPoint.GetComponentInChildren<LaserVFXManager>();
+                var line = curPoint.GetComponentInChildren<GunVFXManager>();
                 if(line) line.TurnOffLAser();
             }
             StopContinuosFireAudio(primaryFireData);
@@ -102,7 +102,7 @@ public class Gun : MonoBehaviour
         {
             foreach (var curPoint in gunPointPositions) 
             {
-                var line = curPoint.GetComponentInChildren<LaserVFXManager>();
+                var line = curPoint.GetComponentInChildren<GunVFXManager>();
                 if(line) line.TurnOffLAser();
             }
             StopContinuosFireAudio(secondaryFireData);
@@ -195,7 +195,7 @@ public class Gun : MonoBehaviour
             // else   Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
             
             var damageType = fireMode.damageType;
-            var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
+            var laser = curPoint.GetComponentInChildren<GunVFXManager>();
             if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position, GetRayRange(fireMode)));
 
             Health targetHealth = null;
@@ -241,7 +241,7 @@ public class Gun : MonoBehaviour
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
         
-        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer))
+        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
         {
             if(rayHit.collider) return rayHit.point;
             else return aimTransform.forward * range;
@@ -258,7 +258,7 @@ public class Gun : MonoBehaviour
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
 
-        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer))
+        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();

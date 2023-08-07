@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserVFXManager : MonoBehaviour
+public class LaserVFXManager : GunVFXManager
 {
     [SerializeField] private LineRenderer[] lines;
-    [SerializeField] private Transform startVFX;
-    [SerializeField] private Transform endVFX;
 
-    public void SetLaser(Vector3 startPoint, Vector3 endPoint)
+    public override void SetLaser(Vector3 startPoint, Vector3 endPoint)
     {
         SetState(true);
         foreach (var line in lines)
@@ -30,9 +28,7 @@ public class LaserVFXManager : MonoBehaviour
         }
     }
 
-    public void TurnOffLAser() => SetState(false);
-
-    private void SetState(bool flag)
+    protected override void SetState(bool flag)
     {
         foreach (var line in lines)
         {

@@ -22,6 +22,7 @@ public class EletricGun : Gun
     protected override void LateUpdate()
     {
         base.LateUpdate();
+        if(Input.GetButton("Fire1") | Input.GetButtonUp("Fire2") & ChargingPower < minChargePower) ChargingPower = 0;
         if(!(LoadedAmmo >= secondaryFireData.ammoCost &  secondaryFireData.fireTimer <= 0)) return;
 
         if(Input.GetButton("Fire2")) Charging();
@@ -68,8 +69,8 @@ public class EletricGun : Gun
 
                 Debug.Log("Target Center: " + targetCenter + " // transform = " + curTarget.transform.position);
 
-                var laser = curPoint.GetComponentInChildren<LaserVFXManager>();
-                if(laser != null) laser.SetLaser(curPoint.position, targetCenter);
+                var eletricVFX = curPoint.GetComponentInChildren<GunVFXManager>();
+                if(eletricVFX != null) eletricVFX.SetLaser(curPoint.position, targetCenter);
 
                 Health targetHealth = curTarget.GetComponentInChildren<Health>();
                 if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
@@ -102,6 +103,7 @@ public class EletricGun : Gun
 
     private void OnDrawGizmos() 
     {
+        if(transform.parent == null) return;
         Gizmos.color = Color.blue;
         var range = primaryFireData.maxDistance;
         Gizmos.DrawWireSphere(transform.parent.position + (transform.forward * range * 0.5f), range * 0.5f);
