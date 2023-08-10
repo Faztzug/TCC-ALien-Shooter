@@ -243,6 +243,12 @@ public class Gun : MonoBehaviour
         
         if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
         {
+            // if(isPlayerGun)
+            // {
+            // if(rayHit.collider) Debug.Log(rayHit.collider.gameObject.name?.ToString());
+            // if(rayHit.collider) Debug.Log(rayHit.collider.transform.parent?.name?.ToString());
+            // if(rayHit.collider & rayHit.collider.transform.parent.parent != null) Debug.Log(rayHit.collider.transform.parent.parent?.name?.ToString());
+            // }
             if(rayHit.collider) return rayHit.point;
             else return aimTransform.forward * range;
         }

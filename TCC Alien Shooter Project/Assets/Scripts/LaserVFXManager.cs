@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LaserVFXManager : GunVFXManager
 {
-    [SerializeField] private LineRenderer[] lines;
+    [SerializeField] protected LineRenderer[] lines;
 
     public override void SetLaser(Vector3 startPoint, Vector3 endPoint)
     {
-        SetState(true);
+        Debug.Log("seting positions: " + startPoint.ToString() + " / " + endPoint.ToString());
         foreach (var line in lines)
         {
             if(line.useWorldSpace)
@@ -21,11 +21,11 @@ public class LaserVFXManager : GunVFXManager
                 line.SetPosition(0, Vector3.zero);
                 line.SetPosition(line.positionCount-1, transform.InverseTransformPoint(endPoint));
             }
-            //line.SetPositions(new Vector3[] {startPoint, endPoint});
             Vector3 dir = (endPoint - startPoint).normalized;
             startVFX.position = startPoint;
             endVFX.position = endPoint - (dir / 10);
         }
+        SetState(true);
     }
 
     protected override void SetState(bool flag)

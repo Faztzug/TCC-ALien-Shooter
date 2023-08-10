@@ -11,10 +11,13 @@ public class EletricGun : Gun
     [SerializeField] private float maxChargePower = 2f;
     private float baseSnipeDamage;
     private float baseSnipeCost;
+    [SerializeField] private GameObject superLaserVFX;
+    [SerializeField] private GameObject chargingVFX;
 
     protected override void Start()
     {
         base.Start();
+        chargingVFX.SetActive(false);
         baseSnipeDamage = secondaryFireData.damage;
         baseSnipeCost = secondaryFireData.ammoCost;
     }
@@ -22,7 +25,7 @@ public class EletricGun : Gun
     protected override void LateUpdate()
     {
         base.LateUpdate();
-        if(Input.GetButton("Fire1") | Input.GetButtonUp("Fire2") & ChargingPower < minChargePower) ChargingPower = 0;
+        if(Input.GetButton("Fire1") | Input.GetButtonUp("Fire2") & ChargingPower < minChargePower) SetChargeOff();
         if(!(LoadedAmmo >= secondaryFireData.ammoCost &  secondaryFireData.fireTimer <= 0)) return;
 
         if(Input.GetButton("Fire2")) Charging();
@@ -38,6 +41,14 @@ public class EletricGun : Gun
     protected void Charging()
     {
         ChargingPower += Time.deltaTime;
+        chargingVFX.SetActive(true);
+        chargingVFX.transform.localScale = Vector3.one * ChargingPower;
+    }
+    protected void SetChargeOff()
+    {
+        ChargingPower = 0;
+        chargingVFX.SetActive(true);
+        chargingVFX.transform.localScale = Vector3.one * ChargingPower;
     }
 
     public override void SecondaryFire()
@@ -46,8 +57,16 @@ public class EletricGun : Gun
         secondaryFireData.ammoCost = baseSnipeCost * (chargingPower / maxChargePower);
         base.SecondaryFire();
         Shooting(secondaryFireData);
-        chargingPower = 0;
-        //need to add a prefabe of laser firing from gun tip
+
+        if(chargingPower >= minChargePower)
+        {
+            var laser = Instantiate(superLaserVFX).GetComponentInChildren<StatiticLaserVFXManager>();
+            laser.multiplierScale = chargingPower;
+            laser.SetLaser(gunPointPositions[0].position, GetRayCastMiddle(gunPointPositions[0].position, GetRayRange(secondaryFireData)));
+            Destroy(laser.gameObject, 10f);
+        }
+
+        SetChargeOff();
     }
 
     public override void Shooting(GunFireStruct fireMode, Bullet bulletPrefab = null)

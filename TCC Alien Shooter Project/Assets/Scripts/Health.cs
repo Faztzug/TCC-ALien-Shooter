@@ -79,7 +79,7 @@ public class Health : MonoBehaviour
         onDeath?.Invoke();
 
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
-        if(audioSource == null) GameState.InstantiateSound(deathSound, transform.position);
+        if(audioSource == null | anim == null) GameState.InstantiateSound(deathSound, transform.position);
         else deathSound.PlayOn(audioSource);
 
         if(anim != null)
