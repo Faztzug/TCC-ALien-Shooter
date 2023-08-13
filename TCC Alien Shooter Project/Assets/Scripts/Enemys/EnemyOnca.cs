@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class EnemyOnca : EnemyBiter
 {
     private SkinnedMeshRenderer skinnedMesh;
     private Material normalMat;
     [SerializeField] private Material transMat;
+    private Material transMatCopy;
     private float agentAngleSpeed;
     [Range(0,100)][SerializeField] private int invisibleChance;
     [SerializeField] private Vector2 transCooldown;
@@ -22,6 +24,7 @@ public class EnemyOnca : EnemyBiter
         agentAngleSpeed = agent.angularSpeed;
         skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
         normalMat = skinnedMesh.material;
+        transMatCopy = new Material(transMat);
     }
     protected override void Update()
     {
@@ -52,19 +55,23 @@ public class EnemyOnca : EnemyBiter
         SetInvisibility(false);
     }
 
+    Tween matTransTween;
     public virtual void SetInvisibility(bool flag)
     {
         isInvisible = flag;
         if(flag)
         {
             transDurationTimer = Random.Range(transRNGDuration.x, transRNGDuration.y);
-            skinnedMesh.material = transMat;
+            skinnedMesh.material = transMatCopy;
+            matTransTween = skinnedMesh.material.DOFloat(1,"_Camuflagem", 1f);
         }
         else
         {
             transDurationTimer = 0;
             transCooldownTimer = Random.Range(transCooldown.x, transCooldown.y);
-            skinnedMesh.material = normalMat;
+            matTransTween.Kill();
+            matTransTween = skinnedMesh.material.DOFloat(0,"_Camuflagem", 1f).
+            OnComplete(() => skinnedMesh.material = normalMat);
         }
     }
 

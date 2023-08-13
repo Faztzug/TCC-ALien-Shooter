@@ -63,7 +63,6 @@ MonoBehaviour:
   shootAim: 0
   shootChance: 0
   alive: 1
-  damageTauntAsync: 0
   aimTransform: {fileID: 0}
   aimRotationSpeed: 2
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.2627451}
@@ -72,6 +71,7 @@ MonoBehaviour:
   biteTime: 0.8
   biteCooldownEnd: 1
   doesShoot: 0
+  waitBeforeFire: 0.25
   melleSound:
     clip: {fileID: 8300000, guid: 91ebcd887e789ed4192a95d772f2ba24, type: 3}
     name: onca
@@ -83,7 +83,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
-  transMat: {fileID: 2100000, guid: c088abb984f6320478f81793e99b766b, type: 2}
+  transMat: {fileID: 2100000, guid: c6d20a3c53b53d34a919240ecf9fc41e, type: 2}
   invisibleChance: 68
   transCooldown: {x: 2, y: 6}
   transRNGDuration: {x: 5, y: 8}
@@ -237,7 +237,6 @@ MonoBehaviour:
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   DeathVFX: {fileID: 0}
-  handTransform: {fileID: 0}
   damageSounds: []
   deathSound:
     clip: {fileID: 8300000, guid: 4ea20ed9ae3706b489970eb62f2aa124, type: 3}

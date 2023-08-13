@@ -8,7 +8,6 @@ public class LaserVFXManager : GunVFXManager
 
     public override void SetLaser(Vector3 startPoint, Vector3 endPoint)
     {
-        Debug.Log("seting positions: " + startPoint.ToString() + " / " + endPoint.ToString());
         foreach (var line in lines)
         {
             if(line.useWorldSpace)
