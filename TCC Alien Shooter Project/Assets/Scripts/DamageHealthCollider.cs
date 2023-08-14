@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageHealthCollider : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    public float Damage => damage;
     private List<Health> lastDamages = new List<Health>();
 
     protected Health GetHealth(Collider other) => GetHealth(other.gameObject);

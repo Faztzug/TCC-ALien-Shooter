@@ -37,7 +37,7 @@ public class EnemyIA : MonoBehaviour
     protected bool inWalkRange => distance <= findPlayerDistance && distance >= minPlayerDistance;
     protected AudioSource audioSource;
 
-    [SerializeField] private Color gizmoColor = Color.yellow;
+    [SerializeField] private Color gizmoColor = new Color(0.7f, 0.75f, 0.2f, 0.2f);
 
     protected virtual void Start() 
     {
@@ -117,9 +117,9 @@ public class EnemyIA : MonoBehaviour
         // }
         this.StopAllCoroutines();
     }
-    public virtual void OnDamage()
+    public virtual void OnDamage(DamageType damageType)
     {
-        GoToPlayerDirect(ignoreFindDistance: true);
+        if(distance >= findPlayerDistance) GoToPlayerDirect(ignoreFindDistance: true);
     }
 
     protected void GoToPlayerDirect(bool ignoreFindDistance = false)

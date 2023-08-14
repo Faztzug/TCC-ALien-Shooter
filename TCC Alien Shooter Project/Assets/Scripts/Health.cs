@@ -6,13 +6,23 @@ using System;
 using UnityEngine.Rendering;
 using UnityEngine.Animations.Rigging;
 
+[Serializable]
+public struct DamageModified
+{
+    public DamageType damageType;
+    [Range(0,4)] public float multplier;
+
+    public override string ToString()
+    {
+        return damageType.ToString() + " x" + multplier;
+    }
+}
+
 public class Health : MonoBehaviour
 {
     public float maxHealth = 1f;
     protected float health;
     public float CurHealth => health;
-    //[SerializeField] protected AudioSource source;
-    //[SerializeField] protected AudioClip damageSound;
     protected Animator anim;
     protected EnemyIA thisEnemy;
     public Action onDeath;
@@ -22,6 +32,7 @@ public class Health : MonoBehaviour
     public Sound deathSound;
     public AudioSource audioSource;
     protected float damageSoundTimer;
+    [SerializeField] protected List<DamageModified> damageModifiers = new List<DamageModified>();
 
     public virtual void Start()
     {
@@ -40,6 +51,9 @@ public class Health : MonoBehaviour
 
     public virtual void UpdateHealth(float value, DamageType damageType)
     {
+        DamageModified modifier = damageModifiers.Find(d => d.damageType == damageType);
+        if(modifier.damageType == damageType) Debug.Log("modified damage of " + value + " to: " + (value *= modifier.multplier));
+        if(modifier.damageType == damageType) value *= modifier.multplier;
         health += value;
 
         if(health > maxHealth) health = maxHealth;
@@ -48,7 +62,7 @@ public class Health : MonoBehaviour
         if(value < 0)
         {
             if(anim != null) anim.SetTrigger("Damage");
-            if(thisEnemy != null) thisEnemy.OnDamage();
+            if(thisEnemy != null) thisEnemy.OnDamage(damageType);
             //if(source != null) source.PlayOneShot(damageSound);
             //else Debug.LogError("NO AUDIO SOURCE FOR DAMAGE");
         }

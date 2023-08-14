@@ -49,9 +49,9 @@ public class EnemyOnca : EnemyBiter
         base.AsyncUpdateIA();
     }
 
-    public override void OnDamage()
+    public override void OnDamage(DamageType damageType)
     {
-        base.OnDamage();
+        base.OnDamage(damageType);
         SetInvisibility(false);
     }
 
