@@ -62,7 +62,7 @@ public class EletricGun : Gun
         {
             var laser = Instantiate(superLaserVFX).GetComponentInChildren<StatiticLaserVFXManager>();
             laser.multiplierScale = chargingPower;
-            laser.SetLaser(gunPointPositions[0].position, GetRayCastMiddle(gunPointPositions[0].position, GetRayRange(secondaryFireData)));
+            laser.SetLaser(gunPointPositions[0].position, GetRayCastMiddle(gunPointPositions[0].position, GetRayRange(secondaryFireData), secondaryFireData.piercingRay));
             Destroy(laser.gameObject, 10f);
         }
 

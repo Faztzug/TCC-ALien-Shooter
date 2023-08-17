@@ -16,6 +16,7 @@ public struct GunFireStruct
     public float fireCooldown;
     [HideInInspector] public float fireTimer;
     public Sound fireSound;
+    public bool piercingRay;
 
     public static bool operator ==(GunFireStruct a, GunFireStruct b)
     {

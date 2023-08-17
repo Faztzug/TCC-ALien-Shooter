@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
+using System.Linq;
 
 public enum GunType
 {
@@ -196,7 +197,7 @@ public class Gun : MonoBehaviour
             
             var damageType = fireMode.damageType;
             var laser = curPoint.GetComponentInChildren<GunVFXManager>();
-            if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position, GetRayRange(fireMode)));
+            if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position, GetRayRange(fireMode), fireMode.piercingRay));
 
             Health targetHealth = null;
             if(fireMode.bulletPrefab) 
@@ -210,17 +211,30 @@ public class Gun : MonoBehaviour
             }
             else 
             {
-                //if(allPointsGoTarget) targetHealth = movimentoMouse.GetTargetHealth();
-                targetHealth = GetTargetHealth(curPoint.position, GetRayRange(fireMode));
-
-                if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
-                else 
+                if(fireMode.piercingRay)
                 {
-                    targetHealth?.UpdateHealth(fireMode.damage, damageType);
-                    Debug.Log("Tracing Damage!");
-                }
+                    var allHealths = GetAllHealths(curPoint.position, GetRayRange(fireMode));
+                    foreach (var health in allHealths)
+                    {
+                        if(fireMode.continuosFire) health?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
+                        else health?.UpdateHealth(fireMode.damage, damageType);
 
-                targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position, GetRayRange(fireMode)), damageType, fireMode.continuosFire);
+                        var bleedPos = health is null ? Vector3.zero : health.transform.position;
+                        var hRgbd = health?.GetComponentInChildren<Rigidbody>();
+                        if(health != null & hRgbd != null) bleedPos += hRgbd.centerOfMass;
+                        health?.BleedVFX(bleedPos, damageType, fireMode.continuosFire);
+                    }
+                }
+                else
+                {
+                    targetHealth = GetTargetHealth(curPoint.position, GetRayRange(fireMode));
+
+                    if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
+                    else targetHealth?.UpdateHealth(fireMode.damage, damageType);
+
+                    targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position, GetRayRange(fireMode)), damageType, fireMode.continuosFire);
+            
+                }
             }
         }
         if(fireMode.Flash != null)
@@ -236,11 +250,19 @@ public class Gun : MonoBehaviour
         else return fireMode.maxDistance;
     }
 
-    public Vector3 GetRayCastMiddle(Vector3 gunPoint, float range)
+    public int FullStopLayers => LayerMask.GetMask("Default", "Teto", "ScenaryNavMeshIgnore");
+    public Vector3 GetRayCastMiddle(Vector3 gunPoint, float range, bool rayCastAll = false)
     {
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
-        
+        List<RaycastHit> rayHits = new List<RaycastHit>();
+        if(rayCastAll) 
+        {
+            rayHits =  Physics.RaycastAll(gunPoint, aimTransform.forward, range, FullStopLayers, QueryTriggerInteraction.Ignore).ToList();
+            if(rayCastAll & rayHits.Count > 0) return rayHits[0].point;
+            return aimTransform.position + aimTransform.forward * range;
+        }
+
         if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
         {
             // if(isPlayerGun)
@@ -250,7 +272,7 @@ public class Gun : MonoBehaviour
             // if(rayHit.collider & rayHit.collider.transform.parent.parent != null) Debug.Log(rayHit.collider.transform.parent.parent?.name?.ToString());
             // }
             if(rayHit.collider) return rayHit.point;
-            else return aimTransform.forward * range;
+            else return aimTransform.position + aimTransform.forward * range;
         }
         else
         {
@@ -279,6 +301,31 @@ public class Gun : MonoBehaviour
         {
             return null;
         }
+    }
+
+    public List<Health> GetAllHealths(Vector3 gunPoint, float range)
+    {
+        var layer = MovimentoMouse.GetLayers(isPlayerGun);
+        RaycastHit[] rayHits = Physics.RaycastAll(gunPoint, aimTransform.forward, range, layer, QueryTriggerInteraction.Ignore);
+        List<Health> healths = new List<Health>();
+
+        if(rayHits.Length > 0)
+        {
+            foreach (var hit in rayHits)
+            {
+                if(hit.transform.gameObject.layer == FullStopLayers) break;
+                var curTransform = hit.transform;
+                var healthObj = curTransform.GetComponentInChildren<Health>();
+                while (healthObj == null && curTransform.parent != null)
+                {
+                    curTransform = curTransform.parent;
+                    healthObj = curTransform.GetComponent<Health>();
+                }
+                if(!healths.Contains(healthObj)) healths.Add(healthObj);
+            }
+        }
+        
+        return healths;
     }
 
     public bool IsACloseObstacleOnFire()

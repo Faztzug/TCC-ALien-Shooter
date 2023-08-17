@@ -92,7 +92,7 @@ MonoBehaviour:
   runSpeed: 8
   shootingDistance: 100
   findPlayerDistance: 50
-  minPlayerDistance: 2
+  minPlayerDistance: 4
   shootAim: 0
   shootChance: 0
   alive: 1
@@ -298,11 +298,11 @@ MonoBehaviour:
   dropYOffset: 2
   maxDrops: 2
   itens:
+  - {fileID: 7320214218185223239, guid: 6d9ca4895570dc244994dd1590fb1e41, type: 3}
   - {fileID: 4275636808051785984, guid: c0556c998d85af14e9edc1c421c366bb, type: 3}
-  - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}
   dropChance:
+  - 100
   - 5
-  - 75
 --- !u!1 &2068789417339271585
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 2068789417339271614}
   - component: {fileID: 2068789417339271615}
   - component: {fileID: 2068789417339271584}
+  - component: {fileID: 1166763403938995443}
   m_Layer: 0
   m_Name: BiteBox
   m_TagString: Untagged
@@ -413,6 +414,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: -3
   invicibilityTime: 0.1
+--- !u!135 &1166763403938995443
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068789417339271585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.43272167
+  m_Center: {x: 0, y: 0, z: 0.5980624}
 --- !u!1001 &692379088920796866
 PrefabInstance:
   m_ObjectHideFlags: 0
