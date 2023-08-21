@@ -15,6 +15,11 @@ public class EnemyEletric : EnemyBiter
         biteDamage = GetComponentInChildren<EnemyTouch>(includeInactive: true).Damage;
     }
 
+    void OnDisable()
+    {
+        eletricVFX.TurnOffLAser();
+    }
+
     protected override void Update() 
     {
         base.Update();

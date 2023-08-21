@@ -12,6 +12,7 @@ public class ShieldHealth : Health
     [SerializeField] protected float regenCooldown = 2f;
     private float regenTimer = 0f;
     public Sound[] shieldDamageSounds;
+    protected virtual float MinShieldValue => -maxHealth;
 
     public override void Start()
     {
@@ -44,6 +45,7 @@ public class ShieldHealth : Health
             }
             regenTimer = regenCooldown;
             UpdateShieldValue(value);
+            if(curShield < 0) base.UpdateHealth(curShield, damageType);
             if(health <= 0) DestroyCharacter();
         }
     }
@@ -71,5 +73,5 @@ public class ShieldHealth : Health
         regenTimer = regenTimer - Time.deltaTime;
     }
 
-    protected void UpdateShieldValue(float value) => curShield = Mathf.Clamp(curShield + value, 0, maxShield);
+    protected void UpdateShieldValue(float value) => curShield = Mathf.Clamp(curShield + value, MinShieldValue, maxShield);
 }

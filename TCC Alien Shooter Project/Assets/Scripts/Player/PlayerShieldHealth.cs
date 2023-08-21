@@ -25,7 +25,9 @@ public class PlayerShieldHealth : ShieldHealth
     [SerializeField] private Color[] matHealthColors;
 
     [SerializeField] private Animator gunHolderAnim;
-    
+
+    protected override float MinShieldValue => 0;
+
 
     public override void Start()
     {

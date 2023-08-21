@@ -52,6 +52,12 @@ public class Gun : MonoBehaviour
         handGripManager = GetComponentInChildren<HandGripManager>();
     }
 
+    void OnDisable()
+    {
+        StopContinuosFireAudio(primaryFireData);
+        StopContinuosFireAudio(secondaryFireData);
+    }
+
     public void AmmoRegen()
     {
         if(LoadedAmmo <= 0 & ammoRegenTimer > 0 
@@ -111,13 +117,13 @@ public class Gun : MonoBehaviour
 
         if (!GameState.isGamePaused)
         {
-            if(LoadedAmmo > 0 || primaryFireData.ammoCost == 0)
+            if(LoadedAmmo >= primaryFireData.ammoCost || primaryFireData.ammoCost == 0)
             {
                 if(primaryFireData.continuosFire && Input.GetButton("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
                 else if (Input.GetButtonDown("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
             }
             
-            if(LoadedAmmo > 0 || secondaryFireData.ammoCost == 0)
+            if(LoadedAmmo >= secondaryFireData.ammoCost || secondaryFireData.ammoCost == 0)
             {
                 if(secondaryFireData.continuosFire && Input.GetButton("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
                 else if(Input.GetButtonDown("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
@@ -135,7 +141,7 @@ public class Gun : MonoBehaviour
     {
         //TODO: Do fade on begin and on end needs better management to not override each other
         contFireSoundTween.Kill(true);
-        if(fireStruct.fireSound.isPlaying) contFireSoundTween = fireStruct.fireSound.audioSource.DOFade(0, 0.2f).SetEase(Ease.InSine)
+        if(fireStruct.fireSound.IsPlaying) contFireSoundTween = fireStruct.fireSound.audioSource.DOFade(0, 0.2f).SetEase(Ease.InSine)
             .OnComplete(() => {
                 if(!(Input.GetButton("Fire2") && fireStruct.fireTimer <= 0) || loadedAmmo <= 0) 
                 fireStruct.fireSound.audioSource.Stop();});
@@ -153,7 +159,7 @@ public class Gun : MonoBehaviour
         anim?.SetTrigger("Fire2");
     }
 
-    private void  FireFunc(GunFireStruct fireMode)
+    private void FireFunc(GunFireStruct fireMode)
     {
         primaryFireData.fireTimer = primaryFireData.fireCooldown;
         secondaryFireData.fireTimer = secondaryFireData.fireCooldown;
@@ -172,11 +178,12 @@ public class Gun : MonoBehaviour
                 fireMode.fireSound.PlayOn(audioSource, oneShot: false);
             } 
 
-            if(fireMode.fireSound.audioSource != null && !fireMode.fireSound.audioSource.isPlaying)
+            if(audioSource != null && !audioSource.isPlaying)
             {
-                fireMode.fireSound.audioSource.volume = 0;
+                if(audioSource.clip != fireMode.fireSound.clip) fireMode.fireSound.Setup(audioSource);
+                audioSource.volume = 0;
                 contFireSoundTween.Kill(true);
-                contFireSoundTween = fireMode.fireSound.audioSource.DOFade(fireMode.fireSound.SFXVolume, 0.2f);
+                contFireSoundTween = audioSource.DOFade(fireMode.fireSound.SFXVolume, 0.2f);
             }
         }
         else

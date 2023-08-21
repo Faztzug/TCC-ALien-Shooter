@@ -20,7 +20,7 @@ public class Sound
 
     [HideInInspector]
     public AudioSource audioSource;
-    public bool isPlaying => audioSource != null && audioSource.isPlaying && audioSource.clip == clip;
+    public bool IsPlaying => audioSource != null && audioSource.isPlaying && audioSource.clip == clip;
     
     public void Setup(AudioSource audioSource)
     {

@@ -207,7 +207,7 @@ public class Movimento : MonoBehaviour
 
         if((velocitylAbs > 0.1) && controller.isGrounded && !GameState.isGamePaused)
         {
-            if(passosSound.isPlaying == false && passosSound.clip)
+            if(passosSound.IsPlaying == false && passosSound.clip)
             {
                 passosSound.PlayOn(audioSource);
             }

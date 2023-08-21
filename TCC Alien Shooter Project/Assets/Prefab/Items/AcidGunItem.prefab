@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8357930706098819328}
   - component: {fileID: 2767453749373367027}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 2246127261171949016}
   - component: {fileID: 21387251152172751}
   - component: {fileID: 6811425423828565654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AcidGunItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,6 +263,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cobrita
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 529b5db0a3aadfb448aeccc95def0fe6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303572621047305589, guid: 529b5db0a3aadfb448aeccc95def0fe6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 529b5db0a3aadfb448aeccc95def0fe6, type: 3}

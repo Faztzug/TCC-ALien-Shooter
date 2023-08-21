@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7639968157339258127}
   - component: {fileID: 4583595402302975740}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GunModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 490914253140689367}
   - component: {fileID: 1851032949399268032}
   - component: {fileID: 2424732302412467591}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PiranhaGunItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,6 +263,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Piranhac
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 41fdfa73cf323434596e029365796784,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567736757721180449, guid: 41fdfa73cf323434596e029365796784,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41fdfa73cf323434596e029365796784, type: 3}
