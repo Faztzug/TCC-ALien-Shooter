@@ -22,6 +22,7 @@ public class DisplayTime : MonoBehaviour
         hour = System.DateTime.Now.Hour;
         minutes = System.DateTime.Now.Minute;
         seconds = System.DateTime.Now.Second;
-        theDisplay.GetComponent<TextMeshProUGUI>().text = "" + hour + ":" + minutes;
+        //theDisplay.GetComponent<TextMeshProUGUI>().text = hour.ToString("00") + ":" + minutes.ToString("00");
+        theDisplay.GetComponent<TextMeshProUGUI>().text = System.DateTime.Now.ToString("HH:mm");
     }
 }

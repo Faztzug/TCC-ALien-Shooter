@@ -50,6 +50,10 @@ public class Gun : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
         handGripManager = GetComponentInChildren<HandGripManager>();
+        foreach (var vfx in GetComponentsInChildren<GunVFXManager>()) 
+        {
+            foreach (var go in vfx.GetComponentsInChildren<Transform>()) go.gameObject.layer = gameObject.layer;
+        }
     }
 
     void OnDisable()
@@ -204,7 +208,7 @@ public class Gun : MonoBehaviour
             
             var damageType = fireMode.damageType;
             var laser = curPoint.GetComponentInChildren<GunVFXManager>();
-            if(laser != null) laser.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position, GetRayRange(fireMode), fireMode.piercingRay));
+            laser?.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position, GetRayRange(fireMode), fireMode.piercingRay));
 
             Health targetHealth = null;
             if(fireMode.bulletPrefab) 

@@ -7,6 +7,7 @@ using TMPro;
 public class SettingsManagerOld : MonoBehaviour
 {
     [Header("Interactables")]
+    [SerializeField] private Button closeButton;
     [SerializeField] private Toggle mute;
     [SerializeField] private Slider music;
     [SerializeField] private Slider sfx;
@@ -34,6 +35,12 @@ public class SettingsManagerOld : MonoBehaviour
 
         if(GameState.GameStateInstance) GameState.OnSettingsUpdated += SettingsHasUpdated;
     }
+
+    public void Close()
+    {
+        closeButton.onClick.Invoke();
+    }
+    
     private void UpdateFileData()
     {
         settingsManager.SaveSettings(SettingsData);

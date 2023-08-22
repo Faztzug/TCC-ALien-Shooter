@@ -7,6 +7,9 @@ public class MenuController : MonoBehaviour
 {
     [SerializeField] private string level1 = "Level 1";
     [SerializeField] private string test = "SampleScene";
+    public SettingsManagerOld settings; 
+    public GameObject instructions;
+    public GameObject creditos;
 
     private void Start() 
     {

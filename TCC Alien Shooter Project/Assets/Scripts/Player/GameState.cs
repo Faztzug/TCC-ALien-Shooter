@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
 using System;
+using UnityEngine.UI;
 
 public class GameState : MonoBehaviour
 {
@@ -207,6 +208,18 @@ public class GameState : MonoBehaviour
 
     public static void PauseGame(bool pause)
     {
+        if(mainCanvas == null)
+        {
+            Debug.Log("On main menu Pause Action");
+            var mainMenu = FindFirstObjectByType<MenuController>(FindObjectsInactive.Include);
+            if(mainMenu.settings.gameObject.activeInHierarchy) mainMenu.settings.Close();
+            else if(mainMenu.instructions.activeInHierarchy) mainMenu.instructions.GetComponentInChildren<Button>().onClick.Invoke();
+            else if(mainMenu.creditos.activeInHierarchy) mainMenu.creditos.GetComponentInChildren<Button>().onClick.Invoke();
+            Cursor.lockState = CursorLockMode.None;
+            isGamePaused = false;
+            return;
+        }
+
         if(isGamePaused && mainCanvas != null && !mainCanvas.DoesExitPause())
         {
             Debug.Log("should exit pause? " + mainCanvas.DoesExitPause());

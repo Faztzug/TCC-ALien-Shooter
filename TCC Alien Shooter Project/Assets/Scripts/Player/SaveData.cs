@@ -5,6 +5,13 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+public enum GameDificulty
+{
+    Easy,
+    Normal,
+    Hard,
+}
+
 public class SaveManager
 {
     private const string kSavePath = "/MySaveData.dat";
@@ -61,6 +68,7 @@ public class SaveData
     public int unlockLevelsTo = 1;
     public List<GunType> gunsColected = new List<GunType>();
     public float[] checkpointPosition = new float[3]{0,0,0};
+    public GameDificulty gameDificulty;
 
     [Header("Cutscene")]
     public bool jumpCutscene;
@@ -70,5 +78,6 @@ public class SaveData
         unlockLevelsTo = 1;
         checkpointPosition = new float[3]{0,0,0};
         gunsColected = new List<GunType>();
+        gameDificulty = GameDificulty.Normal;
     }
 }
