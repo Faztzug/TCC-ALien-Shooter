@@ -91,6 +91,8 @@ public class Gun : MonoBehaviour
                 {
                     var line = curPoint.GetComponentInChildren<GunVFXManager>();
                     if(line) line.TurnOffLAser();
+                    StopContinuosFireAudio(primaryFireData);
+                    StopContinuosFireAudio(secondaryFireData);
                 }
             }
             return;
