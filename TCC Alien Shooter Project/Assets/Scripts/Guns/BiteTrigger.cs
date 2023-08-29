@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public class BiteTrigger : DamageHealthCollider
 {
     [HideInInspector] public PiranhaGun piranha;
+    protected override float InvicibilityTime => 0.5f;
     private void OnTriggerEnter(Collider other) 
     {
         if(!other.CompareTag("Player"))

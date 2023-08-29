@@ -23,7 +23,6 @@ public class EnemyDrop : MonoBehaviour
             float rng = UnityEngine.Random.Range(0,100);
             if(rng <= dropChance[i])
             {
-                Debug.Log("DROPPING");
                 var item = Instantiate(itens[i], dropPos, dropRot);
                 item.GetComponent<Rigidbody>().AddForce(item.transform.up * dropYOffset, ForceMode.Impulse);
                 if(i >= maxDrops) return;

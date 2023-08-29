@@ -9,6 +9,7 @@ public enum DamageType
     heatLaserDamage,
     acidDamage,
     eletricDamage,
+    AnyDamage,
 }
 public class HealthImmunities : Health
 {

@@ -428,6 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: 2
   primaryFireData:
+    notMultpliyGunPoints: 0
     damageType: 4
     bulletPrefab: {fileID: 0}
     Flash: {fileID: 0}
@@ -449,11 +450,13 @@ MonoBehaviour:
       playOnAwake: 0
       audioSource: {fileID: 0}
     piercingRay: 0
+    rayDiamanter: 0
   secondaryFireData:
+    notMultpliyGunPoints: 1
     damageType: 2
     bulletPrefab: {fileID: 0}
     Flash: {fileID: 0}
-    damage: -5
+    damage: -3
     maxDistance: 0
     continuosFire: 0
     ammoCost: 3
@@ -471,6 +474,7 @@ MonoBehaviour:
       playOnAwake: 0
       audioSource: {fileID: 0}
     piercingRay: 1
+    rayDiamanter: 0.1
   isPlayerGun: 1
   useTriggerColiderToGetTargets: 0
   aimTransform: {fileID: 0}

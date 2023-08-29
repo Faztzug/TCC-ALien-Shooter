@@ -18,7 +18,6 @@ public class AmmoItem : Item
         foreach (var gun in guns) if(gun.gunType == ammoType)
         {
             gun.GainAmmo(ammount, this);
-            Debug.Log("collecting ammo: " + ammoType + " found gun? " + guns.Length);
         }
     }
 }

@@ -53,13 +53,15 @@ public class EletricGun : Gun
 
     public override void SecondaryFire()
     {
-        secondaryFireData.damage = baseSnipeDamage * (chargingPower * chargingPower);
+        secondaryFireData.damage = baseSnipeDamage * ((chargingPower * chargingPower) / maxChargePower);
         secondaryFireData.ammoCost = baseSnipeCost * (chargingPower / maxChargePower);
+        Debug.Log("charged = " + chargingPower + " Eletric Damage is " + baseSnipeDamage 
+        + " * " + ((chargingPower * chargingPower) / maxChargePower).ToString() + " = " + secondaryFireData.damage);
         base.SecondaryFire();
-        Shooting(secondaryFireData);
 
         if(chargingPower >= minChargePower)
         {
+            Shooting(secondaryFireData);
             var laser = Instantiate(superLaserVFX).GetComponentInChildren<StatiticLaserVFXManager>();
             laser.multiplierScale = chargingPower;
             laser.SetLaser(gunPointPositions[0].position, GetRayCastMiddle(gunPointPositions[0].position, GetRayRange(secondaryFireData), secondaryFireData.piercingRay));

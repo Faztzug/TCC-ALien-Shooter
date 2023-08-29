@@ -6,6 +6,7 @@ using System;
 [Serializable]
 public struct GunFireStruct
 {
+    public bool notMultpliyGunPoints;
     public DamageType damageType;
     [SerializeField] public Bullet bulletPrefab;
     [SerializeField] public GameObject Flash;
@@ -17,6 +18,7 @@ public struct GunFireStruct
     [HideInInspector] public float fireTimer;
     public Sound fireSound;
     public bool piercingRay;
+    public float rayDiamanter;
 
     public static bool operator ==(GunFireStruct a, GunFireStruct b)
     {

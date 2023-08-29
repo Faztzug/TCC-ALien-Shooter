@@ -198,16 +198,13 @@ public class Gun : MonoBehaviour
         }
     }
     
-    public virtual void  Shooting(GunFireStruct fireMode, Bullet bulletPrefab = null)
+    public virtual void Shooting(GunFireStruct fireMode, Bullet bulletPrefab = null)
     {
         var target = isPlayerGun ? movimentoMouse.raycastResult : enemyTarget;
         if(!isPlayerGun) transform.LookAt(enemyTarget);
 
         foreach (var curPoint in gunPointPositions)
         {
-            // if(allPointsGoTarget)  Debug.DrawLine(curPoint.position, target, Color.blue, 10f);
-            // else   Debug.DrawLine(curPoint.position, aimTransform.forward * MovimentoMouse.kHorizonPoint, Color.blue, 10f);
-            
             var damageType = fireMode.damageType;
             var laser = curPoint.GetComponentInChildren<GunVFXManager>();
             laser?.SetLaser(curPoint.position, GetRayCastMiddle(curPoint.position, GetRayRange(fireMode), fireMode.piercingRay));
@@ -226,7 +223,7 @@ public class Gun : MonoBehaviour
             {
                 if(fireMode.piercingRay)
                 {
-                    var allHealths = GetAllHealths(curPoint.position, GetRayRange(fireMode));
+                    var allHealths = GetAllHealths(curPoint.position, fireMode);
                     foreach (var health in allHealths)
                     {
                         if(fireMode.continuosFire) health?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
@@ -240,7 +237,7 @@ public class Gun : MonoBehaviour
                 }
                 else
                 {
-                    targetHealth = GetTargetHealth(curPoint.position, GetRayRange(fireMode));
+                    targetHealth = GetTargetHealth(curPoint.position, fireMode);
 
                     if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
                     else targetHealth?.UpdateHealth(fireMode.damage, damageType);
@@ -249,6 +246,7 @@ public class Gun : MonoBehaviour
             
                 }
             }
+            if(fireMode.notMultpliyGunPoints) break;
         }
         if(fireMode.Flash != null)
         {
@@ -294,12 +292,17 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public Health GetTargetHealth(Vector3 gunPoint, float range)
+    public Health GetTargetHealth(Vector3 gunPoint,  GunFireStruct fireStruct)
     {
+        var range = GetRayRange(fireStruct);
+        var diameter = fireStruct.rayDiamanter;
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit rayHit;
-
-        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
+        bool gotHit;
+        if(diameter <= 0) gotHit = Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore);
+        else gotHit = Physics.SphereCast(gunPoint, diameter, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore);
+        
+        if(gotHit)
         {
             var curTransform = rayHit.transform;
             var healthObj = curTransform.GetComponentInChildren<Health>();
@@ -316,10 +319,14 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public List<Health> GetAllHealths(Vector3 gunPoint, float range)
+    public List<Health> GetAllHealths(Vector3 gunPoint, GunFireStruct fireStruct)
     {
+        var range = GetRayRange(fireStruct);
+        var diameter = fireStruct.rayDiamanter;
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
-        RaycastHit[] rayHits = Physics.RaycastAll(gunPoint, aimTransform.forward, range, layer, QueryTriggerInteraction.Ignore);
+        RaycastHit[] rayHits;
+        if(diameter <= 0) rayHits = Physics.RaycastAll(gunPoint, aimTransform.forward, range, layer, QueryTriggerInteraction.Ignore);
+        else rayHits = Physics.SphereCastAll(gunPoint, diameter, aimTransform.forward, range, layer, QueryTriggerInteraction.Ignore);
         List<Health> healths = new List<Health>();
 
         if(rayHits.Length > 0)
@@ -395,7 +402,6 @@ public class Gun : MonoBehaviour
     {
         if(LoadedAmmo < maxLoadedAmmo)
         {
-            Debug.Log("gaining ammo");
             LoadedAmmo += ammount;
             item?.DestroyItem();
 

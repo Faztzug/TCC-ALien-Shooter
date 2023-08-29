@@ -16,6 +16,23 @@ public struct DamageModified
     {
         return damageType.ToString() + " x" + multplier;
     }
+
+    public DamageModified(DamageType damageType, float multplier)
+    {
+        this.damageType = damageType;
+        this.multplier = multplier;
+    }
+
+    public static bool operator ==(DamageModified a, DamageModified b)
+    {
+        return (a.damageType == b.damageType);
+    }
+    public static bool operator !=(DamageModified a, DamageModified b)
+    {
+        return (a.damageType != b.damageType);
+    }
+    public override bool Equals(object obj) => obj is DamageModified other && this == other;
+    public override int GetHashCode() => base.GetHashCode();
 }
 
 public class Health : MonoBehaviour
@@ -32,7 +49,7 @@ public class Health : MonoBehaviour
     public Sound deathSound;
     public AudioSource audioSource;
     protected float damageSoundTimer;
-    [SerializeField] protected List<DamageModified> damageModifiers = new List<DamageModified>();
+    public List<DamageModified> damageModifiers = new List<DamageModified>();
 
     public virtual void Start()
     {
@@ -51,9 +68,11 @@ public class Health : MonoBehaviour
 
     public virtual void UpdateHealth(float value, DamageType damageType)
     {
-        DamageModified modifier = damageModifiers.Find(d => d.damageType == damageType);
-        if(modifier.damageType == damageType) Debug.Log("modified damage of " + value + " to: " + (value *= modifier.multplier));
-        if(modifier.damageType == damageType) value *= modifier.multplier;
+        DamageModified modifier = damageModifiers.Find(d => d.damageType == damageType | d.damageType == DamageType.AnyDamage);
+        if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) 
+        Debug.Log("modified damage of " + modifier.damageType + value+"*"+modifier.multplier
+         + " to: " + (value *= modifier.multplier));
+        if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) value *= modifier.multplier;
         health += value;
 
         if(health > maxHealth) health = maxHealth;
@@ -69,12 +88,12 @@ public class Health : MonoBehaviour
 
         if(value < 0 && health >= 0)
         {
-            if(damageSoundTimer < 0 && damageSounds.Length > 0)
+            if(damageSounds != null & damageSounds.Length > 0 & damageSoundTimer < 0 && damageSounds.Length > 0)
             {
                 var index = UnityEngine.Random.Range(0, damageSounds.Length);
-                damageSounds[index]?.PlayOn(audioSource);
+                damageSounds[index].PlayOn(audioSource);
                 damageSoundTimer = 1f;
-                Debug.Log("Health dmaage Sound " + name);
+                //Debug.Log("Health dmaage Sound " + name);
             }
         }
     }
@@ -83,8 +102,8 @@ public class Health : MonoBehaviour
     public virtual void BleedVFX(Vector3 position, DamageType damageType, bool isContinuos = false)
     {
         if(isContinuos & bloodVfxTimer > 0) return;
-        if(bloodVFX == null) Debug.Log(name + " Não possui vfx de sangue!");
-        else GameObject.Destroy(GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null), 3f);
+        //if(bloodVFX == null) Debug.Log(name + " Não possui vfx de sangue!");
+        else if(bloodVFX != null) GameObject.Destroy(GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null), 3f);
         if(isContinuos) bloodVfxTimer = 0.5f;
     }
 

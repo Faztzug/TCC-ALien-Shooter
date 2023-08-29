@@ -41,11 +41,15 @@ public class ShieldHealth : Health
                 var index = UnityEngine.Random.Range(0, shieldDamageSounds.Length);
                 shieldDamageSounds[index]?.PlayOn(audioSource);
                 damageSoundTimer = 1f;
-                Debug.Log("Shield dmaage Sound " + name);
+                //Debug.Log("Shield dmaage Sound " + name);
             }
             regenTimer = regenCooldown;
             UpdateShieldValue(value);
-            if(curShield < 0) base.UpdateHealth(curShield, damageType);
+            if(curShield < 0)
+            {
+                base.UpdateHealth(curShield, damageType);
+                curShield = 0;
+            }
             if(health <= 0) DestroyCharacter();
         }
     }
