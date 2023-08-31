@@ -49,7 +49,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.81
+    m_Value: 1
     min: 0
     max: 1
   response:
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: -0.35
+    m_Value: -0.4
     min: -1
     max: 1
   xMultiplier:
@@ -91,10 +91,10 @@ MonoBehaviour:
     max: 1
   center:
     m_OverrideState: 0
-    m_Value: {x: 2.97, y: 0.5}
+    m_Value: {x: 1, y: 1}
   scale:
     m_OverrideState: 0
-    m_Value: 5
+    m_Value: 0.71
     min: 0.01
     max: 5
 --- !u!114 &11400000
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.06
     min: 0
     max: 1
 --- !u!114 &3724029035087271941
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
