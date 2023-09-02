@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ExplosionMat
+  m_Name: NucleoExplosionMat
   m_Shader: {fileID: -6465566751694194690, guid: 7d393507847cd164186e4d2e389a4ce0,
     type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_8cbf5a4a14c64b52b251a94906d64db1:
-        m_Texture: {fileID: 2800000, guid: 54fc730674c865d41aae20ce6c34124d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -37,16 +37,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_0f6ae27789d04b4aa6f804f24fd7f287: 4.5
-    - Vector1_253640ecb422413f90ba8aa2da6c4ab5: 10
+    - Vector1_0f6ae27789d04b4aa6f804f24fd7f287: 0
+    - Vector1_253640ecb422413f90ba8aa2da6c4ab5: 2000
     - Vector1_761b3a580fac416daab2106fdc1318a4: 1
-    - Vector1_80a2042ef9c44951aca10e83363f07e1: 0.16
+    - Vector1_80a2042ef9c44951aca10e83363f07e1: 0.5
     - Vector1_90600bf3a99948df8e58e45e19a558f0: 0.01
     - Vector1_981ec0275cd34f9d9a8b33525279ee8e: 10
     - Vector1_b6e6604a6c1f4b0f9434d79f13a35c10: 1
     m_Colors:
-    - Color_17cac9fb2dac40c792783be45c625b34: {r: 0.23584908, g: 0, b: 0.049632907,
-        a: 1}
-    - Color_e8defa1afec0499490840b30a36df301: {r: 3.509434, g: 0.15980698, b: 0.0551219,
+    - Color_17cac9fb2dac40c792783be45c625b34: {r: 1, g: 1, b: 1, a: 1}
+    - Color_e8defa1afec0499490840b30a36df301: {r: 4, g: 2.8705883, b: 0.29803923,
         a: 1}
   m_BuildTextureStacks: []
