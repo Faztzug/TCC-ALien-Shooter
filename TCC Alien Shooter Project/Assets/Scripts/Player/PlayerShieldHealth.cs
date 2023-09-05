@@ -13,6 +13,7 @@ public class PlayerShieldHealth : ShieldHealth
     //[SerializeField] private Image bar;
     //private Image bar => GameState.mainCanvas.healthBar;
     //[SerializeField] private PostProcessVolume damageEffect;
+    private float defaultMaxShield;
     private float damageTime = 0;
     [SerializeField] float effectTimeMultplier = 10;
     [SerializeField] float effectGainMultplier = 2f;
@@ -32,6 +33,11 @@ public class PlayerShieldHealth : ShieldHealth
     public override void Start()
     {
         base.Start();
+        
+        defaultMaxShield = maxShield;
+        var dificulty = GameState.SaveData.gameDificulty;
+        if(dificulty == GameDificulty.Easy) maxShield = defaultMaxShield * 1.5f;
+        else if(dificulty == GameDificulty.Hard) maxShield = defaultMaxShield / 2;
         UpdateHealth(maxHealth, DamageType.NULL);
     }
 
@@ -113,6 +119,6 @@ public class PlayerShieldHealth : ShieldHealth
         //GameState.mainCanvas.gameOver.SetActive(true);
         //EventSystem.current.SetSelectedGameObject(GameState.mainCanvas.gameOver.GetComponentInChildren<Button>().gameObject);
 
-        GameState.LoadScene(gameObject.scene.name, 5f);
+        GameState.ReloadScene(5f);
     }
 }

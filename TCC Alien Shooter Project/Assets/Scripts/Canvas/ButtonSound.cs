@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class ButtonSound : MonoBehaviour
 {
+    [SerializeField] private string buttonName;
     [SerializeField] private Sound clickSound;
     [SerializeField] private Sound hoverSound;
-    private Button button;
+    protected Button button;
     private EventTrigger eventTrigger;
     private AudioSource audioSource;
 
-    private void Start() 
+    protected virtual void Start() 
     {
         audioSource = GetComponent<AudioSource>();
         button = GetComponent<Button>();
@@ -32,6 +34,15 @@ public class ButtonSound : MonoBehaviour
     {
         button?.onClick.RemoveListener(PlayClick);
         eventTrigger?.triggers.RemoveAll(e => e.eventID == EventTriggerType.PointerEnter);
+    }
+
+    void OnValidate()
+    {
+        if(!string.IsNullOrEmpty(buttonName)) 
+        {
+            var tmp = GetComponentInChildren<TextMeshProUGUI>();
+            if(tmp != null) tmp.text = buttonName;
+        }
     }
 
 }

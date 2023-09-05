@@ -215,6 +215,8 @@ public class GameState : MonoBehaviour
             if(mainMenu.settings.gameObject.activeInHierarchy) mainMenu.settings.Close();
             else if(mainMenu.instructions.activeInHierarchy) mainMenu.instructions.GetComponentInChildren<Button>().onClick.Invoke();
             else if(mainMenu.creditos.activeInHierarchy) mainMenu.creditos.GetComponentInChildren<Button>().onClick.Invoke();
+            else if(mainMenu.backJogar.gameObject.activeInHierarchy) mainMenu.backJogar.onClick.Invoke();
+            else if(mainMenu.backSelecionarFase.gameObject.activeInHierarchy) mainMenu.backSelecionarFase.onClick.Invoke();
             Cursor.lockState = CursorLockMode.None;
             isGamePaused = false;
             return;
@@ -255,6 +257,6 @@ public class GameState : MonoBehaviour
     {
         GameObject.Instantiate(endCanvas,null);
         yield return new WaitForSecondsRealtime(5f);
-        LoadScene(nextScene);
+        GameState.LoadScene(nextScene);
     }
 }
