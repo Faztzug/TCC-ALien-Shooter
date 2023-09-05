@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,10 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+#if UNITY_EDITOR
     [SerializeField] List<SceneAsset> levels = new List<SceneAsset>();
+#endif
+    [SerializeField] private List<string> levelsNames = new List<string>();
     [SerializeField] private string level1 = "Level 1";
     [SerializeField] private string test = "SampleScene";
     public SettingsManagerOld settings; 
@@ -33,8 +37,8 @@ public class MenuController : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-        if(level >= levels.Count) return;
-        SceneManager.LoadScene(levels[level].name);
+        if(level >= levelsNames.Count) return;
+        SceneManager.LoadScene(levelsNames[level]);
     }
     
     public void TestLevel()
@@ -51,4 +55,15 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+#if UNITY_EDITOR
+    public void OnAfterDeserialize ( ) => FillScenes ( );
+    public void OnBeforeSerialize ( ) => FillScenes ( );
+    public void OnValidate ( ) => FillScenes ( );
+
+    private void FillScenes ( )
+    {
+        levelsNames = levels.Select(l => l.name).ToList();
+    }
+#endif
 }
