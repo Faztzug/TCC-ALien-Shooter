@@ -14,6 +14,7 @@ public enum GunType
 
 public class Gun : MonoBehaviour
 {
+    public const string kCrtiHitTag = "CriticalEnemy"; 
     public GunType gunType;
     public GunFireStruct primaryFireData;
     public GunFireStruct secondaryFireData;
@@ -223,13 +224,11 @@ public class Gun : MonoBehaviour
             {
                 if(fireMode.piercingRay)
                 {
-                    var allHealths = GetAllHealths(curPoint.position, fireMode);
+                    var allHealths = GetAndDamageHealths(curPoint.position, fireMode);
                     foreach (var health in allHealths)
                     {
-                        if(fireMode.continuosFire) health?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
-                        else health?.UpdateHealth(fireMode.damage, damageType);
-
-                        var bleedPos = health is null ? Vector3.zero : health.transform.position;
+                        if(health is null) continue;
+                        var bleedPos = health.transform.position;
                         var hRgbd = health?.GetComponentInChildren<Rigidbody>();
                         if(health != null & hRgbd != null) bleedPos += hRgbd.centerOfMass;
                         health?.BleedVFX(bleedPos, damageType, fireMode.continuosFire);
@@ -237,13 +236,8 @@ public class Gun : MonoBehaviour
                 }
                 else
                 {
-                    targetHealth = GetTargetHealth(curPoint.position, fireMode);
-
-                    if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
-                    else targetHealth?.UpdateHealth(fireMode.damage, damageType);
-
+                    targetHealth = GetAndDamageHealths(curPoint.position, fireMode).FirstOrDefault();
                     targetHealth?.BleedVFX(GetRayCastMiddle(curPoint.position, GetRayRange(fireMode)), damageType, fireMode.continuosFire);
-            
                 }
             }
             if(fireMode.notMultpliyGunPoints) break;
@@ -292,60 +286,57 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public Health GetTargetHealth(Vector3 gunPoint,  GunFireStruct fireStruct)
-    {
-        var range = GetRayRange(fireStruct);
-        var diameter = fireStruct.rayDiamanter;
-        var layer = MovimentoMouse.GetLayers(isPlayerGun);
-        RaycastHit rayHit;
-        bool gotHit;
-        if(diameter <= 0) gotHit = Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore);
-        else gotHit = Physics.SphereCast(gunPoint, diameter, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore);
-        
-        if(gotHit)
-        {
-            var curTransform = rayHit.transform;
-            var healthObj = curTransform.GetComponentInChildren<Health>();
-            while (healthObj == null && curTransform.parent != null)
-            {
-                curTransform = curTransform.parent;
-                healthObj = curTransform.GetComponent<Health>();
-            }
-            return healthObj;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public List<Health> GetAllHealths(Vector3 gunPoint, GunFireStruct fireStruct)
+    public List<Health> GetAndDamageHealths(Vector3 gunPoint,  GunFireStruct fireStruct)
     {
         var range = GetRayRange(fireStruct);
         var diameter = fireStruct.rayDiamanter;
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
         RaycastHit[] rayHits;
-        if(diameter <= 0) rayHits = Physics.RaycastAll(gunPoint, aimTransform.forward, range, layer, QueryTriggerInteraction.Ignore);
-        else rayHits = Physics.SphereCastAll(gunPoint, diameter, aimTransform.forward, range, layer, QueryTriggerInteraction.Ignore);
-        List<Health> healths = new List<Health>();
+        List<Health> healthObjs = new List<Health>();
+        bool gotHit = false;
 
-        if(rayHits.Length > 0)
+        if(fireStruct.piercingRay)
         {
-            foreach (var hit in rayHits)
+            if(diameter <= 0) rayHits = Physics.RaycastAll(gunPoint, aimTransform.forward, range, 
+            layer, QueryTriggerInteraction.Ignore);
+            else rayHits = Physics.SphereCastAll(gunPoint, diameter, aimTransform.forward, range, 
+            layer, QueryTriggerInteraction.Ignore);
+        }
+        else
+        {   
+            RaycastHit rayHit;
+            if(diameter <= 0) gotHit = Physics.Raycast(gunPoint, aimTransform.forward, 
+            out rayHit, range, layer, QueryTriggerInteraction.Ignore);
+            else gotHit = Physics.SphereCast(gunPoint, diameter, aimTransform.forward, 
+            out rayHit, range, layer, QueryTriggerInteraction.Ignore);
+            rayHits = new RaycastHit[1]{rayHit};
+        }
+
+        if(gotHit | rayHits.Length > 0)
+        {
+            foreach (var rayhit in rayHits)
             {
-                if(hit.transform.gameObject.layer == FullStopLayers) break;
-                var curTransform = hit.transform;
+                if(rayhit.collider is null) continue;
+                var damageToDo = fireStruct.damage;
+                if(fireStruct.continuosFire) damageToDo *= Time.deltaTime;
+                if(rayhit.collider.CompareTag(kCrtiHitTag))
+                {
+                    Debug.Log("HEAD SHOOT! " + rayhit.collider.name);
+                    damageToDo *= 2;
+                }
+                var curTransform = rayhit.transform;
                 var healthObj = curTransform.GetComponentInChildren<Health>();
                 while (healthObj == null && curTransform.parent != null)
                 {
                     curTransform = curTransform.parent;
                     healthObj = curTransform.GetComponent<Health>();
                 }
-                if(!healths.Contains(healthObj)) healths.Add(healthObj);
+                if(healthObj is null) continue;
+                healthObj.UpdateHealth(damageToDo, fireStruct.damageType);
+                if(healthObjs.Contains(healthObj)) healthObjs.Add(healthObj);
             }
         }
-        
-        return healths;
+        return healthObjs;
     }
 
     public bool IsACloseObstacleOnFire()

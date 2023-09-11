@@ -49,12 +49,13 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collisionInfo)
     {
         
-        // if(collisionInfo.collider.gameObject.CompareTag("EnemyHead"))
-        // {
-        //     Debug.Log("HEADSHOT!" + collisionInfo.collider.gameObject);
-        //     damage = damage * headShootMultiplier;
-        //     //play sound
-        // }
+        if(collisionInfo.collider.gameObject.CompareTag(Gun.kCrtiHitTag))
+        {
+            Debug.Log("BULEETTT HEADSHOT!" + collisionInfo.collider.gameObject.name);
+            damage *= 2;
+            //play head shoot sound
+        }
+
         if(collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);
         else BulletHit(collisionInfo.gameObject);
     }
@@ -82,13 +83,23 @@ public class Bullet : MonoBehaviour
         hit = true;
 
         //Debug.Log("Bullet Hit: " + collision.name);
+
+        // if(collision.CompareTag(Gun.kCrtiHitTag))
+        // {
+        //     Debug.Log("HEAD SHOOT!");
+        //     damage *= 2;
+        // }
+        // else Debug.Log("Bullet Hit on " + collision.tag + " / " + collision.name);
         
-        if(collision.TryGetComponent<Health>(out Health health))
+        var curTransform = collision.transform;
+        var healthObj = curTransform.GetComponentInChildren<Health>();
+        while (healthObj == null && curTransform.parent != null)
         {
-            health.UpdateHealth(damage, damageType);
-            health?.BleedVFX(transform.position, damageType);
-            //Debug.Log(collisionInfo.gameObject.name + " took " + damage + " of damage!");
+            curTransform = curTransform.parent;
+            healthObj = curTransform.GetComponent<Health>();
         }
+        healthObj?.UpdateHealth(damage, damageType);
+        healthObj?.BleedVFX(transform.position, damageType);
     }
 
     public void Respawn(Vector3 position)

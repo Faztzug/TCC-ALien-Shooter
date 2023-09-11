@@ -68,11 +68,15 @@ public class Health : MonoBehaviour
 
     public virtual void UpdateHealth(float value, DamageType damageType)
     {
-        DamageModified modifier = damageModifiers.Find(d => d.damageType == damageType | d.damageType == DamageType.AnyDamage);
-        if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) 
-        Debug.Log("modified damage of " + modifier.damageType + value+"*"+modifier.multplier
-         + " to: " + (value *= modifier.multplier));
-        if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) value *= modifier.multplier;
+        if(damageModifiers.Count >= 1)
+        {
+            DamageModified modifier = damageModifiers.Find(d => d.damageType == damageType | d.damageType == DamageType.AnyDamage);
+            if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) 
+            Debug.Log("modified damage of " + modifier.damageType + value+"*"+modifier.multplier
+            + " to: " + (value *= modifier.multplier));
+            if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) value *= modifier.multplier;
+        }
+        
         health += value;
 
         if(health > maxHealth) health = maxHealth;
