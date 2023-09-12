@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
         type: 3}
       propertyPath: m_Name
-      value: VFX_SangueExagerado
+      value: VFX_SangueExageradoSapo
       objectReference: {fileID: 0}
     - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
         type: 3}
@@ -86,6 +86,36 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.12156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 0.17647056
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 0.70020974
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 0.7921569
       objectReference: {fileID: 0}
     - target: {fileID: 1211128768557175140, guid: fad81000ff2d1b940971114cf5b13bcd,
         type: 3}
@@ -372,6 +402,11 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[2].countCurve.minCurve.m_Curve.Array.data[1].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
+    - target: {fileID: 1211128768557175141, guid: fad81000ff2d1b940971114cf5b13bcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 406ad24f4dad4a144a5c4a613e15f702, type: 2}
     - target: {fileID: 1211128768557175142, guid: fad81000ff2d1b940971114cf5b13bcd,
         type: 3}
       propertyPath: m_LocalScale.x
