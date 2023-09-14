@@ -270,12 +270,6 @@ public class Gun : MonoBehaviour
 
         if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
         {
-            // if(isPlayerGun)
-            // {
-            // if(rayHit.collider) Debug.Log(rayHit.collider.gameObject.name?.ToString());
-            // if(rayHit.collider) Debug.Log(rayHit.collider.transform.parent?.name?.ToString());
-            // if(rayHit.collider & rayHit.collider.transform.parent.parent != null) Debug.Log(rayHit.collider.transform.parent.parent?.name?.ToString());
-            // }
             if(rayHit.collider) return rayHit.point;
             else return aimTransform.position + aimTransform.forward * range;
         }
@@ -321,7 +315,6 @@ public class Gun : MonoBehaviour
                 if(fireStruct.continuosFire) damageToDo *= Time.deltaTime;
                 if(rayhit.collider.CompareTag(kCrtiHitTag))
                 {
-                    Debug.Log("HEAD SHOOT! " + rayhit.collider.name);
                     damageToDo *= 2;
                 }
                 var curTransform = rayhit.transform;
@@ -333,9 +326,10 @@ public class Gun : MonoBehaviour
                 }
                 if(healthObj is null) continue;
                 healthObj.UpdateHealth(damageToDo, fireStruct.damageType);
-                if(healthObjs.Contains(healthObj)) healthObjs.Add(healthObj);
+                if(!healthObjs.Contains(healthObj)) healthObjs.Add(healthObj);
             }
         }
+        
         return healthObjs;
     }
 

@@ -110,12 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17db65f98b0dde843946c6f0fd2c6adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentGun: {fileID: 0}
   damageType: 0
   bulletType: PlayerAcidBullet
-  moveVector: {x: 0, y: -12, z: 50}
+  moveVector: {x: 0, y: -12, z: 65}
   rgbd: {fileID: 7384125577035025041}
   damage: 5
-  headShootMultiplier: 3
   hit: 0
   headShootSound:
     clip: {fileID: 0}

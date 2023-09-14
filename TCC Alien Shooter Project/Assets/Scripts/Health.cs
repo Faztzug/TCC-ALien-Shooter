@@ -106,9 +106,17 @@ public class Health : MonoBehaviour
     public virtual void BleedVFX(Vector3 position, DamageType damageType, bool isContinuos = false)
     {
         if(isContinuos & bloodVfxTimer > 0) return;
-        //if(bloodVFX == null) Debug.Log(name + " Não possui vfx de sangue!");
-        else if(bloodVFX != null) GameObject.Destroy(GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null), 3f);
-        if(isContinuos) bloodVfxTimer = 0.5f;
+        if(bloodVFX != null) 
+        {
+            var n = isContinuos ? 1 : 3;
+            for (int i = 0; i < n; i++)
+            {
+                var go = GameObject.Instantiate(bloodVFX, position, Quaternion.identity, null);
+                if(this.gameObject.GetComponentInChildren<Animator>() != null) go.transform.parent = this.transform;
+                GameObject.Destroy(go, 3f);
+            }
+        }
+        if(isContinuos) bloodVfxTimer = 0.2f;
     }
 
     public virtual void DestroyCharacter()

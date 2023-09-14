@@ -17,7 +17,6 @@ public class Bullet : MonoBehaviour
     public float damage;
     private Vector3 move;
     private bool setedVelocity = false;
-    public float headShootMultiplier = 5f;
     [HideInInspector] public bool hit = false;
     [SerializeField] private Sound headShootSound;
     TrailRenderer[] trailRenderers = new TrailRenderer[]{};
@@ -81,15 +80,6 @@ public class Bullet : MonoBehaviour
         } 
         if(hit) return;
         hit = true;
-
-        //Debug.Log("Bullet Hit: " + collision.name);
-
-        // if(collision.CompareTag(Gun.kCrtiHitTag))
-        // {
-        //     Debug.Log("HEAD SHOOT!");
-        //     damage *= 2;
-        // }
-        // else Debug.Log("Bullet Hit on " + collision.tag + " / " + collision.name);
         
         var curTransform = collision.transform;
         var healthObj = curTransform.GetComponentInChildren<Health>();
