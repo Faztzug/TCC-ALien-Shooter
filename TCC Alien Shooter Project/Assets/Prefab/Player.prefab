@@ -231,7 +231,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
-  gunChangeWait: 1
+  gunChangeWait: 0.4
   reticulaFeedback: {fileID: 177779067850414071}
 --- !u!82 &4636313611126686135
 AudioSource:
@@ -1645,10 +1645,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4208014022910135885, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4632354211806553309, guid: 47c1033a9a3fa3c4488809f423788201,
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816775405841479012, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9637323
       objectReference: {fileID: 0}
     - target: {fileID: 5343980887189361692, guid: 47c1033a9a3fa3c4488809f423788201,
         type: 3}
@@ -1684,6 +1694,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879920965008530664, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.09941399
       objectReference: {fileID: 0}
     - target: {fileID: 9033928829921001085, guid: 47c1033a9a3fa3c4488809f423788201,
         type: 3}

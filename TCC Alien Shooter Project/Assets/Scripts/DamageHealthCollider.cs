@@ -12,9 +12,9 @@ public class DamageHealthCollider : MonoBehaviour
     protected virtual float InvicibilityTime => 0.01f;
 
     protected Health GetHealth(Collider other) => GetHealth(other.gameObject);
-    protected Health GetHealth(GameObject gameObject)
+    protected Health GetHealth(GameObject go)
     {
-        var curTransform = gameObject.transform;
+        var curTransform = go.transform;
         var healthObj = curTransform.GetComponentInChildren<Health>();
         while (healthObj == null && curTransform.parent != null)
         {
@@ -25,7 +25,6 @@ public class DamageHealthCollider : MonoBehaviour
         if(lastDamages.Contains(healthObj)) return null;
         if(healthObj != null && !lastDamages.Contains(healthObj))
         {
-            Debug.Log(name + " doing damage on " + healthObj.gameObject.name);
             lastDamages.Add(healthObj);
             EndEnemyInvicibility(healthObj);
         }

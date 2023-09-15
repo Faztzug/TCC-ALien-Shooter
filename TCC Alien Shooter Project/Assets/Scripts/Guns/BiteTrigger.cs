@@ -11,8 +11,12 @@ public class BiteTrigger : DamageHealthCollider
     {
         if(!other.CompareTag("Player"))
         {
+            var dmg = damage;
+            if(gameObject.CompareTag(Gun.kCrtiHitTag)) dmg *= 2;
+
             var health = GetHealth(other.gameObject);
-            health?.UpdateHealth(damage, DamageType.piranhaBiteDamage);
+
+            health?.UpdateHealth(dmg, DamageType.piranhaBiteDamage);
             health?.BleedVFX(other.ClosestPointOnBounds(this.transform.position), DamageType.piranhaBiteDamage);
             health?.BleedVFX(other.ClosestPointOnBounds(GameState.MainCamera.transform.position), DamageType.piranhaBiteDamage);
             health?.BleedVFX(other.ClosestPointOnBounds(piranha.ModelTrans.position), DamageType.piranhaBiteDamage);

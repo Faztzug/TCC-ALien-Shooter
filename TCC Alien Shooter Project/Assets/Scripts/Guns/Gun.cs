@@ -65,15 +65,28 @@ public class Gun : MonoBehaviour
 
     public void AmmoRegen()
     {
-        if(LoadedAmmo <= 0 & ammoRegenTimer > 0 
-        | (LoadedAmmo <= 0 & (Input.GetButton("Fire1") | Input.GetButton("Fire2")))) 
+        //a
+        //LoadedAmmo += (maxLoadedAmmo * ((ammoRegenPorcent / 100)) * Time.deltaTime);
+
+        if (LoadedAmmo <= 0)
+        {
+            LoadedAmmo += 0.0000001f;
+            ammoRegenTimer = 1f;
+        }
+
+        if (ammoRegenTimer > 0) 
         {
             ammoRegenTimer -= Time.deltaTime;
         }
-        else
+
+        if(this.gameObject.activeInHierarchy & (Input.GetButton("Fire1") | Input.GetButton("Fire2")))
         {
-            LoadedAmmo += (maxLoadedAmmo * (ammoRegenPorcent / 100)) * Time.deltaTime;
             ammoRegenTimer = 1f;
+        }
+
+        if (ammoRegenTimer <= 0)
+        {
+            LoadedAmmo += (maxLoadedAmmo * ((ammoRegenPorcent / 100)) * Time.deltaTime);
         }
     }
 
@@ -102,7 +115,7 @@ public class Gun : MonoBehaviour
         if(GameState.GodMode) LoadedAmmo = maxLoadedAmmo; 
         //TODO: separate fires modes gun points
         if((primaryFireData.continuosFire && !(Input.GetButton("Fire1") && 
-        primaryFireData.fireTimer <= 0)) || loadedAmmo <= 0)
+        primaryFireData.fireTimer <= 0)) || loadedAmmo < primaryFireData.ammoCost * Time.deltaTime)
         {
             foreach (var curPoint in gunPointPositions) 
             {
@@ -112,7 +125,7 @@ public class Gun : MonoBehaviour
             StopContinuosFireAudio(primaryFireData);
         }
         else if((secondaryFireData.continuosFire && !(Input.GetButton("Fire2") && 
-        secondaryFireData.fireTimer <= 0)) || loadedAmmo <= 0.1f)
+        secondaryFireData.fireTimer <= 0)) || loadedAmmo < secondaryFireData.ammoCost * Time.deltaTime)
         {
             foreach (var curPoint in gunPointPositions) 
             {
@@ -124,13 +137,18 @@ public class Gun : MonoBehaviour
 
         if (!GameState.isGamePaused)
         {
-            if(LoadedAmmo >= primaryFireData.ammoCost || primaryFireData.ammoCost == 0)
+            var firstCost = primaryFireData.ammoCost;
+            if (primaryFireData.continuosFire) firstCost *= Time.deltaTime;
+            var secondCost = secondaryFireData.ammoCost;
+            if (secondaryFireData.continuosFire) secondCost *= Time.deltaTime;
+
+            if (LoadedAmmo >= firstCost || firstCost == 0)
             {
                 if(primaryFireData.continuosFire && Input.GetButton("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
                 else if (Input.GetButtonDown("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
             }
             
-            if(LoadedAmmo >= secondaryFireData.ammoCost || secondaryFireData.ammoCost == 0)
+            if(LoadedAmmo >= secondCost ||secondCost == 0)
             {
                 if(secondaryFireData.continuosFire && Input.GetButton("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
                 else if(Input.GetButtonDown("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();

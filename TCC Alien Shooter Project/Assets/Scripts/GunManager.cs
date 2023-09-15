@@ -14,8 +14,8 @@ public class GunManager : MonoBehaviour
         scroolInput = 0.5f;
         var pastValue = _selectedGunIndex;
 
-        if(value >= guns.Count) _selectedGunIndex = 0;
-        else if(value < 0) _selectedGunIndex = guns.Count - 1;
+        if(value >= avaibleGuns.Count) _selectedGunIndex = 0;
+        else if(value < 0) _selectedGunIndex = avaibleGuns.Count - 1;
         else _selectedGunIndex = value;
         
         if(pastValue != _selectedGunIndex) GunSelected();
@@ -50,8 +50,8 @@ public class GunManager : MonoBehaviour
         if(GameState.isGamePaused || changingGun) return;
         scroolInput += Input.GetAxis("Mouse ScrollWheel");
 
-        if(scroolInput > 1) selectedGunIndex += 1;
-        else if(scroolInput < 0) selectedGunIndex -= 1;
+        if(scroolInput > 1) selectedGunIndex -= 1;
+        else if(scroolInput < 0) selectedGunIndex += 1;
 
         if(Input.GetButtonDown("One")) selectedGunIndex = 0;
         else if(Input.GetButtonDown("Two")) selectedGunIndex = 1;
@@ -60,7 +60,7 @@ public class GunManager : MonoBehaviour
 
     public void SetSelectedGun(GunType gunType)
     {
-        selectedGunIndex = guns.FindIndex(g => g.gunType == gunType);
+        selectedGunIndex = avaibleGuns.FindIndex(g => g.gunType == gunType);
         GunSelected();
     }
 
