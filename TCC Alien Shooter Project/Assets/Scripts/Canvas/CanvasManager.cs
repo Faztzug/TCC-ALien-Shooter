@@ -48,8 +48,22 @@ public class CanvasManager : MonoBehaviour
     public void GunSelected(int index)
     {
         foreach (var tween in gunTweens) tween.Kill();
-        foreach (var item in gunsSelectables) gunTweens.Add(item.rectTransform.DOScale(1f, 0.2f));
-        gunTweens.Add(gunsSelectables[index].rectTransform.DOScale(seletedScale, 0.3f).SetEase(Ease.OutQuad));
+        RebuildGunHolder();
+        foreach (var item in gunsSelectables) gunTweens.Add(item.rectTransform.DOScale(1f, 0.2f).SetEase(Ease.InQuad));
+        gunTweens.Add(gunsSelectables[index].rectTransform.DOScale(seletedScale, 0.3f).SetEase(Ease.OutQuad).OnComplete(() => RebuildGunHolder()));
+    }
+    private void RebuildGunHolder() => StartCoroutine(RebuildingLayout(gunsSelectables[0].transform.parent as RectTransform));
+
+    IEnumerator RebuildingLayout(RectTransform rectT)
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectT);
+        yield return new WaitForEndOfFrame();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectT);
+        for (int i = 0; i < 40; i++)
+        {
+            yield return new WaitForSeconds(0.025f);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectT);
+        }
     }
 
     public void UpdateShieldHealthPercentage(float shield, float health)

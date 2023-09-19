@@ -10,8 +10,11 @@ public class UIGun : MonoBehaviour
     [SerializeField] private GunType _gunType;
     public RectTransform rectTransform => transform as RectTransform;
     [SerializeField] private TextMeshProUGUI ammoTMP;
+    [HideInInspector] public Vector2 defaultSize;
     private void Start() 
     {
+        defaultSize = (this.transform as RectTransform).sizeDelta;
+        Debug.Log(GunType + " Default Size = " + defaultSize);
         AutoHide();
     }
 
