@@ -985,7 +985,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4609486606652817654, guid: a306c414fda9c8c48a29bb8fa062d314,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609486606652817654, guid: a306c414fda9c8c48a29bb8fa062d314,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 66ff9f291c4e43e48b44e1b661fc5979, type: 2}
+    - target: {fileID: 4609486606652817654, guid: a306c414fda9c8c48a29bb8fa062d314,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 3dfc823d09978434d8019c4a6dcb3717, type: 2}
     m_RemovedComponents: []
@@ -1057,6 +1067,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Poraquito_Model
       objectReference: {fileID: 0}
+    - target: {fileID: 4609486606652817654, guid: a306c414fda9c8c48a29bb8fa062d314,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3dfc823d09978434d8019c4a6dcb3717, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a306c414fda9c8c48a29bb8fa062d314, type: 3}
 --- !u!1001 &820106491
@@ -3755,7 +3770,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-78940
+  m_Name: pb_Mesh-1770
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
