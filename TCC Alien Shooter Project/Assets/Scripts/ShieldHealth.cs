@@ -22,8 +22,8 @@ public class ShieldHealth : Health
 
     public void PierciShieldDamage(float value)
     {
-        if(curShield > 0) health += value / 2;
         UpdateHealth(value, DamageType.NULL);
+        base.UpdateHealth(value, DamageType.NULL);
     }
 
     public override void UpdateHealth(float value, DamageType damageType)

@@ -37,13 +37,8 @@ public class PiranhaGun : Gun
         base.SecondaryFire();
         //base.HoldSencondaryFire();
         Shooting(secondaryFireData);
+        primaryFireData.fireTimer -= primaryFireData.fireCooldown / 4;
     }
-
-    // public override void HoldSencondaryFire()
-    // {
-    //     base.HoldSencondaryFire();
-    //     Shooting(DamageType.heatLaserDamage);
-    // }
 
     public void BiteGainAmmo()
     {
@@ -54,7 +49,7 @@ public class PiranhaGun : Gun
     {
         modelTrans.DOLocalMove(biteEndLocalPos, waitBeforeDamage + (biteDamageDuration / 2)).SetEase(Ease.InCubic)
         .OnComplete(() => modelTrans.DOLocalMove(modelStartLocalPos, biteDamageDuration).SetEase(Ease.OutCubic));
-        secondaryFireData.fireTimer += waitBeforeDamage + biteDamageDuration + 0.1f;
+        primaryFireData.fireTimer += waitBeforeDamage + biteDamageDuration + 0.1f;
         await Task.Delay((int)(waitBeforeDamage * 1000));
         biteCollider.gameObject.SetActive(true);
         await Task.Delay((int)(biteDamageDuration * 1000));

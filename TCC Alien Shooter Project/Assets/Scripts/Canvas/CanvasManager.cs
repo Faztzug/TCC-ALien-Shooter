@@ -70,7 +70,7 @@ public class CanvasManager : MonoBehaviour
     {
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
-        damageEffect.weight = 1 - (shieldImage.fillAmount * shieldImage.fillAmount);
+        damageEffect.weight = 1 - (shieldImage.fillAmount * shieldImage.fillAmount * shieldImage.fillAmount);
     }
     public void UpdateAmmoText(GunType wichGun, float normalizedValue)
     {

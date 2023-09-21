@@ -10,14 +10,7 @@ using UnityEngine.Animations.Rigging;
 
 public class PlayerShieldHealth : ShieldHealth
 {
-    //[SerializeField] private Image bar;
-    //private Image bar => GameState.mainCanvas.healthBar;
-    //[SerializeField] private PostProcessVolume damageEffect;
     private float defaultMaxShield;
-    private float damageTime = 0;
-    [SerializeField] float effectTimeMultplier = 10;
-    [SerializeField] float effectGainMultplier = 2f;
-    [SerializeField] float effectDownMultplier = 0.5f;
     [SerializeField] float fallingDeathHeight = -1000;
     public bool IsMaxHealth => health >= maxHealth;
     //private GameState state;

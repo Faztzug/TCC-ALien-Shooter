@@ -186,10 +186,18 @@ public class Gun : MonoBehaviour
 
     private void FireFunc(GunFireStruct fireMode)
     {
-        primaryFireData.fireTimer = primaryFireData.fireCooldown;
-        secondaryFireData.fireTimer = secondaryFireData.fireCooldown;
+        if (fireMode == primaryFireData)
+        {
+            primaryFireData.fireTimer = primaryFireData.fireCooldown;
+            secondaryFireData.fireTimer = secondaryFireData.fireCooldown / 2;
+        }
+        else
+        {
+            primaryFireData.fireTimer = primaryFireData.fireCooldown / 2;
+            secondaryFireData.fireTimer = secondaryFireData.fireCooldown;
+        }
 
-        if(!fireMode.continuosFire)  LoadedAmmo -= fireMode.ammoCost;
+        if (!fireMode.continuosFire)  LoadedAmmo -= fireMode.ammoCost;
         else LoadedAmmo -= fireMode.ammoCost * Time.deltaTime;
 
         if(fireMode.continuosFire)
