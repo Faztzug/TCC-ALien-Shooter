@@ -25,6 +25,8 @@ public class EnemyEletric : EnemyBiter
         base.Update();
         if(!isBiting) eletricVFX.TurnOffLAser();
         else eletricVFX.SetLaser(eletricVFX.transform.position, player.position + (playerRgbd != null ? playerRgbd.centerOfMass : Vector3.zero));
+
+        if (agent.isOnNavMesh) anim.SetBool("Walking", !agent.isStopped && Vector3.Distance(agent.destination, this.transform.position) > minPlayerDistance);
     }
 
     protected override IEnumerator BiteCourotine()
