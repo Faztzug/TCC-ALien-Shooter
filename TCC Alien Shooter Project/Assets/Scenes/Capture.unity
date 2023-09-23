@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -418,6 +418,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -430252044720675574, guid: 7aed444126c1d9e4d935e5b9d924605c,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -430252044720675574, guid: 7aed444126c1d9e4d935e5b9d924605c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5fcc449b419cad4db2e48d5923002dc, type: 2}
+    - target: {fileID: -430252044720675574, guid: 7aed444126c1d9e4d935e5b9d924605c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 91e84fbfc7a3d1b45829b5227fbd97b5, type: 2}
     - target: {fileID: 919132149155446097, guid: 7aed444126c1d9e4d935e5b9d924605c,
         type: 3}
       propertyPath: m_Name
@@ -1436,6 +1451,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: FormigaoEnemyPiranha
       objectReference: {fileID: 0}
+    - target: {fileID: 4011376106124071044, guid: 11d416d82e72b9e4797db2794ab422ac,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011376106124071044, guid: 11d416d82e72b9e4797db2794ab422ac,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e191774542337d14f862928165a64bef, type: 2}
+    - target: {fileID: 4011376106124071044, guid: 11d416d82e72b9e4797db2794ab422ac,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfce7af1234e6c9409664c5ba06146cb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11d416d82e72b9e4797db2794ab422ac, type: 3}
 --- !u!1001 &1283321287
@@ -1661,7 +1691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1623710271
 Light:
   m_ObjectHideFlags: 0
@@ -3770,7 +3800,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1770
+  m_Name: pb_Mesh-14966
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
