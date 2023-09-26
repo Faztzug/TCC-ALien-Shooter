@@ -92,13 +92,19 @@ public class Health : MonoBehaviour
 
         if(value < 0 && health >= 0)
         {
-            if(damageSounds != null & damageSounds.Length > 0 & damageSoundTimer < 0 && damageSounds.Length > 0)
-            {
-                var index = UnityEngine.Random.Range(0, damageSounds.Length);
-                damageSounds[index].PlayOn(audioSource);
-                damageSoundTimer = 1f;
-                //Debug.Log("Health dmaage Sound " + name);
-            }
+            PlayDamageSound(damageSounds);
+        }
+    }
+
+    protected void PlayDamageSound(Sound[] sounds)
+    {
+        if (sounds != null & sounds.Length > 0 & damageSoundTimer < 0)
+        {
+            var index = UnityEngine.Random.Range(0, sounds.Length);
+            GameState.InstantiateSound(sounds[index], this.transform.position);
+            //sounds[index].PlayOn(audioSource);
+            damageSoundTimer = 0.3f;
+            //Debug.Log("Health dmaage Sound " + name);
         }
     }
 
