@@ -674,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: 1
   primaryFireData:
+    notMultpliyGunPoints: 0
     damageType: 3
     bulletPrefab: {fileID: 8196861408395965754, guid: c1010900c080cd54cbc3bd6a7501cb7d,
       type: 3}
@@ -696,7 +697,9 @@ MonoBehaviour:
       playOnAwake: 0
       audioSource: {fileID: 0}
     piercingRay: 0
+    rayDiamanter: 0
   secondaryFireData:
+    notMultpliyGunPoints: 0
     damageType: 3
     bulletPrefab: {fileID: 8196861408395965754, guid: 0c16fa5d0c802df458e53b807bc87938,
       type: 3}
@@ -719,6 +722,7 @@ MonoBehaviour:
       playOnAwake: 0
       audioSource: {fileID: 0}
     piercingRay: 0
+    rayDiamanter: 0
   isPlayerGun: 1
   useTriggerColiderToGetTargets: 0
   aimTransform: {fileID: 0}

@@ -171,13 +171,13 @@ public class Movimento : MonoBehaviour
         if((currentSpeed > crouchingSpeed && isCrouching)
         || !hasMovingInput)
         {
-            currentSpeed -= (lastInputSpeed > crouchingSpeed ? inerciaDeccalaration : inerciaDeccalaration * 3) * Time.deltaTime;
+            currentSpeed -= (lastInputSpeed > crouchingSpeed ? inerciaDeccalaration : inerciaDeccalaration * 8) * Time.deltaTime;
             var flag = isCrouching && hasMovingInput && currentSpeed > crouchingSpeed - 0.1f && currentSpeed < crouchingSpeed + 0.1f;
             if(flag) currentSpeed = crouchingSpeed;
         }
         else if((currentSpeed > walkSpeed && !isRuning))
         {
-            currentSpeed -= (lastInputSpeed > walkSpeed ? inerciaDeccalaration : inerciaDeccalaration * 3) * Time.deltaTime;
+            currentSpeed -= (lastInputSpeed > walkSpeed ? inerciaDeccalaration : inerciaDeccalaration * 5) * Time.deltaTime;
             var flag = hasMovingInput && currentSpeed > walkSpeed - 0.1f && currentSpeed < walkSpeed + 0.1f;
             if(flag) currentSpeed = walkSpeed;
         }

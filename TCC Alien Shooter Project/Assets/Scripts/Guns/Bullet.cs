@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("BULEETTT HEADSHOT!" + collisionInfo.collider.gameObject.name);
             damage *= 2;
-            //play head shoot sound
+            GameState.InstantiateSound(headShootSound, collisionInfo.GetContact(0).point);
         }
 
         if(collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);

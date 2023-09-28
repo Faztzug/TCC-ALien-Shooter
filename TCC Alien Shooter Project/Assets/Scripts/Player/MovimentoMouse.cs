@@ -21,6 +21,11 @@ public class MovimentoMouse : MonoBehaviour
     [SerializeField] private float distanceToInteract = 3f;
     public bool isOnInteractableDistance => distanceFromTarget <= distanceToInteract;
 
+    [Header("Sway Settings")]
+    [SerializeField] private Transform swayHolder;
+    [SerializeField] private float smooth = 8f;
+    [SerializeField] private float multiplier = 2f;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,6 +63,24 @@ public class MovimentoMouse : MonoBehaviour
                 itemObj?.InteractingWithItem();
             }
         }
+
+        SwayWeapons();
+    }
+
+    private void SwayWeapons()
+    {
+        // get mouse input
+        float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier * 2f;
+
+        // calculate target rotation
+        Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
+        Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
+
+        Quaternion targetRotation = rotationX * rotationY;
+
+        // rotate 
+        swayHolder.localRotation = Quaternion.Slerp(swayHolder.localRotation, targetRotation, smooth * Time.deltaTime);
     }
 
     static public int GetLayers(bool isPlayerCast = true)
