@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MonitorGrandeGlitchShader
+  m_Shader: {fileID: -6465566751694194690, guid: b0bfb5b4ba97926448acb65686e37f19,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_4ab4af653fa2426d8e2c65ab1b31fd46:
+        m_Texture: {fileID: 2800000, guid: 683b7974ff466204ca1680521fd8acd3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_c9a69fecc2454de488a372e5958ef545:
+        m_Texture: {fileID: 2800000, guid: c890361e5c943964f88d2852e3c1d03c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ebff1876268c4e2188e65ed05c4d5604_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_8919d6a0038b48e5a77d1df0fd925b9c: 1
+    - Vector1_9b58baedf8f046afbf75c0b08d0034e3: 1
+    - Vector1_a9ed8383a6d643eb94a946cc5c9c26ff: 1
+    m_Colors:
+    - Color_4544f8b6c769439394c9bba7cbc07311: {r: 0.7490196, g: 0, b: 0.03091116,
+        a: 0}
+    - Color_d754791c6dcd46df8dc339ae63673ec3: {r: 0, g: 0, b: 0, a: 1}
+    - Vector4_91ca06b0815d47c8b6395a3383e65949: {r: 0.25, g: 0, b: 1, a: 1}
+  m_BuildTextureStacks: []
