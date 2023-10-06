@@ -8,6 +8,8 @@ using DG.Tweening;
 public class EnemyIA : MonoBehaviour
 {
     [SerializeField] [Range(0,1)] protected float[] updateRateRNG = new float[2];
+    [Range(0, 1)] protected float updateRate;
+    protected float advanceUpdate = 0f;
     [HideInInspector] public Transform player => GameState.PlayerTransform;
     [SerializeField] protected Vector2 playerOffsetXRNG;
     [SerializeField] protected Vector3 playerOffsetGoTo;
@@ -19,7 +21,6 @@ public class EnemyIA : MonoBehaviour
     [SerializeField] protected float shootingDistance = 100f;
     [SerializeField] protected float findPlayerDistance = 100f;
     [SerializeField] protected float minPlayerDistance = 10f;
-    [Range(0,1)] protected float updateRate;
     protected float distance => Vector3.Distance(player.position, this.transform.position);
     protected Animator anim;
     [Range(0,100)] [SerializeField] protected float shootAim = 90;
@@ -27,7 +28,7 @@ public class EnemyIA : MonoBehaviour
     [HideInInspector] public bool alive = true;
     protected Gun gun;
     protected Vector3 missTargetPos = new Vector3();
-    protected bool doesContinuousFire => gun is PiranhaGun;
+    //protected bool DoesContinuousFire => gun is PiranhaGun;
     [SerializeField] protected Transform aimTransform;
     [SerializeField] private float aimRotationSpeed = 5f;
     protected Vector3 targetPos;
@@ -70,6 +71,8 @@ public class EnemyIA : MonoBehaviour
     protected IEnumerator CourotineAsyncUpdateIA()
     {
         updateRate = Random.Range(updateRateRNG[0], updateRateRNG[1]);
+        updateRate = Mathf.Clamp(updateRate - advanceUpdate, 0, updateRateRNG[1]);
+        advanceUpdate = 0f;
 
         yield return new WaitForSeconds(updateRate);
 
@@ -200,10 +203,8 @@ public class EnemyIA : MonoBehaviour
         transform.DORotate(directionPlayer, 1f, RotateMode.FastBeyond360);
     }
     protected float shootRNG;
-    private void ShootAtPlayer()
+    private void ShootAtPlayer(GunFireStruct fireMode)
     {
-        //Debug.Log("shoot player " + shootChance +" >= " + shootRNG);
-        //StopMoving();
         var playerNoYPos = player.position;
         playerNoYPos.y = this.transform.position.y;
         var distanceFlat = Vector3.Distance(this.transform.position, playerNoYPos);
@@ -211,7 +212,7 @@ public class EnemyIA : MonoBehaviour
         var rngValue = (1f / shootAim) * distance;
         var rngMissTarget = new Vector3(Random.Range(-rngValue, rngValue),Random.Range(-rngValue, rngValue), Random.Range(-rngValue, rngValue));
         newTargetTrans = GameState.playerRandomBodyPart;
-        if(!doesContinuousFire && Vector3.Distance(missTargetPos, Vector3.zero) < 0.01f) missTargetPos = rngMissTarget;
+        if(!fireMode.continuosFire && Vector3.Distance(missTargetPos, Vector3.zero) < 0.01f) missTargetPos = rngMissTarget;
         else missTargetPos = Vector3.Lerp(missTargetPos, rngMissTarget, Time.deltaTime);
         newTargetTrans.position += missTargetPos;
         var isPlayerAbove = player.position.y >= transform.position.y;
@@ -221,29 +222,36 @@ public class EnemyIA : MonoBehaviour
             newTargetTrans.position += plusY;
         }
 
-        if(!doesContinuousFire) targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
+        if(!fireMode.continuosFire) targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
 
-        gun.enemyTarget = doesContinuousFire ? targetPos : newTargetTrans.position;
+        gun.enemyTarget = fireMode.continuosFire ? targetPos : newTargetTrans.position;
     }
 
     protected virtual void PrimaryFire()
     {
-        if(gun.IsACloseObstacleOnFire()) return;
-        ShootAtPlayer();
+        if(gun.primaryFireData.continuosFire | gun is PiranhaGun | gun is EletricGun)
+        {
+            if (gun.IsACloseObstacleOnFire()) return;
+        }
+        ShootAtPlayer(gun.primaryFireData);
         gun.PrimaryFire();
         anim.SetTrigger("Fire");
     }
     protected virtual void SecondaryFire()
     {
-        if(gun.IsACloseObstacleOnFire()) return;
-        ShootAtPlayer();
+        if(gun.secondaryFireData.continuosFire)
+        {
+            if (gun.IsACloseObstacleOnFire()) return;
+        }
+        ShootAtPlayer(gun.secondaryFireData);
         gun.SecondaryFire();
+        anim.SetTrigger("Fire");
     }
-    protected virtual void HoldSecondaryFire()
-    {
-        ShootAtPlayer();
-        gun.SecondaryFire();
-    }
+    //protected virtual void HoldSecondaryFire()
+    //{
+    //    ShootAtPlayer();
+    //    gun.SecondaryFire();
+    //}
 
     private void OnDrawGizmos() 
     {

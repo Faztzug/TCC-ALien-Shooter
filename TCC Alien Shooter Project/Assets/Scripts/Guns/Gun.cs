@@ -105,7 +105,7 @@ public class Gun : MonoBehaviour
                 {
                     var line = curPoint.GetComponentInChildren<GunVFXManager>();
                     if(line) line.TurnOffLAser();
-                    StopContinuosFireAudio(primaryFireData);
+                    //StopContinuosFireAudio(primaryFireData);
                     StopContinuosFireAudio(secondaryFireData);
                 }
             }
@@ -221,7 +221,8 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            fireMode.fireSound.PlayOn(audioSource);
+            fireMode.fireSound.PlayOn(audioSource, false);
+            if (!isPlayerGun & fireMode == primaryFireData & this is PiranhaGun) Debug.Log(fireMode.fireSound.clip.name);
         }
     }
     

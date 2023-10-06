@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHumanoid : EnemyIA
 {
-    protected bool isContinousFiring => doesContinuousFire && keepFiringTimer > 0;
+    protected bool isContinousFiring => gun is PiranhaGun & keepFiringTimer > 0;
     [SerializeField] [Range(0f,10f)] protected float[] keepFiringTimeRNG = new float[2];
     protected float keepFiringTimer;
     protected override void Start()
@@ -15,9 +15,13 @@ public class EnemyHumanoid : EnemyIA
     protected override void Update()
     {
         base.Update();
-        keepFiringTimer -= Time.deltaTime;
-        if(isContinousFiring) HoldSecondaryFire();
-        gun.enemyHoldingFire = isContinousFiring;
+
+        if(gun is PiranhaGun)
+        {
+            keepFiringTimer -= Time.deltaTime;
+            if (isContinousFiring) SecondaryFire();
+            gun.enemyHoldingFire = isContinousFiring;
+        }
     }
     protected override void AsyncUpdateIA()
     {
@@ -26,28 +30,39 @@ public class EnemyHumanoid : EnemyIA
         anim.SetFloat("Movement", agent.velocity.magnitude);
         anim.SetBool("isRuning", false);
 
-        if(!isContinousFiring && doesContinuousFire && !gun.IsACloseObstacleOnFire())
+        if(gun is PiranhaGun)
         {
-            agent.speed = walkingSpeed;
-            if(shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.secondaryFireData.fireTimer < 0 && inFireRange)
+            if(distance <= 3f & gun.primaryFireData.fireTimer <= 0)
             {
-                keepFiringTimer = Random.Range(keepFiringTimeRNG[0],keepFiringTimeRNG[1]);
-                HoldSecondaryFire();
-            } 
+                advanceUpdate = 0.1f;
+                if (distance <= 1f) PrimaryFire();
+                GoToPlayerDirect();
+                agent.speed = runSpeed;
+                anim.SetBool("isRuning", true);
+            }
+            else if (!gun.IsACloseObstacleOnFire())
+            {
+                agent.speed = walkingSpeed;
+                if (shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.secondaryFireData.fireTimer < 0 & inFireRange)
+                {
+                    keepFiringTimer = Random.Range(keepFiringTimeRNG[0], keepFiringTimeRNG[1]);
+                    SecondaryFire();
+                }
 
-            if(inWalkRange) GoToPlayerOffset();
-            else if(agent.isOnNavMesh) agent.isStopped = true;
-        }
-        else if(isContinousFiring && doesContinuousFire && distance <= shootingDistance)
-        {
-            HoldSecondaryFire();
-            agent.speed = lowSpeed;
-        }
-        else if(distance >= minPlayerDistance && distance <= findPlayerDistance && distance >= shootingDistance)
-        {
-            GoToPlayerOffset();
-            agent.speed = runSpeed;
-            anim.SetBool("isRuning", true);
+                if (inWalkRange) GoToPlayerOffset();
+                else if (agent.isOnNavMesh) StopMoving();
+            }
+            else if(isContinousFiring & inFireRange)
+            {
+                SecondaryFire();
+                agent.speed = lowSpeed;
+            }
+            else if (distance >= minPlayerDistance & distance <= findPlayerDistance & distance >= shootingDistance)
+            {
+                GoToPlayerOffset();
+                agent.speed = runSpeed;
+                anim.SetBool("isRuning", true);
+            }
         }
     }
 }

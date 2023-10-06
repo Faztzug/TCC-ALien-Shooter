@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyTouch : DamageHealthCollider
 {
+    [SerializeField] DamageType damageType = DamageType.NULL;
     [SerializeField] private bool damageBySecond;
     [SerializeField] float invicibilityTime = 0.1f;
     private float time;
@@ -15,7 +16,7 @@ public class EnemyTouch : DamageHealthCollider
 
     void Update()
     {
-        time -= Time.unscaledDeltaTime;
+        time -= Time.deltaTime;
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -41,11 +42,11 @@ public class EnemyTouch : DamageHealthCollider
         {
             if(damageBySecond) 
             {
-                GetHealth(hit)?.UpdateHealth(damage * Time.deltaTime, DamageType.NULL);
+                GetHealth(hit)?.UpdateHealth(damage * Time.deltaTime, damageType);
             }
             else
             {
-                GetHealth(hit)?.UpdateHealth(damage, DamageType.NULL);
+                GetHealth(hit)?.UpdateHealth(damage, damageType);
                 time = invicibilityTime;
             }
         }

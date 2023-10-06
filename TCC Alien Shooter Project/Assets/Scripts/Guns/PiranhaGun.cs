@@ -35,7 +35,6 @@ public class PiranhaGun : Gun
     public override void SecondaryFire()
     {
         base.SecondaryFire();
-        //base.HoldSencondaryFire();
         Shooting(secondaryFireData);
         primaryFireData.fireTimer -= primaryFireData.fireCooldown / 4;
     }
