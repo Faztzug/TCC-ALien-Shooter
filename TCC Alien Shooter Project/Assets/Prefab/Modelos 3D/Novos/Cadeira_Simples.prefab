@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8599918034200115731}
   - component: {fileID: 4681158067989394870}
   - component: {fileID: 7427041890948006268}
+  - component: {fileID: 8253010440895837194}
+  - component: {fileID: 8415116691494554053}
   m_Layer: 0
   m_Name: Cadeira_Simples
   m_TagString: Untagged
@@ -81,3 +83,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8253010440895837194
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940449346378883241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.022719905, y: 0.016521495, z: 0.019871524}
+  m_Center: {x: 0.0000000069538753, y: 0.008451935, z: 8.072965e-17}
+--- !u!65 &8415116691494554053
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940449346378883241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.016954485, y: 0.043822974, z: 0.003748885}
+  m_Center: {x: 0.00002019119, y: 0.02210267, z: -0.0080613755}
