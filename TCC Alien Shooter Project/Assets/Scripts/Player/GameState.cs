@@ -49,8 +49,11 @@ public class GameState : MonoBehaviour
     public static Action OnSettingsUpdated;
     public static Action OnCutsceneEnd;
     
-    [SerializeField] private string nextScene = "MenuInicial";
+    //[SerializeField] private string nextScene = "MenuInicial";
     [SerializeField] private GameObject endCanvas;
+    [HideInInspector] public static int nEnemies = 0;
+    [HideInInspector] public static int nKillEnemies = 0;
+    private DateTime levelStartTime = DateTime.Now;
 
     private void Awake()
     {
@@ -114,7 +117,8 @@ public class GameState : MonoBehaviour
         if(checkpoint != Vector3.zero)
         {
             playerTransform.GetComponent<Movimento>().GoToCheckPoint(checkpoint);
-        } 
+        }
+        levelStartTime = DateTime.Now;
     }
 
     private void Update()
@@ -250,13 +254,28 @@ public class GameState : MonoBehaviour
 
     public static void EndLevel()
     {
-        if(!GodMode) ToogleGodMode();
+        if(GodMode) ToogleGodMode();
         gameState.StartCoroutine(gameState.EndLevelCourotine());
     }
     IEnumerator EndLevelCourotine()
     {
-        GameObject.Instantiate(endCanvas,null);
+        var totalTime = DateTime.Now - levelStartTime;
+        var go = GameObject.Instantiate(endCanvas,null);
+        go.SetActive(true);
+        var endLevelScreen = go.GetComponentInChildren<EndLevelScreenManager>();
+        endLevelScreen?.SetAnim(nEnemies, nKillEnemies);
         yield return new WaitForSecondsRealtime(5f);
-        GameState.LoadScene(nextScene);
+        var nextSceneI = this.gameObject.scene.buildIndex + 1;
+        if (nextSceneI >= SceneManager.sceneCountInBuildSettings) nextSceneI = 0;
+        /*Debug.Log("cur scene I " + this.gameObject.scene.buildIndex);
+        Debug.Log("NEXT scene I " + nextSceneI);
+        Debug.Log("NEXT scene is valid? " + SceneManager.GetSceneByBuildIndex(nextSceneI).IsValid());
+        Debug.Log("NEXT scene name " + SceneManager.GetSceneByBuildIndex(nextSceneI).name);*/
+
+
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(nextSceneI);
+        string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+        GameState.LoadScene(sceneName);
     }
 }

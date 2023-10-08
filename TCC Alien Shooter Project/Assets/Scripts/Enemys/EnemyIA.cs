@@ -56,6 +56,7 @@ public class EnemyIA : MonoBehaviour
         audioSource = GetComponentInChildren<AudioSource>();
         
         StartCoroutine(CourotineAsyncUpdateIA());
+        GameState.nEnemies++;
     }
 
     protected virtual void Update() 
@@ -105,19 +106,9 @@ public class EnemyIA : MonoBehaviour
         if(agent.isOnNavMesh) agent.SetDestination(transform.position);
         if(agent.isOnNavMesh) agent.isStopped = true;
 
+        if(!alive) return;
+        GameState.nKillEnemies++;
         alive = false;
-
-        // foreach (var collider in GetComponentsInChildren<Collider>())
-        // {
-        //     collider.enabled = false;
-        // }
-        // foreach (var script in GetComponentsInChildren<MonoBehaviour>(true))
-        // {
-        //     if(script == this) continue;
-        //     if(script is Gun) (script as LaserVFXManager).TurnOffLAser();
-        //     if(script is LaserVFXManager) (script as LaserVFXManager).TurnOffLAser();
-        //     script.enabled = false;
-        // }
         this.StopAllCoroutines();
     }
     public virtual void OnDamage(DamageType damageType)
