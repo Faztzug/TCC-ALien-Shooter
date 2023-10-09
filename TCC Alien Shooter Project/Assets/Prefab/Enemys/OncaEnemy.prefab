@@ -65,7 +65,7 @@ MonoBehaviour:
   alive: 1
   aimTransform: {fileID: 0}
   aimRotationSpeed: 2
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.14117648}
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.043137256}
   biteCollider: {fileID: 315705570165237934}
   biteWaitStart: 0.2
   biteTime: 0.8
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
+  isDead: 0
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   DeathVFX: {fileID: 0}
@@ -251,6 +252,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   audioSource: {fileID: 315705569910493906}
   damageModifiers: []
+  doesDestroyOnDeath: 1
 --- !u!114 &-4800811894422088956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: -4
+  damageType: 0
   damageBySecond: 0
   invicibilityTime: 0.1
 --- !u!1 &906908571913886028

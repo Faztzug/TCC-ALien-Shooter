@@ -116,9 +116,7 @@ public class EletricGun : Gun
                 validColliders.Add(col.attachedRigidbody);
             }
         }
-        var names = string.Join(" / ", validColliders.Select(r => r.name)); //validColliders.Select(r => r.name);
-        Debug.Log("Geting On Trigger... " + colliders.Length);
-        Debug.Log("Sorting Valid... " + validColliders.Count + names);
+        var names = string.Join(" / ", validColliders.Select(r => r.name));
         return validColliders;
     }
 

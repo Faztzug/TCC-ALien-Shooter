@@ -40,6 +40,7 @@ public class Health : MonoBehaviour
     public float maxHealth = 1f;
     protected float health;
     public float CurHealth => health;
+    [HideInInspector] public bool isDead = false;
     protected Animator anim;
     protected EnemyIA thisEnemy;
     public Action onDeath;
@@ -50,6 +51,7 @@ public class Health : MonoBehaviour
     public AudioSource audioSource;
     protected float damageSoundTimer;
     public List<DamageModified> damageModifiers = new List<DamageModified>();
+    [SerializeField] protected bool doesDestroyOnDeath = true;
 
     public virtual void Start()
     {
@@ -71,9 +73,6 @@ public class Health : MonoBehaviour
         if(damageModifiers.Count >= 1)
         {
             DamageModified modifier = damageModifiers.Find(d => d.damageType == damageType | d.damageType == DamageType.AnyDamage);
-            if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) 
-            Debug.Log("modified damage of " + modifier.damageType + value+"*"+modifier.multplier
-            + " to: " + (value *= modifier.multplier));
             if(modifier.damageType == damageType | modifier.damageType == DamageType.AnyDamage) value *= modifier.multplier;
         }
         
@@ -164,9 +163,11 @@ public class Health : MonoBehaviour
             drop.Drop(); 
             this.gameObject.SetActive(false);
         }
-        else if(anim == null || anim.parameterCount == 0)
+        else if((anim == null || anim.parameterCount == 0) & doesDestroyOnDeath)
         {
             Destroy(this.gameObject);
         }
+
+        isDead = true;
     }
 }

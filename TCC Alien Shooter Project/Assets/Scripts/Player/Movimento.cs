@@ -20,6 +20,7 @@ public class Movimento : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     public Vector3 LookAtRayHit{get; private set;}
     private CharacterController controller;
+    private Rigidbody rigidbody;
     [SerializeField] private Camera mainCam;
     private Animator anim;
 
@@ -52,6 +53,7 @@ public class Movimento : MonoBehaviour
         upwardsCenter = controller.center;
         upwardsCamLocalPos = mainCam.transform.localPosition;
         //StartCoroutine(UpdateRigBuilder());
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void UpdateIK()
@@ -222,5 +224,12 @@ public class Movimento : MonoBehaviour
     public void GoToCheckPoint(Vector3 checkpoint)
     {
 
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit other)
+    {
+        if (other.rigidbody is null) return;
+        var pushable = other.rigidbody.GetComponent<PushableBody>();
+        pushable?.Push(rigidbody);
     }
 }

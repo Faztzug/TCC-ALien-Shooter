@@ -27,7 +27,10 @@ public class BarrierWhileEnemys : MonoBehaviour
     IEnumerator LaterCheck()
     {
         yield return new WaitForSecondsRealtime(0.1f);
-        if(!dependables.Find(h => h != null))
+        Debug.Log("Is all null? " + (dependables.Find(h => h != null) is null));
+        if(dependables.Find(h => h != null)) Debug.Log("Is all dead? " + (dependables.Find(h => !h.isDead) is null));
+
+        if (!dependables.Find(h => h != null) | !dependables.Find(h => !h.isDead))
         {
             Debug.Log("DESTROY Barrier");
             Destroy(this.gameObject);

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 55527341117535643}
   - component: {fileID: 783430793978784012}
-  m_Layer: 0
+  - component: {fileID: 9040407413303352832}
+  m_Layer: 11
   m_Name: CarrinhoTransporte
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,8 +47,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &9040407413303352832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2653146217696470796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1ad62098e580845a80e5c6368f5fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6942830160163805644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +128,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transporte_Armas
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cefa49a7e038ecb4dab4e3fc1937a7fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cefa49a7e038ecb4dab4e3fc1937a7fc, type: 3}
 --- !u!1 &7825157112134345885 stripped
@@ -129,8 +147,8 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6942830160163805644}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &7163487558418929474
-MeshCollider:
+--- !u!65 &1918766349925534472
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,7 +157,20 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7, y: 1.35, z: 3}
+  m_Center: {x: -0.000000029802322, y: -0.30860734, z: 0}
+--- !u!64 &7163487558418929474
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7825157112134345885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -184573276360931336, guid: cefa49a7e038ecb4dab4e3fc1937a7fc, type: 3}

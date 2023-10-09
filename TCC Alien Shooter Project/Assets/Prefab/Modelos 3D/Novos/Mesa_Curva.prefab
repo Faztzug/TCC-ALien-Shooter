@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6224824389562456720}
   - component: {fileID: 7047253086095660341}
   - component: {fileID: 5055334639180259839}
+  - component: {fileID: 7274079821531766857}
   m_Layer: 0
   m_Name: Mesa_Curva
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7274079821531766857
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712848761359335466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5302568919011541938, guid: f608b1c94848a4a4288356b11b664607, type: 3}

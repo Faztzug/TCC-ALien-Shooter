@@ -118,6 +118,8 @@ public class GameState : MonoBehaviour
         {
             playerTransform.GetComponent<Movimento>().GoToCheckPoint(checkpoint);
         }
+        nEnemies = 0;
+        nKillEnemies = 0;
         levelStartTime = DateTime.Now;
     }
 

@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2310278856307361847}
   m_Layer: 6
   m_Name: FormigaoEnemyPiranha
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  isDead: 0
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   DeathVFX: {fileID: 2418351548702839790, guid: b0fb23853e448f244bfaa559c169d2a6,
@@ -327,6 +328,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   audioSource: {fileID: 2310278856307361847}
   damageModifiers: []
+  doesDestroyOnDeath: 1
   gunHolder: {fileID: 1517865326771250779}
   rightHand: {fileID: 4041683421462357025}
   maxShield: 1
