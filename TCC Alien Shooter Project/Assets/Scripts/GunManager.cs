@@ -36,12 +36,14 @@ public class GunManager : MonoBehaviour
         audioSource = GetComponentInChildren<AudioSource>();
         anim = GetComponentInChildren<Animator>();
         foreach (var gun in guns) gun.gameObject.SetActive(false);
+        UpdateAvaibleGuns();
         GunSelected();
     }
 
+    public void UpdateAvaibleGuns() => avaibleGuns = guns.Where(g => GameState.SaveData.gunsColected.Contains(g.gunType)).ToList();
+
     void Update()
     {
-        avaibleGuns = guns.Where(g => GameState.SaveData.gunsColected.Contains(g.gunType)).ToList();
         foreach (var gun in avaibleGuns)
         {
             gun.AmmoRegen();

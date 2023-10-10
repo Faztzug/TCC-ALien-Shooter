@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 7
+  isDead: 0
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
   DeathVFX: {fileID: 0}
@@ -311,6 +312,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   audioSource: {fileID: 7988682796749478736}
   damageModifiers: []
+  doesDestroyOnDeath: 1
   gunHolder: {fileID: 6612067885380023612}
   rightHand: {fileID: 8558162437597329222}
   maxShield: 5
@@ -374,8 +376,8 @@ MonoBehaviour:
   - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}
   - {fileID: 4275636808051785984, guid: c0556c998d85af14e9edc1c421c366bb, type: 3}
   dropChance:
-  - 75
-  - 10
+  - 100
+  - 20
 --- !u!82 &7988682796749478736
 AudioSource:
   m_ObjectHideFlags: 0

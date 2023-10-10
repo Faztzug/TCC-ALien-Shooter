@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageType: 0
   damageBySecond: 0
   invicibilityTime: 0.1
 --- !u!1 &6155412603637488708
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: -2
+  damageType: 0
   damageBySecond: 0
   invicibilityTime: 0.1
 --- !u!1 &7663323384576428417
@@ -540,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  isDead: 0
   bloodVFX: {fileID: 1211128768393774554, guid: 08b720b0373a1ff4abd26950e3e25aba,
     type: 3}
   DeathVFX: {fileID: 2418351548702839790, guid: 0d1d5763fce261540bdaaaa7951d76ad,
@@ -558,6 +561,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   audioSource: {fileID: 5363006840946648732}
   damageModifiers: []
+  doesDestroyOnDeath: 1
 --- !u!114 &820349350335583623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,7 +596,7 @@ MonoBehaviour:
   - {fileID: 4275636808051785984, guid: c0556c998d85af14e9edc1c421c366bb, type: 3}
   dropChance:
   - 100
-  - 10
+  - 5
 --- !u!82 &5363006840946648732
 AudioSource:
   m_ObjectHideFlags: 0

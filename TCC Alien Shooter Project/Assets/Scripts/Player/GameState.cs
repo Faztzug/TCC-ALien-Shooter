@@ -96,6 +96,9 @@ public class GameState : MonoBehaviour
         OnSettingsUpdated?.Invoke();
         saveManager.SaveGame(saveData);
         PauseGame(false);
+        nEnemies = 0;
+        nKillEnemies = 0;
+        levelStartTime = DateTime.Now;
     }
 
     static public void SaveGameData() => saveManager.SaveGame(SaveData);
@@ -118,9 +121,6 @@ public class GameState : MonoBehaviour
         {
             playerTransform.GetComponent<Movimento>().GoToCheckPoint(checkpoint);
         }
-        nEnemies = 0;
-        nKillEnemies = 0;
-        levelStartTime = DateTime.Now;
     }
 
     private void Update()

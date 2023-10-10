@@ -26,7 +26,7 @@ public class PushableBody : MonoBehaviour
 
     public void Push(Rigidbody cRgbd)
     {
-        if (cRgbd is null || tRgbd is null) return;
+        if (cRgbd == null || tRgbd == null) return;
         if (cRgbd != null & (cRgbd.CompareTag("Player") | cRgbd.CompareTag("Enemy")))
         {
             var mass = cRgbd.mass;
