@@ -38,7 +38,7 @@ public class Gun : MonoBehaviour
     [HideInInspector] public Vector3 enemyTarget;
     [HideInInspector] public bool enemyHoldingFire;
     private HandGripManager handGripManager;
-    protected float ammoRegenPorcent = 0.2f;
+    [SerializeField] protected float ammoRegenPorcent = 0.2f;
     protected float ammoRegenTimer = 1f;
    
     virtual protected void Start()

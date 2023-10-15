@@ -11,8 +11,8 @@ public class BulletAcid : Bullet
     {
         if(!hit)
         {
-            if(acidPoolGO) GameObject.Instantiate(acidPoolGO, transform.position, Quaternion.identity);
-            if(explosionGO) GameObject.Instantiate(explosionGO, transform.position, Quaternion.identity);
+            if(acidPoolGO) GameObject.Instantiate(acidPoolGO, transform.position, Quaternion.identity, null);
+            if(explosionGO) GameObject.Instantiate(explosionGO, transform.position, Quaternion.identity, null);
         }
         base.BulletHit(collision, isTrigger);
     }

@@ -95,7 +95,8 @@ public class EnemyIA : MonoBehaviour
     }
     public virtual void EnemyDeath()
     {
-        if(gameObject.TryGetComponent<EnemyDrop>(out EnemyDrop drop))
+        StopMoving();
+        if (gameObject.TryGetComponent<EnemyDrop>(out EnemyDrop drop))
         {
             drop.Drop();
         }

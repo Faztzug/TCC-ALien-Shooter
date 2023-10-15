@@ -679,7 +679,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 64af1221e6da027478e4a1f757b0d20a, type: 3}
     name: steps
     volume: 1
-    pitch: 3
+    pitch: 2.5
     pitchRNG: []
     loop: 1
     playOnAwake: 0
@@ -921,8 +921,8 @@ MonoBehaviour:
   gunHolder: {fileID: 913098385017708429}
   rightHand: {fileID: 0}
   maxShield: 5
-  shieldRegen: 1
-  regenCooldown: 1
+  shieldRegen: 0.5
+  regenCooldown: 2
   shieldDamageSounds:
   - clip: {fileID: 8300000, guid: 6cde5a92ec6f01d4186141ccb6835ed9, type: 3}
     name: playerShieldDamage1

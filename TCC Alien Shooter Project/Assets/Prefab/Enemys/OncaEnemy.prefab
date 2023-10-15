@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateRateRNG:
   - 0
-  - 0
+  - 0.084
   playerOffsetXRNG: {x: -10, y: 10}
   playerOffsetGoTo: {x: 0, y: 0, z: -10}
   lowSpeed: 4
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0077c20d89edfcf43a94a8d041d3a5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 5
   isDead: 0
   bloodVFX: {fileID: 1211128768393774554, guid: fad81000ff2d1b940971114cf5b13bcd,
     type: 3}
@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ce1abfc1ad68a4d9beecea17bccc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropYOffset: 2
   maxDrops: 2
   itens:
   - {fileID: 7320214218185223239, guid: 7f7439866ed81754da29d93ffe054d09, type: 3}

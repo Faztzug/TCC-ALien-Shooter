@@ -171,10 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240391be7492d1042a635a0248a95119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitBeforeStart: 0
+  waitBeforeStart: 5
   shrinkDownTo: 0.1
-  shirinkTime: 1
-  destroyTimer: 0.1
+  shirinkTime: 10
+  destroyTimer: 15
 --- !u!1 &6056068140783660284
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6056068140783660284}
   serializedVersion: 7
-  lengthInSec: 1
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -781,7 +781,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2

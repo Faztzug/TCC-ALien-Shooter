@@ -38,7 +38,7 @@ public class EnemyBiter : EnemyIA
             else if(doesShoot && shootChance >= shootRNG && gun.LoadedAmmo > 0 
             && gun.primaryFireData.fireTimer < 0 && inFireRange) 
             {
-                StopMoving();
+                //StopMoving();
                 updateRate += waitBeforeFire;
                 StartCoroutine(FireCourotine());
             }
