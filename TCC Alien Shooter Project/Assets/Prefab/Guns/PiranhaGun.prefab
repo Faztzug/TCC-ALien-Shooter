@@ -684,6 +684,8 @@ MonoBehaviour:
     damageType: 1
     bulletPrefab: {fileID: 0}
     Flash: {fileID: 0}
+    defaultHitVFX: {fileID: 6188481996835528250, guid: 7f6570fb65b7c0f4dbf83a7417ab1a7b,
+      type: 3}
     damage: -5
     maxDistance: 0
     continuosFire: 0
@@ -701,6 +703,17 @@ MonoBehaviour:
       loop: 0
       playOnAwake: 0
       audioSource: {fileID: 0}
+    hitSound:
+      clip: {fileID: 8300000, guid: bfca528ec585a864ebff437b4ab6d80e, type: 3}
+      name: Hit
+      volume: 0.629
+      pitch: 1.2
+      pitchRNG:
+      - 0
+      - 0.78
+      loop: 0
+      playOnAwake: 0
+      audioSource: {fileID: 0}
     piercingRay: 0
     rayDiamanter: 0
   secondaryFireData:
@@ -708,6 +721,7 @@ MonoBehaviour:
     damageType: 2
     bulletPrefab: {fileID: 0}
     Flash: {fileID: 0}
+    defaultHitVFX: {fileID: 0}
     damage: -1.4
     maxDistance: 0
     continuosFire: 1
@@ -725,6 +739,17 @@ MonoBehaviour:
       loop: 1
       playOnAwake: 0
       audioSource: {fileID: 0}
+    hitSound:
+      clip: {fileID: 0}
+      name: 
+      volume: 1
+      pitch: 1
+      pitchRNG:
+      - 0
+      - 0
+      loop: 0
+      playOnAwake: 0
+      audioSource: {fileID: 0}
     piercingRay: 0
     rayDiamanter: 0
   isPlayerGun: 1
@@ -739,6 +764,7 @@ MonoBehaviour:
   movimentoMouse: {fileID: 0}
   enemyTarget: {x: 0, y: 0, z: 0}
   enemyHoldingFire: 0
+  ammoRegenPorcent: 0.2
   biteCollider: {fileID: 7370464230192837999}
   waitBeforeDamage: 0.1
   biteDamageDuration: 0.3

@@ -70,8 +70,20 @@ public class CanvasManager : MonoBehaviour
     {
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
-        damageEffect.weight = 1 - (shieldImage.fillAmount * shieldImage.fillAmount * shieldImage.fillAmount);
+        damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2));
     }
+
+    private float ElevateBy(float value, int elevate)
+    {
+        if (value == 0) return 0;
+        var result = value;
+        for (int i = 1; i < elevate; i++)
+        {
+            result *= value;
+        }
+        return result;
+    }
+
     public void UpdateAmmoText(GunType wichGun, float normalizedValue)
     {
         foreach (var item in gunsSelectables.FindAll(g => g.GunType == wichGun))

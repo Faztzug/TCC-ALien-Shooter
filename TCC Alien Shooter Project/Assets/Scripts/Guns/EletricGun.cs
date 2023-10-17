@@ -78,12 +78,13 @@ public class EletricGun : Gun
         
         var rigidbodys = GetTargetsOnRange(fireMode.maxDistance);
 
-        if(primaryFireData == fireMode & rigidbodys.Count > 0 & LoadedAmmo > 0)
+        if (primaryFireData == fireMode & rigidbodys.Count > 0 & LoadedAmmo > 0)
         {
             LoadedAmmo -= fireMode.ammoCost * Time.deltaTime;
             for (int i = 0; i < gunPointPositions.Length; i++)
             {
                 var curPoint = gunPointPositions[i];
+
                 var curTarget = rigidbodys[i % rigidbodys.Count];
                 var damageType = fireMode.damageType;
                 var targetCenter = curTarget.transform.position + curTarget.centerOfMass;
@@ -91,15 +92,36 @@ public class EletricGun : Gun
                 Debug.Log("Target Center: " + targetCenter + " // transform = " + curTarget.transform.position);
 
                 var eletricVFX = curPoint.GetComponentInChildren<GunVFXManager>();
-                if(eletricVFX != null) eletricVFX.SetLaser(curPoint.position, targetCenter);
+                if (eletricVFX != null) eletricVFX.SetLaser(curPoint.position, targetCenter);
+
 
                 Health targetHealth = curTarget.GetComponentInChildren<Health>();
-                if(fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
+                if (fireMode.continuosFire) targetHealth?.UpdateHealth(fireMode.damage * Time.deltaTime, damageType);
                 else targetHealth?.UpdateHealth(fireMode.damage, damageType);
                 targetHealth?.BleedVFX(targetCenter, damageType, fireMode.continuosFire);
+
+                if (targetHealth != null)
+                {
+                    eletricVFX?.SetEndVFXScale(1);
+                }
+                else
+                {
+                    eletricVFX?.SetEndVFXScale(0.25f);
+                }
+
+                audioSource.pitch = primaryFireData.fireSound.pitch + 0.3f;
             }
         }
-        else base.Shooting(fireMode, bulletPrefab);
+        else
+        {
+            foreach (var curPoint in gunPointPositions)
+            {
+                var line = curPoint.GetComponentInChildren<GunVFXManager>();
+                if (line) line.SetEndVFXScale(0.25f);
+            }
+            audioSource.pitch = primaryFireData.fireSound.pitch;
+            base.Shooting(fireMode, bulletPrefab);
+        }
     }
 
     protected List<Rigidbody> GetTargetsOnRange(float range)

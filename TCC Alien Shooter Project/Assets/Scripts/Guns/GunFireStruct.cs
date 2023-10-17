@@ -10,13 +10,15 @@ public struct GunFireStruct
     public DamageType damageType;
     [SerializeField] public Bullet bulletPrefab;
     [SerializeField] public GameObject Flash;
+    [SerializeField] public GameObject defaultHitVFX;
     public float damage;
-    public float maxDistance; //0 equals default distance
+    public float maxDistance;
     public bool continuosFire;
     public float ammoCost;
     public float fireCooldown;
     [HideInInspector] public float fireTimer;
     public Sound fireSound;
+    public Sound hitSound;
     public bool piercingRay;
     public float rayDiamanter;
 

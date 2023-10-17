@@ -21,6 +21,20 @@ public class BiteTrigger : DamageHealthCollider
             health?.BleedVFX(other.ClosestPointOnBounds(GameState.MainCamera.transform.position), DamageType.piranhaBiteDamage);
             health?.BleedVFX(other.ClosestPointOnBounds(piranha.ModelTrans.position), DamageType.piranhaBiteDamage);
             if(health != null) piranha.BiteGainAmmo();
+
+            var hitVFX = piranha.primaryFireData.defaultHitVFX;
+            if(hitVFX != null & health == null)
+            {
+                var go = GameObject.Instantiate(hitVFX, this.transform.position, piranha.ModelTrans.rotation, null);
+                var duration = hitVFX.GetComponentInChildren<ParticleSystem>().main.duration;
+                if (duration == 0) duration = 5f;
+                GameObject.Destroy(go, duration);
+            }
+
+            if(piranha.primaryFireData.hitSound.clip != null)
+            {
+                GameState.InstantiateSound(piranha.primaryFireData.hitSound, this.transform.position);
+            }
         } 
     }
 }
