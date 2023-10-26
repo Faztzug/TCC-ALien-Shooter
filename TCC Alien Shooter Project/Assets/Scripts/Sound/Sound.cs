@@ -9,7 +9,7 @@ public class Sound
     public string name;
     [Range(0, 1)] [SerializeField]
     private float volume = 1f;
-    public float SFXVolume => volume * GameState.SettingsData.sfxVolume;
+    public float SFXVolume => GameState.SettingsData.mute ? 0f : volume * GameState.SettingsData.sfxVolume;
     public float MusicVolume => volume * GameState.SettingsData.musicVolume;
     [Range(-3, 3)]
     public float pitch = 1f;
@@ -24,16 +24,17 @@ public class Sound
     
     public void Setup(AudioSource audioSource)
     {
+        this.audioSource = audioSource;
         audioSource.clip = clip;
-        // if(GameState.GameStateInstance != null)
-        // {
-        //     audioSource.volume = GameState.SaveData.mute ? 0f : volume * GameState.SaveData.sfxVolume;
-        // }
         audioSource.volume = SFXVolume;
         audioSource.pitch = pitch;
         audioSource.loop = loop;
         audioSource.playOnAwake = playOnAwake;
-        this.audioSource = audioSource;
+        if(loop)
+        {
+            audioSource.volume = volume;
+            audioSource.outputAudioMixerGroup = GameState.AudioMixer.FindMatchingGroups("SFX")[0];
+        }
     }
 
     public void PlayOn(AudioSource audioSource, bool oneShot = true)

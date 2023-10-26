@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class GameState : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class GameState : MonoBehaviour
         get => GameStateInstance.isPlayerDead;
         set => GameStateInstance.isPlayerDead = value;
     }
-    public static bool isPlayerDashing {get; set;} = false;
     public static bool isGamePaused {get; set;} = false;
     public bool godMode = false;
     static public bool GodMode => GameStateInstance.godMode;
@@ -45,6 +45,9 @@ public class GameState : MonoBehaviour
     public SettingsData settingsData;
     public static SettingsData SettingsData { get => gameState.settingsData; set => gameState.settingsData = value; }
     public static SettingsDataManager settingsManager = new SettingsDataManager();
+
+    public static AudioMixer AudioMixer => gameState.audioMixer;
+    [SerializeField] private AudioMixer audioMixer;
 
     public static Action OnSettingsUpdated;
     public static Action OnCutsceneEnd;
@@ -121,6 +124,11 @@ public class GameState : MonoBehaviour
         {
             playerTransform.GetComponent<Movimento>().GoToCheckPoint(checkpoint);
         }
+
+        var music = settingsData.mute ? 0 : SettingsData.musicVolume;
+        var sfx = settingsData.mute ? 0 : SettingsData.sfxVolume;
+        AudioMixer.SetFloat("music", Mathf.Log10(music + 0.0001f) * 20);
+        AudioMixer.SetFloat("sfx", Mathf.Log10(sfx + 0.0001f) * 20);
     }
 
     private void Update()

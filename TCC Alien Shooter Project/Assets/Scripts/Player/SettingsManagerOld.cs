@@ -44,7 +44,18 @@ public class SettingsManagerOld : MonoBehaviour
     private void UpdateFileData()
     {
         settingsManager.SaveSettings(SettingsData);
-        if(GameState.GameStateInstance) GameState.OnSettingsUpdated?.Invoke();
+        GameState.settingsManager.SaveSettings(SettingsData);
+        if (SettingsData.mute)
+        {
+            GameState.AudioMixer.SetFloat("music", Mathf.Log10(0.0001f) * 20);
+            GameState.AudioMixer.SetFloat("sfx", Mathf.Log10(0.0001f) * 20);
+        }
+        else
+        {
+            GameState.AudioMixer.SetFloat("music", Mathf.Log10(SettingsData.musicVolume + 0.0001f) * 20);
+            GameState.AudioMixer.SetFloat("sfx", Mathf.Log10(SettingsData.sfxVolume + 0.0001f) * 20);
+        }
+        if (GameState.GameStateInstance) GameState.OnSettingsUpdated?.Invoke();
     }
     public void MuteChanged(bool value)
     {
