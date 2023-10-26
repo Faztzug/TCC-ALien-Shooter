@@ -9,6 +9,7 @@ public class EletricGun : Gun
     public float ChargingPower {get => chargingPower; set => chargingPower = Mathf.Clamp(value, 0, maxChargePower);}
     [SerializeField] private float minChargePower = 0.5f;
     [SerializeField] private float maxChargePower = 2f;
+    [SerializeField] private Sound chargingSound;
     private float baseSnipeDamage;
     private float baseSnipeCost;
     [SerializeField] private GameObject superLaserVFX;
@@ -40,12 +41,14 @@ public class EletricGun : Gun
 
     protected void Charging()
     {
+        if(ChargingPower == 0 & (!audioSource.isPlaying | audioSource.clip != chargingSound.clip)) chargingSound.PlayOn(audioSource, false);
         ChargingPower += Time.deltaTime;
         chargingVFX.SetActive(true);
         chargingVFX.transform.localScale = Vector3.one * ChargingPower;
     }
     protected void SetChargeOff()
     {
+        if (audioSource.isPlaying & audioSource.clip == chargingSound.clip) audioSource.Stop();
         ChargingPower = 0;
         chargingVFX.SetActive(true);
         chargingVFX.transform.localScale = Vector3.one * ChargingPower;
@@ -57,10 +60,10 @@ public class EletricGun : Gun
         secondaryFireData.ammoCost = baseSnipeCost * (chargingPower / maxChargePower);
         Debug.Log("charged = " + chargingPower + " Eletric Damage is " + baseSnipeDamage 
         + " * " + ((chargingPower * chargingPower) / maxChargePower).ToString() + " = " + secondaryFireData.damage);
-        base.SecondaryFire();
 
         if(chargingPower >= minChargePower)
         {
+            base.SecondaryFire();
             Shooting(secondaryFireData);
             var laser = Instantiate(superLaserVFX).GetComponentInChildren<StatiticLaserVFXManager>();
             laser.multiplierScale = chargingPower;

@@ -30,11 +30,11 @@ public class PushableBody : MonoBehaviour
         if (cRgbd != null & (cRgbd.CompareTag("Player") | cRgbd.CompareTag("Enemy")))
         {
             var mass = cRgbd.mass;
-            if (cRgbd.CompareTag("Player")) mass /= 50;
+            if (cRgbd.CompareTag("Player")) mass /= 30;
             mass -= tRgbd.mass;
 
             var dir = tRgbd.transform.position - cRgbd.transform.position;
-            tRgbd.AddForceAtPosition((mass) * 2f * dir.normalized, cRgbd.worldCenterOfMass);
+            tRgbd.AddForceAtPosition((mass) * 4f * dir.normalized, cRgbd.worldCenterOfMass);
             Debug.Log("Pushing Cart! " + (dir.normalized * (cRgbd.mass - tRgbd.mass)).ToString());
         }
     }

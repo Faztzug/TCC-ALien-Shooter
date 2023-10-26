@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using DG.Tweening;
 
 public class Movimento : MonoBehaviour
 {
@@ -28,7 +29,12 @@ public class Movimento : MonoBehaviour
     [SerializeField] private float gravity = 1f;
     private float gravityAcceleration;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource passosAudio;
     [SerializeField] private Sound passosSound;
+    [SerializeField] private AudioSource correrAudio;
+    [SerializeField] private Sound correrSound;
+    [SerializeField] private AudioSource respirarAudio;
+    [SerializeField] private Sound respirarSound;
 
     private bool isCrouching;
     [SerializeField] private float crouchingSpeed = 3f;
@@ -54,6 +60,10 @@ public class Movimento : MonoBehaviour
         upwardsCamLocalPos = mainCam.transform.localPosition;
         //StartCoroutine(UpdateRigBuilder());
         rigidbody = GetComponent<Rigidbody>();
+
+        passosSound.Setup(passosAudio);
+        correrSound.Setup(correrAudio);
+        respirarSound.Setup(respirarAudio);
     }
 
     private void UpdateIK()
@@ -80,6 +90,11 @@ public class Movimento : MonoBehaviour
             if(passosSound.audioSource != null)
             {
                 passosSound.audioSource.Pause();
+            }
+            if (correrSound.audioSource != null)
+            {
+                correrSound.audioSource.Pause();
+                respirarSound.audioSource.Pause();
             }
         }
     }
@@ -209,17 +224,37 @@ public class Movimento : MonoBehaviour
 
         if((velocitylAbs > 0.1) && controller.isGrounded && !GameState.isGamePaused)
         {
-            if(passosSound.IsPlaying == false && passosSound.clip)
+            if(currentSpeed <= walkSpeed & passosSound.IsPlaying == false && passosSound.clip)
             {
-                passosSound.PlayOn(audioSource);
+                passosSound.PlayOn(passosAudio, false);
+                correrSound.audioSource.Pause();
+                respirarTween.Kill();
+                respirarTween = respirarSound.audioSource.DOFade(0, 2f);
             }
-            passosSound.audioSource.pitch = passosSound.pitch * currentSpeed / runSpeed;
+            if(currentSpeed > walkSpeed & !correrSound.IsPlaying)
+            {
+                Debug.Log("playing running!");
+                passosSound.audioSource.Pause();
+                correrSound.PlayOn(correrAudio, false);
+                if(!respirarSound.IsPlaying) respirarSound.PlayOn(respirarAudio, false);
+                respirarSound.audioSource.volume = 0f;
+                respirarTween = respirarSound.audioSource.DOFade(respirarSound.SFXVolume, 3f);
+            }
+            //passosSound.audioSource.pitch = passosSound.pitch * currentSpeed / runSpeed;
         }
         else if(passosSound.audioSource != null)
         {
             passosSound.audioSource.Pause();
+            correrSound.audioSource.Pause();
+            if (currentSpeed <= walkSpeed)
+            {
+                respirarTween.Kill();
+                respirarTween = respirarSound.audioSource.DOFade(0, 1f);
+            }
         }
     }
+
+    Tween respirarTween;
 
     public void GoToCheckPoint(Vector3 checkpoint)
     {
