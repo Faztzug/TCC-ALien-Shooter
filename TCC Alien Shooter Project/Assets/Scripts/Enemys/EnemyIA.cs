@@ -117,7 +117,7 @@ public class EnemyIA : MonoBehaviour
         if(distance >= findPlayerDistance) GoToPlayerDirect(ignoreFindDistance: true);
     }
 
-    protected void GoToPlayerDirect(bool ignoreFindDistance = false)
+    public void GoToPlayerDirect(bool ignoreFindDistance = false)
     {
         if(agent.isOnNavMesh)
         {

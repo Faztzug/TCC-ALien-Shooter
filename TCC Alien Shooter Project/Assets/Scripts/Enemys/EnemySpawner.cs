@@ -6,11 +6,14 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private bool needsTrigger = true;
     [SerializeField] private GameObject[] enemysPrefabs;
-    [SerializeField] private List<EnemyIA> enemysList;
+    private List<EnemyIA> enemysList = new List<EnemyIA>();
+    private List<GameObject> bodyList = new List<GameObject>();
+    [SerializeField] private int maxBodys = 20;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private int maxEnemys;
-    [SerializeField] [Range(1f,10f)] private float[] asyncRng = new float[2];
+    [SerializeField] private int maxEnemys = 10;
+    [SerializeField] [Range(0f,10f)] private float[] asyncRng = new float[2];
     private float rngTimer = 0;
+    [SerializeField] private bool sendEnemyToPlayer;
 
     void Start()
     {
@@ -21,6 +24,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //Debug.Log("Trigger Spawner!");
+            StartCoroutine(AsyncUpdate());
+            GetComponent<Collider>().enabled = false;
+        }
+    }
+
     IEnumerator AsyncUpdate()
     {
         yield return new WaitForSeconds(rngTimer);
@@ -28,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         enemysList.RemoveAll(e => e.alive == false);
 
 
-        if(maxEnemys >= enemysList.Count)
+        if(maxEnemys > enemysList.Count)
         {
             //Debug.Log("SpawnEnemy!");
             int iRngPrefab = Random.Range(0, enemysPrefabs.Length);
@@ -36,6 +49,14 @@ public class EnemySpawner : MonoBehaviour
 
             var enemy = Instantiate(enemysPrefabs[iRngPrefab], spawnPoints[iRngPos].position, transform.rotation).GetComponent<EnemyIA>();
             enemysList.Add(enemy);
+            if (sendEnemyToPlayer) StartCoroutine(SendEnemyToPlayer(enemy));
+            bodyList.Add(enemy.gameObject);
+            if(bodyList.Count > maxBodys)
+            {
+                var body = bodyList[0];
+                bodyList.Remove(body);
+                Destroy(body);
+            }
         }
 
         rngTimer = Random.Range(asyncRng[0], asyncRng[1]);
@@ -44,15 +65,9 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(AsyncUpdate());
     }
 
-    void OnTriggerEnter(Collider other)
+    IEnumerator SendEnemyToPlayer(EnemyIA enemy)
     {
-        if(other.CompareTag("Player"))
-        {
-            //Debug.Log("Trigger Spawner!");
-            StartCoroutine(AsyncUpdate());
-            GetComponent<Collider>().enabled = false;
-        }
+        yield return new WaitForSeconds(0);
+        enemy.GoToPlayerDirect(true);
     }
-
-
 }
