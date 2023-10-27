@@ -11,11 +11,15 @@ public class ShrinkingObject : MonoBehaviour
     [SerializeField] private float destroyTimer = 0.5f;
     private Vector3 startScale;
     private bool isDestroying;
+    private Light lightComp;
+    private float startIntensity;
 
 
     private void Start() 
     {
         startScale = transform.localScale;
+        lightComp = GetComponent<Light>();
+        if(lightComp != null) startIntensity = lightComp.intensity;
     }
 
     private void Update() 
@@ -25,6 +29,11 @@ public class ShrinkingObject : MonoBehaviour
 
         transform.localScale = Vector3.Lerp(startScale, startScale * shrinkDownTo, curTimerShrink / shirinkTime);
         curTimerShrink += Time.deltaTime;
+
+        if(lightComp != null)
+        {
+            lightComp.intensity = Mathf.Lerp(startIntensity, shrinkDownTo, curTimerShrink / shirinkTime);
+        }
 
         if(curTimerShrink >= shirinkTime)
         {

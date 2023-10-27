@@ -58,8 +58,8 @@ public class EletricGun : Gun
     {
         secondaryFireData.damage = baseSnipeDamage * ((chargingPower * chargingPower) / maxChargePower);
         secondaryFireData.ammoCost = baseSnipeCost * (chargingPower / maxChargePower);
-        Debug.Log("charged = " + chargingPower + " Eletric Damage is " + baseSnipeDamage 
-        + " * " + ((chargingPower * chargingPower) / maxChargePower).ToString() + " = " + secondaryFireData.damage);
+        /*Debug.Log("charged = " + chargingPower + " Eletric Damage is " + baseSnipeDamage 
+        + " * " + ((chargingPower * chargingPower) / maxChargePower).ToString() + " = " + secondaryFireData.damage);*/
 
         if(chargingPower >= minChargePower)
         {

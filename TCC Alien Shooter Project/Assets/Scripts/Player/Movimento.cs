@@ -233,7 +233,6 @@ public class Movimento : MonoBehaviour
             }
             if(currentSpeed > walkSpeed & !correrSound.IsPlaying)
             {
-                Debug.Log("playing running!");
                 passosSound.audioSource.Pause();
                 correrSound.PlayOn(correrAudio, false);
                 if(!respirarSound.IsPlaying) respirarSound.PlayOn(respirarAudio, false);

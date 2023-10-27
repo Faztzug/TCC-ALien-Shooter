@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8141003542727452848}
   - component: {fileID: 102575617936677564}
+  - component: {fileID: 8835193717610716272}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -93,6 +94,22 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &8835193717610716272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48093676653679160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240391be7492d1042a635a0248a95119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitBeforeStart: 0.2
+  shrinkDownTo: 0.05
+  shirinkTime: 2
+  destroyTimer: 5
 --- !u!1 &6188481996835528250
 GameObject:
   m_ObjectHideFlags: 0
@@ -4925,7 +4942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9025156871290472793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.148, y: 0.25, z: -0.498}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8143953834874909864}
