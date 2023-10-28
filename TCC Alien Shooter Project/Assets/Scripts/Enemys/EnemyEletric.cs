@@ -23,6 +23,8 @@ public class EnemyEletric : EnemyBiter
     protected override void Update() 
     {
         base.Update();
+        if (!alive) return;
+
         if(!isBiting) eletricVFX.TurnOffLAser();
         else eletricVFX.SetLaser(eletricVFX.transform.position, player.position + (playerRgbd != null ? playerRgbd.centerOfMass : Vector3.zero));
 

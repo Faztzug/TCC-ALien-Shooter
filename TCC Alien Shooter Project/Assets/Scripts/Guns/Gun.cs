@@ -426,6 +426,17 @@ public class Gun : MonoBehaviour
         handGripManager?.SetGrips();
     }
 
+    public void TurnOffLasers()
+    {
+        foreach (var curPoint in gunPointPositions)
+        {
+            var line = curPoint.GetComponentInChildren<GunVFXManager>(true);
+            if (line) line.TurnOffLAser();
+            StopContinuosFireAudio(primaryFireData);
+            StopContinuosFireAudio(secondaryFireData);
+        }
+    }
+
     protected virtual void OnValidate() 
     {
         if(primaryFireData.damage > 0) primaryFireData.damage = -primaryFireData.damage;

@@ -159,13 +159,15 @@ public class Health : MonoBehaviour
             }
             foreach (var script in GetComponentsInChildren<MonoBehaviour>())
             {
-                if(script == this || script is Movimento || script is GameState 
+                if(this is PlayerShieldHealth && script == this || script is Movimento || script is GameState 
                 || script is CanvasManager || script is Volume || LayerMask.LayerToName(script.gameObject.layer) == "UI"
-                || script is RigBuilder && this is PlayerShieldHealth) 
+                || script is RigBuilder) 
                 {
                     continue;
                 }
 
+                if(script is Gun) (script as Gun).TurnOffLasers();
+                if(script is EnemyIA) continue;
                 if(script is MovimentoMouse) script.enabled = false;
                 if(script is LaserVFXManager) (script as LaserVFXManager).TurnOffLAser();
                 script.enabled = false;

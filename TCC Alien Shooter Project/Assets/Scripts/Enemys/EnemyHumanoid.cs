@@ -15,6 +15,7 @@ public class EnemyHumanoid : EnemyIA
     protected override void Update()
     {
         base.Update();
+        if(!alive) return;
 
         if(gun is PiranhaGun)
         {

@@ -7824,7 +7824,7 @@ MonoBehaviour:
     showFPS: 1
     sensibilidadeX: 0.5
     sensibilidadeY: 0.5
-  nextScene: Level 1
+  audioMixer: {fileID: 0}
   endCanvas: {fileID: 0}
 --- !u!4 &1369433436
 Transform:
@@ -9790,6 +9790,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7019061827595590995, guid: 08d3fe7c5cb4b9b41a91607f11444382,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -21
+      objectReference: {fileID: 0}
     - target: {fileID: 7814970150844676846, guid: 08d3fe7c5cb4b9b41a91607f11444382,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -9844,6 +9849,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668444928163686982, guid: 08d3fe7c5cb4b9b41a91607f11444382,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 8850869750682767328, guid: 08d3fe7c5cb4b9b41a91607f11444382,
         type: 3}
@@ -14206,10 +14216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

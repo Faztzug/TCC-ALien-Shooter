@@ -61,7 +61,14 @@ public class EnemyIA : MonoBehaviour
 
     protected virtual void Update() 
     {
-        targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
+        if (alive) targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
+        else
+        {
+            StopMoving();
+            GetComponentInChildren<Gun>(true)?.TurnOffLasers();
+            this.enabled = false;
+            return;
+        }
         // var directionPlayer = targetPos - aimTransform.position;
         
         // var newDirection = Vector3.RotateTowards(aimTransform.forward, directionPlayer, aimRotationSpeed, 0);
@@ -174,13 +181,13 @@ public class EnemyIA : MonoBehaviour
         }
     }
 
-    protected void StopMoving()
+    public void StopMoving()
     {
         if(agent.isOnNavMesh) 
         {   
             agent.SetDestination(this.transform.position);
-            agent.isStopped = true;
         }
+        agent.isStopped = true;
     }
 
     protected bool IsMoving() => agent.isOnNavMesh && !agent.isStopped && Vector3.Distance(agent.destination, transform.position) > minPlayerDistance;
