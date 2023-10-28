@@ -31,6 +31,7 @@ public class PlayerShieldHealth : ShieldHealth
         var dificulty = GameState.SaveData.gameDificulty;
         if(dificulty == GameDificulty.Easy) maxShield = defaultMaxShield * 1.5f;
         else if(dificulty == GameDificulty.Hard) maxShield = defaultMaxShield / 2;
+        curShield = maxShield;
         UpdateHealth(maxHealth, DamageType.NULL);
     }
 

@@ -426,7 +426,7 @@ public class Gun : MonoBehaviour
         handGripManager?.SetGrips();
     }
 
-    private void OnValidate() 
+    protected virtual void OnValidate() 
     {
         if(primaryFireData.damage > 0) primaryFireData.damage = -primaryFireData.damage;
         if(secondaryFireData.damage > 0) secondaryFireData.damage = -secondaryFireData.damage;

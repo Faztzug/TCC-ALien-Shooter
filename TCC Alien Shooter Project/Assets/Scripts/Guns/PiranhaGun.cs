@@ -7,6 +7,7 @@ using DG.Tweening;
 public class PiranhaGun : Gun
 {
     [SerializeField] BiteTrigger biteCollider;
+    private EnemyTouch enemyBite;
     [SerializeField] float waitBeforeDamage;
     [SerializeField] float biteDamageDuration;
     [SerializeField] float biteAmmoGain = 1f;
@@ -53,5 +54,19 @@ public class PiranhaGun : Gun
         biteCollider.gameObject.SetActive(true);
         await Task.Delay((int)(biteDamageDuration * 1000));
         biteCollider.gameObject.SetActive(false);
+    }
+
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+        if (isPlayerGun)
+        {
+            biteCollider.SetDamage(primaryFireData.damage);
+        }
+        else
+        {
+            if (enemyBite == null) enemyBite = biteCollider.GetComponent<EnemyTouch>();
+            if (enemyBite != null) enemyBite.SetDamage(primaryFireData.damage);
+        }
     }
 }

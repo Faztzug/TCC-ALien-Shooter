@@ -126,6 +126,24 @@ public class Health : MonoBehaviour
 
     public virtual void DestroyCharacter()
     {
+        if (isDead) return;
+
+        if (thisEnemy != null)
+        {
+            thisEnemy.EnemyDeath();
+        }
+        else if (TryGetComponent<EnemyDrop>(out EnemyDrop drop))
+        {
+            drop.Drop();
+            this.gameObject.SetActive(false);
+        }
+        else if ((anim == null || anim.parameterCount == 0) & doesDestroyOnDeath)
+        {
+            Destroy(this.gameObject, 0f);
+        }
+
+        isDead = true;
+
         onDeath?.Invoke();
 
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
@@ -153,21 +171,5 @@ public class Health : MonoBehaviour
                 script.enabled = false;
             }
         }
-        
-        if(thisEnemy != null) 
-        {
-            thisEnemy.EnemyDeath();
-        }
-        else if(TryGetComponent<EnemyDrop>(out EnemyDrop drop)) 
-        {
-            drop.Drop(); 
-            this.gameObject.SetActive(false);
-        }
-        else if((anim == null || anim.parameterCount == 0) & doesDestroyOnDeath)
-        {
-            Destroy(this.gameObject);
-        }
-
-        isDead = true;
     }
 }

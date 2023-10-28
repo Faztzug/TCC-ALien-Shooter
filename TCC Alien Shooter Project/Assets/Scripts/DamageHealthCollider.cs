@@ -43,4 +43,6 @@ public class DamageHealthCollider : MonoBehaviour
     {
         if(damage > 0) damage = -damage;
     }
+
+    public void SetDamage(float dmg) => damage = dmg;
 }
