@@ -27,9 +27,6 @@ public class EnemyDrop : MonoBehaviour
                 var item = Instantiate(itens[i], dropPos, dropRot);
                 item.GetComponent<Rigidbody>().AddForce(transform.up * 2f, ForceMode.Impulse);
 
-                Debug.Log("drop parent pos = " + transform.position);
-                Debug.Log("drop item pos = " + item.transform.position);
-                Debug.Log("expected pos = " + (transform.position + new Vector3(0,1.5f,0)));
                 if (i >= maxDrops) return;
             } 
         }

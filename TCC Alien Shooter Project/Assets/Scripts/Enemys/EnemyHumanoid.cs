@@ -51,7 +51,7 @@ public class EnemyHumanoid : EnemyIA
                 }
 
                 if (inWalkRange) GoToPlayerOffset();
-                else if (agent.isOnNavMesh) StopMoving();
+                else if (agent.isOnNavMesh & inFireRange) StopMoving();
             }
             else if(isContinousFiring & inFireRange)
             {

@@ -35,7 +35,7 @@ public class PushableBody : MonoBehaviour
 
             var dir = tRgbd.transform.position - cRgbd.transform.position;
             tRgbd.AddForceAtPosition((mass) * 4f * dir.normalized, cRgbd.worldCenterOfMass);
-            Debug.Log("Pushing Cart! " + (dir.normalized * (cRgbd.mass - tRgbd.mass)).ToString());
+            //Debug.Log("Pushing Cart! " + (dir.normalized * (cRgbd.mass - tRgbd.mass)).ToString());
         }
     }
 

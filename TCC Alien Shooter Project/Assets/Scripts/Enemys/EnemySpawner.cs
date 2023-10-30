@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private bool needsTrigger = true;
+    [SerializeField] private bool autoStart = true;
     [SerializeField] private GameObject[] enemysPrefabs;
     private List<EnemyIA> enemysList = new List<EnemyIA>();
     private List<GameObject> bodyList = new List<GameObject>();
@@ -17,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        if(!needsTrigger) 
+        if(autoStart) 
         {
             if(TryGetComponent<Collider>(out Collider col)) col.enabled = false;
             StartCoroutine(AsyncUpdate());
@@ -37,7 +38,11 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator AsyncUpdate()
     {
         yield return new WaitForSeconds(rngTimer);
-        
+
+        foreach (var e in enemysList.FindAll(e => e.alive == false))
+        {
+            bodyList.Add(e.gameObject);
+        }
         enemysList.RemoveAll(e => e.alive == false);
 
 
@@ -50,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             var enemy = Instantiate(enemysPrefabs[iRngPrefab], spawnPoints[iRngPos].position, transform.rotation).GetComponent<EnemyIA>();
             enemysList.Add(enemy);
             if (sendEnemyToPlayer) StartCoroutine(SendEnemyToPlayer(enemy));
-            bodyList.Add(enemy.gameObject);
+
             if(bodyList.Count > maxBodys)
             {
                 var body = bodyList[0];

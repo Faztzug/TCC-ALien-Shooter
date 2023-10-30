@@ -14,6 +14,7 @@ public class EnemyIA : MonoBehaviour
     [SerializeField] protected Vector2 playerOffsetXRNG;
     [SerializeField] protected Vector3 playerOffsetGoTo;
     protected NavMeshAgent agent;
+    public NavMeshAgent Agent => agent;
     protected Rigidbody rgbd;
     [SerializeField] protected float lowSpeed = 3f;
     [SerializeField] protected float walkingSpeed = 5f;
@@ -135,8 +136,9 @@ public class EnemyIA : MonoBehaviour
                 var directionPlayer = playerFlatPos - transform.position;
 
                 var thisPos = transform.position;
-                agent.SetDestination(player.position + directionPlayer * 0.5f);
                 agent.isStopped = false;
+                var sucess = agent.SetDestination(player.position + directionPlayer * 0.5f);
+                if (this is EnemyHumanoid & ignoreFindDistance) Debug.Log("Humanoid going player with sucess " + sucess);
             }
             else 
             {
@@ -144,7 +146,7 @@ public class EnemyIA : MonoBehaviour
                 agent.SetDestination(pos);
                 rgbd.velocity = Vector3.zero;
                 rgbd.angularVelocity = Vector3.zero;
-                //Debug.Log("not going to player");
+                Debug.Log("not going to player " + name);
             }
         }
         else

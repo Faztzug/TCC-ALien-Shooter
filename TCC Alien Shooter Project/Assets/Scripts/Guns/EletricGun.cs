@@ -92,7 +92,7 @@ public class EletricGun : Gun
                 var damageType = fireMode.damageType;
                 var targetCenter = curTarget.transform.position + curTarget.centerOfMass;
 
-                Debug.Log("Target Center: " + targetCenter + " // transform = " + curTarget.transform.position);
+                //Debug.Log("Target Center: " + targetCenter + " // transform = " + curTarget.transform.position);
 
                 var eletricVFX = curPoint.GetComponentInChildren<GunVFXManager>();
                 if (eletricVFX != null) eletricVFX.SetLaser(curPoint.position, targetCenter);
