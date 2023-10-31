@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7842684373681576834}
   - component: {fileID: 4720411728764277699}
   - component: {fileID: 7418867609236916918}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,9 +43,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.745283, g: 0.2214756, b: 0.2214756, a: 1}
+  m_Color: {r: 0.3301887, g: 0.023362404, b: 0.023362404, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -83,7 +83,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8055541628120902701}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LuzEmergencia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,6 +213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Luz_Emergencia
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4a5a58bc96ef604b989ffa44a811d0c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a5a58bc96ef604b989ffa44a811d0c, type: 3}
