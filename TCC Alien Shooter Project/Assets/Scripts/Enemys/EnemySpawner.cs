@@ -53,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
             int iRngPos = Random.Range(0, spawnPoints.Length);
 
             var enemy = Instantiate(enemysPrefabs[iRngPrefab], spawnPoints[iRngPos].position, transform.rotation).GetComponent<EnemyIA>();
+            enemy.transform.position = spawnPoints[iRngPos].position;
             enemysList.Add(enemy);
             if (sendEnemyToPlayer) StartCoroutine(SendEnemyToPlayer(enemy));
 

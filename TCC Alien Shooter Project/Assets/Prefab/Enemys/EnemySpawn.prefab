@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needsTrigger: 0
+  autoStart: 1
   enemysPrefabs:
   - {fileID: 2068789416959607775, guid: 6ef036467b487324e8b98203820325f3, type: 3}
   - {fileID: 1517865328363480280, guid: 11d416d82e72b9e4797db2794ab422ac, type: 3}
@@ -55,8 +56,8 @@ MonoBehaviour:
   - {fileID: 5790324214872032524}
   maxEnemys: 20
   asyncRng:
-  - 0.66
-  - 1.29
+  - 0
+  - 10
   sendEnemyToPlayer: 1
 --- !u!1001 &4265029028438900060
 PrefabInstance:
@@ -65,6 +66,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5401376000218940961}
     m_Modifications:
+    - target: {fileID: 3369320221464542520, guid: 24093c3355570fa4b8ec7c82a0d7f00a,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7740333693920491600, guid: 24093c3355570fa4b8ec7c82a0d7f00a,
         type: 3}
       propertyPath: m_RootOrder
