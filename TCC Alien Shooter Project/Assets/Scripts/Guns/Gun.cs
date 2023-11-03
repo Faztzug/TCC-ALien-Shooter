@@ -344,6 +344,16 @@ public class Gun : MonoBehaviour
                 {
                     damageToDo *= 2;
                 }
+
+                Debug.Log("area hit = " + rayhit.collider.name);
+                if(rayhit.collider.TryGetComponent<ModifierDamageArea>(out ModifierDamageArea areaDmgMod))
+                {
+                    var dmgType = fireStruct.damageType;
+                    DamageModified modifier = areaDmgMod.damageModifiers.Find(d => d.damageType == dmgType | d.damageType == DamageType.AnyDamage);
+                    Debug.Log("Mofiing damge to Area to *= " + modifier.multplier.ToString());
+                    if (modifier.damageType == dmgType | modifier.damageType == DamageType.AnyDamage) damageToDo *= modifier.multplier;
+                }
+
                 var curTransform = rayhit.transform;
                 var healthObj = curTransform.GetComponentInChildren<Health>();
                 while (healthObj == null && curTransform.parent != null)
@@ -352,6 +362,8 @@ public class Gun : MonoBehaviour
                     healthObj = curTransform.GetComponent<Health>();
                 }
                 if(healthObj is null) continue;
+                if (healthObjs.Contains(healthObj)) continue;
+
                 healthObj.UpdateHealth(damageToDo, fireStruct.damageType);
                 if(!healthObjs.Contains(healthObj)) healthObjs.Add(healthObj);
             }

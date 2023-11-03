@@ -54,8 +54,14 @@ public class Bullet : MonoBehaviour
             damage *= 2;
             GameState.InstantiateSound(headShootSound, collisionInfo.GetContact(0).point);
         }
+        if (collisionInfo.collider.TryGetComponent<ModifierDamageArea>(out ModifierDamageArea areaDmgMod))
+        {
+            var dmgType = damageType;
+            DamageModified modifier = areaDmgMod.damageModifiers.Find(d => d.damageType == dmgType | d.damageType == DamageType.AnyDamage);
+            if (modifier.damageType == dmgType | modifier.damageType == DamageType.AnyDamage) damage *= modifier.multplier;
+        }
 
-        if(collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);
+        if (collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);
         else BulletHit(collisionInfo.gameObject);
     }
     // void OnTriggerEnter(Collider other)

@@ -23,4 +23,15 @@ public class BossHealth : ShieldHealth
         shieldBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, shieldParent.rect.width * shieldPorcent);
         healthBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, healthParent.rect.width * healthPorcent);
     }
+
+    public override void DestroyCharacter()
+    {
+        base.DestroyCharacter();
+        if (GameState.SaveData.unlockLevelsTo < 4)
+        {
+            GameState.SaveData.unlockLevelsTo = 4;
+            GameState.saveManager.SaveGame(GameState.SaveData);
+        }
+        GameState.EndLevel();
+    }
 }

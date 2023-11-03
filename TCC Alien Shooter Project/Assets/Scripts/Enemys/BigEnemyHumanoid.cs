@@ -14,16 +14,18 @@ public class BigEnemyHumanoid : EnemyHumanoid
     }
     protected override void AsyncUpdateIA()
     {
-        if(distance >= findPlayerDistance & !health.damageModifiers.Contains(damageImunity))
+        if((distance >= findPlayerDistance || !inFireRange) & !health.damageModifiers.Contains(damageImunity))
         {
             health.damageModifiers.Add(damageImunity);
+            anim.SetBool("crouching", true);
             //Debug.Log("ADD Imunity");
         }
-        else if(distance < findPlayerDistance)
+        else if(distance < findPlayerDistance & inFireRange)
         {
             health.damageModifiers.RemoveAll(d => d.damageType == damageImunity.damageType);
             //Debug.Log("REMOVE Imunity");
+            anim.SetBool("crouching", false);
+            base.AsyncUpdateIA();
         }
-        base.AsyncUpdateIA();
     }
 }

@@ -138,7 +138,6 @@ public class EnemyIA : MonoBehaviour
                 var thisPos = transform.position;
                 agent.isStopped = false;
                 var sucess = agent.SetDestination(player.position + directionPlayer * 0.5f);
-                if (this is EnemyHumanoid & ignoreFindDistance) Debug.Log("Humanoid going player with sucess " + sucess);
             }
             else 
             {
@@ -146,7 +145,6 @@ public class EnemyIA : MonoBehaviour
                 agent.SetDestination(pos);
                 rgbd.velocity = Vector3.zero;
                 rgbd.angularVelocity = Vector3.zero;
-                Debug.Log("not going to player " + name);
             }
         }
         else

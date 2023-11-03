@@ -1,0 +1,740 @@
+fileFormatVersion: 2
+guid: 6847bf2ee8080194689a3ccc78a6f023
+ModelImporter:
+  serializedVersion: 20300
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Head' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 22
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 3
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 16
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Mapinpin_Iddle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mapinpin
+      parentName: Mapinpin_Iddle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Principal1
+      parentName: Mapinpin_Iddle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle1
+      parentName: Principal1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root 1
+      parentName: nurbsCircle1
+      position: {x: -0.778579, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle2
+      parentName: Root 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pernocas 1
+      parentName: nurbsCircle2
+      position: {x: -0.28216624, y: 0, z: 0.060099747}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle3
+      parentName: Pernocas 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bracitos 1
+      parentName: nurbsCircle3
+      position: {x: -0.94238365, y: 0, z: -0.060099747}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle4
+      parentName: Bracitos 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bracin_D 1
+      parentName: nurbsCircle4
+      position: {x: 0.036060475, y: -0.672167, z: 0.09875486}
+      rotation: {x: -0.03593089, y: 0.03723137, z: 0.71859825, w: 0.6934979}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle13
+      parentName: Bracin_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.16317591, y: 0.059391174, z: 0.3368241, w: 0.9254166}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cotovelo_D 1
+      parentName: nurbsCircle13
+      position: {x: -0.5801394, y: 0, z: -1.2212453e-17}
+      rotation: {x: 0.0034827879, y: 0.19593467, z: -0.017427852, w: 0.98045594}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle15
+      parentName: Cotovelo_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0.25881907, z: -0, w: 0.9659259}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pulso_D 1
+      parentName: nurbsCircle15
+      position: {x: -0.45653802, y: -0.0063439175, z: 0.04871452}
+      rotation: {x: -0.0045072506, y: -0.0493547, z: 0.090833426, w: 0.9946322}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle17
+      parentName: Pulso_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.08641012, y: -0.011376108, z: 0.13002951, w: 0.98767215}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Maozita_D
+      parentName: nurbsCircle17
+      position: {x: -0.20560163, y: -7.81597e-16, z: -1.4654943e-16}
+      rotation: {x: 0.041332416, y: 0.6744493, z: -0.08893199, w: 0.7317792}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle19
+      parentName: Maozita_D
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedao_D 1
+      parentName: nurbsCircle19
+      position: {x: -0.13719988, y: 3.907985e-16, z: 0}
+      rotation: {x: -0.06282606, y: -0.0075416374, z: 0.22850697, w: 0.9714837}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle21
+      parentName: Dedao_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.1736482, y: 0, z: -0, w: 0.9848078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedao_D_Dobra
+      parentName: nurbsCircle21
+      position: {x: -0.084005855, y: 3.907985e-16, z: 5.8619773e-16}
+      rotation: {x: 0, y: -0.34295624, z: -0, w: 0.9393514}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle22
+      parentName: Dedao_D_Dobra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0.1736482, z: -0, w: 0.9848078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedao_D_Meio
+      parentName: nurbsCircle22
+      position: {x: -0.06966509, y: -3.907985e-16, z: -3.907985e-16}
+      rotation: {x: 0, y: -0.09976572, z: -0, w: 0.995011}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle23
+      parentName: Dedao_D_Meio
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_A_D 1
+      parentName: nurbsCircle19
+      position: {x: -0.097901896, y: -0.010755684, z: -0.14639147}
+      rotation: {x: -0.11379015, y: -0.6229611, z: 0.18422855, w: 0.75168556}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle24
+      parentName: Dedo_A_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_A_D_Meio
+      parentName: nurbsCircle24
+      position: {x: -0.12545821, y: 3.907985e-16, z: -9.7699626e-17}
+      rotation: {x: 0, y: 0.014407678, z: -0, w: 0.9998962}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle25
+      parentName: Dedo_A_D_Meio
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.087155744, w: 0.9961947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_Meio_D 1
+      parentName: nurbsCircle19
+      position: {x: -0.00022782672, y: -0.014305681, z: -0.14492431}
+      rotation: {x: -0.09520058, y: -0.7295951, z: 0.12232787, w: 0.66608095}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle26
+      parentName: Dedo_Meio_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.087155744, w: 0.9961947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_Meio_D_Meio
+      parentName: nurbsCircle26
+      position: {x: -0.14390956, y: -7.81597e-16, z: -4.8849813e-17}
+      rotation: {x: 0, y: -0.003982132, z: -0, w: 0.9999921}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle27
+      parentName: Dedo_Meio_D_Meio
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.13052619, w: 0.9914449}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedin_D 1
+      parentName: nurbsCircle19
+      position: {x: 0.108361095, y: -0.024423208, z: -0.11228732}
+      rotation: {x: -0.10089339, y: -0.7637288, z: 0.119273394, w: 0.62634873}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle28
+      parentName: Dedin_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.25881907, w: 0.9659259}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedin_Meio_D 1
+      parentName: nurbsCircle28
+      position: {x: -0.1235527, y: -7.81597e-16, z: -1.4654943e-16}
+      rotation: {x: 0, y: -0.009250932, z: -0, w: 0.9999572}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle29
+      parentName: Dedin_Meio_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.087155744, w: 0.9961947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bracin_E 1
+      parentName: nurbsCircle4
+      position: {x: 0.036060512, y: 0.672166, z: 0.09875492}
+      rotation: {x: 0.71859825, y: 0.6934979, z: 0.03593089, w: -0.03723137}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle14
+      parentName: Bracin_E 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.16317591, y: 0.059391174, z: 0.3368241, w: 0.9254166}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cotovelo_E 1
+      parentName: nurbsCircle14
+      position: {x: 0.5801414, y: 0.000000595149, z: 0.00000016023611}
+      rotation: {x: 0.0034827879, y: 0.19593467, z: -0.017427852, w: 0.98045594}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle16
+      parentName: Cotovelo_E 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0.25881907, z: -0, w: 0.9659259}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pulso_E 1
+      parentName: nurbsCircle16
+      position: {x: 0.45653716, y: 0.0063425996, z: -0.04871527}
+      rotation: {x: -0.0045072506, y: -0.0493547, z: 0.090833426, w: 0.9946322}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle18
+      parentName: Pulso_E 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.08641012, y: -0.011376108, z: 0.13002951, w: 0.98767215}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Maozita_E
+      parentName: nurbsCircle18
+      position: {x: 0.20560129, y: -0.0000003218535, z: 0.000000028400224}
+      rotation: {x: 0.041332416, y: 0.6744493, z: -0.08893199, w: 0.7317792}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle20
+      parentName: Maozita_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedao_E
+      parentName: nurbsCircle20
+      position: {x: 0.13719855, y: 0.000001427408, z: 0.0000011159747}
+      rotation: {x: -0.06282606, y: -0.0075416374, z: 0.22850697, w: 0.9714837}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle30
+      parentName: Dedao_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.1736482, y: 0, z: -0, w: 0.9848078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedao_Dobra_D 1
+      parentName: nurbsCircle30
+      position: {x: 0.08400602, y: -0.00000009888272, z: -0.0000003898095}
+      rotation: {x: 0.000000009897676, y: -0.34295624, z: 0.0000000036136314, w: 0.9393514}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle31
+      parentName: Dedao_Dobra_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0.1736482, z: -0, w: 0.9848078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedao_Meio_D 1
+      parentName: nurbsCircle31
+      position: {x: 0.06966565, y: 0.00000008529911, z: -0.00000003783883}
+      rotation: {x: -0.000000010697084, y: -0.09976572, z: -0.0000000010725533, w: 0.995011}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle32
+      parentName: Dedao_Meio_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_A_E
+      parentName: nurbsCircle20
+      position: {x: 0.09790224, y: 0.010756082, z: 0.14639273}
+      rotation: {x: -0.11379015, y: -0.6229611, z: 0.18422855, w: 0.75168556}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle33
+      parentName: Dedo_A_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_A_Meio_E
+      parentName: nurbsCircle33
+      position: {x: 0.12545802, y: 0.000000958733, z: 0.0000014289558}
+      rotation: {x: 0, y: 0.014407678, z: -0, w: 0.9998962}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle34
+      parentName: Dedo_A_Meio_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.087155744, w: 0.9961947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_Meio_E
+      parentName: nurbsCircle20
+      position: {x: 0.00022757931, y: 0.014306095, z: 0.14492413}
+      rotation: {x: -0.09520058, y: -0.7295951, z: 0.12232787, w: 0.66608095}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle35
+      parentName: Dedo_Meio_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.087155744, w: 0.9961947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_Meio_Meio_E
+      parentName: nurbsCircle35
+      position: {x: 0.14391032, y: 0.00000038468957, z: 0.00000030713554}
+      rotation: {x: 0, y: -0.003982132, z: -0, w: 0.9999921}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle36
+      parentName: Dedo_Meio_Meio_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.13052619, w: 0.9914449}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedin_E
+      parentName: nurbsCircle20
+      position: {x: -0.10836084, y: 0.024423543, z: 0.112288944}
+      rotation: {x: -0.10089339, y: -0.7637288, z: 0.119273394, w: 0.62634873}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle37
+      parentName: Dedin_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.25881907, w: 0.9659259}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedin_Meio_E
+      parentName: nurbsCircle37
+      position: {x: 0.12355205, y: 0.0000016766882, z: 0.0000014422873}
+      rotation: {x: 0, y: -0.009250932, z: -0, w: 0.9999572}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle38
+      parentName: Dedin_Meio_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.087155744, w: 0.9961947}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pernita_D
+      parentName: nurbsCircle3
+      position: {x: -0.015394925, y: -0.44063696, z: 0.043408636}
+      rotation: {x: -0.037160043, y: 0.7001878, z: 0.7061297, w: 0.098676674}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle5
+      parentName: Pernita_D
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joelho_D 1
+      parentName: nurbsCircle5
+      position: {x: -0.39331165, y: -0.01719604, z: -4.8849814e-16}
+      rotation: {x: 0.9637341, y: 0.26686448, z: -1.6340738e-17, w: -5.9011694e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle7
+      parentName: Joelho_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tornozelo_D 1
+      parentName: nurbsCircle7
+      position: {x: -0.30254364, y: -0.016471561, z: -9.7699626e-17}
+      rotation: {x: 0.82495123, y: 0.5652039, z: -1.6010924e-16, w: -2.3368967e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle9
+      parentName: Tornozelo_D 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pezin_D
+      parentName: nurbsCircle9
+      position: {x: -0.3228521, y: -9.7699626e-17, z: 0}
+      rotation: {x: 0, y: -0, z: -0.28174934, w: 0.9594881}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle11
+      parentName: Pezin_D
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pernita_E
+      parentName: nurbsCircle3
+      position: {x: -0.015395742, y: 0.44063798, z: 0.043408718}
+      rotation: {x: -0.7061297, y: -0.098676674, z: -0.037160043, w: 0.7001878}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle6
+      parentName: Pernita_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Joelho_E 1
+      parentName: nurbsCircle6
+      position: {x: 0.39331204, y: 0.017196259, z: -0.0000016338505}
+      rotation: {x: 0.9637341, y: 0.26686448, z: 1.6340738e-17, w: 5.9011694e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle8
+      parentName: Joelho_E 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tornozelo_E 1
+      parentName: nurbsCircle8
+      position: {x: 0.3025429, y: 0.016471421, z: -0.000000007110016}
+      rotation: {x: 0.82495123, y: 0.5652039, z: -1.6010924e-16, w: -2.3368967e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle10
+      parentName: Tornozelo_E 1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Pezin_E
+      parentName: nurbsCircle10
+      position: {x: 0.32285306, y: 0.000000582523, z: 0.00000088933206}
+      rotation: {x: 0, y: -0, z: -0.28174934, w: 0.9594881}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle12
+      parentName: Pezin_E
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Principal
+      parentName: Mapinpin_Iddle(Clone)
+      position: {x: 0, y: -0.16136, z: 0}
+      rotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: Root
+      parentName: Principal
+      position: {x: -0.778579, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: Pernocas
+      parentName: Root
+      position: {x: -0.28216624, y: 0, z: 0.060099747}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: Bracitos
+      parentName: Pernocas
+      position: {x: -0.94238365, y: 0, z: -0.060099747}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: Fim_Cabeca
+      parentName: Bracitos
+      position: {x: -1.0936834, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bracin_D
+      parentName: Bracitos
+      position: {x: 0.036060475, y: -0.672167, z: 0.09875486}
+      rotation: {x: -0.026697189, y: 0.027998516, z: 0.7158976, w: 0.69713265}
+      scale: {x: 1.0000002, y: 1, z: 1.0000002}
+    - name: Cotovelo_D
+      parentName: Bracin_D
+      position: {x: -0.5801394, y: 7.81597e-16, z: -1.9539925e-16}
+      rotation: {x: 0.008645133, y: -0.03000858, z: -0.04286149, w: 0.99859285}
+      scale: {x: 0.9999997, y: 1, z: 1.0000006}
+    - name: Pulso_D
+      parentName: Cotovelo_D
+      position: {x: -0.45653802, y: -0.0063439175, z: 0.04871452}
+      rotation: {x: -0.0045073233, y: -0.049354725, z: 0.09083342, w: 0.9946322}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Mao_D
+      parentName: Pulso_D
+      position: {x: -0.20560163, y: -3.907985e-16, z: -2.1982416e-16}
+      rotation: {x: 0.04133241, y: 0.6744493, z: -0.088932, w: 0.7317793}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: Dedao_D
+      parentName: Mao_D
+      position: {x: -0.13719988, y: 3.907985e-16, z: 1.4654943e-16}
+      rotation: {x: 0.038982544, y: -0.4170919, z: 0.084096216, w: 0.90412533}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1}
+    - name: Dedao_Dobra_D
+      parentName: Dedao_D
+      position: {x: -0.084005855, y: 0, z: 1.9539925e-16}
+      rotation: {x: 0.00000014156097, y: -0.026126137, z: 0.0000009685751, w: 0.9996587}
+      scale: {x: 1.0000006, y: 1, z: 0.9999997}
+    - name: Dedao_Meio_D
+      parentName: Dedao_Dobra_D
+      position: {x: -0.06966509, y: 0, z: -4.8849814e-16}
+      rotation: {x: -0.000000057370528, y: -0.038617514, z: -0.0000004823521, w: 0.99925405}
+      scale: {x: 1.0000001, y: 1, z: 0.9999997}
+    - name: Dedao_Fim_D
+      parentName: Dedao_Meio_D
+      position: {x: -0.19378614, y: 3.907985e-16, z: -3.907985e-16}
+      rotation: {x: 0, y: -0.46671754, z: -0, w: 0.88440645}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_A_D
+      parentName: Mao_D
+      position: {x: -0.097901896, y: -0.010755684, z: -0.14639147}
+      rotation: {x: -0.054590676, y: -0.5160366, z: 0.06275783, w: 0.8525184}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Dedo_A_Meio_D
+      parentName: Dedo_A_D
+      position: {x: -0.12545821, y: -3.907985e-16, z: 0}
+      rotation: {x: -0.00000013411044, y: 0.014407633, z: -0, w: 0.9998963}
+      scale: {x: 1.0000002, y: 1, z: 0.99999994}
+    - name: Dedo_A_Fim_D
+      parentName: Dedo_A_Meio_D
+      position: {x: -0.16839173, y: -3.907985e-16, z: 2.4424907e-16}
+      rotation: {x: 0, y: -0.26639637, z: -0, w: 0.9638636}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedo_Meio_D
+      parentName: Mao_D
+      position: {x: -0.00022782672, y: -0.014305681, z: -0.14492431}
+      rotation: {x: -0.058280725, y: -0.52731377, z: 0.031086273, w: 0.8470993}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1.0000001}
+    - name: Dedo_Meio_Meio_D
+      parentName: Dedo_Meio_D
+      position: {x: -0.14390956, y: -1.563194e-15, z: 3.6637358e-17}
+      rotation: {x: 0.000000044703473, y: -0.003982066, z: 0.000000052154054, w: 0.99999213}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Dedo_Meio_Fim_D
+      parentName: Dedo_Meio_Meio_D
+      position: {x: -0.19863546, y: 1.1723955e-15, z: -2.1982415e-15}
+      rotation: {x: 0, y: -0.11089907, z: -0, w: 0.9938317}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dedin_D
+      parentName: Mao_D
+      position: {x: 0.108361095, y: -0.024423208, z: -0.11228732}
+      rotation: {x: -0.064973876, y: -0.5262863, z: 0.023517715, w: 0.84749526}
+      scale: {x: 0.99999994, y: 0.9999996, z: 1.0000001}
+    - name: Dedin_Meio_D
+      parentName: Dedin_D
+      position: {x: -0.1235527, y: -7.81597e-16, z: -1.7097434e-16}
+      rotation: {x: -0.000000040978183, y: -0.009250907, z: 0.000000007450579, w: 0.9999572}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000001}
+    - name: Dedin_Fim_D
+      parentName: Dedin_Meio_D
+      position: {x: -0.17612669, y: 0, z: -7.083223e-16}
+      rotation: {x: 0, y: -0.052901726, z: -0, w: 0.9985997}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bracin_E
+      parentName: Bracitos
+      position: {x: 0.036060512, y: 0.672166, z: 0.09875492}
+      rotation: {x: 0.7158974, y: 0.6971329, z: 0.026697056, w: -0.027998421}
+      scale: {x: 1, y: 1, z: 1.0000005}
+    - name: Cotovelo_E
+      parentName: Bracin_E
+      position: {x: 0.5801414, y: 0.000000595149, z: 0.00000016023611}
+      rotation: {x: 0.008644903, y: -0.030008927, z: -0.0428603, w: 0.9985929}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000005}
+    - name: Pulso_E
+      parentName: Cotovelo_E
+      position: {x: 0.45653716, y: 0.0063425996, z: -0.04871527}
+      rotation: {x: -0.0045073014, y: -0.049354695, z: 0.090833455, w: 0.9946322}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000005}
+    - name: Mao_E
+      parentName: Pulso_E
+      position: {x: 0.20560129, y: -0.0000003218535, z: 0.000000028400224}
+      rotation: {x: 0.0413324, y: 0.6744493, z: -0.088932, w: 0.73177916}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000001}
+    - name: Eedao_E
+      parentName: Mao_E
+      position: {x: 0.13719855, y: 0.000001427408, z: 0.0000011159747}
+      rotation: {x: 0.038983196, y: -0.41709185, z: 0.08409677, w: 0.9041252}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000005}
+    - name: Eedao_Eobra_E
+      parentName: Eedao_E
+      position: {x: 0.08400602, y: -0.00000009888272, z: -0.0000003898095}
+      rotation: {x: -0.000000018626448, y: -0.02612471, z: 0.000000366941, w: 0.9996587}
+      scale: {x: 1.0000002, y: 0.9999997, z: 1.0000004}
+    - name: Eedao_Meio_E
+      parentName: Eedao_Eobra_E
+      position: {x: 0.06966565, y: 0.00000008529911, z: -0.00000003783883}
+      rotation: {x: 0.00000009932375, y: -0.038618654, z: 0.0000006360638, w: 0.99925405}
+      scale: {x: 1.0000004, y: 1.0000001, z: 0.99999994}
+    - name: Eedao_Fim_E
+      parentName: Eedao_Meio_E
+      position: {x: 0.19378494, y: -0.0000012716421, z: -0.000000526814}
+      rotation: {x: 1.5216922e-18, y: -0.46671754, z: 9.393248e-10, w: 0.88440645}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eedo_A_E
+      parentName: Mao_E
+      position: {x: 0.09790224, y: 0.010756082, z: 0.14639273}
+      rotation: {x: -0.054588493, y: -0.5160327, z: 0.0627538, w: 0.8525211}
+      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000005}
+    - name: Eedo_A_Meio_E
+      parentName: Eedo_A_E
+      position: {x: 0.12545802, y: 0.000000958733, z: 0.0000014289558}
+      rotation: {x: -0.000000007450581, y: 0.014407754, z: -0.000000014901161, w: 0.9998963}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000007}
+    - name: Eedo_A_Fim_E
+      parentName: Eedo_A_Meio_E
+      position: {x: 0.16839069, y: 0.00000035304487, z: -0.0000016404164}
+      rotation: {x: 0.0000000071813435, y: -0.26639637, z: 0.0000000019848074, w: 0.9638636}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eedo_Meio_E
+      parentName: Mao_E
+      position: {x: 0.00022757931, y: 0.014306095, z: 0.14492413}
+      rotation: {x: -0.05828034, y: -0.52731353, z: 0.031084955, w: 0.84709954}
+      scale: {x: 1.0000002, y: 0.9999998, z: 1.0000002}
+    - name: Eedo_Meio_Meio_E
+      parentName: Eedo_Meio_E
+      position: {x: 0.14391032, y: 0.00000038468957, z: 0.00000030713554}
+      rotation: {x: -0.000000022351736, y: -0.003982126, z: -0.000000029802315, w: 0.9999921}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000004}
+    - name: Eedo_Meio_Fim_E
+      parentName: Eedo_Meio_Meio_E
+      position: {x: 0.19862667, y: 0.0000033900503, z: -0.0000034667864}
+      rotation: {x: 0.000000007404623, y: -0.11089907, z: 8.262622e-10, w: 0.9938317}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Eedin_E
+      parentName: Mao_E
+      position: {x: -0.10836084, y: 0.024423543, z: 0.112288944}
+      rotation: {x: -0.06497289, y: -0.5262825, z: 0.023512991, w: 0.8474978}
+      scale: {x: 1.0000006, y: 0.9999998, z: 1.0000006}
+    - name: Eedin_Meio_E
+      parentName: Eedin_E
+      position: {x: 0.12355205, y: 0.0000016766882, z: 0.0000014422873}
+      rotation: {x: 0.000000018626448, y: -0.009250907, z: 0.000000022351736, w: 0.9999572}
+      scale: {x: 1.0000004, y: 0.9999998, z: 1.0000004}
+    - name: Eedin_Fim_E
+      parentName: Eedin_Meio_E
+      position: {x: 0.17613153, y: -0.0000014314609, z: 0.000000035953022}
+      rotation: {x: 0.000000014880295, y: -0.052901726, z: 7.882971e-10, w: 0.9985997}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perna_D
+      parentName: Pernocas
+      position: {x: -0.015394925, y: -0.44063696, z: 0.043408636}
+      rotation: {x: -0.037160035, y: 0.70018774, z: 0.7061297, w: 0.098676756}
+      scale: {x: 1.0000006, y: 1.0000004, z: 1.0000004}
+    - name: Joelho_D
+      parentName: Perna_D
+      position: {x: -0.39331165, y: -0.01719604, z: -1.9539925e-16}
+      rotation: {x: -0.9637341, y: -0.26686457, z: 0.000000050291412, w: 0.00000008940696}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1.0000001}
+    - name: Tornozelo_D
+      parentName: Joelho_D
+      position: {x: -0.30254364, y: -0.016471561, z: -1.9539925e-16}
+      rotation: {x: 0.8249513, y: 0.56520385, z: 0.000000015737042, w: 0.000000010789473}
+      scale: {x: 0.9999997, y: 1.0000002, z: 1}
+    - name: Pe_D
+      parentName: Tornozelo_D
+      position: {x: -0.3228521, y: -1.9539925e-16, z: 0}
+      rotation: {x: 0.000000028220875, y: 0.000000020750255, z: -0.28174937, w: 0.95948803}
+      scale: {x: 1.0000005, y: 0.9999998, z: 1.0000002}
+    - name: Fim_Pe_D
+      parentName: Pe_D
+      position: {x: -0.48205268, y: 2.4424907e-16, z: 0}
+      rotation: {x: -0.051535852, y: -0.70522624, z: -0.051535852, w: 0.70522624}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perna_E
+      parentName: Pernocas
+      position: {x: -0.015395742, y: 0.44063798, z: 0.043408718}
+      rotation: {x: 0.7061297, y: 0.098676726, z: 0.037160035, w: -0.70018774}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000005}
+    - name: Joelho_E
+      parentName: Perna_E
+      position: {x: 0.39331204, y: 0.017196259, z: -0.0000016338505}
+      rotation: {x: -0.9637341, y: -0.26686445, z: 0.0000000745058, w: 0.0000000372529}
+      scale: {x: 0.99999994, y: 1.0000004, z: 1.0000004}
+    - name: Tornozelo_E
+      parentName: Joelho_E
+      position: {x: 0.3025429, y: 0.016471421, z: -0.000000007110016}
+      rotation: {x: 0.82495135, y: 0.56520385, z: -0.000000018712583, w: -0.000000037549498}
+      scale: {x: 0.9999998, y: 1, z: 1}
+    - name: Pe_E
+      parentName: Tornozelo_E
+      position: {x: 0.32285306, y: 0.000000582523, z: 0.00000088933206}
+      rotation: {x: 0.000000043677822, y: 0.000000032931947, z: -0.28174937, w: 0.95948803}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000002}
+    - name: Fim_Pe_E
+      parentName: Pe_E
+      position: {x: 0.48205304, y: 0.000000028455874, z: -0.00000026536082}
+      rotation: {x: -0.051535852, y: -0.70522624, z: -0.051535852, w: 0.70522624}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 22
+    rootMotionBoneName: Root
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: f9a6d7e1b3a583b42b7cd14b92b1f694,
+    type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

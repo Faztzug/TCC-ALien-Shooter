@@ -14,6 +14,14 @@ public class BiteTrigger : DamageHealthCollider
             var dmg = damage;
             if(gameObject.CompareTag(Gun.kCrtiHitTag)) dmg *= 2;
 
+
+            if (other.TryGetComponent<ModifierDamageArea>(out ModifierDamageArea areaDmgMod))
+            {
+                var dmgType = DamageType.piranhaBiteDamage;
+                DamageModified modifier = areaDmgMod.damageModifiers.Find(d => d.damageType == dmgType | d.damageType == DamageType.AnyDamage);
+                if (modifier.damageType == dmgType | modifier.damageType == DamageType.AnyDamage) dmg *= modifier.multplier;
+            }
+
             var health = GetHealth(other.gameObject);
 
             health?.UpdateHealth(dmg, DamageType.piranhaBiteDamage);
