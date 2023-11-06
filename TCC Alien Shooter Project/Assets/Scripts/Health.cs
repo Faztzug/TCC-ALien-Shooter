@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine.Rendering;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Events;
 
 [Serializable]
 public struct DamageModified
@@ -52,6 +53,7 @@ public class Health : MonoBehaviour
     protected float damageSoundTimer;
     public List<DamageModified> damageModifiers = new List<DamageModified>();
     [SerializeField] protected bool doesDestroyOnDeath = true;
+    public UnityEvent OnDeath;
 
     public virtual void Start()
     {
@@ -145,6 +147,7 @@ public class Health : MonoBehaviour
         isDead = true;
 
         onDeath?.Invoke();
+        OnDeath?.Invoke();
 
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
         if(audioSource == null | anim == null) GameState.InstantiateSound(deathSound, transform.position);

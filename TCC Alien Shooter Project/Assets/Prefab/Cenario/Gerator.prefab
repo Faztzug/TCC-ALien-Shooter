@@ -141,7 +141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8688780915867237892}
   - component: {fileID: 2442827147795190911}
-  - component: {fileID: 8523251558678636913}
   - component: {fileID: 8860113737217437965}
   - component: {fileID: 8934558503870188976}
   - component: {fileID: 7606818667884196448}
@@ -178,47 +177,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8191103683717264908}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8523251558678636913
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191103683717264908}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 8e64a72f2cb9c45bba4b11d98489b11f, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8860113737217437965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -245,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  isDead: 0
   bloodVFX: {fileID: 7921272023415586258, guid: a436a1fbeb9c401448639f1e65bc5e64,
     type: 3}
   DeathVFX: {fileID: 7921272023415586258, guid: 5e39e57ed039acf42bf5f0f6b7363624,
@@ -262,6 +221,11 @@ MonoBehaviour:
     playOnAwake: 0
     audioSource: {fileID: 0}
   audioSource: {fileID: 7606818667884196448}
+  damageModifiers: []
+  doesDestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   damageOnlyFrom: 0100000002000000
 --- !u!82 &7606818667884196448
 AudioSource:
