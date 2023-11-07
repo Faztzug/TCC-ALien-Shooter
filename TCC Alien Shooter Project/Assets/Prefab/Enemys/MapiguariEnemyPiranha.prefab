@@ -391,7 +391,7 @@ MonoBehaviour:
     type: 3}
   DeathVFX: {fileID: 0}
   damageSounds:
-  - clip: {fileID: 8300000, guid: 63bfd2dd890e8b64dab3dac27eddd995, type: 3}
+  - clip: {fileID: 8300000, guid: 073a0393eb8cbe64c96dda1dc2f3b694, type: 3}
     name: playerDamage1
     volume: 1
     pitch: 0
@@ -401,18 +401,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
-  - clip: {fileID: 8300000, guid: e84d18b2ca253e749bc6078706ffccf0, type: 3}
-    name: playerDamage2
-    volume: 1
-    pitch: 0
-    pitchRNG:
-    - 0.41
-    - -0.33
-    loop: 0
-    playOnAwake: 0
-    audioSource: {fileID: 0}
   deathSound:
-    clip: {fileID: 8300000, guid: ed29b8dc5c4162f4e9ca7674e0b81716, type: 3}
+    clip: {fileID: 8300000, guid: be83a38e859cf9444a09c9ff7555caa6, type: 3}
     name: death
     volume: 1
     pitch: 1
@@ -425,6 +415,9 @@ MonoBehaviour:
   audioSource: {fileID: 7988682796749478736}
   damageModifiers: []
   doesDestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   gunHolder: {fileID: 6612067885380023612}
   rightHand: {fileID: 8558162437597329222}
   maxShield: 5
@@ -844,6 +837,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyIddleSoundVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2621579639608926439, guid: aaf0d048bd83c5443b1c20f992f58fc8,
+        type: 3}
+      propertyPath: sound.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 68f5bad61cc856140bf031cf677a1553, type: 3}
+    - target: {fileID: 2621579639608926439, guid: aaf0d048bd83c5443b1c20f992f58fc8,
+        type: 3}
+      propertyPath: sound.name
+      value: mapi
       objectReference: {fileID: 0}
     - target: {fileID: 2621579639608926439, guid: aaf0d048bd83c5443b1c20f992f58fc8,
         type: 3}

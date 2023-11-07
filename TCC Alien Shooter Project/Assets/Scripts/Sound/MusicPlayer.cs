@@ -8,18 +8,27 @@ public class MusicPlayer : MonoBehaviour
     private AudioClip CurrentPlaying;
     private AudioSource audioSource;
 
+    public void ChangeMusic(Sound newMusic)
+    {
+        musicSound = newMusic;
+        SettingMusic();
+    }
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        SettingMusic();
+        if (GameState.GameStateInstance != null) GameState.OnSettingsUpdated += UpdateVolume;
+    }
+
+    private void SettingMusic()
+    {
         musicSound.Setup(audioSource);
 
         UpdateVolume();
 
         audioSource.Play();
         CurrentPlaying = musicSound.clip;
-        
-        if(GameState.GameStateInstance != null) GameState.OnSettingsUpdated += UpdateVolume;
     }
 
     public void UpdateVolume()

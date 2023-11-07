@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActivateGOTrigger : MonoBehaviour
 {
     [SerializeField] private List<GameObject> objets = new List<GameObject>();
+    [SerializeField] private Sound musicToChange;
 
     private void Awake()
     {
@@ -16,6 +17,10 @@ public class ActivateGOTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             foreach (var go in objets) go.SetActive(true);
+            if(musicToChange.clip != null)
+            {
+                FindAnyObjectByType<MusicPlayer>().ChangeMusic(musicToChange);
+            }
         }
     }
 }

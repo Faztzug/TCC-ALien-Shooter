@@ -9,6 +9,7 @@ public class BossHealth : ShieldHealth
     protected RectTransform shieldParent => shieldBar.parent as RectTransform;
     [SerializeField] protected RectTransform healthBar;
     protected RectTransform healthParent => healthBar.parent as RectTransform;
+    [SerializeField] Sound victoryJiggle;
 
     protected override void Update()
     {
@@ -27,6 +28,8 @@ public class BossHealth : ShieldHealth
     public override void DestroyCharacter()
     {
         base.DestroyCharacter();
+        GameState.InstantiateSound(victoryJiggle, this.transform.position);
+        
         if (GameState.SaveData.unlockLevelsTo < 4)
         {
             GameState.SaveData.unlockLevelsTo = 4;
