@@ -40,7 +40,7 @@ BoxCollider:
   m_GameObject: {fileID: 772530402329585482}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.24102402, y: 1, z: 0.2185632}
   m_Center: {x: 0.0046367645, y: 0.0000000010452565, z: 0.056779426}
@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 541689442533694015}
   - component: {fileID: 2333006325780066037}
   - component: {fileID: 2511763636444123849}
-  - component: {fileID: 1603239172460547893}
   m_Layer: 0
   m_Name: ArvoreCover
   m_TagString: Untagged
@@ -73,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 4278556622381616928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.23, y: 0.21, z: 24.07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4111812273777528394}
   m_Father: {fileID: 0}
@@ -140,18 +139,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35455036, y: 1.0513792, z: 0.40197372}
-  m_Center: {x: -0.003935337, y: 0.36158997, z: 0.4568615}
---- !u!65 &1603239172460547893
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4278556622381616928}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.25096416, y: 1.0099263, z: 0.17598724}
-  m_Center: {x: 0.018269062, y: 2.0899532, z: 0.11797333}
+  m_Size: {x: 2, y: 15.713918, z: 2}
+  m_Center: {x: 0, y: 7.309959, z: 1.41}
