@@ -3883,17 +3883,17 @@ PrefabInstance:
     - target: {fileID: 6612067885872428976, guid: 4f1be73bfdaaf774aba858346693fb52,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6612067885872428976, guid: 4f1be73bfdaaf774aba858346693fb52,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6612067885872428976, guid: 4f1be73bfdaaf774aba858346693fb52,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6612067885872428976, guid: 4f1be73bfdaaf774aba858346693fb52,
         type: 3}
@@ -3948,7 +3948,12 @@ PrefabInstance:
     - target: {fileID: 6612067885872428981, guid: 4f1be73bfdaaf774aba858346693fb52,
         type: 3}
       propertyPath: maxHealth
-      value: 14
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612067885872428981, guid: 4f1be73bfdaaf774aba858346693fb52,
+        type: 3}
+      propertyPath: maxShield
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6612067885872428991, guid: 4f1be73bfdaaf774aba858346693fb52,
         type: 3}
@@ -11139,6 +11144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2755
+      objectReference: {fileID: 0}
+    - target: {fileID: 73343146452970338, guid: 96cbea16df72d4346bfec18392d0cf92,
+        type: 3}
+      propertyPath: m_Shape
+      value: Unity.ProBuilder UnityEngine.ProBuilder.Shapes.Sprite
       objectReference: {fileID: 0}
     - target: {fileID: 166208327663072960, guid: 96cbea16df72d4346bfec18392d0cf92,
         type: 3}

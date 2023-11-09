@@ -254,6 +254,9 @@ MonoBehaviour:
   audioSource: {fileID: 315705569910493906}
   damageModifiers: []
   doesDestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-4800811894422088956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1498,6 +1501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerShallNotGetUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855416925897460247, guid: 63620340bab3d55419dfd3cd7a951e37,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6659030140736512811, guid: 63620340bab3d55419dfd3cd7a951e37,
         type: 3}
