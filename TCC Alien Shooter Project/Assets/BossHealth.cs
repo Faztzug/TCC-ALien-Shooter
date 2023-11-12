@@ -30,9 +30,9 @@ public class BossHealth : ShieldHealth
         base.DestroyCharacter();
         GameState.InstantiateSound(victoryJiggle, this.transform.position);
         
-        if (GameState.SaveData.unlockLevelsTo < 4)
+        if (GameState.SaveData.unlockLevelsTo < 3)
         {
-            GameState.SaveData.unlockLevelsTo = 4;
+            GameState.SaveData.unlockLevelsTo = 3;
             GameState.saveManager.SaveGame(GameState.SaveData);
         }
         GameState.EndLevel();

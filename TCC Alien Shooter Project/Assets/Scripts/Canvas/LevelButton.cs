@@ -11,7 +11,12 @@ public class LevelButton : ButtonSound
     {
         base.Start();
         menuController = FindObjectOfType<MenuController>(true);
-        if(GameState.SaveData.unlockLevelsTo < levelIndex) button.enabled = false;
+        UpdateState();
+    }
+
+    public void UpdateState()
+    {
+        button.enabled = (GameState.SaveData.unlockLevelsTo >= levelIndex || GameState.GodMode);
     }
 
     public void LoadLevelByIndex()
