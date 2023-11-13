@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2296981040565780692
 Transform:
@@ -98,6 +98,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maca_Simples
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2ec5f4367f88d640b3ada348121ef80,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2ec5f4367f88d640b3ada348121ef80, type: 3}
 --- !u!1 &2578571784936677145 stripped
@@ -123,5 +128,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.955457, y: 0.4443282, z: 10.490686}
-  m_Center: {x: -0.00000044703484, y: 3.3063648, z: 0}
+  m_Size: {x: 1.318486, y: 0.162287, z: 3.496896}
+  m_Center: {x: 0, y: 1.0950316, z: 0}

@@ -70,7 +70,7 @@ public class CanvasManager : MonoBehaviour
     {
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
-        damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2));
+        damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2)) * 0.7f;
     }
 
     private float ElevateBy(float value, int elevate)
