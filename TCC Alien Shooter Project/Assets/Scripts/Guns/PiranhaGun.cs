@@ -38,6 +38,13 @@ public class PiranhaGun : Gun
         base.SecondaryFire();
         Shooting(secondaryFireData);
         primaryFireData.fireTimer -= primaryFireData.fireCooldown / 4;
+        if(IsAmmoEmpty()) GameState.gunManager.NextGun();
+    }
+
+    public override bool IsAmmoEmpty()
+    {
+        if (secondaryFireData.continuosFire) return (loadedAmmo < secondaryFireData.ammoCost * Time.deltaTime);
+        else return (loadedAmmo < secondaryFireData.ammoCost);
     }
 
     public void BiteGainAmmo()

@@ -65,9 +65,6 @@ public class Gun : MonoBehaviour
 
     public void AmmoRegen()
     {
-        //a
-        //LoadedAmmo += (maxLoadedAmmo * ((ammoRegenPorcent / 100)) * Time.deltaTime);
-
         if (LoadedAmmo <= 0)
         {
             LoadedAmmo += 0.0000001f;
@@ -444,6 +441,12 @@ public class Gun : MonoBehaviour
             StopContinuosFireAudio(primaryFireData);
             StopContinuosFireAudio(secondaryFireData);
         }
+    }
+
+    public virtual bool IsAmmoEmpty() 
+    {
+        if(primaryFireData.continuosFire) return (loadedAmmo < primaryFireData.ammoCost * Time.deltaTime);
+        else return (loadedAmmo < primaryFireData.ammoCost);
     }
 
     protected virtual void OnValidate() 

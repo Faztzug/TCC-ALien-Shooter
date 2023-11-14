@@ -725,7 +725,7 @@ MonoBehaviour:
     damage: -1.4
     maxDistance: 0
     continuosFire: 1
-    ammoCost: 1
+    ammoCost: 1.2
     fireCooldown: 0
     fireTimer: 0
     fireSound:
@@ -755,8 +755,8 @@ MonoBehaviour:
   isPlayerGun: 1
   useTriggerColiderToGetTargets: 0
   aimTransform: {fileID: 0}
-  loadedAmmo: 25
-  maxLoadedAmmo: 80
+  loadedAmmo: 0
+  maxLoadedAmmo: 65
   shootCooldown: 0
   gunPointPositions:
   - {fileID: 8660088875733594001}
@@ -764,7 +764,7 @@ MonoBehaviour:
   movimentoMouse: {fileID: 0}
   enemyTarget: {x: 0, y: 0, z: 0}
   enemyHoldingFire: 0
-  ammoRegenPorcent: 0.2
+  ammoRegenPorcent: 0.1
   biteCollider: {fileID: 7370464230192837999}
   waitBeforeDamage: 0.1
   biteDamageDuration: 0.3

@@ -679,6 +679,7 @@ MonoBehaviour:
     bulletPrefab: {fileID: 8196861408395965754, guid: c1010900c080cd54cbc3bd6a7501cb7d,
       type: 3}
     Flash: {fileID: 0}
+    defaultHitVFX: {fileID: 0}
     damage: -1.5
     maxDistance: 0
     continuosFire: 0
@@ -696,6 +697,17 @@ MonoBehaviour:
       loop: 0
       playOnAwake: 0
       audioSource: {fileID: 0}
+    hitSound:
+      clip: {fileID: 0}
+      name: 
+      volume: 1
+      pitch: 1
+      pitchRNG:
+      - 0
+      - 0
+      loop: 0
+      playOnAwake: 0
+      audioSource: {fileID: 0}
     piercingRay: 0
     rayDiamanter: 0
   secondaryFireData:
@@ -704,6 +716,7 @@ MonoBehaviour:
     bulletPrefab: {fileID: 8196861408395965754, guid: 0c16fa5d0c802df458e53b807bc87938,
       type: 3}
     Flash: {fileID: 0}
+    defaultHitVFX: {fileID: 0}
     damage: -2
     maxDistance: 0
     continuosFire: 0
@@ -721,20 +734,31 @@ MonoBehaviour:
       loop: 0
       playOnAwake: 0
       audioSource: {fileID: 0}
+    hitSound:
+      clip: {fileID: 0}
+      name: 
+      volume: 1
+      pitch: 1
+      pitchRNG:
+      - 0
+      - 0
+      loop: 0
+      playOnAwake: 0
+      audioSource: {fileID: 0}
     piercingRay: 0
     rayDiamanter: 0
   isPlayerGun: 1
   useTriggerColiderToGetTargets: 0
   aimTransform: {fileID: 0}
-  loadedAmmo: 20
-  maxLoadedAmmo: 60
+  loadedAmmo: 0
+  maxLoadedAmmo: 50
   shootCooldown: 60
   gunPointPositions:
   - {fileID: 1343884193598592456}
   movimentoMouse: {fileID: 0}
   enemyTarget: {x: 0, y: 0, z: 0}
   enemyHoldingFire: 0
-  ammoRegenPorcent: 0.4
+  ammoRegenPorcent: 0.2
 --- !u!82 &3295556652931260170
 AudioSource:
   m_ObjectHideFlags: 0

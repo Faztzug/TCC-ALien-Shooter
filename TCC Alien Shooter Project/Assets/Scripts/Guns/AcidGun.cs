@@ -8,6 +8,7 @@ public class AcidGun : Gun
     {
         base.PrimaryFire();
         Shooting(primaryFireData);
+        if(IsAmmoEmpty()) GameState.gunManager.NextGun();
     }
 
     public override void SecondaryFire()

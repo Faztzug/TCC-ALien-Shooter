@@ -10,7 +10,7 @@ public class GunItem : AmmoItem
         {
             GameState.SaveData.gunsColected.Add(ammoType);
             GameState.SaveGameData();
-            var gunsManager = GameState.PlayerTransform.GetComponentInChildren<GunManager>();
+            var gunsManager = GameState.gunManager;
             gunsManager.UpdateAvaibleGuns();
             gunsManager.SetSelectedGun(ammoType);
             base.CollectItem(obj);

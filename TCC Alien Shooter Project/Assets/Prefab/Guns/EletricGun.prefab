@@ -434,7 +434,7 @@ MonoBehaviour:
     Flash: {fileID: 0}
     defaultHitVFX: {fileID: 0}
     damage: -1
-    maxDistance: 5
+    maxDistance: 7
     continuosFire: 1
     ammoCost: 1
     fireCooldown: 0
@@ -502,8 +502,8 @@ MonoBehaviour:
   isPlayerGun: 1
   useTriggerColiderToGetTargets: 0
   aimTransform: {fileID: 0}
-  loadedAmmo: 20
-  maxLoadedAmmo: 50
+  loadedAmmo: 0
+  maxLoadedAmmo: 45
   shootCooldown: 30
   gunPointPositions:
   - {fileID: 3450406334942840813}
@@ -514,7 +514,7 @@ MonoBehaviour:
   movimentoMouse: {fileID: 0}
   enemyTarget: {x: 0, y: 0, z: 0}
   enemyHoldingFire: 0
-  ammoRegenPorcent: 0.5
+  ammoRegenPorcent: 0.25
   minChargePower: 0.5
   maxChargePower: 2
   chargingSound:

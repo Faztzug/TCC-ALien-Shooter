@@ -37,6 +37,7 @@ public class EletricGun : Gun
     {
         base.PrimaryFire();
         Shooting(primaryFireData);
+        if (IsAmmoEmpty()) GameState.gunManager.NextGun();
     }
 
     protected void Charging()

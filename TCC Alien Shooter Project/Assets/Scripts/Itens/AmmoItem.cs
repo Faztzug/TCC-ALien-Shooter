@@ -9,7 +9,7 @@ public class AmmoItem : Item
     protected override void Start() 
     {
         base.Start();
-        ammount = Random.Range(ammoRange[0], ammoRange[1]+1);
+        if(ammoRange.Length >= 2) ammount = Random.Range(ammoRange[0], ammoRange[1]+1);
     }
     public override void CollectItem(GameObject obj)
     {

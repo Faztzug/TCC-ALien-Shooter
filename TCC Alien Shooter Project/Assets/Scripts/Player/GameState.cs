@@ -30,6 +30,9 @@ public class GameState : MonoBehaviour
     static public bool skipCutscene;
     private MovimentoMouse movimentoMouse;
     static public MovimentoMouse MovimentoMouse { get => gameState.movimentoMouse; }
+    private GunManager _gunManager;
+    static public GunManager gunManager => gameState._gunManager;
+
     private Camera mainCamera;
     static public Camera MainCamera { get => gameState.mainCamera; }
     private Camera cutsceneCamera;
@@ -64,6 +67,7 @@ public class GameState : MonoBehaviour
         movimentoMouse = GetComponentInChildren<MovimentoMouse>();
         //var cutSceneGOCam = GameObject.FindGameObjectWithTag("CutsceneCamera");
         mainCanvas = gameObject.GetComponentInChildren<CanvasManager>();
+        _gunManager = GetComponentInChildren<GunManager>();
         gameState = this;
         SaveData = saveManager.LoadGame();
         if(SaveData.gunsColected == null) SaveData = saveManager.ResetData();

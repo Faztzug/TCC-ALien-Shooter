@@ -216,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 7663323384221329617}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.035, y: 0.895, z: 0.824}
-  m_LocalScale: {x: 0.7, y: 0.81564, z: 1.3}
+  m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_Children:
   - {fileID: 6885041802372437492}
   - {fileID: 5229428172734305677}
@@ -563,6 +563,9 @@ MonoBehaviour:
   audioSource: {fileID: 5363006840946648732}
   damageModifiers: []
   doesDestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &820349350335583623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,6 +1107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isPlayerGun
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1343884193950524906, guid: 47c1033a9a3fa3c4488809f423788201,
+        type: 3}
+      propertyPath: primaryFireData.damage
+      value: -1.25
       objectReference: {fileID: 0}
     - target: {fileID: 1343884193950524906, guid: 47c1033a9a3fa3c4488809f423788201,
         type: 3}

@@ -72,10 +72,25 @@ public class GunManager : MonoBehaviour
         gunChange = StartCoroutine(GunSelectedCourotine());
     }
 
+    public void NextGun()
+    {
+        if(avaibleGuns.FindAll(g => g.IsAmmoEmpty()).Count >= avaibleGuns.Count)
+        {
+            if (selectedGunIndex == 0) return;
+            else
+            {
+                selectedGunIndex = 0;
+                return;
+            }
+        }
+        var nextIndex = selectedGunIndex+1;
+        if(nextIndex >= avaibleGuns.Count) nextIndex = 0;
+        selectedGunIndex = nextIndex;
+    }
+
     private IEnumerator GunSelectedCourotine()
     {
         anim.SetTrigger("Change");
-        Debug.Log("New gun index: " + selectedGunIndex);
         scroolInput = 0.5f;
         changingGun = true;
         yield return new WaitForSeconds(gunChangeWait);
