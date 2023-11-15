@@ -100,7 +100,7 @@ MonoBehaviour:
   alive: 1
   aimTransform: {fileID: 0}
   aimRotationSpeed: 5
-  gizmoColor: {r: 0.696, g: 0.753, b: 0.213, a: 0.23921569}
+  gizmoColor: {r: 0.21176471, g: 0.47029182, b: 0.7529412, a: 0.23921569}
   biteCollider: {fileID: 2068789417339271585}
   biteWaitStart: 0.3
   biteTime: 1
@@ -287,6 +287,9 @@ MonoBehaviour:
   - damageType: 4
     multplier: 0.51
   doesDestroyOnDeath: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2716896032743473675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,9 +306,11 @@ MonoBehaviour:
   itens:
   - {fileID: 7320214218185223239, guid: 6d9ca4895570dc244994dd1590fb1e41, type: 3}
   - {fileID: 4275636808051785984, guid: c0556c998d85af14e9edc1c421c366bb, type: 3}
+  - {fileID: 4275636808051785984, guid: 16028a487feda4e49917bcd112f45d1c, type: 3}
   dropChance:
   - 100
   - 5
+  - 10
 --- !u!1 &2068789417339271585
 GameObject:
   m_ObjectHideFlags: 0

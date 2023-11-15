@@ -141,13 +141,15 @@ public class Gun : MonoBehaviour
 
             if (LoadedAmmo >= firstCost || firstCost == 0)
             {
-                if(primaryFireData.continuosFire && Input.GetButton("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
+                if((primaryFireData.continuosFire || primaryFireData.allowRepeatedFire) && Input.GetButton("Fire1") 
+                    && primaryFireData.fireTimer <= 0) PrimaryFire();
                 else if (Input.GetButtonDown("Fire1") && primaryFireData.fireTimer <= 0) PrimaryFire();
             }
             
             if(LoadedAmmo >= secondCost ||secondCost == 0)
             {
-                if(secondaryFireData.continuosFire && Input.GetButton("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
+                if((secondaryFireData.continuosFire || secondaryFireData.allowRepeatedFire) && Input.GetButton("Fire2") 
+                    && secondaryFireData.fireTimer <= 0) SecondaryFire();
                 else if(Input.GetButtonDown("Fire2") && secondaryFireData.fireTimer <= 0) SecondaryFire();
             }
         }

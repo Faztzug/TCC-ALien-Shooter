@@ -14,6 +14,7 @@ public struct GunFireStruct
     public float damage;
     public float maxDistance;
     public bool continuosFire;
+    public bool allowRepeatedFire;
     public float ammoCost;
     public float fireCooldown;
     [HideInInspector] public float fireTimer;

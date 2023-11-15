@@ -9,6 +9,12 @@ public class DocumentLoreUIManager : MonoBehaviour
     [HideInInspector] public LoreDocument loreDocument;
     [SerializeField] private TextMeshProUGUI tittle;
     [SerializeField] private TextMeshProUGUI body;
+    private ScrollRect scrollRect;
+
+    private void Awake()
+    {
+        scrollRect = GetComponentInChildren<ScrollRect>();
+    }
 
     public void SetLoreDucmentUI(LoreDocument document)
     {
@@ -17,5 +23,6 @@ public class DocumentLoreUIManager : MonoBehaviour
         tittle.text = loreDocument.tittleText;
         body.text = loreDocument.bodyText;
         LayoutRebuilder.ForceRebuildLayoutImmediate(tittle.transform.parent as RectTransform);
+        scrollRect.verticalNormalizedPosition = 1f;
     }
 }

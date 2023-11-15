@@ -183,21 +183,32 @@ public class Movimento : MonoBehaviour
         var isRuning = Input.GetButton("Sprint");
         anim.SetBool("isRuning", isRuning && hasMovingInput && !isCrouching);
 
-        if(hasMovingInput && (isRuning || (!isRuning && currentSpeed < walkSpeed))) currentSpeed += (isRuning ? runAccelaration : runAccelaration * 2) * Time.deltaTime;
-        
-        if((currentSpeed > crouchingSpeed && isCrouching)
-        || !hasMovingInput)
+        if((currentSpeed > crouchingSpeed & isCrouching) || !hasMovingInput)
         {
-            currentSpeed -= (lastInputSpeed > crouchingSpeed ? inerciaDeccalaration : inerciaDeccalaration * 8) * Time.deltaTime;
-            var flag = isCrouching && hasMovingInput && currentSpeed > crouchingSpeed - 0.1f && currentSpeed < crouchingSpeed + 0.1f;
+            var decreaseValue = 0f;
+            if(lastInputSpeed > walkSpeed) decreaseValue = inerciaDeccalaration * 1f * Time.deltaTime;
+            else if(lastInputSpeed > crouchingSpeed & lastInputSpeed < runSpeed) decreaseValue = inerciaDeccalaration * 2.5f * Time.deltaTime;
+            else if(lastInputSpeed < crouchingSpeed) decreaseValue = inerciaDeccalaration * 5f * Time.deltaTime;
+
+            currentSpeed -= decreaseValue;
+            var flag = isCrouching & hasMovingInput & currentSpeed > crouchingSpeed - 0.2f && currentSpeed < crouchingSpeed + 0.2f;
             if(flag) currentSpeed = crouchingSpeed;
         }
-        else if((currentSpeed > walkSpeed && !isRuning))
+        else if((currentSpeed > walkSpeed & !isRuning))
         {
-            currentSpeed -= (lastInputSpeed > walkSpeed ? inerciaDeccalaration : inerciaDeccalaration * 5) * Time.deltaTime;
-            var flag = hasMovingInput && currentSpeed > walkSpeed - 0.1f && currentSpeed < walkSpeed + 0.1f;
+            var decreaseValue = 0f;
+            if (lastInputSpeed > walkSpeed) decreaseValue = inerciaDeccalaration * 1f * Time.deltaTime;
+            else decreaseValue = inerciaDeccalaration * 2.5f * Time.deltaTime;
+
+            currentSpeed -= decreaseValue;
+            var flag = hasMovingInput && currentSpeed > walkSpeed - 0.2f && currentSpeed < walkSpeed + 0.2f;
             if(flag) currentSpeed = walkSpeed;
         }
+
+        if (hasMovingInput & isRuning) currentSpeed += runAccelaration * Time.deltaTime;
+        else if (hasMovingInput & !isRuning) currentSpeed += runAccelaration * 2 * Time.deltaTime;
+
+        if (lastInputSpeed <= walkSpeed & currentSpeed > walkSpeed & !isRuning) currentSpeed = walkSpeed;
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);
 

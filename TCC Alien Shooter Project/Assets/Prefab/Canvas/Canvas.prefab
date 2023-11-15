@@ -2822,7 +2822,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081649412490290663}
   m_HandleRect: {fileID: 3367479706035126303}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4086,8 +4086,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8864886372300552099}
   m_HandleRect: {fileID: 6205729487980653897}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4448,7 +4448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3209185170802801797
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6473,7 +6473,8 @@ MonoBehaviour:
   m_text: Titulo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e430c3539075a049a66cb8aaa4b1012, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 3124116832312771742, guid: 5e430c3539075a049a66cb8aaa4b1012,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6699,10 +6700,17 @@ MonoBehaviour:
     os espa\xE7os de texto em publica\xE7\xF5es (jornais, revistas, e sites) para
     testar e ajustar aspectos visuais (layout, tipografia, formata\xE7\xE3o, etc.)
     antes de utilizar conte\xFAdo real. Tamb\xE9m \xE9 utilizado em cat\xE1logos
-    tipogr\xE1ficos, para demonstrar textos e t\xEDtulos escritos com as fontes.[1]"
+    tipogr\xE1ficos, para demonstrar textos e t\xEDtulos escritos com as fontes.[1]\n\r\nA
+    express\xE3o Lorem ipsum em design gr\xE1fico e editora\xE7\xE3o \xE9 um texto
+    padr\xE3o em latim utilizado na produ\xE7\xE3o gr\xE1fica para preencher os espa\xE7os
+    de texto em publica\xE7\xF5es (jornais, revistas, e sites) para testar e ajustar
+    aspectos visuais (layout, tipografia, formata\xE7\xE3o, etc.) antes de utilizar
+    conte\xFAdo real. Tamb\xE9m \xE9 utilizado em cat\xE1logos tipogr\xE1ficos, para
+    demonstrar textos e t\xEDtulos escritos com as fontes.[1]"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e430c3539075a049a66cb8aaa4b1012, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 3124116832312771742, guid: 5e430c3539075a049a66cb8aaa4b1012,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6733,7 +6741,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 100
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6743,7 +6751,7 @@ MonoBehaviour:
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
+  m_wordWrappingRatios: 0.1
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
@@ -6765,7 +6773,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4798848440225327620
@@ -7308,26 +7316,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PDAVisual
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861321709310279653, guid: 816f0d61be8a96940911539f9f95d3df,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861321709310279653, guid: 816f0d61be8a96940911539f9f95d3df,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861321709310279653, guid: 816f0d61be8a96940911539f9f95d3df,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861321709310279653, guid: 816f0d61be8a96940911539f9f95d3df,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 816f0d61be8a96940911539f9f95d3df, type: 3}

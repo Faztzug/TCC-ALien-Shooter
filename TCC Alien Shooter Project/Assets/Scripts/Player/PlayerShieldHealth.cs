@@ -13,6 +13,8 @@ public class PlayerShieldHealth : ShieldHealth
     private float defaultMaxShield;
     [SerializeField] float fallingDeathHeight = -1000;
     public bool IsMaxHealth => health >= maxHealth;
+    public bool IsMaxShield => curShield >= maxShield;
+    public float MaxShield => maxShield;
     //private GameState state;
     public bool dead;
     [SerializeField] private Material playerHealthMat;

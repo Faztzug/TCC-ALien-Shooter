@@ -116,7 +116,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 40.94
+  far clip plane: 10
   field of view: 61
   orthographic: 0
   orthographic size: 5
@@ -783,7 +783,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
+  far clip plane: 200
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -931,7 +931,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
+  far clip plane: 200
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 10
   runAccelaration: 5
-  inerciaDeccalaration: 20
+  inerciaDeccalaration: 30
   backWardsMultiplier: 1
   strafeMultiplier: 1
   jumpForce: 10
@@ -4240,6 +4240,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4625836510810924286, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625836510810924286, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
     - target: {fileID: 4660236247320304926, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4258,6 +4268,11 @@ PrefabInstance:
     - target: {fileID: 4660236247320304926, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848563864637535815, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5168731698637884429, guid: d950f54d0b4b1604384a3e4ae5592fb5,
@@ -4285,6 +4300,16 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5494278819685843265, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494278819685843265, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5554742498771487401, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4355,6 +4380,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6205729487980653897, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300465637438295381, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -4370,6 +4400,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6678865060853336925, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7561782197722315542, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4383,6 +4418,11 @@ PrefabInstance:
     - target: {fileID: 7561782197722315542, guid: d950f54d0b4b1604384a3e4ae5592fb5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7634708126074388957, guid: d950f54d0b4b1604384a3e4ae5592fb5,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7873960936642346775, guid: d950f54d0b4b1604384a3e4ae5592fb5,
