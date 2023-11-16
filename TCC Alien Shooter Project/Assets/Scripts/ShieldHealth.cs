@@ -56,6 +56,7 @@ public class ShieldHealth : Health
 
     public override void DestroyCharacter()
     {
+        if (isDead) return;
         base.DestroyCharacter();
         if(anim != null)
         {

@@ -163,8 +163,7 @@ public class Health : MonoBehaviour
             foreach (var script in GetComponentsInChildren<MonoBehaviour>())
             {
                 if(this is PlayerShieldHealth && script == this || script is Movimento || script is GameState 
-                || script is CanvasManager || script is Volume || LayerMask.LayerToName(script.gameObject.layer) == "UI"
-                || script is RigBuilder) 
+                || script is CanvasManager || script is Volume || LayerMask.LayerToName(script.gameObject.layer) == "UI") 
                 {
                     continue;
                 }

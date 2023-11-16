@@ -122,7 +122,7 @@ public class EnemyIA : MonoBehaviour
     }
     public virtual void OnDamage(DamageType damageType)
     {
-        if(distance >= findPlayerDistance) GoToPlayerDirect(ignoreFindDistance: true);
+        if(distance >= findPlayerDistance & !inFireRange) GoToPlayerDirect(ignoreFindDistance: true);
     }
 
     public void GoToPlayerDirect(bool ignoreFindDistance = false)

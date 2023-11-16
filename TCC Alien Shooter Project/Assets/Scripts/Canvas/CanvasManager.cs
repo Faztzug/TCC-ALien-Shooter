@@ -22,6 +22,13 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Image shieldImage;
     [SerializeField] private Image healthImage;
     [SerializeField] private Volume damageEffect;
+    [SerializeField] private GameObject bloodHolder;
+    private Image[] bloodSplaters;
+
+    private void Awake()
+    {
+        bloodSplaters = bloodHolder.GetComponentsInChildren<Image>();
+    }
 
     public bool DoesExitPause()
     {
@@ -71,6 +78,13 @@ public class CanvasManager : MonoBehaviour
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
         damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2)) * 0.7f;
+        var dmgPercent = ElevateBy(1 - health, 2);
+        for (int i = 0; i < bloodSplaters.Length; i++)
+        {
+            var indexPercent = ((float)i + 1) / bloodSplaters.Length;
+            bloodSplaters[i].gameObject.SetActive(indexPercent <= dmgPercent);
+        }
+        Debug.Log("Damge Porcent = " + dmgPercent + " shouldbe: " + (1 - health));
     }
 
     private float ElevateBy(float value, int elevate)
