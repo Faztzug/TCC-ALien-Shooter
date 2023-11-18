@@ -48,7 +48,7 @@ public class MovimentoMouse : MonoBehaviour
 
         if(Input.GetButtonDown("Use") && isOnInteractableDistance && !GameState.isGamePaused)
         {
-            var layer = GetLayers();
+            var layer = GetLayers(true);
             RaycastHit rayHit;
             if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
             {
@@ -85,8 +85,8 @@ public class MovimentoMouse : MonoBehaviour
 
     static public int GetLayers(bool isPlayerCast = true)
     {
-        var layer = isPlayerCast ? LayerMask.GetMask("Player") : LayerMask.GetMask("Enemy");
-        return ~layer;
+        if (isPlayerCast) return ~(LayerMask.GetMask("Player") | LayerMask.GetMask("ColPlayerOnly")); 
+        else return ~(LayerMask.GetMask("Enemy") | LayerMask.GetMask("ColPlayerOnly"));
     }
 
     public Health GetTargetHealth()
@@ -109,7 +109,7 @@ public class MovimentoMouse : MonoBehaviour
             //Debug.Log("Found Health? " + (healthObj != null));
 
             if(healthObj != null) reticula.SetReticulaState(ReticulaState.Enemy);
-            else if(itemObj != null) reticula.SetReticulaState(ReticulaState.Interactable);
+            else if(itemObj != null) reticula.SetReticulaState(ReticulaState.Interactable, itemObj.InteractText);
             else reticula.SetReticulaState(ReticulaState.Neutral);
             return healthObj;
         }

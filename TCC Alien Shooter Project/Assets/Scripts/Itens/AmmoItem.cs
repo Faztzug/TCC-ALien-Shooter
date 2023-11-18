@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,16 @@ public class AmmoItem : Item
 {
     [SerializeField] protected GunType ammoType;
     [SerializeField] private int[] ammoRange = new int[2];
+    /*[SerializeField] protected string TextFullAmmo = "Munição Cheia";
+    public override string InteractText
+    {
+        get
+        {
+            var gun = GameState.gunManager.AvaibleGuns.Find(g => g.gunType == ammoType);
+            if (gun.isFullAmmo) return TextFullAmmo;
+            else return base.InteractText;
+        }
+    }*/
     protected override void Start() 
     {
         base.Start();

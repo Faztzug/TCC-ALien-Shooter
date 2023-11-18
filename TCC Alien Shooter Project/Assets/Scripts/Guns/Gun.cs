@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
     {get => loadedAmmo; 
     protected set{loadedAmmo = Mathf.Clamp(value, 0, maxLoadedAmmo); 
     UpdateAmmoText();}}
+    public bool isFullAmmo => LoadedAmmo >= maxLoadedAmmo;
     [SerializeField] private int maxLoadedAmmo = 6;
     protected List<Bullet> bullets = new List<Bullet>();
     [SerializeField] private float shootCooldown = 30f;

@@ -8,6 +8,7 @@ public class GunManager : MonoBehaviour
 {
     [SerializeField] List<Gun> guns;
     List<Gun> avaibleGuns;
+    public List<Gun> AvaibleGuns => avaibleGuns;
     public int selectedGunIndex 
     {get => _selectedGunIndex;
     set {

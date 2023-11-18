@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class ShieldItem : Item
 {
+    /*[SerializeField] protected string TextFullShield = "Escudo Cheio";
+    public override string InteractText
+    {
+        get
+        {
+            if (GameState.PlayerTransform.GetComponent<PlayerShieldHealth>().IsMaxShield) return TextFullShield;
+            else return base.InteractText;
+        }
+    }*/
+
     public override void CollectItem(GameObject obj)
     {
         base.CollectItem(obj);

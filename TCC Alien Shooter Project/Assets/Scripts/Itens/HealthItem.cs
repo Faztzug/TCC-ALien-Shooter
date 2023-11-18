@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class HealthItem : Item
 {
+    /*[SerializeField] protected string TextFullHealth = "Vida Cheia";
+    public override string InteractText
+    {
+        get
+        {
+            if (GameState.PlayerTransform.GetComponent<PlayerShieldHealth>().IsMaxShield) return TextFullHealth;
+            else return base.InteractText;
+        }
+    }*/
     public override void CollectItem(GameObject obj)
     {
         base.CollectItem(obj);

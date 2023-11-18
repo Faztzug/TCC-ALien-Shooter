@@ -84,7 +84,6 @@ public class CanvasManager : MonoBehaviour
             var indexPercent = ((float)i + 1) / bloodSplaters.Length;
             bloodSplaters[i].gameObject.SetActive(indexPercent <= dmgPercent);
         }
-        Debug.Log("Damge Porcent = " + dmgPercent + " shouldbe: " + (1 - health));
     }
 
     private float ElevateBy(float value, int elevate)

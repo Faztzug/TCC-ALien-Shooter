@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
 { 
     [SerializeField] protected int ammount;
     [SerializeField] protected Sound collectSound;
+    [SerializeField] protected string _interactText;
+    public virtual string InteractText => string.IsNullOrWhiteSpace(_interactText) | string.IsNullOrEmpty(_interactText) ? null : _interactText;
 
     protected virtual void Start() { }
     protected virtual void OnTriggerEnter(Collider other)

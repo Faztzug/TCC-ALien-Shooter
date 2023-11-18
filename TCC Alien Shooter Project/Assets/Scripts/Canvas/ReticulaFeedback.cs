@@ -33,7 +33,7 @@ public class ReticulaFeedback : MonoBehaviour
         interactableText.color = interactableColor;
     }
 
-    public void SetReticulaState(ReticulaState reticulaState)
+    public void SetReticulaState(ReticulaState reticulaState, string middleScreenText = null)
     {
         curState = reticulaState;
         switch (reticulaState)
@@ -48,5 +48,8 @@ public class ReticulaFeedback : MonoBehaviour
                 image.color = uIColor.Color;
                 break;
         }
+        var prefix = "E - ";
+        if (middleScreenText == null) middleScreenText = "Interagir";
+        interactableText.text = prefix + middleScreenText;
     }
 }
