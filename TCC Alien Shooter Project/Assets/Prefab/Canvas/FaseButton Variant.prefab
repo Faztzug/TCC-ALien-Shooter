@@ -220,6 +220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029764913874357998, guid: 6815352184a976e4dab2324c36af6005,
         type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.23139048
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029764913874357998, guid: 6815352184a976e4dab2324c36af6005,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -405,6 +410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8743725262623613118, guid: 6815352184a976e4dab2324c36af6005,
         type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743725262623613118, guid: 6815352184a976e4dab2324c36af6005,
+        type: 3}
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
@@ -417,6 +427,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8026147341022165662}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1600301480199871008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8743725262623613118, guid: 6815352184a976e4dab2324c36af6005,
+    type: 3}
+  m_PrefabInstance: {fileID: 8026147341022165662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6462736430966998357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,3 +475,6 @@ MonoBehaviour:
     playOnAwake: 0
     audioSource: {fileID: 0}
   levelIndex: 0
+  levelImageOn: {fileID: 0}
+  levelImageOff: {fileID: 0}
+  image: {fileID: 1600301480199871008}
