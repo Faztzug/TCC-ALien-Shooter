@@ -286,23 +286,34 @@ public class Gun : MonoBehaviour
     public Vector3 GetRayCastMiddle(Vector3 gunPoint, float range, bool rayCastAll = false)
     {
         var layer = MovimentoMouse.GetLayers(isPlayerGun);
+
+        RaycastHit middleCast;
+        var pointDir = aimTransform.forward;
+        if(Physics.Raycast(aimTransform.position, aimTransform.forward, out middleCast, range, layer, QueryTriggerInteraction.Ignore))
+        {
+            var point = middleCast.point + aimTransform.forward * (range / 10);
+            pointDir = point - gunPoint;
+            pointDir.Normalize();
+        }
+
         RaycastHit rayHit;
         List<RaycastHit> rayHits = new List<RaycastHit>();
         if(rayCastAll) 
         {
-            rayHits =  Physics.RaycastAll(gunPoint, aimTransform.forward, range, FullStopLayers, QueryTriggerInteraction.Ignore).ToList();
+            rayHits =  Physics.RaycastAll(gunPoint, pointDir, range, FullStopLayers, QueryTriggerInteraction.Ignore).ToList();
             if(rayCastAll & rayHits.Count > 0) return rayHits[0].point;
             return aimTransform.position + aimTransform.forward * range;
         }
 
-        if(Physics.Raycast(gunPoint, aimTransform.forward, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
+        if(Physics.Raycast(gunPoint, pointDir, out rayHit, range, layer, QueryTriggerInteraction.Ignore))
         {
-            if(rayHit.collider) return rayHit.point;
+            var n = (rayHit.collider != null) ? rayHit.collider.name : "NULL";
+            if(rayHit.collider != null) return rayHit.point;
             else return aimTransform.position + aimTransform.forward * range;
         }
         else
         {
-            Debug.DrawLine(aimTransform.position, aimTransform.position + aimTransform.forward * range, Color.green);
+            Debug.DrawLine(gunPoint, gunPoint + pointDir * range, Color.green);
             return aimTransform.position + aimTransform.forward * range;
         }
     }
@@ -316,19 +327,29 @@ public class Gun : MonoBehaviour
         List<Health> healthObjs = new List<Health>();
         bool gotHit = false;
 
-        if(fireStruct.piercingRay)
+
+        RaycastHit middleCast;
+        var pointDir = aimTransform.forward;
+        if (Physics.Raycast(aimTransform.position, aimTransform.forward, out middleCast, range, layer, QueryTriggerInteraction.Ignore))
         {
-            if(diameter <= 0) rayHits = Physics.RaycastAll(gunPoint, aimTransform.forward, range, 
+            var point = middleCast.point + aimTransform.forward * (range / 10);
+            pointDir = point - gunPoint;
+            pointDir.Normalize();
+        }
+
+        if (fireStruct.piercingRay)
+        {
+            if(diameter <= 0) rayHits = Physics.RaycastAll(gunPoint, pointDir, range, 
             layer, QueryTriggerInteraction.Ignore);
-            else rayHits = Physics.SphereCastAll(gunPoint, diameter, aimTransform.forward, range, 
+            else rayHits = Physics.SphereCastAll(gunPoint, diameter, pointDir, range, 
             layer, QueryTriggerInteraction.Ignore);
         }
         else
         {   
             RaycastHit rayHit;
-            if(diameter <= 0) gotHit = Physics.Raycast(gunPoint, aimTransform.forward, 
+            if(diameter <= 0) gotHit = Physics.Raycast(gunPoint, pointDir, 
             out rayHit, range, layer, QueryTriggerInteraction.Ignore);
-            else gotHit = Physics.SphereCast(gunPoint, diameter, aimTransform.forward, 
+            else gotHit = Physics.SphereCast(gunPoint, diameter, pointDir, 
             out rayHit, range, layer, QueryTriggerInteraction.Ignore);
             rayHits = new RaycastHit[1]{rayHit};
         }

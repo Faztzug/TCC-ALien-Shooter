@@ -39,7 +39,8 @@ public struct DamageModified
 public class Health : MonoBehaviour
 {
     public float maxHealth = 1f;
-    protected float health;
+    private float _health;
+    protected float health { get => _health; set { _health = Mathf.Clamp(value, 0f, maxHealth); } }
     public float CurHealth => health;
     [HideInInspector] public bool isDead = false;
     protected Animator anim;
@@ -79,8 +80,6 @@ public class Health : MonoBehaviour
         }
         
         health += value;
-
-        if(health > maxHealth) health = maxHealth;
         if(health <= 0) DestroyCharacter();
 
         if(value < 0)

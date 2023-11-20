@@ -85,8 +85,8 @@ public class MovimentoMouse : MonoBehaviour
 
     static public int GetLayers(bool isPlayerCast = true)
     {
-        if (isPlayerCast) return ~(LayerMask.GetMask("Player") | LayerMask.GetMask("ColPlayerOnly")); 
-        else return ~(LayerMask.GetMask("Enemy") | LayerMask.GetMask("ColPlayerOnly"));
+        if (isPlayerCast) return ~(LayerMask.GetMask("Player") | LayerMask.GetMask("ColPlayerOnly") | LayerMask.GetMask("Item")); 
+        else return ~(LayerMask.GetMask("Enemy") | LayerMask.GetMask("ColPlayerOnly") | LayerMask.GetMask("Item"));
     }
 
     public Health GetTargetHealth()
@@ -106,7 +106,6 @@ public class MovimentoMouse : MonoBehaviour
                 healthObj = curTransform.GetComponent<Health>();
                 if(itemObj == null) itemObj = curTransform.GetComponent<Item>();
             }
-            //Debug.Log("Found Health? " + (healthObj != null));
 
             if(healthObj != null) reticula.SetReticulaState(ReticulaState.Enemy);
             else if(itemObj != null) reticula.SetReticulaState(ReticulaState.Interactable, itemObj.InteractText);

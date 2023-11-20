@@ -78,10 +78,11 @@ public class CanvasManager : MonoBehaviour
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
         damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2)) * 0.7f;
+
         var dmgPercent = ElevateBy(1 - health, 2);
         for (int i = 0; i < bloodSplaters.Length; i++)
         {
-            var indexPercent = ((float)i + 1) / bloodSplaters.Length;
+            var indexPercent = ((float)i + 1) / (float)bloodSplaters.Length;
             bloodSplaters[i].gameObject.SetActive(indexPercent <= dmgPercent);
         }
     }
