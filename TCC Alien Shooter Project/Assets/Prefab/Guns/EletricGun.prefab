@@ -436,6 +436,7 @@ MonoBehaviour:
     damage: -1
     maxDistance: 7
     continuosFire: 1
+    allowRepeatedFire: 0
     ammoCost: 1
     fireCooldown: 0
     fireTimer: 0
@@ -469,9 +470,10 @@ MonoBehaviour:
     bulletPrefab: {fileID: 0}
     Flash: {fileID: 0}
     defaultHitVFX: {fileID: 0}
-    damage: -3
+    damage: -3.2
     maxDistance: 0
     continuosFire: 0
+    allowRepeatedFire: 0
     ammoCost: 3
     fireCooldown: 1
     fireTimer: 0
