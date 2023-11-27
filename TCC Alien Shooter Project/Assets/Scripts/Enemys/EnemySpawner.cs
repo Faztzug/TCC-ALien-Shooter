@@ -12,9 +12,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int maxBodys = 20;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private int maxEnemys = 10;
-    [SerializeField] [Range(0f,10f)] private float[] asyncRng = new float[2];
+    [SerializeField] [Range(0f,20f)] private float[] asyncRng = new float[2];
     private float rngTimer = 0;
     [SerializeField] private bool sendEnemyToPlayer;
+    [SerializeField] private float turnoffDistance = 0f;
 
     void Start()
     {
@@ -45,23 +46,26 @@ public class EnemySpawner : MonoBehaviour
         }
         enemysList.RemoveAll(e => e.alive == false);
 
-
         if(maxEnemys > enemysList.Count)
         {
             //Debug.Log("SpawnEnemy!");
             int iRngPrefab = Random.Range(0, enemysPrefabs.Length);
             int iRngPos = Random.Range(0, spawnPoints.Length);
 
-            var enemy = Instantiate(enemysPrefabs[iRngPrefab], spawnPoints[iRngPos].position, transform.rotation).GetComponent<EnemyIA>();
-            enemy.transform.position = spawnPoints[iRngPos].position;
-            enemysList.Add(enemy);
-            if (sendEnemyToPlayer) StartCoroutine(SendEnemyToPlayer(enemy));
-
-            if(bodyList.Count > maxBodys)
+            if(Vector3.Distance(GameState.PlayerTransform.position, spawnPoints[iRngPos].position) > turnoffDistance)
             {
-                var body = bodyList[0];
-                bodyList.Remove(body);
-                Destroy(body);
+                var enemy = Instantiate(enemysPrefabs[iRngPrefab], spawnPoints[iRngPos].position, transform.rotation).GetComponent<EnemyIA>();
+                enemy.transform.position = spawnPoints[iRngPos].position;
+                enemy.countsToBodyCount = false;
+                enemysList.Add(enemy);
+                if (sendEnemyToPlayer) StartCoroutine(SendEnemyToPlayer(enemy));
+
+                if (bodyList.Count > maxBodys)
+                {
+                    var body = bodyList[0];
+                    bodyList.Remove(body);
+                    Destroy(body);
+                }
             }
         }
 

@@ -21,6 +21,10 @@ public class ActivateGOTrigger : MonoBehaviour
             {
                 FindAnyObjectByType<MusicPlayer>().ChangeMusic(musicToChange);
             }
+            foreach (var col in GetComponentsInChildren<Collider>())
+            {
+                col.enabled = false;
+            }
         }
     }
 }

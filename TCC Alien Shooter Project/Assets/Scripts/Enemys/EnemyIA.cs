@@ -40,6 +40,7 @@ public class EnemyIA : MonoBehaviour
     protected AudioSource audioSource;
 
     [SerializeField] private Color gizmoColor = new Color(0.7f, 0.75f, 0.2f, 0.2f);
+    [HideInInspector] public bool countsToBodyCount = true;
 
     protected virtual void Start() 
     {
@@ -57,7 +58,7 @@ public class EnemyIA : MonoBehaviour
         audioSource = GetComponentInChildren<AudioSource>();
         
         StartCoroutine(CourotineAsyncUpdateIA());
-        GameState.nEnemies++;
+        if(countsToBodyCount) GameState.nEnemies++;
     }
 
     protected virtual void Update() 
@@ -114,9 +115,17 @@ public class EnemyIA : MonoBehaviour
 
         if(agent.isOnNavMesh) agent.SetDestination(transform.position);
         if(agent.isOnNavMesh) agent.isStopped = true;
+        agent.enabled = false;
+        rgbd.velocity = Vector3.zero;
+        rgbd.useGravity = false;
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 10f, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+        {
+            transform.DOMove(hit.point, 1f).SetEase(Ease.InSine);
+        }
 
         if(!alive) return;
-        GameState.nKillEnemies++;
+        if(countsToBodyCount) GameState.nKillEnemies++;
         alive = false;
         this.StopAllCoroutines();
     }
@@ -186,8 +195,8 @@ public class EnemyIA : MonoBehaviour
         if(agent.isOnNavMesh) 
         {   
             agent.SetDestination(this.transform.position);
+            agent.isStopped = true;
         }
-        agent.isStopped = true;
     }
 
     protected bool IsMoving() => agent.isOnNavMesh && !agent.isStopped && Vector3.Distance(agent.destination, transform.position) > minPlayerDistance;
