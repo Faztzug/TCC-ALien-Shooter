@@ -507,6 +507,7 @@ MonoBehaviour:
   aimTransform: {fileID: 5229428172734305677}
   aimRotationSpeed: 10
   gizmoColor: {r: 0.015686274, g: 1, b: 0.20466691, a: 0.14117648}
+  countsToBodyCount: 1
   biteCollider: {fileID: 7663323384221329617}
   biteWaitStart: 0.1
   biteTime: 0.1
@@ -525,11 +526,42 @@ MonoBehaviour:
     playOnAwake: 0
     audioSource: {fileID: 0}
   modelTrans: {fileID: 7502107824600138664}
-  jumpHeight: 1
-  jumpTime: 0.4
+  jumpHeight: 1.5
+  jumpTime: 0.6
   jumpRNG:
   - 0.937
   - 1.185
+  jumpSounds:
+  - clip: {fileID: 8300000, guid: da7d68cc7c84db341b7b914dc13970d0, type: 3}
+    name: pulo1
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - -0.23
+    - 0.35
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 2b7b0cdf032514a4280662b786a16cc8, type: 3}
+    name: pulo2
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - -0.23
+    - 0.35
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: b098d09d83ee6644f9fbe772fb6bc4df, type: 3}
+    name: pulo3
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - -0.23
+    - 0.35
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
 --- !u!114 &-2646598843623873948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,7 +580,37 @@ MonoBehaviour:
     type: 3}
   DeathVFX: {fileID: 2418351548702839790, guid: 0d1d5763fce261540bdaaaa7951d76ad,
     type: 3}
-  damageSounds: []
+  damageSounds:
+  - clip: {fileID: 8300000, guid: 8004343dc80ead545be07ec1f2f1967e, type: 3}
+    name: dano1
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - -0.23
+    - 0.35
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 51afe2489fe26ef48ae93518539d4610, type: 3}
+    name: dano2
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - -0.23
+    - 0.35
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: f96d98434930d75428c6abf900e09ed9, type: 3}
+    name: dano3
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - -0.23
+    - 0.35
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
   deathSound:
     clip: {fileID: 8300000, guid: b370a8af05f198f419b6afd571d02425, type: 3}
     name: deathsapo

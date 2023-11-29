@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class EnemyHumanoid : EnemyIA
 {
     protected bool isContinousFiring => gun is PiranhaGun & keepFiringTimer > 0;
     [SerializeField] [Range(0f,10f)] protected float[] keepFiringTimeRNG = new float[2];
     protected float keepFiringTimer;
+    [SerializeField] protected Rig rightArmRig;
     protected override void Start()
     {
         base.Start();
@@ -35,11 +37,7 @@ public class EnemyHumanoid : EnemyIA
         {
             if(distance <= 3f & gun.primaryFireData.fireTimer <= 0)
             {
-                advanceUpdate = 0.1f;
-                if (distance <= 1f) PrimaryFire();
-                GoToPlayerDirect();
-                agent.speed = runSpeed;
-                anim.SetBool("isRuning", true);
+                BitePlayer();
             }
             else if (!gun.IsACloseObstacleOnFire())
             {
@@ -65,5 +63,15 @@ public class EnemyHumanoid : EnemyIA
                 anim.SetBool("isRuning", true);
             }
         }
+    }
+
+    protected void BitePlayer()
+    {
+        keepFiringTimer = 0;
+        advanceUpdate = 0.1f;
+        if (distance <= 1f) PrimaryFire();
+        GoToPlayerDirect();
+        agent.speed = runSpeed;
+        anim.SetBool("isRuning", true);
     }
 }

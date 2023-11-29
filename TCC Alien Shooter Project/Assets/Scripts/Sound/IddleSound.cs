@@ -20,12 +20,13 @@ public class IddleSound : MonoBehaviour
 
     public void Play()
     {
+        if(!audioSource) audioSource = GetComponentInChildren<AudioSource>();
         sound.PlayOn(audioSource, false);
     }
 
     private void Update()
     {
-        if (!sound.IsPlaying)
+        if (!sound.IsPlaying & renewLoop)
         {
             timer -= Time.deltaTime;
             if (timer < 0)

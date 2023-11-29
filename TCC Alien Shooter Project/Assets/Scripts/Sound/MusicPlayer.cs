@@ -7,6 +7,7 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private Sound musicSound;
     private AudioClip CurrentPlaying;
     private AudioSource audioSource;
+    public AudioSource GetAudioSource => audioSource;
 
     public void ChangeMusic(Sound newMusic)
     {
@@ -24,6 +25,7 @@ public class MusicPlayer : MonoBehaviour
     private void SettingMusic()
     {
         musicSound.Setup(audioSource);
+        audioSource.outputAudioMixerGroup = null;
 
         UpdateVolume();
 

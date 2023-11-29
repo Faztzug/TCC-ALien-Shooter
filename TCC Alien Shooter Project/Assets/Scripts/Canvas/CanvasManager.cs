@@ -24,6 +24,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Volume damageEffect;
     [SerializeField] private GameObject bloodHolder;
     private Image[] bloodSplaters;
+    [SerializeField] GameObject shieldBreak;
 
     private void Awake()
     {
@@ -75,6 +76,8 @@ public class CanvasManager : MonoBehaviour
 
     public void UpdateShieldHealthPercentage(float shield, float health)
     {
+        if (shieldImage.fillAmount > 0 & shield == 0) Debug.Log("BREAK");
+        if (shieldImage.fillAmount > 0 & shield == 0) Destroy(Instantiate(shieldBreak, bloodHolder.transform.position, transform.rotation, transform), 5f);
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
         damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2)) * 0.7f;

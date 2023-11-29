@@ -40,7 +40,7 @@ public class EnemyEletric : EnemyBiter
         base.OnDamage(damageType);
         if(damageType == DamageType.piranhaBiteDamage) 
         {
-            GameState.PlayerTransform.GetComponentInChildren<PlayerShieldHealth>().PierciShieldDamage(biteDamage);
+            GameState.PlayerTransform.GetComponentInChildren<PlayerShieldHealth>().PierciShieldDamage(biteDamage, DamageType.eletricDamage);
         }
     }
 }

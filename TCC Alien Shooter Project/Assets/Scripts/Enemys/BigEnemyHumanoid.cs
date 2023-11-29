@@ -6,6 +6,7 @@ public class BigEnemyHumanoid : EnemyHumanoid
 {
     protected Health health;
     protected DamageModified damageImunity;
+    [SerializeField] [Range(0, 1)] protected float biteChance = 1f; 
     protected override void Start()
     {
         base.Start();
@@ -18,6 +19,7 @@ public class BigEnemyHumanoid : EnemyHumanoid
         {
             health.damageModifiers.Add(damageImunity);
             anim.SetBool("crouching", true);
+            keepFiringTimer = 0;
             //Debug.Log("ADD Imunity");
         }
         else if(distance < findPlayerDistance & inFireRange)
@@ -26,6 +28,14 @@ public class BigEnemyHumanoid : EnemyHumanoid
             //Debug.Log("REMOVE Imunity");
             anim.SetBool("crouching", false);
             base.AsyncUpdateIA();
+        }
+
+        if(distance <= 1f)
+        {
+            if(gun is PiranhaGun & gun.primaryFireData.fireTimer <= 0)
+            {
+                BitePlayer();
+            }
         }
     }
 }

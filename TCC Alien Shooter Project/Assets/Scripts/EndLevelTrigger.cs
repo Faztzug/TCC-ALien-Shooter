@@ -15,6 +15,7 @@ public class EndLevelTrigger : MonoBehaviour
                 GameState.saveManager.SaveGame(GameState.SaveData);
             }
             GameState.EndLevel();
+            GetComponentInChildren<Collider>().enabled = false;
         }
     }
 }

@@ -12,6 +12,7 @@ public class EnemySapo : EnemyBiter
     protected bool isJumping;
     private bool isMoving => !isBiting & IsMoving();
     private Sequence jumpTween;
+    [SerializeField] protected Sound[] jumpSounds;
 
     protected override void Start()
     {
@@ -30,6 +31,9 @@ public class EnemySapo : EnemyBiter
             var time = jumpTime * rng;
             isJumping = true;
             anim.SetTrigger("Jump");
+            var soundIndex = UnityEngine.Random.Range(0, jumpSounds.Length);
+            jumpSounds[soundIndex].PlayOn(audioSource);
+
             jumpTween = DOTween.Sequence();
             jumpTween.Append(modelTrans.DOLocalMoveY(height, time / 2).SetEase(Ease.OutSine));
             jumpTween.Append(modelTrans.DOLocalMoveY(0, time / 2).SetEase(Ease.InSine));

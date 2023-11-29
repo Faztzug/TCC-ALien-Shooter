@@ -61,8 +61,7 @@ public class Health : MonoBehaviour
         health = maxHealth;
         thisEnemy = GetComponent<EnemyIA>();
         anim = GetComponentInChildren<Animator>();
-        var getAudio = GetComponentInChildren<AudioSource>();
-        if(getAudio != null) audioSource = getAudio;
+        if(audioSource == null) GetComponentInChildren<AudioSource>();
     }
 
     protected virtual void Update() 
@@ -103,7 +102,7 @@ public class Health : MonoBehaviour
             var index = UnityEngine.Random.Range(0, sounds.Length);
             GameState.InstantiateSound(sounds[index], this.transform.position);
             //sounds[index].PlayOn(audioSource);
-            damageSoundTimer = 0.3f;
+            damageSoundTimer = 0.2f;
             //Debug.Log("Health dmaage Sound " + name);
         }
     }
@@ -148,8 +147,9 @@ public class Health : MonoBehaviour
         onDeath?.Invoke();
         OnDeath?.Invoke();
 
+        GetComponentInChildren<AudioSource>()?.Stop();
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
-        if(audioSource == null | anim == null) GameState.InstantiateSound(deathSound, transform.position);
+        if(audioSource == null || anim == null) GameState.InstantiateSound(deathSound, transform.position);
         else deathSound.PlayOn(audioSource);
 
         if(anim != null)

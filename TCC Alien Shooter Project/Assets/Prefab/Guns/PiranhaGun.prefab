@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 5693225437726120581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.135, z: 0.195}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.35}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 5038951262809461344}
   m_RootOrder: 4
@@ -689,6 +689,7 @@ MonoBehaviour:
     damage: -5
     maxDistance: 0
     continuosFire: 0
+    allowRepeatedFire: 0
     ammoCost: 0
     fireCooldown: 0.5
     fireTimer: 0
@@ -722,9 +723,10 @@ MonoBehaviour:
     bulletPrefab: {fileID: 0}
     Flash: {fileID: 0}
     defaultHitVFX: {fileID: 0}
-    damage: -1.4
+    damage: -1.5
     maxDistance: 0
     continuosFire: 1
+    allowRepeatedFire: 0
     ammoCost: 1.2
     fireCooldown: 0
     fireTimer: 0

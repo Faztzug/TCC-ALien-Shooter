@@ -21,6 +21,7 @@ public class PlayerShieldHealth : ShieldHealth
     [SerializeField] private Color[] matHealthColors;
 
     [SerializeField] private Animator gunHolderAnim;
+    [SerializeField] private Sound eletricDamage;
 
     protected override float MinShieldValue => 0;
 
@@ -60,7 +61,9 @@ public class PlayerShieldHealth : ShieldHealth
             if (updatingHealthThisFrame) return;
             updatingHealthThisFrame = true;
         }
-        
+
+        if (value < -1 & damageType == DamageType.eletricDamage) Debug.Log("CHOQUE SUPER CHOQUE");
+        if (value < -1 & damageType == DamageType.eletricDamage) eletricDamage.PlayOn(audioSource);
         base.UpdateHealth(value, damageType);
         //bar.fillAmount = health / maxHealth;
 

@@ -60,6 +60,8 @@ public class GameState : MonoBehaviour
     [HideInInspector] public static int nEnemies = 0;
     [HideInInspector] public static int nKillEnemies = 0;
     private DateTime levelStartTime = DateTime.Now;
+    [HideInInspector] public static List<string> allPdasOnLevel = new List<string>();
+    [HideInInspector] public static List<string> allPdasfound = new List<string>();
 
     private void Awake()
     {
@@ -105,6 +107,8 @@ public class GameState : MonoBehaviour
         PauseGame(false);
         nEnemies = 0;
         nKillEnemies = 0;
+        allPdasfound = new List<string>();
+        allPdasOnLevel = new List<string>();
         levelStartTime = DateTime.Now;
     }
 
@@ -277,8 +281,8 @@ public class GameState : MonoBehaviour
         var go = GameObject.Instantiate(endCanvas,null);
         go.SetActive(true);
         var endLevelScreen = go.GetComponentInChildren<EndLevelScreenManager>();
-        endLevelScreen?.SetAnim(nEnemies, nKillEnemies);
-        yield return new WaitForSecondsRealtime(5f);
+        endLevelScreen?.SetAnim(nEnemies, nKillEnemies, allPdasOnLevel.Count, allPdasfound.Count);
+        yield return new WaitForSecondsRealtime(10f);
         var nextSceneI = this.gameObject.scene.buildIndex + 1;
         if (nextSceneI >= SceneManager.sceneCountInBuildSettings) nextSceneI = 0;
         /*Debug.Log("cur scene I " + this.gameObject.scene.buildIndex);

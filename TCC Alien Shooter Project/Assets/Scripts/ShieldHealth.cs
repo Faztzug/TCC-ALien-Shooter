@@ -20,10 +20,10 @@ public class ShieldHealth : Health
         curShield = maxShield;
     }
 
-    public void PierciShieldDamage(float value)
+    public void PierciShieldDamage(float value, DamageType damageType = DamageType.NULL)
     {
-        UpdateHealth(value, DamageType.NULL);
-        base.UpdateHealth(value, DamageType.NULL);
+        UpdateHealth(value, damageType);
+        base.UpdateHealth(value, damageType);
     }
 
     public override void UpdateHealth(float value, DamageType damageType)

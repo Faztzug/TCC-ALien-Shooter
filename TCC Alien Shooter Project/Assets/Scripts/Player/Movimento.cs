@@ -28,6 +28,8 @@ public class Movimento : MonoBehaviour
     [Header("Gravity Values")]
     [SerializeField] private float gravity = 1f;
     private float gravityAcceleration;
+    [SerializeField] private Sound jumpSound;
+    [SerializeField] private Sound landingSound;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource passosAudio;
     [SerializeField] private Sound passosSound;
@@ -150,6 +152,7 @@ public class Movimento : MonoBehaviour
     {
         if(controller.isGrounded)
         {
+            if (ungroudedTime > 0) landingSound.PlayOn(audioSource);
             ungroudedTime = 0;
             gravityAcceleration = -gravity;
         } 
@@ -157,7 +160,7 @@ public class Movimento : MonoBehaviour
         {
             ungroudedTime += Time.deltaTime;
             gravityAcceleration -= gravity * Time.deltaTime;
-        } 
+        }
 
         if(ungroudedTime < 0.1f && !GameState.IsPlayerDead)
         {
@@ -167,6 +170,7 @@ public class Movimento : MonoBehaviour
             {
                 gravityAcceleration = jumpForce;
                 anim.SetBool("isJumping", true);
+                jumpSound.PlayOn(audioSource);
             }
         }
 

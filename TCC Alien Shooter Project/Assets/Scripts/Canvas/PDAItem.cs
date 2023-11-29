@@ -8,11 +8,13 @@ public class PDAItem : Item
     [SerializeField] float readCooldown = 0.2f;
     float timer;
     AudioSource audioSource;
+    [SerializeField] bool countTowardsEnd = true;
 
     protected override void Start()
     {
         base.Start();
         audioSource = GetComponentInChildren<AudioSource>();
+        if (countTowardsEnd & !GameState.allPdasOnLevel.Contains(loreText.tittleText)) GameState.allPdasOnLevel.Add(loreText.tittleText);
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -41,6 +43,7 @@ public class PDAItem : Item
 
     private void OpenPDA()
     {
+        if(countTowardsEnd & !GameState.allPdasfound.Contains(loreText.tittleText)) GameState.allPdasfound.Add(loreText.tittleText);
         GameState.OpenPDA(loreText);
         collectSound.PlayOn(audioSource);
         timer = readCooldown;
