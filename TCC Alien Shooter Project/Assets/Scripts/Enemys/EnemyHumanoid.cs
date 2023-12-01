@@ -9,6 +9,9 @@ public class EnemyHumanoid : EnemyIA
     [SerializeField] [Range(0f,10f)] protected float[] keepFiringTimeRNG = new float[2];
     protected float keepFiringTimer;
     [SerializeField] protected Rig rightArmRig;
+    protected override bool allowRenewTargetPos => (gun is PiranhaGun & keepFiringTimer <= 0) || targetPos == Vector3.zero;
+
+
     protected override void Start()
     {
         base.Start();
@@ -21,9 +24,9 @@ public class EnemyHumanoid : EnemyIA
 
         if(gun is PiranhaGun)
         {
-            keepFiringTimer -= Time.deltaTime;
-            if (isContinousFiring) SecondaryFire();
             gun.enemyHoldingFire = isContinousFiring;
+            if (isContinousFiring) SecondaryFire();
+            keepFiringTimer -= Time.deltaTime;
         }
     }
     protected override void AsyncUpdateIA()
@@ -39,7 +42,7 @@ public class EnemyHumanoid : EnemyIA
             {
                 BitePlayer();
             }
-            else if (!gun.IsACloseObstacleOnFire())
+            else if (!gun.IsACloseObstacleOnFire() & keepFiringTimer <= 0)
             {
                 agent.speed = walkingSpeed;
                 if (shootChance >= shootRNG && gun.LoadedAmmo > 0 && gun.secondaryFireData.fireTimer < 0 & inFireRange)
@@ -53,7 +56,6 @@ public class EnemyHumanoid : EnemyIA
             }
             else if(isContinousFiring & inFireRange)
             {
-                SecondaryFire();
                 agent.speed = lowSpeed;
             }
             else if (distance >= minPlayerDistance & distance <= findPlayerDistance & distance >= shootingDistance)

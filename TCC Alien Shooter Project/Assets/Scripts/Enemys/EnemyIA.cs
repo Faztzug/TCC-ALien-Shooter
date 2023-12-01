@@ -41,6 +41,7 @@ public class EnemyIA : MonoBehaviour
 
     [SerializeField] private Color gizmoColor = new Color(0.7f, 0.75f, 0.2f, 0.2f);
     [HideInInspector] public bool countsToBodyCount = true;
+    protected virtual bool allowRenewTargetPos => true;
 
     protected virtual void Start() 
     {
@@ -51,8 +52,8 @@ public class EnemyIA : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         gun = GetComponentInChildren<Gun>();
         if(gun != null) gun.aimTransform = aimTransform;
-        targetPos = player.position;
-        newTargetTrans = player;
+        newTargetTrans = GameState.PlayerMiddleT;
+        targetPos = newTargetTrans.position;
         agent.speed = walkingSpeed;
         playerOffsetGoTo.x = Random.Range(playerOffsetXRNG.x, playerOffsetXRNG.y);
         audioSource = GetComponentInChildren<AudioSource>();
@@ -72,10 +73,14 @@ public class EnemyIA : MonoBehaviour
             return;
         }
         // var directionPlayer = targetPos - aimTransform.position;
-        
+
         // var newDirection = Vector3.RotateTowards(aimTransform.forward, directionPlayer, aimRotationSpeed, 0);
         // aimTransform.rotation = Quaternion.LookRotation(newDirection);
-        if(gun != null) aimTransform.LookAt(targetPos);
+        if (gun != null)
+        {
+            aimTransform.LookAt(targetPos);
+            gun.transform.LookAt(targetPos);
+        }
     }
 
     protected IEnumerator CourotineAsyncUpdateIA()
@@ -213,44 +218,46 @@ public class EnemyIA : MonoBehaviour
     protected float shootRNG;
     private void ShootAtPlayer(GunFireStruct fireMode)
     {
+        if (!allowRenewTargetPos) return;
+
         var playerNoYPos = player.position;
         playerNoYPos.y = this.transform.position.y;
         var distanceFlat = Vector3.Distance(this.transform.position, playerNoYPos);
 
-        var rngValue = (1f / shootAim) * distance;
+        var rngValue = (1f / shootAim) * distanceFlat * 2f;
         var rngMissTarget = new Vector3(Random.Range(-rngValue, rngValue),Random.Range(-rngValue, rngValue), Random.Range(-rngValue, rngValue));
+
         newTargetTrans = GameState.playerRandomBodyPart;
-        if(!fireMode.continuosFire && Vector3.Distance(missTargetPos, Vector3.zero) < 0.01f) missTargetPos = rngMissTarget;
+        targetPos = newTargetTrans.position;
+
+        if (!fireMode.continuosFire && Vector3.Distance(missTargetPos, Vector3.zero) < 0.01f) missTargetPos = rngMissTarget;
         else missTargetPos = Vector3.Lerp(missTargetPos, rngMissTarget, Time.deltaTime);
-        newTargetTrans.position += missTargetPos;
+        targetPos += missTargetPos;
+
         var isPlayerAbove = player.position.y >= transform.position.y;
         if(gun is AcidGun) 
         { 
             var plusY = new Vector3(0, distance / 16f, 0);
-            newTargetTrans.position += plusY;
+            targetPos += plusY;
         }
 
         if(!fireMode.continuosFire) targetPos = Vector3.Lerp(targetPos, newTargetTrans.position, aimRotationSpeed * Time.deltaTime);
 
-        gun.enemyTarget = fireMode.continuosFire ? targetPos : newTargetTrans.position;
+        gun.enemyTarget = targetPos;
     }
 
     protected virtual void PrimaryFire()
     {
-        if(gun.primaryFireData.continuosFire | gun is PiranhaGun | gun is EletricGun)
-        {
-            if (gun.IsACloseObstacleOnFire()) return;
-        }
+        //if(gun.primaryFireData.continuosFire | gun is PiranhaGun | gun is EletricGun)
+        //{
+        //    if (gun.IsACloseObstacleOnFire()) return;
+        //}
         ShootAtPlayer(gun.primaryFireData);
         gun.PrimaryFire();
         anim.SetTrigger("Fire");
     }
     protected virtual void SecondaryFire()
     {
-        if(gun.secondaryFireData.continuosFire)
-        {
-            if (gun.IsACloseObstacleOnFire()) return;
-        }
         ShootAtPlayer(gun.secondaryFireData);
         gun.SecondaryFire();
         anim.SetTrigger("Fire");

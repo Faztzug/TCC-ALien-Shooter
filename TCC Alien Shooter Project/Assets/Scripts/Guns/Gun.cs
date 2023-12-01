@@ -41,17 +41,21 @@ public class Gun : MonoBehaviour
     private HandGripManager handGripManager;
     [SerializeField] protected float ammoRegenPorcent = 0.2f;
     protected float ammoRegenTimer = 1f;
-   
+
+    protected virtual void Awake()
+    {
+        handGripManager = GetComponentInChildren<HandGripManager>();
+    }
+
     virtual protected void Start()
     {
         cam = Camera.main;
         if(isPlayerGun) aimTransform = cam.transform;
 
         UpdateAmmoText();
-        Cursor.lockState = CursorLockMode.Locked;
+        if(isPlayerGun) Cursor.lockState = CursorLockMode.Locked;
         anim = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
-        handGripManager = GetComponentInChildren<HandGripManager>();
         foreach (var vfx in GetComponentsInChildren<GunVFXManager>()) 
         {
             foreach (var go in vfx.GetComponentsInChildren<Transform>()) go.gameObject.layer = gameObject.layer;
@@ -229,7 +233,7 @@ public class Gun : MonoBehaviour
     public virtual void Shooting(GunFireStruct fireMode, Bullet bulletPrefab = null)
     {
         var target = isPlayerGun ? movimentoMouse.raycastResult : enemyTarget;
-        if(!isPlayerGun) transform.LookAt(enemyTarget);
+        //if(!isPlayerGun) transform.LookAt(enemyTarget);
 
         foreach (var curPoint in gunPointPositions)
         {
@@ -399,9 +403,9 @@ public class Gun : MonoBehaviour
         {
             var gunPoint = gunPointT.position;
             var dir = GameState.PlayerMiddleT.position - gunPoint;
-            if(Physics.Raycast(gunPoint, dir.normalized, out rayHit, 10, layer))
+            if(Physics.Raycast(gunPoint, dir.normalized, out rayHit, 1, layer))
             {
-                Debug.DrawLine(gunPoint, gunPoint + dir.normalized * 10, Color.yellow, 1f);
+                Debug.DrawLine(gunPoint, gunPoint + dir.normalized * 1, Color.yellow, 1f);
                 if(rayHit.collider && rayHit.collider.gameObject.layer != LayerMask.NameToLayer("Player")) return true;
             }
         }
@@ -453,7 +457,8 @@ public class Gun : MonoBehaviour
 
     private void OnEnable() 
     {
-        handGripManager?.SetGrips();
+        if(isPlayerGun) handGripManager.SetGrips();
+        else handGripManager?.SetGrips();
     }
 
     public void TurnOffLasers()

@@ -74,7 +74,7 @@ public class Movimento : MonoBehaviour
 
     IEnumerator UpdateRigBuilder()
     {
-        yield return null;
+        yield return new WaitForEndOfFrame();
         rigBuilder.Build();
         //StartCoroutine(UpdateRigBuilder());
     }
