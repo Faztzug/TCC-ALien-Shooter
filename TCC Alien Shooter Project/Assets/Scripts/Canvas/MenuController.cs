@@ -23,7 +23,6 @@ public class MenuController : MonoBehaviour
     private void Start() 
     {
         Cursor.lockState = CursorLockMode.None;
-        Application.targetFrameRate = 30;
     }
     public void StartGame()
     {

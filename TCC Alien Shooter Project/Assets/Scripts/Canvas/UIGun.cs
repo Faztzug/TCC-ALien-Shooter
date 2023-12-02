@@ -14,7 +14,6 @@ public class UIGun : MonoBehaviour
     private void Start() 
     {
         defaultSize = (this.transform as RectTransform).sizeDelta;
-        Debug.Log(GunType + " Default Size = " + defaultSize);
         AutoHide();
     }
 

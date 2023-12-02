@@ -22,6 +22,7 @@ public class SettingsData
     public float sfxVolume;
     public float musicVolume;
     public Quality quality;
+    public int FPS;
     public bool showFPS;
     public float sensibilidadeX;
     public float sensibilidadeY;
@@ -32,7 +33,8 @@ public class SettingsData
         musicVolume = 0.8f;
         sfxVolume = 0.8f;
         quality = Quality.High;
-        showFPS = true;
+        FPS = 60;
+        showFPS = false;
         sensibilidadeX = 0.5f;
         sensibilidadeY = 0.5f;
     }

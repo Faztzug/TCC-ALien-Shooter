@@ -110,6 +110,8 @@ public class GameState : MonoBehaviour
         allPdasfound = new List<string>();
         allPdasOnLevel = new List<string>();
         levelStartTime = DateTime.Now;
+        Application.targetFrameRate = GameState.SettingsData.FPS;
+        Debug.Log("Setting FPS to " + GameState.SettingsData.FPS);
     }
 
     static public void SaveGameData() => saveManager.SaveGame(SaveData);

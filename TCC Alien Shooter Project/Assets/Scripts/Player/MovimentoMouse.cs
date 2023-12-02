@@ -29,26 +29,26 @@ public class MovimentoMouse : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Application.targetFrameRate = 60;
     }
 
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensibilidadeMouse * senX * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensibilidadeMouse * senY * Time.deltaTime;
+        if (GameState.isGamePaused) return;
+        float mouseX = (Input.GetAxis("Mouse X") * sensibilidadeMouse * senX);
+        float mouseY = (Input.GetAxis("Mouse Y") * sensibilidadeMouse * senY);
 
         camRotationY += mouseY;
         camRotationY = Mathf.Clamp(camRotationY, maxXRotation.x, maxXRotation.y);
 
-        playerHead.localRotation = Quaternion.Euler(camRotationY,0f,0f);
+        playerHead.localRotation = Quaternion.Euler(camRotationY, 0f,0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
         GetTargetHealth();
 
         if(Input.GetButtonDown("Use") && isOnInteractableDistance && !GameState.isGamePaused)
         {
-            var layer = GetLayers(true);
+            var layer = ItemLayers();
             RaycastHit rayHit;
             if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
             {
@@ -85,13 +85,17 @@ public class MovimentoMouse : MonoBehaviour
 
     static public int GetLayers(bool isPlayerCast = true)
     {
-        if (isPlayerCast) return ~(LayerMask.GetMask("Player") | LayerMask.GetMask("ColPlayerOnly") | LayerMask.GetMask("Item")); 
-        else return ~(LayerMask.GetMask("Enemy") | LayerMask.GetMask("ColPlayerOnly") | LayerMask.GetMask("Item"));
+        if (isPlayerCast) return ~(LayerMask.GetMask("Player") | LayerMask.GetMask("ColPlayerOnly") 
+                | LayerMask.GetMask("Item") | LayerMask.GetMask("ColDefaultOnly")); 
+        else return ~(LayerMask.GetMask("Enemy") | LayerMask.GetMask("ColPlayerOnly") | 
+                LayerMask.GetMask("Item") | LayerMask.GetMask("ColDefaultOnly"));
     }
+
+    protected int ItemLayers() => ~(LayerMask.GetMask("Player") | LayerMask.GetMask("ColPlayerOnly"));
 
     public Health GetTargetHealth()
     {
-        var layer = GetLayers();
+        var layer = ItemLayers();
         RaycastHit rayHit;
 
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, kHorizonPoint, layer))
