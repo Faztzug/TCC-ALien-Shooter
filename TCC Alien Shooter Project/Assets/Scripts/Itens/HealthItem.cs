@@ -22,6 +22,7 @@ public class HealthItem : Item
             var porcent = ammount / 100f;
             var value = hp.maxHealth * porcent;
             hp.GainHealth(value);
+            GameState.mainCanvas.InstantiateVFX(GameState.mainCanvas.healthRecoverVFX);
             DestroyItem();
         }
     }

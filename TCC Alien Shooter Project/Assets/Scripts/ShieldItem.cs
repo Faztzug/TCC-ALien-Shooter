@@ -23,6 +23,7 @@ public class ShieldItem : Item
             var porcent = ammount / 100f;
             var value = hp.MaxShield * porcent;
             hp.RecoverShield(value);
+            GameState.mainCanvas.InstantiateVFX(GameState.mainCanvas.shieldRecoverVFX);
             DestroyItem();
         }
     }

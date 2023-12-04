@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 
 public class CanvasManager : MonoBehaviour
 {
+    [SerializeField] private RectTransform canvasHolder;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject tutorial;
@@ -24,7 +25,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Volume damageEffect;
     [SerializeField] private GameObject bloodHolder;
     private Image[] bloodSplaters;
+    public Transform BloodHolder => bloodHolder.transform;
     [SerializeField] GameObject shieldBreak;
+    public GameObject eletricDamageVFX;
+    public GameObject shieldRecoverVFX;
+    public GameObject healthRecoverVFX;
 
     private void Awake()
     {
@@ -76,8 +81,7 @@ public class CanvasManager : MonoBehaviour
 
     public void UpdateShieldHealthPercentage(float shield, float health)
     {
-        if (shieldImage.fillAmount > 0 & shield == 0) Debug.Log("BREAK");
-        if (shieldImage.fillAmount > 0 & shield == 0) Destroy(Instantiate(shieldBreak, bloodHolder.transform.position, transform.rotation, transform), 5f);
+        if (shieldImage.fillAmount > 0 & shield == 0) InstantiateVFX(shieldBreak);
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;
         damageEffect.weight = (ElevateBy(1 - shieldImage.fillAmount, 2)) * 0.7f;
@@ -99,6 +103,11 @@ public class CanvasManager : MonoBehaviour
             result *= value;
         }
         return result;
+    }
+
+    public void InstantiateVFX(GameObject vfx)
+    {
+        Destroy(Instantiate(vfx, canvasHolder.position, transform.rotation, transform), 5f);
     }
 
     public void UpdateAmmoText(GunType wichGun, float normalizedValue)

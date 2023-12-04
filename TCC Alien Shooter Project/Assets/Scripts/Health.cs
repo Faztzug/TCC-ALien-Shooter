@@ -49,17 +49,22 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject bloodVFX;
     [SerializeField] private GameObject DeathVFX;
     public Sound[] damageSounds;
+    public Sound[] extraDamageSounds;
     public Sound deathSound;
     public AudioSource audioSource;
+    protected float bloodVfxTimer = 0f;
     protected float damageSoundTimer;
+    protected float alternateDamageSoundTimer;
     public List<DamageModified> damageModifiers = new List<DamageModified>();
     [SerializeField] protected bool doesDestroyOnDeath = true;
     public UnityEvent OnDeath;
+    public const float kEasyHealthPctg = 0.8f;
 
     public virtual void Start()
     {
-        health = maxHealth;
         thisEnemy = GetComponent<EnemyIA>();
+        if (GameState.SaveData.gameDificulty == GameDificulty.Easy & !(this is PlayerShieldHealth) & thisEnemy) maxHealth *= kEasyHealthPctg;
+        health = maxHealth;
         anim = GetComponentInChildren<Animator>();
         if(audioSource == null) GetComponentInChildren<AudioSource>();
     }
@@ -68,6 +73,7 @@ public class Health : MonoBehaviour
     {
         bloodVfxTimer -= Time.deltaTime;
         damageSoundTimer -= Time.deltaTime;
+        alternateDamageSoundTimer -= Time.deltaTime;
     }
 
     public virtual void UpdateHealth(float value, DamageType damageType)
@@ -85,29 +91,30 @@ public class Health : MonoBehaviour
         {
             if(anim != null) anim.SetTrigger("Damage");
             if(thisEnemy != null) thisEnemy.OnDamage(damageType);
-            //if(source != null) source.PlayOneShot(damageSound);
-            //else Debug.LogError("NO AUDIO SOURCE FOR DAMAGE");
         }
 
         if(value < 0 && health >= 0)
         {
             PlayDamageSound(damageSounds);
+            PlayDamageSound(extraDamageSounds, true);
         }
     }
 
-    protected void PlayDamageSound(Sound[] sounds)
+    protected void PlayDamageSound(Sound[] sounds, bool useAlternateTimer = false)
     {
-        if (sounds != null & sounds.Length > 0 & damageSoundTimer < 0)
+        if (sounds != null & sounds.Length > 0 & 
+            ((damageSoundTimer < 0f) || (useAlternateTimer & alternateDamageSoundTimer < 0f)))
         {
             var index = UnityEngine.Random.Range(0, sounds.Length);
             GameState.InstantiateSound(sounds[index], this.transform.position);
-            //sounds[index].PlayOn(audioSource);
-            damageSoundTimer = 0.2f;
-            //Debug.Log("Health dmaage Sound " + name);
+
+            if (useAlternateTimer) alternateDamageSoundTimer = 0.2f;
+            else damageSoundTimer = 0.2f;
+
+            if (!(this is PlayerShieldHealth)) Debug.Log("Playeing Damage: " + sounds[index].clip.name);
         }
     }
 
-    protected float bloodVfxTimer = 0f;
     public virtual void BleedVFX(Vector3 position, DamageType damageType, bool isContinuos = false)
     {
         if(isContinuos & bloodVfxTimer > 0) return;

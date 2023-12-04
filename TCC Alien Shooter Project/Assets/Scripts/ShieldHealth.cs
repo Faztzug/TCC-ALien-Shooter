@@ -17,6 +17,7 @@ public class ShieldHealth : Health
     public override void Start()
     {
         base.Start();
+        if (GameState.SaveData.gameDificulty == GameDificulty.Easy & !(this is PlayerShieldHealth) & thisEnemy) maxShield *= kEasyHealthPctg;
         curShield = maxShield;
     }
 

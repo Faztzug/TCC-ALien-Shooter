@@ -1133,6 +1133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a53d9b440694ab4998f966207dbf990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasHolder: {fileID: 475173905298733204}
   pauseMenu: {fileID: 6292528327221919039}
   settingsMenu: {fileID: 1785087731830469337}
   tutorial: {fileID: 4135259251401780398}
@@ -1150,6 +1151,12 @@ MonoBehaviour:
   damageEffect: {fileID: 9134781097309930032}
   bloodHolder: {fileID: 925478226948357901}
   shieldBreak: {fileID: 8634439717448625178, guid: 7fed2ff7ec315754ab42b6b7062c985b,
+    type: 3}
+  eletricDamageVFX: {fileID: 7921272023415586258, guid: 5e39e57ed039acf42bf5f0f6b7363624,
+    type: 3}
+  shieldRecoverVFX: {fileID: 9150946605474228029, guid: 9307008512a9c1c45ac122516378acfa,
+    type: 3}
+  healthRecoverVFX: {fileID: 2418351548702839790, guid: b0fb23853e448f244bfaa559c169d2a6,
     type: 3}
 --- !u!114 &475173906381334902
 MonoBehaviour:
