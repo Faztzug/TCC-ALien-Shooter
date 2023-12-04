@@ -26,6 +26,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject bloodHolder;
     private Image[] bloodSplaters;
     public Transform BloodHolder => bloodHolder.transform;
+    [SerializeField] Animator shieldAnim;
     [SerializeField] GameObject shieldBreak;
     public GameObject eletricDamageVFX;
     public GameObject shieldRecoverVFX;
@@ -81,6 +82,7 @@ public class CanvasManager : MonoBehaviour
 
     public void UpdateShieldHealthPercentage(float shield, float health)
     {
+        shieldAnim.SetFloat("Value", shield);
         if (shieldImage.fillAmount > 0 & shield == 0) InstantiateVFX(shieldBreak);
         shieldImage.fillAmount = shield;
         healthImage.fillAmount = health;

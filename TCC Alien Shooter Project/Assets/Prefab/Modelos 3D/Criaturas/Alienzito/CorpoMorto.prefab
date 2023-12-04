@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8935753322603498958}
   - component: {fileID: 2746313943578525398}
   - component: {fileID: 4989460385420286109}
+  - component: {fileID: 356970467980485214}
   m_Layer: 0
   m_Name: CorpoMorto
   m_TagString: Untagged
@@ -94,7 +95,7 @@ BoxCollider:
   m_GameObject: {fileID: 2780414912010933494}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.7505646, y: 0.3574522, z: 0.34796137}
   m_Center: {x: 0.0062484755, y: 0.45166823, z: 0.03713389}
@@ -107,7 +108,7 @@ BoxCollider:
   m_GameObject: {fileID: 2780414912010933494}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.20890808, y: 0.30303943, z: 0.26148325}
   m_Center: {x: 0.008506718, y: 0.8111491, z: 0.080373034}
@@ -120,7 +121,7 @@ BoxCollider:
   m_GameObject: {fileID: 2780414912010933494}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.25959778, y: 1.1953883, z: 0.41401184}
   m_Center: {x: -0.23229218, y: -0.36425704, z: 0.0041085547}
@@ -133,7 +134,21 @@ BoxCollider:
   m_GameObject: {fileID: 2780414912010933494}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.26394653, y: 1.1854243, z: 0.39945018}
   m_Center: {x: 0.21250916, y: -0.36536312, z: 0.011389441}
+--- !u!64 &356970467980485214
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780414912010933494}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8145136920215169916, guid: 9465716634e58304f9752c56df92726b, type: 3}
