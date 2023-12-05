@@ -19909,13 +19909,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 98446365959372880, guid: d0b37858ec339e743b2613e68a982417,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98446365959372880, guid: d0b37858ec339e743b2613e68a982417,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 98446365959372880, guid: d0b37858ec339e743b2613e68a982417,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6550958507491599544}
     - target: {fileID: 98446365959372880, guid: d0b37858ec339e743b2613e68a982417,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 98446365959372880, guid: d0b37858ec339e743b2613e68a982417,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CanvasManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4578494527067819279, guid: d0b37858ec339e743b2613e68a982417,
         type: 3}

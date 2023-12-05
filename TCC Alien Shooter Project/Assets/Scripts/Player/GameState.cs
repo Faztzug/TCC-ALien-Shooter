@@ -23,9 +23,14 @@ public class GameState : MonoBehaviour
         set => GameStateInstance.isPlayerDead = value;
     }
     public static bool isGamePaused {get; set;} = false;
-    public bool godMode = false;
+    private bool godMode = false;
     static public bool GodMode => GameStateInstance.godMode;
-    static public void ToogleGodMode() => GameStateInstance.godMode = !GodMode;
+    static public void ToogleGodMode()
+    {
+        GameStateInstance.godMode = !GodMode;
+        onToggleGodMode?.Invoke();
+    }
+    static public Action onToggleGodMode;
     static public bool isOnCutscene;
     static public bool skipCutscene;
     private MovimentoMouse movimentoMouse;
