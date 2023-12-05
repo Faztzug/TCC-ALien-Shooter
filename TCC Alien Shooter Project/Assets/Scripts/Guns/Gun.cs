@@ -358,6 +358,7 @@ public class Gun : MonoBehaviour
             rayHits = new RaycastHit[1]{rayHit};
         }
 
+        var crit = false;
         if(gotHit | rayHits.Length > 0)
         {
             foreach (var rayhit in rayHits)
@@ -368,6 +369,7 @@ public class Gun : MonoBehaviour
                 if(rayhit.collider.CompareTag(kCrtiHitTag))
                 {
                     damageToDo *= 2;
+                    crit = true;
                 }
                 if(rayhit.collider.TryGetComponent<ModifierDamageArea>(out ModifierDamageArea areaDmgMod))
                 {
@@ -386,11 +388,16 @@ public class Gun : MonoBehaviour
                 if(healthObj is null) continue;
                 if (healthObjs.Contains(healthObj)) continue;
 
+                if ((crit & healthObj != null) & (!fireStruct.continuosFire || healthObj.CanDoDamageSound))
+                {
+                    healthObj.PlayDamageSound(healthObj.headshootSounds, Health.TimerToUse.critical);
+                }
+
                 healthObj.UpdateHealth(damageToDo, fireStruct.damageType);
                 if(!healthObjs.Contains(healthObj)) healthObjs.Add(healthObj);
             }
         }
-        
+
         return healthObjs;
     }
 

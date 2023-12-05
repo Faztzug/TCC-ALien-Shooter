@@ -435,6 +435,17 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
+  headshootSounds:
+  - clip: {fileID: 8300000, guid: b34c26c30b0ade34ebccf6296b21cf62, type: 3}
+    name: headshoot
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0.26
+    - -0.19
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
   deathSound:
     clip: {fileID: 8300000, guid: be83a38e859cf9444a09c9ff7555caa6, type: 3}
     name: death
@@ -459,6 +470,16 @@ MonoBehaviour:
   regenCooldown: 2
   shieldDamageSounds:
   - clip: {fileID: 8300000, guid: 6cde5a92ec6f01d4186141ccb6835ed9, type: 3}
+    name: playerShieldDamage1
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0.32
+    - -0.29
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ac13fc8686d71ef419f95cfda84be585, type: 3}
     name: playerShieldDamage1
     volume: 1
     pitch: 1

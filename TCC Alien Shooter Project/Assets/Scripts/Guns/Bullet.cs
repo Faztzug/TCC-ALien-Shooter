@@ -47,12 +47,13 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collisionInfo)
     {
-        
+        var critHit = false;
         if(collisionInfo.collider.gameObject.CompareTag(Gun.kCrtiHitTag))
         {
             Debug.Log("BULEETTT HEADSHOT!" + collisionInfo.collider.gameObject.name);
             damage *= 2;
-            GameState.InstantiateSound(headShootSound, collisionInfo.GetContact(0).point);
+            critHit = true;
+            //GameState.InstantiateSound(headShootSound, collisionInfo.GetContact(0).point);
         }
         if (collisionInfo.collider.TryGetComponent<ModifierDamageArea>(out ModifierDamageArea areaDmgMod))
         {
@@ -61,17 +62,19 @@ public class Bullet : MonoBehaviour
             if (modifier.damageType == dmgType | modifier.damageType == DamageType.AnyDamage) damage *= modifier.multplier;
         }
 
-        if (collisionInfo.rigidbody?.gameObject != null) BulletHit(collisionInfo.rigidbody.gameObject);
-        else BulletHit(collisionInfo.gameObject);
+        Health health = null;
+        if (collisionInfo.rigidbody?.gameObject != null) health = BulletHit(collisionInfo.rigidbody.gameObject);
+        else health = BulletHit(collisionInfo.gameObject);
+        if (critHit) health?.PlayDamageSound(health.headshootSounds, Health.TimerToUse.critical);
     }
     // void OnTriggerEnter(Collider other)
     // {
     //     if(other.attachedRigidbody?.gameObject != null) BulletHit(other.attachedRigidbody.gameObject, true);
     //     else BulletHit(other.gameObject, true);
     // }
-    public virtual void BulletHit(GameObject collision, bool isTrigger = false)
+    public virtual Health BulletHit(GameObject collision, bool isTrigger = false)
     {
-        if(collision.GetComponentInChildren<Gun>() == parentGun) return;
+        if(collision.GetComponentInChildren<Gun>() == parentGun) return null;
         
         if(!isTrigger)
         {
@@ -84,7 +87,7 @@ public class Bullet : MonoBehaviour
             }
             meshRenderer.enabled = false;
         } 
-        if(hit) return;
+        if(hit) return null;
         hit = true;
         
         var curTransform = collision.transform;
@@ -96,6 +99,7 @@ public class Bullet : MonoBehaviour
         }
         healthObj?.UpdateHealth(damage, damageType);
         healthObj?.BleedVFX(transform.position, damageType);
+        return healthObj;
     }
 
     public void Respawn(Vector3 position)

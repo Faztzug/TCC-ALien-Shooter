@@ -50,10 +50,12 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject DeathVFX;
     public Sound[] damageSounds;
     public Sound[] extraDamageSounds;
+    public Sound[] headshootSounds;
     public Sound deathSound;
     public AudioSource audioSource;
     protected float bloodVfxTimer = 0f;
     protected float damageSoundTimer;
+    public bool CanDoDamageSound => damageSoundTimer < 0;
     protected float alternateDamageSoundTimer;
     public List<DamageModified> damageModifiers = new List<DamageModified>();
     [SerializeField] protected bool doesDestroyOnDeath = true;
@@ -96,20 +98,31 @@ public class Health : MonoBehaviour
         if(value < 0 && health >= 0)
         {
             PlayDamageSound(damageSounds);
-            PlayDamageSound(extraDamageSounds, true);
+            PlayDamageSound(extraDamageSounds, TimerToUse.alternate);
         }
     }
 
-    protected void PlayDamageSound(Sound[] sounds, bool useAlternateTimer = false)
+    public enum TimerToUse
     {
+        normal,
+        alternate,
+        critical,
+    }
+
+    public void PlayDamageSound(Sound[] sounds, TimerToUse timer = TimerToUse.normal)
+    {
+        var normal = timer == TimerToUse.normal;
+        var aternateTimer = timer == TimerToUse.alternate;
+        var crit = timer == TimerToUse.critical;
+
         if (sounds != null & sounds.Length > 0 & 
-            ((damageSoundTimer < 0f) || (useAlternateTimer & alternateDamageSoundTimer < 0f)))
+            (crit || (damageSoundTimer < 0f) || (aternateTimer & alternateDamageSoundTimer < 0f)))
         {
             var index = UnityEngine.Random.Range(0, sounds.Length);
             GameState.InstantiateSound(sounds[index], this.transform.position);
 
-            if (useAlternateTimer) alternateDamageSoundTimer = 0.2f;
-            else damageSoundTimer = 0.2f;
+            if (aternateTimer) alternateDamageSoundTimer = 0.2f;
+            else if(normal) damageSoundTimer = 0.2f;
 
             if (!(this is PlayerShieldHealth)) Debug.Log("Playeing Damage: " + sounds[index].clip.name);
         }

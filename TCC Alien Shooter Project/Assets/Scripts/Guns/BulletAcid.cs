@@ -7,14 +7,14 @@ public class BulletAcid : Bullet
     [SerializeField] private GameObject acidPoolGO;
     [SerializeField] private GameObject explosionGO;
 
-    public override void BulletHit(GameObject collision, bool isTrigger = false)
+    public override Health BulletHit(GameObject collision, bool isTrigger = false)
     {
         if(!hit)
         {
             if(acidPoolGO) GameObject.Instantiate(acidPoolGO, transform.position, Quaternion.identity, null);
             if(explosionGO) GameObject.Instantiate(explosionGO, transform.position, Quaternion.identity, null);
         }
-        base.BulletHit(collision, isTrigger);
+        return base.BulletHit(collision, isTrigger);
     }
 
 }

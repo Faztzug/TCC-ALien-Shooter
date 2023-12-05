@@ -1573,6 +1573,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
+  extraDamageSounds: []
+  headshootSounds: []
   deathSound:
     clip: {fileID: 8300000, guid: 84812296c3872354db20714e8d5ebe94, type: 3}
     name: playerDeath
@@ -1601,8 +1603,18 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     pitchRNG:
-    - 0.2
-    - -0.1
+    - 0.32
+    - -0.29
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ac13fc8686d71ef419f95cfda84be585, type: 3}
+    name: playerShieldDamage1
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0.32
+    - -0.29
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
@@ -1619,14 +1631,14 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0.43521762, a: 1}
   - {r: 0, g: 1, b: 0.9805918, a: 1}
   gunHolderAnim: {fileID: 5878317173721772786}
-  eletricDamage:
+  eletricDamageSound:
     clip: {fileID: 8300000, guid: ef0877dbfaa56c84a9f0bf03954fefd9, type: 3}
-    name: eletrucutada
+    name: choque
     volume: 1
     pitch: 1
     pitchRNG:
-    - -0.15
-    - 0.37
+    - 0.14
+    - -0.09
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}

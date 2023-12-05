@@ -543,6 +543,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
+  extraDamageSounds: []
+  headshootSounds: []
   deathSound:
     clip: {fileID: 8300000, guid: c078f7056dfddfb4ba3d95b163be8202, type: 3}
     name: morte
@@ -567,12 +569,22 @@ MonoBehaviour:
   regenCooldown: 2
   shieldDamageSounds:
   - clip: {fileID: 8300000, guid: 6cde5a92ec6f01d4186141ccb6835ed9, type: 3}
-    name: 
+    name: playerShieldDamage1
     volume: 1
-    pitch: 1.16
+    pitch: 1
     pitchRNG:
-    - -0.4
-    - 0.34
+    - 0.32
+    - -0.29
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ac13fc8686d71ef419f95cfda84be585, type: 3}
+    name: playerShieldDamage1
+    volume: 1
+    pitch: 1
+    pitchRNG:
+    - 0.32
+    - -0.29
     loop: 0
     playOnAwake: 0
     audioSource: {fileID: 0}
