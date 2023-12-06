@@ -169,8 +169,14 @@ public class Health : MonoBehaviour
 
         GetComponentInChildren<AudioSource>()?.Stop();
         if(DeathVFX != null) GameObject.Destroy(GameObject.Instantiate(DeathVFX, transform.position, transform.rotation, null), 5f);
-        if(audioSource == null || anim == null) GameState.InstantiateSound(deathSound, transform.position);
-        else deathSound.PlayOn(audioSource);
+        if (audioSource == null || anim == null || doesDestroyOnDeath)
+        {
+            GameState.InstantiateSound(deathSound, transform.position);
+        }
+        else
+        {
+            deathSound.PlayOn(audioSource);
+        }
 
         if(anim != null)
         {

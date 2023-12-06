@@ -279,7 +279,7 @@ public class GameState : MonoBehaviour
 
     public static void EndLevel()
     {
-        if(GodMode) ToogleGodMode();
+        if(!GodMode) ToogleGodMode();
         gameState.StartCoroutine(gameState.EndLevelCourotine());
     }
     IEnumerator EndLevelCourotine()
