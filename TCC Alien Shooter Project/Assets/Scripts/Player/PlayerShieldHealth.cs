@@ -113,6 +113,7 @@ public class PlayerShieldHealth : ShieldHealth
         gunHolderAnim.SetTrigger("Death");
         
         GameState.IsPlayerDead = true;
+        GameState.mainCanvas.GameOverUI.SetActive(true);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         

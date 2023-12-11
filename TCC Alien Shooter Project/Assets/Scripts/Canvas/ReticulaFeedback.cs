@@ -20,7 +20,11 @@ public class ReticulaFeedback : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactableText;
     private ReticulaState curState;
 
-    
+    private void Start()
+    {
+        interactableText.color = interactableColor;
+    }
+
     private void Update() 
     {
         var flag = curState == ReticulaState.Interactable && GameState.MovimentoMouse.isOnInteractableDistance;
@@ -30,7 +34,6 @@ public class ReticulaFeedback : MonoBehaviour
     public void SetReticulaIndex(int index)
     {
         image.sprite = gunReticulas[index];
-        interactableText.color = interactableColor;
     }
 
     public void SetReticulaState(ReticulaState reticulaState, string middleScreenText = null)

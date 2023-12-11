@@ -31,6 +31,8 @@ public class CanvasManager : MonoBehaviour
     public GameObject eletricDamageVFX;
     public GameObject shieldRecoverVFX;
     public GameObject healthRecoverVFX;
+    [SerializeField] private GameObject gameoverAnimUI;
+    public GameObject GameOverUI => gameoverAnimUI;
 
     private void Awake()
     {
